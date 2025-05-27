@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sociedad Astronómica de Aguascalientes (SAAGS)</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome para iconos -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <style>
+        /* Estilos personalizados */
+        :root {
+            --navbar-height: 76px; /* Altura de la barra de navegación */
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #0a1128;
+            color: #f0f0f0;
+            position: relative;
+        }
+        
+        html {
+            scroll-padding-top: var(--navbar-height); /* Ajuste para el scroll */
+            scroll-behavior: smooth;
+        }
+        
+        section {
+            padding-top: calc(2rem + var(--navbar-height));
+            margin-top: -var(--navbar-height);
+        }
+        
+        .hero-section {
+            padding-top: 0;
+            margin-top: 0;
+            padding-bottom: 2rem;
+        }
+        
+        /* Fondo de estrellas */
+        .bg-stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a1128 url("https://images2.alphacoders.com/825/825785.jpg") center center/cover no-repeat;
+            z-index: -1;
+        }
+        
+        .navbar {
+            background-color: rgba(13, 36, 90, 0.9) !important;
+            border-bottom: 1px solid #304d9d;
+        }
+        
+        .navbar-brand img {
+            height: 50px;
+        }
+        
+        .hero-section {
+            background: linear-gradient(to bottom, rgba(13, 36, 90, 0.7), rgba(7, 11, 35, 0.9)), url('/api/placeholder/1200/600') center/cover no-repeat;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-title {
+            color: #7cb9e8;
+            border-bottom: 2px solid #7cb9e8;
+            display: inline-block;
+            padding-bottom: 5px;
+            margin-bottom: 30px;
+        }
+        
+		#actividades .card-text, #actividades .card-title {
+			color: #f0f0f0; /* Color claro para asegurar contraste con el fondo oscuro */
+		}
+		
+        .card {
+            background-color: rgba(13, 36, 90, 0.7);
+            border: 1px solid #304d9d;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 123, 255, 0.3);
+        }
+        
+        .event-card {
+            border-left: 4px solid #7cb9e8;
+        }
+        
+        .footer {
+            background-color: rgba(7, 11, 35, 0.9);
+            border-top: 1px solid #304d9d;
+            padding: 40px 0;
+        }
+        
+        .social-links a {
+            color: #f0f0f0;
+            margin-right: 15px;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: #7cb9e8;
+        }
+        
+        .btn-primary {
+            background-color: #304d9d;
+            border-color: #304d9d;
+        }
+        
+        .btn-primary:hover {
+            background-color: #1a3a8f;
+            border-color: #1a3a8f;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+        
+        .gallery-item img {
+            transition: transform 0.5s;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .team-member img {
+            border-radius: 50%;
+            border: 3px solid #304d9d;
+        }
+        
+        /* Animación para el conteo estadístico */
+        .count-box {
+            background-color: rgba(13, 36, 90, 0.7);
+            padding: 20px;
+            border-radius: 5px;
+            border: 1px solid #304d9d;
+            margin-bottom: 20px;
+        }
+
+        .count-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #7cb9e8;
+        }
+        
+        /* Estilo para la sección de calendario astronómico */
+        .astro-event {
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            background-color: rgba(13, 36, 90, 0.7);
+            border-left: 4px solid #7cb9e8;
+        }
+        
+        /* Tooltip estilizado */
+        .custom-tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+        
+        .tooltip-content {
+            visibility: hidden;
+            width: 200px;
+            background-color: rgba(13, 36, 90, 0.95);
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -100px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            border: 1px solid #304d9d;
+        }
+        
+        .custom-tooltip:hover .tooltip-content {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Fondo de estrellas simplificado - una sola div con imagen de fondo -->
+    <div class="bg-stars"></div>
+
+    <!-- Barra de Navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#inicio">
+                <img src="https://icon-library.com/images/moon-icon-png/moon-icon-png-4.jpg" alt="Logo SAAGS" class="me-2">
+                <span>SAAGS</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#inicio">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#nosotros">Nosotros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#actividades">Actividades</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#galeria">Galería</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#calendario">Calendario Astronómico</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#equipo">Equipo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contacto">Contacto</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sección Hero / Inicio -->
+    <section id="inicio" class="hero-section">
+        <div class="container text-center">
+            <h1 class="display-3 mb-4 fw-bold text-white">Sociedad Astronómica de Aguascalientes</h1>
+            <p class="lead mb-5">Explorando el universo desde el corazón de México</p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="#actividades" class="btn btn-primary btn-lg">Nuestras actividades</a>
+                <a href="#contacto" class="btn btn-outline-light btn-lg">Únete a nosotros</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Nosotros -->
+    <section id="nosotros" class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <h2 class="section-title">Quiénes Somos</h2>
+                    <p>La Sociedad Astronómica de Aguascalientes (SAAGS) es una organización sin fines de lucro dedicada a la promoción y divulgación de la astronomía y ciencias espaciales en el estado de Aguascalientes y sus alrededores.</p>
+                    <p>Fundada en 2010 por un grupo de entusiastas aficionados a la astronomía, nuestra sociedad ha crecido hasta convertirse en un referente regional para la observación astronómica, la educación científica y la comunidad astronómica amateur.</p>
+                    <p>Nuestros objetivos principales son:</p>
+                    <ul>
+                        <li>Promover el interés por la astronomía y las ciencias espaciales</li>
+                        <li>Facilitar la comunicación entre aficionados y profesionales</li>
+                        <li>Organizar observaciones astronómicas y eventos educativos</li>
+                        <li>Contribuir a la cultura científica de nuestra comunidad</li>
+                    </ul>
+                </div>
+                <div class="col-lg-6">
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="count-box text-center">
+                                <div class="count-number">12+</div>
+                                <p class="mb-0">Años de experiencia</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="count-box text-center">
+                                <div class="count-number">200+</div>
+                                <p class="mb-0">Miembros activos</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="count-box text-center">
+                                <div class="count-number">50+</div>
+                                <p class="mb-0">Eventos anuales</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="count-box text-center">
+                                <div class="count-number">5000+</div>
+                                <p class="mb-0">Personas alcanzadas</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pt-3">
+                        <img src="/api/placeholder/600/300" alt="Observación astronómica SAAGS" class="img-fluid rounded shadow">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Actividades -->
+    <section id="actividades" class="py-5 bg-dark">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Nuestras Actividades</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="/api/placeholder/400/300" class="card-img-top" alt="Observaciones astronómicas">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Observaciones Astronómicas</h5>
+                            <p class="card-text">Organizamos sesiones regulares de observación astronómica utilizando telescopios y equipos profesionales, abiertas tanto para miembros como para el público general.</p>
+                        </div>
+                        <div class="card-footer text-center">
+                            <a href="#" class="btn btn-primary btn-sm">Próximas observaciones</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="/api/placeholder/400/300" class="card-img-top" alt="Cursos y talleres">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Cursos y Talleres</h5>
+                            <p class="card-text">Impartimos cursos de introducción a la astronomía, talleres de astrofotografía, construcción de telescopios y uso de software astronómico.</p>
+                        </div>
+                        <div class="card-footer text-center">
+                            <a href="#" class="btn btn-primary btn-sm">Ver programación</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="/api/placeholder/400/300" class="card-img-top" alt="Conferencias">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Conferencias y Charlas</h5>
+                            <p class="card-text">Presentamos conferencias con expertos nacionales e internacionales, así como charlas de divulgación en escuelas, universidades y espacios públicos.</p>
+                        </div>
+                        <div class="card-footer text-center">
+                            <a href="#" class="btn btn-primary btn-sm">Próximas conferencias</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-5">
+                <h3 class="mb-4">Próximos Eventos</h3>
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="event-card p-4">
+                            <div class="d-flex justify-content-between">
+                                <h5>Observación lunar</h5>
+                                <span class="badge bg-primary">15 Mayo 2025</span>
+                            </div>
+                            <p class="mb-0">Observación pública de la Luna y planetas desde el Parque México. Telescopios disponibles para todo público.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="event-card p-4">
+                            <div class="d-flex justify-content-between">
+                                <h5>Taller de Astrofotografía</h5>
+                                <span class="badge bg-primary">22 Mayo 2025</span>
+                            </div>
+                            <p class="mb-0">Aprende técnicas básicas de fotografía astronómica con cualquier cámara. Incluye sesión práctica nocturna.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Galería -->
+    <section id="galeria" class="py-5">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Galería Astronómica</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="gallery-item">
+                        <img src="/api/placeholder/400/300" alt="Galaxia" class="img-fluid w-100 rounded">
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="gallery-item">
+                        <img src="/api/placeholder/400/300" alt="Nebulosa" class="img-fluid w-100 rounded">
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="gallery-item">
+                        <img src="/api/placeholder/400/300" alt="Luna" class="img-fluid w-100 rounded">
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="gallery-item">
+                        <img src="/api/placeholder/400/300" alt="Vía Láctea" class="img-fluid w-100 rounded">
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="gallery-item">
+                        <img src="/api/placeholder/400/300" alt="Eclipse" class="img-fluid w-100 rounded">
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="gallery-item">
+                        <img src="/api/placeholder/400/300" alt="Cúmulo estelar" class="img-fluid w-100 rounded">
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <a href="#" class="btn btn-primary">Ver más fotografías</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calendario Astronómico -->
+    <section id="calendario" class="py-5 bg-dark">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Calendario Astronómico</h2>
+            <div class="row mb-4">
+                <div class="col-12 mb-4">
+                    <h3>Eventos astronómicos destacados de Mayo 2025</h3>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="astro-event">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h5 class="mb-0">Lluvia de meteoros Eta Acuáridas</h5>
+                            <span class="badge bg-primary">5-6 Mayo</span>
+                        </div>
+                        <p class="mb-0">Una de las mejores lluvias de meteoros del año, producida por polvo del cometa Halley. Máxima actividad durante la madrugada del 6 de mayo.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="astro-event">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h5 class="mb-0">Luna Nueva</h5>
+                            <span class="badge bg-primary">8 Mayo</span>
+                        </div>
+                        <p class="mb-0">Excelente oportunidad para observar objetos del cielo profundo como galaxias y nebulosas debido a la ausencia de luz lunar.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="astro-event">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h5 class="mb-0">Conjunción Venus-Marte</h5>
+                            <span class="badge bg-primary">18 Mayo</span>
+                        </div>
+                        <p class="mb-0">Los planetas Venus y Marte estarán muy próximos en el cielo, visible justo después del atardecer en el horizonte oeste.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="astro-event">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h5 class="mb-0">Luna Llena</h5>
+                            <span class="badge bg-primary">23 Mayo</span>
+                        </div>
+                        <p class="mb-0">También conocida como "Luna de las Flores" en el hemisferio norte, iluminará completamente el cielo nocturno.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <a href="#" class="btn btn-primary">Descargar calendario completo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Equipo -->
+    <section id="equipo" class="py-5">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Nuestro Equipo</h2>
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                    <div class="text-center">
+                        <img src="/api/placeholder/150/150" alt="Director" class="mb-3 team-member img-fluid">
+                        <h5>Dr. Miguel Ángel Pérez</h5>
+                        <p class="text-muted">Director</p>
+                        <div class="social-links small">
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="text-center">
+                        <img src="/api/placeholder/150/150" alt="Coordinadora de Divulgación" class="mb-3 team-member img-fluid">
+                        <h5>Dra. Laura Mendoza</h5>
+                        <p class="text-muted">Coord. de Divulgación</p>
+                        <div class="social-links small">
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="text-center">
+                        <img src="/api/placeholder/150/150" alt="Coord. de Observaciones" class="mb-3 team-member img-fluid">
+                        <h5>Ing. Carlos Ramírez</h5>
+                        <p class="text-muted">Coord. de Observaciones</p>
+                        <div class="social-links small">
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="text-center">
+                        <img src="/api/placeholder/150/150" alt="Secretaria" class="mb-3 team-member img-fluid">
+                        <h5>Lic. Ana Sofía Torres</h5>
+                        <p class="text-muted">Secretaria</p>
+                        <div class="social-links small">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Contacto -->
+    <section id="contacto" class="py-5 bg-dark">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Contáctanos</h2>
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <h4>Información de contacto</h4>
+                    <ul class="list-unstyled">
+                        <li class="mb-3"><i class="fas fa-map-marker-alt me-2"></i> Av. Universidad 940, Ciudad Universitaria, Aguascalientes, Ags.</li>
+                        <li class="mb-3"><i class="fas fa-phone me-2"></i> (449) 123-4567</li>
+                        <li class="mb-3"><i class="fas fa-envelope me-2"></i> contacto@saags.org</li>
+                    </ul>
+                    
+                    <h4 class="mt-4">Síguenos</h4>
+                    <div class="social-links mt-3">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                    
+                    <h4 class="mt-4">Horario de atención</h4>
+                    <p>Lunes a Viernes: 10:00 AM - 7:00 PM<br>
+                    Sábados: 10:00 AM - 2:00 PM</p>
+                </div>
+                <div class="col-lg-6">
+                    <form>
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">Nombre completo</label>
+                            <input type="text" class="form-control" id="nombre" placeholder="Tu nombre">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Correo electrónico</label>
+                            <input type="email" class="form-control" id="email" placeholder="tucorreo@ejemplo.com">
+                        </div>
+                        <div class="mb-3">
+                            <label for="asunto" class="form-label">Asunto</label>
+                            <input type="text" class="form-control" id="asunto" placeholder="Asunto del mensaje">
+                        </div>
+                        <div class="mb-3">
+                            <label for="mensaje" class="form-label">Mensaje</label>
+                            <textarea class="form-control" id="mensaje" rows="5" placeholder="Tu mensaje aquí..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Enviar mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5>Sociedad Astronómica de Aguascalientes</h5>
+                    <p>Promoviendo el conocimiento astronómico y la pasión por el universo desde 2010.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Enlaces rápidos</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#nosotros" class="text-decoration-none text-light">Sobre nosotros</a></li>
+                        <li><a href="#actividades" class="text-decoration-none text-light">Actividades</a></li>
+                        <li><a href="#calendario" class="text-decoration-none text-light">Calendario Astronómico</a></li>
+                        <li><a href="#contacto" class="text-decoration-none text-light">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Boletín informativo</h5>
+                    <p>Suscríbete para recibir novedades astronómicas y eventos</p>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="Tu email" aria-label="Email" aria-describedby="button-addon2">
+                        <button class="btn btn-primary" type="button" id="button-addon2">Suscribir</button>
+                    </div>
+                </div>
+            </div>
+            <hr class="mt-4">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <p class="mb-0">&copy; 2025 Sociedad Astronómica de Aguascalientes. Todos los derechos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Javascript personalizado para mejorar la navegación -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Cerrar el menú móvil al hacer clic en los enlaces
+            const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+            const navbarCollapse = document.querySelector('.navbar-collapse');
+            
+            navLinks.forEach(function(link) {
+                link.addEventListener('click', function() {
+                    if (navbarCollapse.classList.contains('show')) {
+                        bootstrap.Collapse.getInstance(navbarCollapse).hide();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
