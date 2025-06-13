@@ -7,9 +7,11 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome para iconos -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://icon-library.com/images/moon-icon-png/moon-icon-png-4.jpg">
     <style>
         /* Estilos personalizados */
         :root {
@@ -51,12 +53,79 @@
         }
         
         .navbar {
-            background-color: rgba(13, 36, 90, 0.9) !important;
-            border-bottom: 1px solid #304d9d;
+            min-height: var(--navbar-height);
+            padding-top: 1.2rem !important;
+            padding-bottom: 1.2rem !important;
+            box-shadow: 0 2px 12px rgba(13,36,90,0.18);
+            background-color: rgba(13, 36, 90, 0.95) !important;
+            border-bottom: 1.5px solid #304d9d;
+            letter-spacing: 0.03em;
         }
         
+        /* Logo más grande y redondo */
         .navbar-brand img {
-            height: 50px;
+            height: 54px !important;
+            width: 54px !important;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-right: 12px;
+            box-shadow: 0 0 10px #1a3a8f77;
+        }
+        
+        /* Mejor presentación de marca */
+        .navbar-brand span {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            color: #7cb9e8 !important;
+        }
+
+        /* Organización y espacio entre enlaces */
+        .navbar-nav {
+            gap: 1.3rem;
+        }
+
+        .navbar-nav .nav-link {
+            font-size: 1.15rem;
+            font-weight: 500;
+            padding: 0.6rem 1.2rem !important;
+            border-radius: 0.7rem;
+            color: #f0f0f0 !important;
+            transition: background 0.22s, color 0.22s, box-shadow 0.22s;
+            margin: 0 0.1rem;
+            letter-spacing: 0.04em;
+        }
+
+        /* Hover y activo */
+        .navbar-nav .nav-link:hover, 
+        .navbar-nav .nav-link.active {
+            background: rgba(124, 185, 232, 0.13);
+            color: #ffe066 !important;
+            box-shadow: 0 2px 8px #7cb9e86c;
+        }
+
+        /* Mejor legibilidad menu móvil */
+        .navbar-dark .navbar-toggler {
+            border: none;
+            outline: none;
+            box-shadow: none !important;
+        }
+
+        @media (max-width: 991.98px) {
+            .navbar-nav {
+                gap: 0.5rem;
+            }
+            .navbar-brand span {
+                font-size: 1.4rem;
+            }
+            .navbar-brand img {
+                height: 44px !important;
+                width: 44px !important;
+            }
+            .navbar {
+                padding-top: 0.8rem !important;
+                padding-bottom: 0.8rem !important;
+            }
         }
         
         .hero-section {
@@ -195,6 +264,41 @@
             visibility: visible;
             opacity: 1;
         }
+
+        .text-justify p,
+        .text-justify ul,
+        .text-justify li {
+            text-align: justify;
+        }
+
+        #actividades .event-card p,
+        #actividades .event-card h5,
+        #actividades .event-card span,
+        #actividades .event-card {
+            text-align: justify;
+        }
+
+        /* Sección Galería: justificar solo si hay texto descriptivo */
+        #galeria p,
+        #galeria .gallery-item p {
+            text-align: justify;
+        }
+
+        /* Calendario Astronómico */
+        #calendario p,
+        #calendario ul,
+        #calendario li,
+        #calendario .astro-event,
+        #calendario .list-group-item {
+            text-align: justify;
+        }
+
+        /* Sección Equipo: justificar textos bajo los nombres si lo deseas */
+        #equipo p,
+        #equipo .team-member,
+        #equipo .text-muted {
+            text-align: justify;
+        }
     </style>
 </head>
 <body>
@@ -202,42 +306,42 @@
     <div class="bg-stars"></div>
 
     <!-- Barra de Navegación -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top py-3">
-        <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="#inicio">
-                <img src="https://icon-library.com/images/moon-icon-png/moon-icon-png-4.jpg" alt="Logo SAAGS" class="me-2">
-                <span>SAAGS</span>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#inicio">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#nosotros">Nosotros</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#actividades">Actividades</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#galeria">Galería</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#calendario">Calendario Astronómico</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#equipo">Equipo</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contacto">Contacto</a>
-                    </li>
-                </ul>
-            </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top py-4 shadow-sm">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center gap-2 fs-3" href="#inicio">
+            <img src="https://icon-library.com/images/moon-icon-png/moon-icon-png-4.jpg" alt="Logo SAAGS" style="height: 48px; width: 48px; object-fit: cover; border-radius: 50%;">
+            <span class="fw-bold">SAAGS</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav gap-3 fs-5">
+                <li class="nav-item">
+                    <a class="nav-link px-3" href="#inicio">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-3" href="#nosotros">Nosotros</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-3" href="#actividades">Actividades</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-3" href="#galeria">Galería</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-3" href="#calendario">Calendario Astronómico</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-3" href="#equipo">Equipo</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-3" href="#contacto">Contacto</a>
+                </li>
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
 
     <!-- Sección Hero / Inicio -->
     <section id="inicio" class="hero-section">
@@ -252,10 +356,11 @@
     </section>
 
     <!-- Sección Nosotros -->
+    <!-- Sección Nosotros -->
     <section id="nosotros" class="py-5">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 mb-4">
+                <div class="col-lg-6 mb-4 text-justify">
                     <h2 class="section-title">Nosotros</h2>
                     <p>La Sociedad Astronómica de Aguascalientes (SAAGS) es una organización sin fines de lucro, constituida en la Ciudad de Aguascalientes, Ags., México, el 29 de junio de 1991. Fue protocolizada mediante escritura pública por el Lic. Gabriel Villalobos Ramírez, Notario No. 3 y destacado astrónomo aguascalentense.</p>
                     <p>Está integrada por entusiastas aficionados a la astronomía y a las ciencias del espacio, y tiene como objetivos principales:</p>
@@ -267,9 +372,14 @@
                         <li>Establecer relaciones con organizaciones afines en el país y en el extranjero.</li>
                         <li>Participar en la elaboración y difusión de programas de investigación, eventos astronómicos y noticias científicas.</li>
                     </ul>
+                    <h4 class="mt-4">Principios</h4>
                     <p>La organización no persigue fines políticos, lucrativos o religiosos, ni es medio para estos fines. Presenta conferencias regularmente para instituciones y agrupaciones, y proporciona boletines a la prensa, radio y televisión locales sobre los principales eventos astronómicos.</p>
-                    <p>La Sociedad figura en los directorios de AstroRed México y de Sky & Telescope, revista internacional de astronomía. Además, mantiene relaciones con otras sociedades astronómicas del país y con el Observatorio del Monte Wilson en Los Ángeles, California, mediante el programa Telescopios para la Educación.</p>
-                    <p>Han sido fundadores y presidentes de esta sociedad:</p>
+                    <h4 class="mt-4">Reconocimientos y Relaciones</h4>
+                    <ul>
+                        <li>Figura en los directorios de AstroRed México y de la revista internacional <em>Sky & Telescope</em>.</li>
+                        <li>Mantiene relaciones con otras sociedades astronómicas del país, así como con el Observatorio Astronómico del Monte Wilson en Los Ángeles, California, a través de su programa "Telescopios para la Educación".</li>
+                    </ul>
+                    <h4 class="mt-4">Fundadores y presidentes</h4>
                     <ul>
                         <li>Arq. Francisco Aguayo Mora (+)</li>
                         <li>Don Guillermo Hesselbach Velasco (+)</li>
@@ -315,12 +425,12 @@
     <!-- Sección Actividades -->
     <section id="actividades" class="py-5 bg-dark">
         <div class="container">
-            <h2 class="section-title text-center mb-5">Actividades</h2>
+            <h2 class="section-title text-center mb-5">Actividades y Eventos</h2>
             <p>La Sociedad Astronómica de Aguascalientes organiza y participa en una variedad de actividades dirigidas a la divulgación, formación e interacción comunitaria en torno a la Astronomía y las Ciencias del Espacio. Entre sus principales actividades se encuentran:</p>
             <div class="row">
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
-                        <img src="planetariotepezala.jpeg" class="card-img-top" alt="Observaciones astronómicas">
+                        <img src="\img\planetariotepezala.jpeg" class="card-img-top" alt="Observaciones astronómicas">
                         <div class="card-body">
                             <h5 class="card-title text-center">Observaciones Astronómicas Públicas</h5>
                             <p class="card-text">Realizamos sesiones de observación para todo público, utilizando telescopios astronómicos en diversos espacios de la ciudad. Estas jornadas están orientadas tanto a la apreciación estética del cielo como al conocimiento científico.</p>
@@ -344,7 +454,7 @@
                 </div>
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
-                        <img src="proyeccion.jpeg" class="card-img-top" alt="Conferencias">
+                        <img src="\img\proyeccion.jpeg" class="card-img-top" alt="Conferencias">
                         <div class="card-body">
                             <h5 class="card-title text-center">Conferencias y charlas de divulgación</h5>
                             <p class="card-text">Se ofrecen conferencias regulares a instituciones educativas, agrupaciones y medios, así como charlas para estudiantes y público general. Los temas abarcan desde fenómenos celestes hasta historia y tecnología astronómica.</p>
@@ -362,7 +472,7 @@
                             <p class="card-text">Colaboramos con prensa, radio y televisión local para informar a la comunidad sobre eventos astronómicos relevantes como eclipses, lluvias de meteoros, conjunciones y más.</p>
                         </div>
                         <div class="card-footer text-center">
-                            <a href="#" class="btn btn-primary btn-sm">Próximas conferencias</a>
+                            <a href="https://www.heraldo.mx/tendremos-el-telescoio-mas-grande-de-la-region/" class="btn btn-primary btn-sm">Noticias</a>
                         </div>
                     </div>
                 </div>
@@ -373,20 +483,29 @@
                             <h5 class="card-title text-center">Colaboración nacional e internacional</h5>
                             <p class="card-text">La Sociedad mantiene vínculos con organizaciones astronómicas de México y el extranjero, incluyendo su participación en redes como AstroRed México, la revista Sky & Telescope, y el programa internacional Telescopios para la Educación.</p>
                         </div>
-                        <div class="card-footer text-center">
-                            <a href="#" class="btn btn-primary btn-sm">Próximas conferencias</a>
-                        </div>
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
-                        <img src="gruposaags.jpg" class="card-img-top" alt="Difusión">
+                        <img src="https://scontent.fagu3-1.fna.fbcdn.net/v/t39.30808-6/453625529_10161921322637973_3556443490677784030_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=2285d6&_nc_ohc=PHGe_QIZDgcQ7kNvwFKd39L&_nc_oc=Adnkqk4g2lNZseCFCkg-hqAObqZQmw3kj04C7X2XdF8lIPoBVrVTDaw4gGQD4sbWm2XjFJdeWSEEF6KvbQZ_JsCW&_nc_zt=23&_nc_ht=scontent.fagu3-1.fna&_nc_gid=zf57eYouXzixemiPwFHcvQ&oh=00_AfPwZOjm5CTR1s4V7HgsTLyRszO3GsYghZmyH5QVjeFjkg&oe=68528955" class="card-img-top" alt="Difusión">
                         <div class="card-body">
                             <h5 class="card-title text-center">Difusión continua</h5>
                             <p class="card-text">Se publica y comparte contenido científico y educativo en medios digitales, redes sociales y boletines informativos, con el fin de mantener un flujo constante de comunicación con la comunidad.</p>
                         </div>
                         <div class="card-footer text-center">
-                            <a href="#" class="btn btn-primary btn-sm">Próximas conferencias</a>
+                            <a href="https://www.facebook.com/groups/saags/?locale=es_LA" class="btn btn-primary btn-sm">Grupo de Facebook</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="https://agsespacial.org/assets/logo2-f5TOnI85.png" class="card-img-top" alt="Difusión">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Participación en Ferias y Eventos</h5>
+                            <p class="card-text">La SAAGS ha participado en eventos como la Feria del Libro de Aguascalientes, ofreciendo actividades lúdicas y observaciones astronómicas para el público en general.</p>
+                        </div>
+                        <div class="card-footer text-center">
+                            <a href="https://agsespacial.org/" class="btn btn-primary btn-sm">AGS: EI</a>
                         </div>
                     </div>
                 </div>
@@ -424,34 +543,58 @@
             <h2 class="section-title text-center mb-5">Galería Astronómica</h2>
             <div class="row">
                 <div class="col-md-4 mb-4">
-                    <div class="gallery-item">
-                        <img src="/api/placeholder/400/300" alt="Galaxia" class="img-fluid w-100 rounded">
-                    </div>
+                    <figure class="gallery-item">
+                        <img src="img/galeria/galaxia.jpg" alt="Galaxia de Andrómeda" class="img-fluid w-100 rounded">
+                        <figcaption class="mt-2 text-center">
+                            <strong>Galaxia de Andrómeda</strong><br>
+                            Fotografía tomada por Manuel Rodríguez Huerta
+                        </figcaption>
+                    </figure>
                 </div>
                 <div class="col-md-4 mb-4">
-                    <div class="gallery-item">
-                        <img src="/api/placeholder/400/300" alt="Nebulosa" class="img-fluid w-100 rounded">
-                    </div>
+                    <figure class="gallery-item">
+                        <img src="img/galeria/nebulosa.jpg" alt="Nebulosa Rosea" class="img-fluid w-100 rounded">
+                        <figcaption class="mt-2 text-center">
+                            <strong>Nebulosa Rosea</strong><br>
+                            Fotografía tomada por Luis Sánchez de Alba
+                        </figcaption>
+                    </figure>
                 </div>
                 <div class="col-md-4 mb-4">
-                    <div class="gallery-item">
-                        <img src="/api/placeholder/400/300" alt="Luna" class="img-fluid w-100 rounded">
-                    </div>
+                    <figure class="gallery-item">
+                        <img src="img/galeria/via_lactea.jpg" alt="Vía Láctea en la zona del Cisne" class="img-fluid w-100 rounded">
+                        <figcaption class="mt-2 text-center">
+                            <strong>Vía Láctea en la zona del Cisne</strong><br>
+                            Fotografía tomada por Alfredo Lomas Torres
+                        </figcaption>
+                    </figure>
                 </div>
                 <div class="col-md-4 mb-4">
-                    <div class="gallery-item">
-                        <img src="/api/placeholder/400/300" alt="Vía Láctea" class="img-fluid w-100 rounded">
-                    </div>
+                    <figure class="gallery-item">
+                        <img src="img/galeria/cumulo.jpg" alt="Cúmulo estelar de las Pléyades" class="img-fluid w-100 rounded">
+                        <figcaption class="mt-2 text-center">
+                            <strong>Cúmulo estelar de las Pléyades</strong><br>
+                            Fotografía tomada por Luis Jorge Manzanero
+                        </figcaption>
+                    </figure>
                 </div>
                 <div class="col-md-4 mb-4">
-                    <div class="gallery-item">
-                        <img src="/api/placeholder/400/300" alt="Eclipse" class="img-fluid w-100 rounded">
-                    </div>
+                    <figure class="gallery-item">
+                        <img src="img/galeria/eclipse.jpg" alt="Luna de Sangre y el eclipse total" class="img-fluid w-100 rounded">
+                        <figcaption class="mt-2 text-center">
+                            <strong>Luna de Sangre y el eclipse total</strong><br>
+                            Fotografía tomada por Miguel Medina
+                        </figcaption>
+                    </figure>
                 </div>
                 <div class="col-md-4 mb-4">
-                    <div class="gallery-item">
-                        <img src="/api/placeholder/400/300" alt="Cúmulo estelar" class="img-fluid w-100 rounded">
-                    </div>
+                    <figure class="gallery-item">
+                        <img src="img/galeria/luna.jpg" alt="Luna" class="img-fluid w-100 rounded">
+                        <figcaption class="mt-2 text-center">
+                            <strong>Luna</strong><br>
+                            Fotografía tomada por Luis Sánchez de Alba
+                        </figcaption>
+                    </figure>
                 </div>
             </div>
             <div class="text-center mt-4">
@@ -587,7 +730,7 @@
                         <h5>Dr. Miguel Ángel Pérez</h5>
                         <p class="text-muted">Director</p>
                         <div class="social-links small">
-                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-x-twitter"></i></a>
                             <a href="#"><i class="fab fa-linkedin"></i></a>
                         </div>
                     </div>
@@ -598,7 +741,7 @@
                         <h5>Dra. Laura Mendoza</h5>
                         <p class="text-muted">Coord. de Divulgación</p>
                         <div class="social-links small">
-                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-x-twitter"></i></a>
                             <a href="#"><i class="fab fa-linkedin"></i></a>
                         </div>
                     </div>
@@ -609,7 +752,7 @@
                         <h5>Ing. Carlos Ramírez</h5>
                         <p class="text-muted">Coord. de Observaciones</p>
                         <div class="social-links small">
-                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-x-twitter"></i></a>
                             <a href="#"><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
@@ -639,13 +782,19 @@
                     <ul class="list-unstyled">
                         <li class="mb-3"><i class="fas fa-map-marker-alt me-2"></i> Av. Universidad 940, Ciudad Universitaria, Aguascalientes, Ags.</li>
                         <li class="mb-3"><i class="fas fa-phone me-2"></i> (449) 123-4567</li>
-                        <li class="mb-3"><i class="fas fa-envelope me-2"></i> segovia1107@hotmail.com, saagsawb@gmail.com</li>
+                        <li class="mb-3"><i class="fas fa-envelope me-2"></i>
+                            <a href="mailto:segovia1107@hotmail.com" style="color: white;">segovia1107@hotmail.com</a>,
+                            <a href="mailto:saagsawb@gmail.com" style="color: white;">saagsawb@gmail.com</a>
+                        </li>
+                        <li class="mb-3"><a href="https://www.facebook.com/groups/saags/?locale=es_LA" target="_blank" style="color: inherit;">
+                            <i class="fab fa-facebook-f me-2"></i>Sociedad Astronómica de Aguascalientes, A.C.</a>
+                        </li>
                     </ul>
                     
                     <h4 class="mt-4">Síguenos</h4>
                     <div class="social-links mt-3">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.facebook.com/groups/saags" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-x-twitter"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
                         <a href="#"><i class="fab fa-youtube"></i></a>
                     </div>
