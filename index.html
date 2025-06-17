@@ -60,19 +60,31 @@
             background-color: rgba(13, 36, 90, 0.95) !important;
             border-bottom: 1.5px solid #304d9d;
             letter-spacing: 0.03em;
+            display: flex;
+            align-items: center;
         }
-        
-        /* Logo más grande y redondo */
+
+        .navbar .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar-brand {
+            display: flex !important;
+            align-items: center !important;
+            gap: 12px;
+        }
+
         .navbar-brand img {
             height: 54px !important;
             width: 54px !important;
             object-fit: cover;
             border-radius: 50%;
-            margin-right: 12px;
+            margin-right: 0 !important; /* Elimina margin si usas gap */
             box-shadow: 0 0 10px #1a3a8f77;
         }
-        
-        /* Mejor presentación de marca */
+
         .navbar-brand span {
             font-size: 2rem;
             font-weight: 700;
@@ -80,9 +92,10 @@
             color: #7cb9e8 !important;
         }
 
-        /* Organización y espacio entre enlaces */
         .navbar-nav {
             gap: 1.3rem;
+            display: flex;
+            align-items: center;
         }
 
         .navbar-nav .nav-link {
@@ -96,7 +109,6 @@
             letter-spacing: 0.04em;
         }
 
-        /* Hover y activo */
         .navbar-nav .nav-link:hover, 
         .navbar-nav .nav-link.active {
             background: rgba(124, 185, 232, 0.13);
@@ -104,13 +116,13 @@
             box-shadow: 0 2px 8px #7cb9e86c;
         }
 
-        /* Mejor legibilidad menu móvil */
         .navbar-dark .navbar-toggler {
             border: none;
             outline: none;
             box-shadow: none !important;
         }
 
+        /* Responsive */
         @media (max-width: 991.98px) {
             .navbar-nav {
                 gap: 0.5rem;
@@ -158,6 +170,19 @@
         .card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0, 123, 255, 0.3);
+        }
+
+        .card-actividad-title {
+        color: #f7c948;           /* Amarillo vibrante */
+        font-weight: 700;         /* Negrita */
+        font-family: 'Montserrat', sans-serif; /* Misma fuente del resto del sitio */
+        font-size: 1.35rem;       /* Ajusta el tamaño según tu preferencia */
+        text-transform: none;     /* Sin mayúsculas forzadas */
+        letter-spacing: 0.01em;
+        }
+
+        .card-actividad-title i {
+        color: #f7c948;           /* Amarillo para el icono */
         }
         
         .event-card {
@@ -299,6 +324,16 @@
         #equipo .text-muted {
             text-align: justify;
         }
+
+        .mensaje-exito {
+            font-size: 1rem;
+            border-radius: 0.5rem;
+            background: #d1f1da;
+            color: #217a3b;
+            border: 1px solid #b2e2c5;
+            box-shadow: 0 1px 6px #217a3b24;
+            transition: opacity 0.3s;
+        }
     </style>
 </head>
 <body>
@@ -307,8 +342,8 @@
 
     <!-- Barra de Navegación -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top py-4 shadow-sm">
-    <div class="container">
-        <a class="navbar-brand d-flex align-items-center gap-2 fs-3" href="#inicio">
+    <div class="container d-flex justify-content-between align-items-center">
+        <a class="navbar-brand" href="#inicio">
             <img src="https://icon-library.com/images/moon-icon-png/moon-icon-png-4.jpg" alt="Logo SAAGS" style="height: 48px; width: 48px; object-fit: cover; border-radius: 50%;">
             <span class="fw-bold">SAAGS</span>
         </a>
@@ -355,7 +390,6 @@
         </div>
     </section>
 
-    <!-- Sección Nosotros -->
     <!-- Sección Nosotros -->
     <section id="nosotros" class="py-5">
         <div class="container">
@@ -425,14 +459,14 @@
     <!-- Sección Actividades -->
     <section id="actividades" class="py-5 bg-dark">
         <div class="container">
-            <h2 class="section-title text-center mb-5">Actividades y Eventos</h2>
-            <p>La Sociedad Astronómica de Aguascalientes organiza y participa en una variedad de actividades dirigidas a la divulgación, formación e interacción comunitaria en torno a la Astronomía y las Ciencias del Espacio. Entre sus principales actividades se encuentran:</p>
+            <h2 class="section-title text-center mb-5 animate__animated animate__fadeIn">Actividades y Eventos</h2>
+            <p class="text-justify">La Sociedad Astronómica de Aguascalientes organiza y participa en una variedad de actividades dirigidas a la divulgación, formación e interacción comunitaria en torno a la Astronomía y las Ciencias del Espacio. Entre sus principales actividades se encuentran:</p>
             <div class="row">
                 <div class="col-md-4 mb-4">
-                    <div class="card h-100">
+                    <div class="card bg-gradient-astro shadow-lg h-100">
                         <img src="img/planetariotepezala.jpeg" class="card-img-top" alt="Observaciones astronómicas">
                         <div class="card-body">
-                            <h5 class="card-title text-center">Observaciones Astronómicas Públicas</h5>
+                            <h5 class="card-actividad-title text-center"><i class="fa-solid fa-star"></i> Observaciones Astronómicas Públicas</h5>
                             <p class="card-text">Realizamos sesiones de observación para todo público, utilizando telescopios astronómicos en diversos espacios de la ciudad. Estas jornadas están orientadas tanto a la apreciación estética del cielo como al conocimiento científico.</p>
                         </div>
                         <div class="card-footer text-center">
@@ -441,10 +475,10 @@
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
-                    <div class="card h-100">
+                    <div class="card bg-gradient-astro shadow-lg h-100">
                         <img src="https://recursosegb.usach.cl/wp-content/uploads/2023/11/3.png" class="card-img-top" alt="Cursos y talleres">
                         <div class="card-body">
-                            <h5 class="card-title text-center">Cursos, talleres y seminarios</h5>
+                            <h5 class="card-actividad-title text-center"><i class="fa-solid fa-meteor"></i> Cursos, talleres y seminarios</h5>
                             <p class="card-text">Impartimos cursos básicos y avanzados sobre astronomía general, astrofotografía, construcción de telescopios y uso de software astronómico, tanto en modalidad presencial como en línea.</p>
                         </div>
                         <div class="card-footer text-center">
@@ -453,10 +487,10 @@
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
-                    <div class="card h-100">
+                    <div class="card bg-gradient-astro shadow-lg h-100">
                         <img src="img/proyeccion.jpeg" class="card-img-top" alt="Conferencias">
                         <div class="card-body">
-                            <h5 class="card-title text-center">Conferencias y charlas de divulgación</h5>
+                            <h5 class="card-actividad-title text-center"><i class="fa-solid fa-moon"></i> Conferencias y charlas de divulgación</h5>
                             <p class="card-text">Se ofrecen conferencias regulares a instituciones educativas, agrupaciones y medios, así como charlas para estudiantes y público general. Los temas abarcan desde fenómenos celestes hasta historia y tecnología astronómica.</p>
                         </div>
                         <div class="card-footer text-center">
@@ -465,10 +499,10 @@
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
-                    <div class="card h-100">
+                    <div class="card bg-gradient-astro shadow-lg h-100">
                         <img src="https://i.ytimg.com/vi/qzzGI81AR1w/maxresdefault.jpg" class="card-img-top" alt="Medios">
                         <div class="card-body">
-                            <h5 class="card-title text-center">Participación en medios de comunicación</h5>
+                            <h5 class="card-actividad-title text-center"><i class="fa-solid fa-bullhorn"></i> Participación en medios de comunicación</h5>
                             <p class="card-text">Colaboramos con prensa, radio y televisión local para informar a la comunidad sobre eventos astronómicos relevantes como eclipses, lluvias de meteoros, conjunciones y más.</p>
                         </div>
                         <div class="card-footer text-center">
@@ -477,19 +511,19 @@
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
-                    <div class="card h-100">
+                    <div class="card bg-gradient-astro shadow-lg h-100">
                         <img src="https://resources.sanborns.com.mx/imagenes-sanborns-ii/1200/3472302207123.jpg?scale=500&qlty=75" class="card-img-top" alt="Colaboraciones">
                         <div class="card-body">
-                            <h5 class="card-title text-center">Colaboración nacional e internacional</h5>
+                            <h5 class="card-actividad-title text-center"><i class="fa-solid fa-people-group"></i> Colaboración nacional e internacional</h5>
                             <p class="card-text">La Sociedad mantiene vínculos con organizaciones astronómicas de México y el extranjero, incluyendo su participación en redes como AstroRed México, la revista Sky & Telescope, y el programa internacional Telescopios para la Educación.</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
-                    <div class="card h-100">
+                    <div class="card bg-gradient-astro shadow-lg h-100">
                         <img src="https://scontent.fagu3-1.fna.fbcdn.net/v/t39.30808-6/453625529_10161921322637973_3556443490677784030_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=2285d6&_nc_ohc=PHGe_QIZDgcQ7kNvwFKd39L&_nc_oc=Adnkqk4g2lNZseCFCkg-hqAObqZQmw3kj04C7X2XdF8lIPoBVrVTDaw4gGQD4sbWm2XjFJdeWSEEF6KvbQZ_JsCW&_nc_zt=23&_nc_ht=scontent.fagu3-1.fna&_nc_gid=zf57eYouXzixemiPwFHcvQ&oh=00_AfPwZOjm5CTR1s4V7HgsTLyRszO3GsYghZmyH5QVjeFjkg&oe=68528955" class="card-img-top" alt="Difusión">
                         <div class="card-body">
-                            <h5 class="card-title text-center">Difusión continua</h5>
+                            <h5 class="card-actividad-title text-center"><i class="fa-solid fa-share-nodes"></i> Difusión continua</h5>
                             <p class="card-text">Se publica y comparte contenido científico y educativo en medios digitales, redes sociales y boletines informativos, con el fin de mantener un flujo constante de comunicación con la comunidad.</p>
                         </div>
                         <div class="card-footer text-center">
@@ -498,10 +532,10 @@
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
-                    <div class="card h-100">
+                    <div class="card bg-gradient-astro shadow-lg h-100">
                         <img src="https://agsespacial.org/assets/logo2-f5TOnI85.png" class="card-img-top" alt="Difusión">
                         <div class="card-body">
-                            <h5 class="card-title text-center">Participación en Ferias y Eventos</h5>
+                            <h5 class="card-actividad-title text-center"><i class="fa-solid fa-person-rays"></i> Participación en Ferias y Eventos</h5>
                             <p class="card-text">La SAAGS ha participado en eventos como la Feria del Libro de Aguascalientes, ofreciendo actividades lúdicas y observaciones astronómicas para el público en general.</p>
                         </div>
                         <div class="card-footer text-center">
@@ -540,11 +574,11 @@
     <!-- Sección Galería -->
     <section id="galeria" class="py-5">
         <div class="container">
-            <h2 class="section-title text-center mb-5">Galería Astronómica</h2>
+            <h2 class="section-title text-center mb-5 animate__animated animate__fadeIn">Galería Astronómica</h2>
             <div class="row">
                 <div class="col-md-4 mb-4">
                     <figure class="gallery-item">
-                        <img src="img/galeria/galaxia.jpg" alt="Galaxia de Andrómeda" class="img-fluid w-100 rounded">
+                        <img src="img/galeria/galaxia.jpg" alt="Galaxia de Andrómeda" class="img-fluid w-100 rounded" loading="lazy">
                         <figcaption class="mt-2 text-center">
                             <strong>Galaxia de Andrómeda</strong><br>
                             Fotografía tomada por Manuel Rodríguez Huerta
@@ -553,7 +587,7 @@
                 </div>
                 <div class="col-md-4 mb-4">
                     <figure class="gallery-item">
-                        <img src="img/galeria/nebulosa.jpg" alt="Nebulosa Rosea" class="img-fluid w-100 rounded">
+                        <img src="img/galeria/nebulosa.jpg" alt="Nebulosa Rosea" class="img-fluid w-100 rounded" loading="lazy">
                         <figcaption class="mt-2 text-center">
                             <strong>Nebulosa Rosea</strong><br>
                             Fotografía tomada por Luis Sánchez de Alba
@@ -562,7 +596,7 @@
                 </div>
                 <div class="col-md-4 mb-4">
                     <figure class="gallery-item">
-                        <img src="img/galeria/via_lactea.jpg" alt="Vía Láctea en la zona del Cisne" class="img-fluid w-100 rounded">
+                        <img src="img/galeria/via_lactea.jpg" alt="Vía Láctea en la zona del Cisne" class="img-fluid w-100 rounded" loading="lazy">
                         <figcaption class="mt-2 text-center">
                             <strong>Vía Láctea en la zona del Cisne</strong><br>
                             Fotografía tomada por Alfredo Lomas Torres
@@ -571,7 +605,7 @@
                 </div>
                 <div class="col-md-4 mb-4">
                     <figure class="gallery-item">
-                        <img src="img/galeria/cumulo.jpg" alt="Cúmulo estelar de las Pléyades" class="img-fluid w-100 rounded">
+                        <img src="img/galeria/cumulo.jpg" alt="Cúmulo estelar de las Pléyades" class="img-fluid w-100 rounded" loading="lazy">
                         <figcaption class="mt-2 text-center">
                             <strong>Cúmulo estelar de las Pléyades</strong><br>
                             Fotografía tomada por Luis Jorge Manzanero
@@ -580,7 +614,7 @@
                 </div>
                 <div class="col-md-4 mb-4">
                     <figure class="gallery-item">
-                        <img src="img/galeria/eclipse.jpg" alt="Luna de Sangre y el eclipse total" class="img-fluid w-100 rounded">
+                        <img src="img/galeria/eclipse.jpg" alt="Luna de Sangre y el eclipse total" class="img-fluid w-100 rounded" loading="lazy">
                         <figcaption class="mt-2 text-center">
                             <strong>Luna de Sangre y el eclipse total</strong><br>
                             Fotografía tomada por Miguel Medina
@@ -589,7 +623,7 @@
                 </div>
                 <div class="col-md-4 mb-4">
                     <figure class="gallery-item">
-                        <img src="img/galeria/luna.jpg" alt="Luna" class="img-fluid w-100 rounded">
+                        <img src="img/galeria/luna.jpg" alt="Luna" class="img-fluid w-100 rounded" loading="lazy">
                         <figcaption class="mt-2 text-center">
                             <strong>Luna</strong><br>
                             Fotografía tomada por Luis Sánchez de Alba
@@ -598,7 +632,7 @@
                 </div>
             </div>
             <div class="text-center mt-4">
-                <a href="#" class="btn btn-primary">Ver más fotografías</a>
+                <a href="#" class="btn btn-primary animate__animated animate__pulse animate__infinite" aria-label="Ver más fotografías">Ver más fotografías</a>
             </div>
         </div>
     </section>
@@ -876,6 +910,50 @@
                     }
                 });
             });
+        });
+        // FORMULARIO DE CONTACTO
+        document.addEventListener('DOMContentLoaded', function() {
+        // Selecciona el formulario de contacto
+        const contactoForm = document.querySelector('#contacto form');
+        if(contactoForm) {
+            contactoForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Limpia los campos
+            contactoForm.reset();
+            // Muestra el mensaje de éxito
+            mostrarMensajeExito(contactoForm, "El mensaje ha sido enviado con éxito.");
+            });
+        }
+
+        // BOLETÍN INFORMATIVO (footer)
+        const newsletterInput = document.querySelector('.footer input[type="email"]');
+        const newsletterBtn = document.getElementById('button-addon2');
+        if(newsletterInput && newsletterBtn) {
+            newsletterBtn.addEventListener('click', function() {
+            // Limpia el campo
+            newsletterInput.value = '';
+            // Muestra el mensaje de éxito
+            mostrarMensajeExito(newsletterBtn.parentElement, "¡Te has suscrito con éxito!");
+            });
+        }
+
+        // Función utilitaria para mostrar mensaje de éxito
+        function mostrarMensajeExito(parent, mensaje) {
+            // Elimina mensaje previo si existe
+            let mensajePrevio = parent.querySelector('.mensaje-exito');
+            if(mensajePrevio) mensajePrevio.remove();
+
+            // Crea el mensaje
+            const div = document.createElement('div');
+            div.className = 'mensaje-exito alert alert-success mt-2 mb-0 py-2 px-3 text-center';
+            div.textContent = mensaje;
+            parent.appendChild(div);
+
+            // Desaparece después de 4 segundos
+            setTimeout(() => {
+            div.remove();
+            }, 4000);
+        }
         });
     </script>
 </body>
