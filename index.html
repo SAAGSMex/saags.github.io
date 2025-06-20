@@ -4,13 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sociedad Astronómica de Aguascalientes (SAAGS)</title>
-    <title>Sociedad Astronómica de Aguascalientes (SAAGS)</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome para iconos -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <!-- Animate.css -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="https://icon-library.com/images/crescent-moon-icon/crescent-moon-icon-7.jpg">
+    <!--Preload de imágenes para mejorar el rendimiento-->
+    <link rel="preload" as="image" href="https://images2.alphacoders.com/825/825785.jpg">
+    <link rel="preload" as="image" href="https://images4.alphacoders.com/137/1370823.png">
     <style>
         /* Estilos personalizados */
         :root {
@@ -32,12 +36,6 @@
         section {
             padding-top: calc(2rem + var(--navbar-height));
             margin-top: -var(--navbar-height);
-        }
-        
-        .hero-section {
-            padding-top: 0;
-            margin-top: 0;
-            padding-bottom: 2rem;
         }
         
         /* Fondo de estrellas */
@@ -140,12 +138,17 @@
         }
         
         .hero-section {
-            background: linear-gradient(to bottom, rgba(13, 36, 90, 0.7), rgba(7, 11, 35, 0.9)), url('/api/placeholder/1200/600') center/cover no-repeat;
+            background: linear-gradient(to bottom, rgba(13, 36, 90, 0.7), rgba(7, 11, 35, 0.9)), 
+                url('https://images4.alphacoders.com/137/1370823.png') 
+                center/cover no-repeat;
             min-height: 80vh;
             display: flex;
             align-items: center;
             position: relative;
             overflow: hidden;
+            padding-top: 0;
+            margin-top: 0;
+            padding-bottom: 2rem;
         }
         
         .section-title {
@@ -341,54 +344,58 @@
 
     <!-- Barra de Navegación -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top py-4 shadow-sm">
-    <div class="container d-flex justify-content-between align-items-center">
-        <a class="navbar-brand" href="#inicio">
-            <img src="https://icon-library.com/images/moon-icon-png/moon-icon-png-4.jpg" alt="Logo SAAGS" style="height: 48px; width: 48px; object-fit: cover; border-radius: 50%;">
-            <span class="fw-bold">SAAGS</span>
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            <ul class="navbar-nav gap-3 fs-5">
-                <li class="nav-item">
-                    <a class="nav-link px-3" href="#inicio">Inicio</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link px-3" href="#nosotros">Nosotros</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link px-3" href="#actividades">Actividades</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link px-3" href="#galeria">Galería</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link px-3" href="#calendario">Calendario Astronómico</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link px-3" href="#equipo">Equipo</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link px-3" href="#contacto">Contacto</a>
-                </li>
-            </ul>
+        <div class="container d-flex justify-content-between align-items-center">
+            <a class="navbar-brand" href="#inicio">
+                <img src="https://icon-library.com/images/moon-icon-png/moon-icon-png-4.jpg" alt="Logo SAAGS" style="height: 48px; width: 48px; object-fit: cover; border-radius: 50%;">
+                <span class="fw-bold">SAAGS</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav gap-3 fs-5">
+                    <li class="nav-item">
+                        <a class="nav-link px-3" href="#inicio">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3" href="#nosotros">Nosotros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3" href="#actividades">Actividades</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3" href="#galeria">Galería</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3" href="#calendario">Calendario Astronómico</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3" href="#equipo">Equipo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3" href="#contacto">Contacto</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
     <!-- Sección Hero / Inicio -->
     <section id="inicio" class="hero-section">
         <div class="container text-center">
-            <h1 class="display-3 mb-4 fw-bold text-white">Sociedad Astronómica de Aguascalientes</h1>
-            <p class="lead mb-5">Explorando el universo desde el corazón de México</p>
+            <h1 class="display-3 mb-4 fw-bold text-white animate__animated animate__fadeInDown show fade">
+                Sociedad Astronómica de Aguascalientes
+            </h1>
+            <p class="lead mb-5 animate__animated animate__fadeInUp show fade">
+                Explorando el universo desde el corazón de México
+            </p>
             <div class="d-flex justify-content-center gap-3">
-                <a href="#actividades" class="btn btn-primary btn-lg">Nuestras actividades</a>
-                <a href="#contacto" class="btn btn-outline-light btn-lg">Únete a nosotros</a>
+                <a href="#actividades" class="btn btn-primary btn-lg animate__animated animate__fadeIn show fade">Nuestras actividades</a>
+                <a href="#contacto" class="btn btn-outline-light btn-lg animate__animated animate__fadeIn show fade">Únete a nosotros</a>
             </div>
         </div>
     </section>
-
+<!--btn btn-primary btn-lg animate__animated animate__pulse animate__infinite show fade-->
     <!-- Sección Nosotros -->
     <section id="nosotros" class="py-5">
         <div class="container">
@@ -631,7 +638,7 @@
                 </div>
             </div>
             <div class="text-center mt-4">
-                <a href="#" class="btn btn-primary animate__animated animate__pulse animate__infinite" aria-label="Ver más fotografías">Ver más fotografías</a>
+                <a href="#" class="btn btn-primary" aria-label="Ver más fotografías">Ver más fotografías</a>
             </div>
         </div>
     </section>
@@ -955,6 +962,39 @@
             div.remove();
             }, 4000);
         }
+        });
+        
+        // Script para manejar aria-current="page" dinámicamente según el hash en la URL y el scroll.
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+            const sections = Array.from(navLinks).map(link => document.querySelector(link.getAttribute('href')));
+
+            // Función para actualizar aria-current y clase active
+            function updateActiveNav() {
+                let currentSectionIndex = 0;
+                const scrollPosition = window.scrollY + (window.innerHeight / 4);
+
+                sections.forEach((section, idx) => {
+                    if (section && section.offsetTop <= scrollPosition) {
+                        currentSectionIndex = idx;
+                    }
+                });
+
+                navLinks.forEach((link, idx) => {
+                    if (idx === currentSectionIndex) {
+                        link.setAttribute('aria-current', 'page');
+                        link.classList.add('active');
+                    } else {
+                        link.removeAttribute('aria-current');
+                        link.classList.remove('active');
+                    }
+                });
+            }
+
+            // Actualizar al cargar, al hacer scroll y al cambiar el hash
+            updateActiveNav();
+            window.addEventListener('scroll', updateActiveNav);
+            window.addEventListener('hashchange', updateActiveNav);
         });
     </script>
     <!-- Bootstrap JS Bundle with Popper -->
