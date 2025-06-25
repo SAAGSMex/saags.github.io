@@ -20,24 +20,24 @@
         :root {
             --navbar-height: 76px; /* Altura de la barra de navegación */
         }
-        
+
         body {
             font-family: 'Montserrat', sans-serif;
             background-color: #0a1128;
             color: #f0f0f0;
             position: relative;
         }
-        
+
         html {
             scroll-padding-top: var(--navbar-height); /* Ajuste para el scroll */
             scroll-behavior: smooth;
         }
-        
+
         section {
             padding-top: calc(2rem + var(--navbar-height));
             margin-top: -var(--navbar-height);
         }
-        
+
         /* Fondo de estrellas */
         .bg-stars {
             position: fixed;
@@ -48,7 +48,7 @@
             background: #0a1128 url("https://images2.alphacoders.com/825/825785.jpg") center center/cover no-repeat;
             z-index: -1;
         }
-        
+
         .navbar {
             min-height: var(--navbar-height);
             padding-top: 1.2rem !important;
@@ -60,41 +60,34 @@
             display: flex;
             align-items: center;
         }
-
         .navbar .container {
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
-
         .navbar-brand {
             display: flex !important;
             align-items: center !important;
             gap: 12px;
         }
-
         .navbar-brand img {
             height: 54px !important;
             width: 54px !important;
             object-fit: cover;
             border-radius: 50%;
-            margin-right: 0 !important; /* Elimina margin si usas gap */
             box-shadow: 0 0 10px #1a3a8f77;
         }
-
         .navbar-brand span {
             font-size: 2rem;
             font-weight: 700;
             letter-spacing: 0.06em;
             color: #7cb9e8 !important;
         }
-
         .navbar-nav {
             gap: 1.3rem;
             display: flex;
             align-items: center;
         }
-
         .navbar-nav .nav-link {
             font-size: 1.15rem;
             font-weight: 500;
@@ -105,21 +98,19 @@
             margin: 0 0.1rem;
             letter-spacing: 0.04em;
         }
-
         .navbar-nav .nav-link:hover, 
         .navbar-nav .nav-link.active {
             background: rgba(124, 185, 232, 0.13);
             color: #ffe066 !important;
             box-shadow: 0 2px 8px #7cb9e86c;
         }
-
         .navbar-dark .navbar-toggler {
             border: none;
             outline: none;
             box-shadow: none !important;
         }
 
-        /* Responsive */
+        /* Responsive navbar */
         @media (max-width: 991.98px) {
             .navbar-nav {
                 gap: 0.5rem;
@@ -136,8 +127,8 @@
                 padding-bottom: 0.8rem !important;
             }
         }
-        
-        /*/api/placeholder/1200/600*/
+
+        /* Hero section */
         .hero-section {
             background: linear-gradient(to bottom, rgba(13, 36, 90, 0.7), rgba(7, 11, 35, 0.9)), 
                 url('https://images4.alphacoders.com/137/1370823.png') 
@@ -150,7 +141,7 @@
             padding-top: 0;
             margin-top: 0;
             padding-bottom: 2rem;
-        } 
+        }
 
         .section-title {
             color: #7cb9e8;
@@ -159,87 +150,165 @@
             padding-bottom: 5px;
             margin-bottom: 30px;
         }
-        
-		#actividades .card-text, #actividades .card-title {
-			color: #f0f0f0; /* Color claro para asegurar contraste con el fondo oscuro */
-		}
-		
-        .card {
-            background-color: rgba(13, 36, 90, 0.7);
-            border: 1px solid #304d9d;
-            transition: transform 0.3s, box-shadow 0.3s;
+
+        /* Tarjetas de la sección Actividades */
+        #actividades .card {
+            background: linear-gradient(135deg, rgba(13,36,90,0.92) 80%, rgba(124,185,232,0.09) 100%);
+            border: none;
+            border-radius: 1.3rem;
+            box-shadow: 0 8px 32px 0 rgba(13,36,90, 0.17), 0 2px 8px 0 rgba(124,185,232,0.13);
+            transition: transform 0.22s cubic-bezier(0.4, 0.2, 0.2, 1), box-shadow 0.22s;
+            overflow: hidden;
+            margin-bottom: 2rem;
         }
-        
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 123, 255, 0.3);
+        #actividades .card:hover {
+            transform: translateY(-7px) scale(1.025);
+            box-shadow: 0 16px 40px 0 rgba(0,123,255,0.25), 0 4px 16px rgba(124,185,232,0.25);
+            border-color: #f7c948;
+        }
+
+        /* Imagen general de las cards */
+        #actividades .card-img-top {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            object-position: center;
+            background: #0a1128;
+            border-top-left-radius: 1.3rem;
+            border-top-right-radius: 1.3rem;
+            box-shadow: 0 2px 8px rgba(124,185,232,0.10);
+            transition: filter 0.22s;
+            padding: 0;
+        }
+        /* Solo para imágenes que quieres más pequeñas y completas */
+        #actividades .img-ajustable {
+            height: 250px;
+            object-fit: contain;
+            width: 100%;
+            background: #0a1128;
+            padding: 0;
+        }
+        @media (max-width: 991.98px) {
+            #actividades .card-img-top { height: 130px; }
+            #actividades .img-ajustable { height: 70px; }
+        }
+        @media (max-width: 767.98px) {
+            #actividades .card-img-top { height: 90px; }
+            #actividades .img-ajustable { height: 50px; }
+        }
+
+        #actividades .card:hover .card-img-top {
+            filter: brightness(1.12) saturate(1.07);
         }
 
         .card-actividad-title {
-        color: #f7c948;           /* Amarillo vibrante */
-        font-weight: 700;         /* Negrita */
-        font-family: 'Montserrat', sans-serif; /* Misma fuente del resto del sitio */
-        font-size: 1.35rem;       /* Ajusta el tamaño según tu preferencia */
-        text-transform: none;     /* Sin mayúsculas forzadas */
-        letter-spacing: 0.01em;
+            color: #ffe066;
+            font-size: 1.2rem;
+            font-weight: bold;
+            letter-spacing: 0.03em;
+            margin-bottom: 0.7rem;
+            text-shadow: 0 2px 8px rgba(13,36,90,0.18);
+            font-family: 'Montserrat', sans-serif;
+        }
+        .card-actividad-title i {
+            color: #ffe066;
+            margin-right: 7px;
+        }
+        #actividades .card-body {
+            padding: 1.2rem 1.1rem 0.7rem 1.1rem;
+            background: transparent;
+        }
+        #actividades .card-text {
+            color: #e7eaf6;
+            font-size: 1rem;
+            margin-bottom: 0;
+            min-height: 80px;
+        }
+        #actividades .card-footer {
+            background: transparent;
+            border-top: none;
+            padding-bottom: 1.1rem;
+            padding-top: 0.3rem;
         }
 
-        .card-actividad-title i {
-        color: #f7c948;           /* Amarillo para el icono */
+        /* Botones de las tarjetas en sección Actividades */   
+        /*#ffe066*/
+        #actividades .card-footer .btn {
+            background: linear-gradient(90deg, #1a2540 50%, #304d9d 140%);
+            color: #f0f0f0; 
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 0.55rem 1.5rem;
+            border: none;
+            border-radius: 100px;
+            box-shadow: 0 2px 12px 0 rgba(48,77,157,0.18);
+            transition: background 0.22s, color 0.22s, box-shadow 0.22s, transform 0.18s;
+            text-transform: none;
+            outline: none;
+            letter-spacing: 0.02em;
         }
-        
+
+        #actividades .card-footer .btn:hover, 
+        #actividades .card-footer .btn:focus {
+            background: linear-gradient(90deg, #ffe066 10%, #233d6c 100%);
+            color: #1a2540;
+            box-shadow: 0 6px 24px #ffe06666, 0 2px 8px #7cb9e866;
+            transform: translateY(-2px) scale(1.06);
+            text-decoration: none;
+        }
+
+        /* Event cards */
         .event-card {
             border-left: 4px solid #7cb9e8;
         }
-        
+
+        /* Footer */
         .footer {
             background-color: rgba(7, 11, 35, 0.9);
             border-top: 1px solid #304d9d;
             padding: 40px 0;
         }
-        
         .social-links a {
             color: #f0f0f0;
             margin-right: 15px;
             font-size: 1.5rem;
             transition: color 0.3s;
         }
-        
         .social-links a:hover {
             color: #7cb9e8;
         }
-        
+
+        /* Botones primarios generales */
         .btn-primary {
             background-color: #304d9d;
             border-color: #304d9d;
         }
-        
         .btn-primary:hover {
             background-color: #1a3a8f;
             border-color: #1a3a8f;
         }
-        
+
+        /* Galería */
         .gallery-item {
             position: relative;
             overflow: hidden;
             border-radius: 5px;
             margin-bottom: 30px;
         }
-        
         .gallery-item img {
             transition: transform 0.5s;
         }
-        
         .gallery-item:hover img {
             transform: scale(1.05);
         }
-        
+
+        /* Equipo */
         .team-member img {
             border-radius: 50%;
             border: 3px solid #304d9d;
         }
-        
-        /* Animación para el conteo estadístico */
+
+        /* Conteo estadístico */
         .count-box {
             background-color: rgba(13, 36, 90, 0.7);
             padding: 20px;
@@ -247,14 +316,13 @@
             border: 1px solid #304d9d;
             margin-bottom: 20px;
         }
-
         .count-number {
             font-size: 2.5rem;
             font-weight: bold;
             color: #7cb9e8;
         }
-        
-        /* Estilo para la sección de calendario astronómico */
+
+        /* Calendario astronómico */
         .astro-event {
             padding: 15px;
             border-radius: 5px;
@@ -262,14 +330,13 @@
             background-color: rgba(13, 36, 90, 0.7);
             border-left: 4px solid #7cb9e8;
         }
-        
+
         /* Tooltip estilizado */
         .custom-tooltip {
             position: relative;
             display: inline-block;
             cursor: pointer;
         }
-        
         .tooltip-content {
             visibility: hidden;
             width: 200px;
@@ -287,32 +354,27 @@
             transition: opacity 0.3s;
             border: 1px solid #304d9d;
         }
-        
         .custom-tooltip:hover .tooltip-content {
             visibility: visible;
             opacity: 1;
         }
 
+        /* Justificado de textos */
         .text-justify p,
         .text-justify ul,
         .text-justify li {
             text-align: justify;
         }
-
         #actividades .event-card p,
         #actividades .event-card h5,
         #actividades .event-card span,
         #actividades .event-card {
             text-align: justify;
         }
-
-        /* Sección Galería: justificar solo si hay texto descriptivo */
         #galeria p,
         #galeria .gallery-item p {
             text-align: justify;
         }
-
-        /* Calendario Astronómico */
         #calendario p,
         #calendario ul,
         #calendario li,
@@ -320,14 +382,13 @@
         #calendario .list-group-item {
             text-align: justify;
         }
-
-        /* Sección Equipo: justificar textos bajo los nombres si lo deseas */
         #equipo p,
         #equipo .team-member,
         #equipo .text-muted {
             text-align: justify;
         }
 
+        /* Mensaje de éxito */
         .mensaje-exito {
             font-size: 1rem;
             border-radius: 0.5rem;
@@ -507,7 +568,7 @@
                 </div>
                 <div class="col-md-4 mb-4">
                     <div class="card bg-gradient-astro shadow-lg h-100">
-                        <img src="https://i.ytimg.com/vi/qzzGI81AR1w/maxresdefault.jpg" class="card-img-top" alt="Medios">
+                        <img src="https://i.ytimg.com/vi/qzzGI81AR1w/maxresdefault.jpg" class="card-img-top img-ajustable" alt="Medios">
                         <div class="card-body">
                             <h5 class="card-actividad-title text-center"><i class="fa-solid fa-bullhorn"></i> Participación en medios de comunicación</h5>
                             <p class="card-text">Colaboramos con prensa, radio y televisión local para informar a la comunidad sobre eventos astronómicos relevantes como eclipses, lluvias de meteoros, conjunciones y más.</p>
@@ -519,7 +580,7 @@
                 </div>
                 <div class="col-md-4 mb-4">
                     <div class="card bg-gradient-astro shadow-lg h-100">
-                        <img src="https://resources.sanborns.com.mx/imagenes-sanborns-ii/1200/3472302207123.jpg?scale=500&qlty=75" class="card-img-top" alt="Colaboraciones">
+                        <img src="https://resources.sanborns.com.mx/imagenes-sanborns-ii/1200/3472302207123.jpg?scale=500&qlty=75" class="card-img-top img-ajustable" alt="Colaboraciones">
                         <div class="card-body">
                             <h5 class="card-actividad-title text-center"><i class="fa-solid fa-people-group"></i> Colaboración nacional e internacional</h5>
                             <p class="card-text">La Sociedad mantiene vínculos con organizaciones astronómicas de México y el extranjero, incluyendo su participación en redes como AstroRed México, la revista Sky & Telescope, y el programa internacional Telescopios para la Educación.</p>
@@ -528,7 +589,7 @@
                 </div>
                 <div class="col-md-4 mb-4">
                     <div class="card bg-gradient-astro shadow-lg h-100">
-                        <img src="https://scontent.fagu3-1.fna.fbcdn.net/v/t39.30808-6/453625529_10161921322637973_3556443490677784030_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=2285d6&_nc_ohc=PHGe_QIZDgcQ7kNvwFKd39L&_nc_oc=Adnkqk4g2lNZseCFCkg-hqAObqZQmw3kj04C7X2XdF8lIPoBVrVTDaw4gGQD4sbWm2XjFJdeWSEEF6KvbQZ_JsCW&_nc_zt=23&_nc_ht=scontent.fagu3-1.fna&_nc_gid=zf57eYouXzixemiPwFHcvQ&oh=00_AfPwZOjm5CTR1s4V7HgsTLyRszO3GsYghZmyH5QVjeFjkg&oe=68528955" class="card-img-top" alt="Difusión">
+                        <img src="https://scontent.fagu3-1.fna.fbcdn.net/v/t39.30808-6/453625529_10161921322637973_3556443490677784030_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=2285d6&_nc_ohc=PHGe_QIZDgcQ7kNvwFKd39L&_nc_oc=Adnkqk4g2lNZseCFCkg-hqAObqZQmw3kj04C7X2XdF8lIPoBVrVTDaw4gGQD4sbWm2XjFJdeWSEEF6KvbQZ_JsCW&_nc_zt=23&_nc_ht=scontent.fagu3-1.fna&_nc_gid=zf57eYouXzixemiPwFHcvQ&oh=00_AfPwZOjm5CTR1s4V7HgsTLyRszO3GsYghZmyH5QVjeFjkg&oe=68528955" class="card-img-top img-ajustable" alt="Difusión">
                         <div class="card-body">
                             <h5 class="card-actividad-title text-center"><i class="fa-solid fa-share-nodes"></i> Difusión continua</h5>
                             <p class="card-text">Se publica y comparte contenido científico y educativo en medios digitales, redes sociales y boletines informativos, con el fin de mantener un flujo constante de comunicación con la comunidad.</p>
@@ -540,7 +601,7 @@
                 </div>
                 <div class="col-md-4 mb-4">
                     <div class="card bg-gradient-astro shadow-lg h-100">
-                        <img src="https://agsespacial.org/assets/logo2-f5TOnI85.png" class="card-img-top" alt="Difusión">
+                        <img src="https://agsespacial.org/assets/logo2-f5TOnI85.png" class="card-img-top img-ajustable" alt="Difusión">
                         <div class="card-body">
                             <h5 class="card-actividad-title text-center"><i class="fa-solid fa-person-rays"></i> Participación en Ferias y Eventos</h5>
                             <p class="card-text">La SAAGS ha participado en eventos como la Feria del Libro de Aguascalientes, ofreciendo actividades lúdicas y observaciones astronómicas para el público en general.</p>
@@ -1034,6 +1095,13 @@
             btnActividades.classList.add('animate__pulse', 'animate__infinite');
             }
         }, { once: true });
+        });
+
+        //Boton de Actividades
+          document.querySelectorAll('.card-footer .btn').forEach(function(btn){
+            btn.addEventListener('mouseup', function(){
+            this.blur();
+            });
         });
     </script>
     <!-- Bootstrap JS Bundle with Popper -->
