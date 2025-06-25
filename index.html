@@ -18,7 +18,7 @@
     <style>
         /* Estilos personalizados */
         :root {
-            --navbar-height: 76px; /* Altura de la barra de navegación */
+            --navbar-height: 76px;
         }
 
         body {
@@ -29,7 +29,7 @@
         }
 
         html {
-            scroll-padding-top: var(--navbar-height); /* Ajuste para el scroll */
+            scroll-padding-top: var(--navbar-height);
             scroll-behavior: smooth;
         }
 
@@ -49,6 +49,7 @@
             z-index: -1;
         }
 
+        /* Navbar Styles */
         .navbar {
             min-height: var(--navbar-height);
             padding-top: 1.2rem !important;
@@ -110,7 +111,6 @@
             box-shadow: none !important;
         }
 
-        /* Responsive navbar */
         @media (max-width: 991.98px) {
             .navbar-nav {
                 gap: 0.5rem;
@@ -183,7 +183,6 @@
             transition: filter 0.22s;
             padding: 0;
         }
-        /* Solo para imágenes que quieres más pequeñas y completas */
         #actividades .img-ajustable {
             height: 250px;
             object-fit: contain;
@@ -191,7 +190,6 @@
             background: #0a1128;
             padding: 0;
         }
-
         #actividades .card:hover .card-img-top {
             filter: brightness(1.12) saturate(1.07);
         }
@@ -226,7 +224,6 @@
             padding-top: 0.3rem;
         }
 
-        /* Botones de las tarjetas en sección Actividades */   
         #actividades .card-footer .btn {
             background: linear-gradient(90deg, #1a2540 50%, #304d9d 140%);
             color: #f0f0f0; 
@@ -255,10 +252,10 @@
         @media (max-width: 767.98px) {
             #actividades .card-img-top,
             #actividades .img-ajustable {
-                height: 180px;                  /* Aumenta un poco la altura para mejor proporción */
+                height: 180px;
                 min-height: 120px;
-                object-fit: contain !important; /* Muestra toda la imagen, aunque tenga bordes */
-                background: #0a1128;            /* Fondo oscuro para las franjas si las hay */
+                object-fit: contain !important;
+                background: #0a1128;
                 border-radius: 1.1rem 1.1rem 0 0;
                 width: 100%;
                 display: block;
@@ -268,6 +265,63 @@
         /* Event cards */
         .event-card {
             border-left: 4px solid #7cb9e8;
+        }
+
+        /* ===== GALERÍA con Bootstrap Mejorada ===== */
+        #galeria .gallery-item {
+            background: rgba(15, 24, 59, 0.93);
+            border-radius: 1.1rem;
+            overflow: hidden;
+            box-shadow: 0 4px 20px 0 rgba(30,50,120,0.09), 0 1.5px 8px 0 rgba(124,185,232,0.10);
+            transition: transform 0.16s, box-shadow 0.18s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        #galeria .gallery-item:hover {
+            transform: translateY(-7px) scale(1.024);
+            box-shadow: 0 12px 36px 0 rgba(120,180,255,0.13), 0 2px 8px 0 #7cb9e863;
+            border-color: #ffe066;
+        }
+        #galeria .gallery-item picture, 
+        #galeria .gallery-item img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 4/3;
+            object-fit: cover;
+            object-position: center;
+            background: #101a36;
+            min-height: 0;
+            border-radius: 1.1rem 1.1rem 0 0;
+            transition: filter 0.18s;
+        }
+        #galeria .gallery-item:hover img {
+            filter: brightness(1.11) saturate(1.09);
+        }
+        #galeria .gallery-item figcaption {
+            padding: 1rem 0.8rem 0.7rem 0.8rem;
+            color: #e7eaf6;
+            text-align: center;
+            font-size: 1.05rem;
+            background: linear-gradient(0deg, rgba(13,36,90,0.93) 80%, rgba(124,185,232,0.07) 100%);
+            border-radius: 0 0 1.1rem 1.1rem;
+            min-height: 82px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 0.3em;
+        }
+        #galeria .gallery-item figcaption strong {
+            color: #ffe066;
+            font-size: 1.13rem;
+            letter-spacing: 0.01em;
+            font-weight: 600;
+        }
+        @media (max-width: 767.98px) {
+            #galeria .gallery-item figcaption {
+                font-size: 1rem;
+                padding: 0.8rem 0.7rem 0.55rem 0.7rem;
+            }
         }
 
         /* Footer */
@@ -296,96 +350,11 @@
             border-color: #1a3a8f;
         }
 
-        /* ===== GALERÍA ASTRONÓMICA - GRID MODERNO (gallery) ===== */
-        #gallery .gallery-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-        gap: 2.1rem;
-        margin-bottom: 2rem;
-        }
-
-        #gallery .gallery-item {
-        background: rgba(15, 24, 59, 0.87);
-        border-radius: 1.2rem;
-        overflow: hidden;
-        box-shadow: 0 4px 20px 0 rgba(30,50,120,0.10), 0 1.5px 8px 0 rgba(124,185,232,0.10);
-        transition: transform 0.18s, box-shadow 0.22s;
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-        min-width: 0;
-        border: 1px solid #243463;
-        }
-
-        #gallery .gallery-item:hover {
-        transform: translateY(-9px) scale(1.027);
-        box-shadow: 0 12px 36px 0 rgba(120,180,255,0.17), 0 2px 8px 0 #7cb9e863;
-        border-color: #ffe066;
-        }
-
-        /* Imagen de galería: aspecto uniforme y centrado */
-        #gallery .gallery-item picture, 
-        #gallery .gallery-item img {
-        display: block;
-        width: 100%;
-        aspect-ratio: 4/3;
-        object-fit: cover;
-        object-position: center;
-        background: #101a36;
-        min-height: 0;
-        border-radius: 1.2rem 1.2rem 0 0;
-        transition: filter 0.2s;
-        }
-
-        #gallery .gallery-item:hover img {
-        filter: brightness(1.13) saturate(1.08);
-        }
-
-        #gallery .gallery-item figcaption {
-        padding: 1.1rem 1rem 0.7rem 1rem;
-        color: #e7eaf6;
-        text-align: center;
-        font-size: 1.05rem;
-        background: linear-gradient(0deg, rgba(13,36,90,0.94) 80%, rgba(124,185,232,0.07) 100%);
-        border-radius: 0 0 1.2rem 1.2rem;
-        min-height: 90px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        gap: 0.35em;
-        }
-
-        #gallery .gallery-item figcaption strong {
-        color: #ffe066;
-        font-size: 1.13rem;
-        letter-spacing: 0.01em;
-        font-weight: 600;
-        }
-
-        /* Responsive: grid a columnas más anchas en pantallas grandes */
-        @media (min-width: 992px) {
-        #gallery .gallery-grid {
-            grid-template-columns: repeat(3, 1fr);
-        }
-        }
-        @media (max-width: 768px) {
-        #gallery .gallery-grid {
-            grid-template-columns: 1fr;
-            gap: 1.2rem;
-        }
-        #gallery .gallery-item figcaption {
-            font-size: 1rem;
-            padding: 0.8rem 0.7rem 0.6rem 0.7rem;
-        }
-        }
-
         /* Equipo */
         .team-member img {
             border-radius: 50%;
             border: 3px solid #304d9d;
         }
-
-        /* Conteo estadístico */
         .count-box {
             background-color: rgba(13, 36, 90, 0.7);
             padding: 20px;
@@ -448,8 +417,8 @@
         #actividades .event-card {
             text-align: justify;
         }
-        #gallery p,
-        #gallery .gallery-item p {
+        #galeria p,
+        #galeria .gallery-item p {
             text-align: justify;
         }
         #calendario p,
@@ -721,85 +690,85 @@
         <div class="container">
             <h2 class="section-title text-center mb-5 animate__animated animate__fadeIn">Galería Astronómica</h2>
             <div class="row">
-                <div class="col-md-4 mb-4">
-                    <figure class="gallery-item">
+                <div class="col-12 col-sm-6 col-lg-4 mb-4">
+                    <figure class="gallery-item h-100">
                         <picture>
                             <source srcset="img/galeria/galaxia.webp" type="image/webp">
                             <img src="img/galeria/galaxia.jpg" alt="Galaxia de Andrómeda"
-                                class="img-fluid w-100 rounded"
+                                class="img-fluid"
                                 loading="lazy" width="800" height="600">
                         </picture>
-                        <figcaption class="mt-2 text-center">
+                        <figcaption>
                             <strong>Galaxia de Andrómeda</strong><br>
                             Fotografía tomada por Manuel Rodríguez Huerta
                         </figcaption>
                     </figure>
                 </div>
-                <div class="col-md-4 mb-4">
-                    <figure class="gallery-item">
+                <div class="col-12 col-sm-6 col-lg-4 mb-4">
+                    <figure class="gallery-item h-100">
                         <picture>
                             <source srcset="img/galeria/nebulosa.webp" type="image/webp">
                             <img src="img/galeria/nebulosa.jpg" alt="Nebulosa Rosea"
-                                class="img-fluid w-100 rounded"
+                                class="img-fluid"
                                 loading="lazy" width="800" height="600">
                         </picture>
-                        <figcaption class="mt-2 text-center">
+                        <figcaption>
                             <strong>Nebulosa Rosea</strong><br>
                             Fotografía tomada por Luis Sánchez de Alba
                         </figcaption>
                     </figure>
                 </div>
-                <div class="col-md-4 mb-4">
-                    <figure class="gallery-item">
+                <div class="col-12 col-sm-6 col-lg-4 mb-4">
+                    <figure class="gallery-item h-100">
                         <picture>
                             <source srcset="img/galeria/via_lactea.webp" type="image/webp">
                             <img src="img/galeria/via_lactea.jpg" alt="Vía Láctea en la zona del Cisne"
-                                class="img-fluid w-100 rounded"
+                                class="img-fluid"
                                 loading="lazy" width="800" height="600">
                         </picture>
-                        <figcaption class="mt-2 text-center">
+                        <figcaption>
                             <strong>Vía Láctea en la zona del Cisne</strong><br>
                             Fotografía tomada por Alfredo Lomas Torres
                         </figcaption>
                     </figure>
                 </div>
-                <div class="col-md-4 mb-4">
-                    <figure class="gallery-item">
+                <div class="col-12 col-sm-6 col-lg-4 mb-4">
+                    <figure class="gallery-item h-100">
                         <picture>
                             <source srcset="img/galeria/cumulo.webp" type="image/webp">
                             <img src="img/galeria/cumulo.jpg" alt="Cúmulo estelar de las Pléyades"
-                                class="img-fluid w-100 rounded"
+                                class="img-fluid"
                                 loading="lazy" width="800" height="600">
                         </picture>
-                        <figcaption class="mt-2 text-center">
+                        <figcaption>
                             <strong>Cúmulo estelar de las Pléyades</strong><br>
                             Fotografía tomada por Luis Jorge Manzanero
                         </figcaption>
                     </figure>
                 </div>
-                <div class="col-md-4 mb-4">
-                    <figure class="gallery-item">
+                <div class="col-12 col-sm-6 col-lg-4 mb-4">
+                    <figure class="gallery-item h-100">
                         <picture>
                             <source srcset="img/galeria/eclipse.webp" type="image/webp">
                             <img src="img/galeria/eclipse.jpg" alt="Luna de Sangre y el eclipse total"
-                                class="img-fluid w-100 rounded"
+                                class="img-fluid"
                                 loading="lazy" width="800" height="600">
                         </picture>
-                        <figcaption class="mt-2 text-center">
+                        <figcaption>
                             <strong>Luna de Sangre y el eclipse total</strong><br>
                             Fotografía tomada por Miguel Medina
                         </figcaption>
                     </figure>
                 </div>
-                <div class="col-md-4 mb-4">
-                    <figure class="gallery-item">
+                <div class="col-12 col-sm-6 col-lg-4 mb-4">
+                    <figure class="gallery-item h-100">
                         <picture>
                             <source srcset="img/galeria/luna.webp" type="image/webp">
                             <img src="img/galeria/luna.jpg" alt="Luna"
-                                class="img-fluid w-100 rounded"
+                                class="img-fluid"
                                 loading="lazy" width="800" height="600">
                         </picture>
-                        <figcaption class="mt-2 text-center">
+                        <figcaption>
                             <strong>Luna</strong><br>
                             Fotografía tomada por Luis Sánchez de Alba
                         </figcaption>
