@@ -1058,7 +1058,6 @@
                             </a>
                         </li>
                     </ul>
-                    
                     <h4 class="mt-4">Síguenos</h4>
                     <div class="social-links mt-3" aria-label="Redes sociales de la Sociedad Astronómica de Aguascalientes">
                         <a href="https://www.facebook.com/groups/saags" target="_blank" aria-label="Facebook"><i class="fab fa-facebook" aria-hidden="true"></i></a>
@@ -1066,13 +1065,12 @@
                         <a href="#" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
                         <a href="#" aria-label="YouTube"><i class="fab fa-youtube" aria-hidden="true"></i></a>
                     </div>
-                    
                     <h4 class="mt-4">Horario de atención</h4>
                     <p>Lunes a Viernes: 10:00 AM - 7:00 PM<br>
                     Sábados: 10:00 AM - 2:00 PM</p>
                 </div>
                 <div class="col-lg-6">
-                    <form aria-label="Formulario de contacto (demostrativo, no envía datos reales)" action="#" autocomplete="on">
+                    <form aria-label="Formulario de contacto (demostrativo, no envía datos reales)" action="#" autocomplete="on" novalidate>
                         <div class="mb-3">
                             <label for="nombre" class="form-label">Nombre completo</label>
                             <input type="text" class="form-control" id="nombre" name="nombre"
@@ -1220,22 +1218,22 @@
             window.addEventListener('hashchange', updateActiveNav);
         });
 
-        // FORMULARIO DE CONTACTO: validación y mensaje de éxito
+        // FORMULARIO DE CONTACTO: validación personalizada, accesibilidad y mensaje de éxito
         document.addEventListener('DOMContentLoaded', function() {
             const contactoForm = document.querySelector('#contacto form');
             if(contactoForm) {
                 contactoForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-
-                    // Validación simple de campos requeridos
-                    let valido = true;
+                    // Elimina mensajes de error previos
                     contactoForm.querySelectorAll('.mensaje-error').forEach(el => el.remove());
+                    let valido = true;
 
+                    // Campos
                     const nombre = contactoForm.querySelector('#nombre');
                     const email = contactoForm.querySelector('#email');
                     const asunto = contactoForm.querySelector('#asunto');
                     const mensaje = contactoForm.querySelector('#mensaje');
 
+                    // Validación personalizada
                     if (!nombre.value.trim()) {
                         mostrarMensajeError(nombre, "El nombre es obligatorio.");
                         valido = false;
@@ -1253,58 +1251,61 @@
                         valido = false;
                     }
 
-                    if(!valido) return;
+                    if (!valido) {
+                        e.preventDefault();
+                        return;
+                    }
 
+                    e.preventDefault();
                     contactoForm.reset();
                     mostrarMensajeExito(contactoForm, "El mensaje ha sido enviado con éxito.");
                 });
             }
 
-            // BOLETÍN INFORMATIVO (footer): validación y mensaje de éxito
-            const newsletterInput = document.querySelector('.footer input[type="email"]');
-            const newsletterBtn = document.getElementById('button-addon2');
-            if(newsletterInput && newsletterBtn) {
-                newsletterBtn.addEventListener('click', function() {
-                    // Elimina mensajes previos
-                    newsletterBtn.parentElement.querySelectorAll('.mensaje-error').forEach(el => el.remove());
-
+            // BOLETÍN INFORMATIVO (footer): validación personalizada y mensaje de éxito
+            const newsletterForm = document.querySelector('.footer form');
+            if (newsletterForm) {
+                newsletterForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    newsletterForm.querySelectorAll('.mensaje-error').forEach(el => el.remove());
+                    const newsletterInput = newsletterForm.querySelector('input[type="email"]');
                     if (!newsletterInput.value.trim() || !/^[\w\.-]+@[\w\.-]+\.\w{2,}$/.test(newsletterInput.value)) {
                         mostrarMensajeError(newsletterInput, "Introduce un correo electrónico válido.");
                         return;
                     }
                     newsletterInput.value = '';
-                    mostrarMensajeExito(newsletterBtn.parentElement, "¡Te has suscrito con éxito!");
+                    mostrarMensajeExito(newsletterForm.querySelector('.input-group'), "¡Te has suscrito con éxito!");
                 });
             }
 
-            // Función utilitaria para mostrar mensaje de error
+            // Función accesible para mostrar mensaje de error
             function mostrarMensajeError(input, mensaje) {
                 let errorDiv = document.createElement('div');
                 errorDiv.className = 'mensaje-error alert alert-danger mt-2 py-2 px-3';
+                errorDiv.setAttribute('role', 'alert');
+                errorDiv.setAttribute('aria-live', 'assertive');
                 errorDiv.textContent = mensaje;
                 if (input.parentElement) {
                     input.parentElement.appendChild(errorDiv);
                 } else {
                     input.after(errorDiv);
                 }
-                setTimeout(() => {
-                    errorDiv.remove();
-                }, 4000);
+                setTimeout(() => { errorDiv.remove(); }, 5000);
             }
 
-            // Función utilitaria para mostrar mensaje de éxito
+            // Función accesible para mostrar mensaje de éxito
             function mostrarMensajeExito(parent, mensaje) {
                 let mensajePrevio = parent.querySelector('.mensaje-exito');
-                if(mensajePrevio) mensajePrevio.remove();
+                if (mensajePrevio) mensajePrevio.remove();
 
                 const div = document.createElement('div');
                 div.className = 'mensaje-exito alert alert-success mt-2 mb-0 py-2 px-3 text-center';
+                div.setAttribute('role', 'status');
+                div.setAttribute('aria-live', 'polite');
                 div.textContent = mensaje;
                 parent.appendChild(div);
 
-                setTimeout(() => {
-                    div.remove();
-                }, 4000);
+                setTimeout(() => { div.remove(); }, 4000);
             }
         });
 
@@ -1327,18 +1328,19 @@
                 this.blur();
             });
         });
-    </script>
-    <!-- Bootstrap JS Bundle with Popper -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-    <!-- GLightbox JS -->
-    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
-    <script>
-    GLightbox({
-        selector: '.glightbox',
-        touchNavigation: true,
-        loop: true,
-        closeButton: true
-    });
+        
+        </script>
+        <!-- Bootstrap JS Bundle with Popper -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+        <!-- GLightbox JS -->
+        <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+        <script>
+        GLightbox({
+            selector: '.glightbox',
+            touchNavigation: true,
+            loop: true,
+            closeButton: true
+        });
     </script>
 </body>
 </html>
