@@ -984,9 +984,11 @@
             <div class="row">
                 <div class="col-md-3 mb-4">
                     <div class="text-center" aria-label="Miembro del equipo: Dr. Miguel Ángel Pérez, Director">
-                        <img src="/api/placeholder/150/150" alt="Foto de Dr. Miguel Ángel Pérez, Director" class="mb-3 team-member img-fluid rounded-circle shadow">
+                        <img src="https://www.thematicland.com/wp-content/uploads/2021/08/202-2022264_usuario-annimo-usuario-annimo-user-icon-png-transparent.png" alt="Foto de Dr. Miguel Ángel Pérez, Director"
+                        class="mb-3 team-member img-fluid rounded-circle shadow"
+                        style="width:200px; height:200px; object-fit:cover;"><!-- /api/placeholder/150/150-->
                         <h5>Dr. Miguel Ángel Pérez</h5>
-                        <p class="text-muted">Director</p>
+                        <span class="cargo text-info" style="display: block;">Director</span>
                         <div class="social-links small" aria-label="Redes sociales de Dr. Miguel Ángel Pérez">
                             <a href="#" aria-label="X (Twitter) de Dr. Miguel Ángel Pérez"><i class="fab fa-x-twitter"></i></a>
                             <a href="#" aria-label="LinkedIn de Dr. Miguel Ángel Pérez"><i class="fab fa-linkedin"></i></a>
@@ -995,9 +997,11 @@
                 </div>
                 <div class="col-md-3 mb-4">
                     <div class="text-center" aria-label="Miembro del equipo: Dra. Laura Mendoza, Coord. de Divulgación">
-                        <img src="/api/placeholder/150/150" alt="Foto de Dra. Laura Mendoza, Coordinadora de Divulgación" class="mb-3 team-member img-fluid rounded-circle shadow">
+                        <img src="https://www.thematicland.com/wp-content/uploads/2021/08/202-2022264_usuario-annimo-usuario-annimo-user-icon-png-transparent.png" alt="Foto de Dra. Laura Mendoza, Coord. de Divulgación"
+                        class="mb-3 team-member img-fluid rounded-circle shadow"
+                        style="width:200px; height:200px; object-fit:cover;">
                         <h5>Dra. Laura Mendoza</h5>
-                        <p class="text-muted">Coord. de Divulgación</p>
+                        <span class="cargo text-info" style="display: block;">Coord. de Divulgación</span>
                         <div class="social-links small" aria-label="Redes sociales de Dra. Laura Mendoza">
                             <a href="#" aria-label="X (Twitter) de Dra. Laura Mendoza"><i class="fab fa-x-twitter"></i></a>
                             <a href="#" aria-label="LinkedIn de Dra. Laura Mendoza"><i class="fab fa-linkedin"></i></a>
@@ -1006,9 +1010,11 @@
                 </div>
                 <div class="col-md-3 mb-4">
                     <div class="text-center" aria-label="Miembro del equipo: Ing. Carlos Ramírez, Coord. de Observaciones">
-                        <img src="/api/placeholder/150/150" alt="Foto de Ing. Carlos Ramírez, Coord. de Observaciones" class="mb-3 team-member img-fluid rounded-circle shadow">
+                        <img src="https://www.thematicland.com/wp-content/uploads/2021/08/202-2022264_usuario-annimo-usuario-annimo-user-icon-png-transparent.png" alt="Foto de Ing. Carlos Ramírez, Coord. de Observaciones"
+                        class="mb-3 team-member img-fluid rounded-circle shadow"
+                        style="width:200px; height:200px; object-fit:cover;">
                         <h5>Ing. Carlos Ramírez</h5>
-                        <p class="text-muted">Coord. de Observaciones</p>
+                        <span class="cargo text-info" style="display: block;">Coord. de Observaciones</span>
                         <div class="social-links small" aria-label="Redes sociales de Ing. Carlos Ramírez">
                             <a href="#" aria-label="X (Twitter) de Ing. Carlos Ramírez"><i class="fab fa-x-twitter"></i></a>
                             <a href="#" aria-label="Instagram de Ing. Carlos Ramírez"><i class="fab fa-instagram"></i></a>
@@ -1017,9 +1023,11 @@
                 </div>
                 <div class="col-md-3 mb-4">
                     <div class="text-center" aria-label="Miembro del equipo: Lic. Ana Sofía Torres, Secretaria">
-                        <img src="/api/placeholder/150/150" alt="Foto de Lic. Ana Sofía Torres, Secretaria" class="mb-3 team-member img-fluid rounded-circle shadow">
+                        <img src="https://www.thematicland.com/wp-content/uploads/2021/08/202-2022264_usuario-annimo-usuario-annimo-user-icon-png-transparent.png" alt="Foto de Lic. Ana Sofía Torres, Secretaria"
+                        class="mb-3 team-member img-fluid rounded-circle shadow"
+                        style="width:200px; height:200px; object-fit:cover;">
                         <h5>Lic. Ana Sofía Torres</h5>
-                        <p class="text-muted">Secretaria</p>
+                        <span class="cargo text-info" style="display: block;">Secretaria</span>
                         <div class="social-links small" aria-label="Redes sociales de Lic. Ana Sofía Torres">
                             <a href="#" aria-label="LinkedIn de Lic. Ana Sofía Torres"><i class="fab fa-linkedin"></i></a>
                             <a href="#" aria-label="Instagram de Lic. Ana Sofía Torres"><i class="fab fa-instagram"></i></a>
@@ -1102,7 +1110,7 @@
         </div>
     </section>
 
-    <!-- Footer accesible -->
+    <!-- Footer-->
     <footer class="footer" aria-label="Pie de página">
         <div class="container">
             <div class="row">
@@ -1122,13 +1130,30 @@
                 <div class="col-md-4">
                     <h5>Boletín informativo</h5>
                     <p>Suscríbete para recibir novedades astronómicas y eventos</p>
-                    <div class="input-group mb-3">
-                        <input type="email" class="form-control" placeholder="Tu email" aria-label="Email para boletín" aria-describedby="button-addon2">
-                        <button class="btn btn-primary" type="button" id="button-addon2">Suscribir</button>
-                    </div>
+                    <form class="needs-validation" novalidate aria-label="Formulario de suscripción al boletín (demostrativo, no funcional)">
+                        <div class="input-group mb-3">
+                            <input type="email"
+                                   class="form-control"
+                                   placeholder="Tu email"
+                                   aria-label="Email para boletín"
+                                   aria-describedby="button-addon2 ayuda-suscripcion"
+                                   id="suscripcion-email"
+                                   name="suscripcion-email"
+                                   required>
+                            <button class="btn btn-primary"
+                                    type="submit"
+                                    id="button-addon2"
+                                    aria-label="Suscribirse al boletín. Este campo es solo demostrativo, no envía datos reales.">
+                                Suscribir
+                            </button>
+                        </div>
+                        <div>
+                            <span id="ayuda-suscripcion" class="text-info" style="display: block; margin-top: 0.5rem;">Este formulario es solo demostrativo y no envía datos reales.</span>
+                        </div>
+                    </form>
                 </div>
             </div>
-            <hr class="mt-4">
+            <hr class="mt-4" aria-hidden="true">
             <div class="row">
                 <div class="col-md-12 text-center">
                     <p class="mb-0">&copy; 2025 Sociedad Astronómica de Aguascalientes. Todos los derechos reservados.</p>
