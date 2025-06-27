@@ -1044,17 +1044,19 @@
                             <a href="mailto:segovia1107@hotmail.com" style="color: white;">segovia1107@hotmail.com</a>,
                             <a href="mailto:saagsawb@gmail.com" style="color: white;">saagsawb@gmail.com</a>
                         </li>
-                        <li class="mb-3"><a href="https://www.facebook.com/groups/saags/?locale=es_LA" target="_blank" style="color: inherit;">
-                            <i class="fab fa-facebook-f me-2" aria-hidden="true"></i>Sociedad Astronómica de Aguascalientes, A.C.</a>
+                        <li class="mb-3">
+                            <a href="https://www.facebook.com/groups/saags/?locale=es_LA" target="_blank" style="color: inherit;" aria-label="Grupo de Facebook Sociedad Astronómica de Aguascalientes, A.C.">
+                                <i class="fab fa-facebook-f me-2" aria-hidden="true"></i>Sociedad Astronómica de Aguascalientes, A.C.
+                            </a>
                         </li>
                     </ul>
                     
                     <h4 class="mt-4">Síguenos</h4>
                     <div class="social-links mt-3" aria-label="Redes sociales de la Sociedad Astronómica de Aguascalientes">
-                        <a href="https://www.facebook.com/groups/saags" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                        <a href="#" aria-label="X (Twitter)"><i class="fab fa-x-twitter"></i></a>
-                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.facebook.com/groups/saags" target="_blank" aria-label="Facebook"><i class="fab fa-facebook" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="X (Twitter)"><i class="fab fa-x-twitter" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube" aria-hidden="true"></i></a>
                     </div>
                     
                     <h4 class="mt-4">Horario de atención</h4>
@@ -1062,22 +1064,36 @@
                     Sábados: 10:00 AM - 2:00 PM</p>
                 </div>
                 <div class="col-lg-6">
-                    <form aria-label="Formulario de contacto">
+                    <form aria-label="Formulario de contacto (demostrativo, no envía datos reales)" action="#" autocomplete="on">
                         <div class="mb-3">
                             <label for="nombre" class="form-label">Nombre completo</label>
-                            <input type="text" class="form-control" id="nombre" placeholder="Tu nombre" required>
+                            <input type="text" class="form-control" id="nombre" name="nombre"
+                                   placeholder="Tu nombre" required
+                                   aria-required="true"
+                                   aria-label="Nombre completo">
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Correo electrónico</label>
-                            <input type="email" class="form-control" id="email" placeholder="tucorreo@ejemplo.com" required>
+                            <input type="email" class="form-control" id="email" name="email"
+                                   placeholder="tucorreo@ejemplo.com" required
+                                   aria-required="true"
+                                   aria-label="Correo electrónico"
+                                   aria-describedby="ayuda-email">
+                            <small id="ayuda-email" class="form-text text-muted">Nunca compartiremos tu correo con nadie más.</small>
                         </div>
                         <div class="mb-3">
                             <label for="asunto" class="form-label">Asunto</label>
-                            <input type="text" class="form-control" id="asunto" placeholder="Asunto del mensaje" required>
+                            <input type="text" class="form-control" id="asunto" name="asunto"
+                                   placeholder="Asunto del mensaje" required
+                                   aria-required="true"
+                                   aria-label="Asunto del mensaje">
                         </div>
                         <div class="mb-3">
                             <label for="mensaje" class="form-label">Mensaje</label>
-                            <textarea class="form-control" id="mensaje" rows="5" placeholder="Tu mensaje aquí..." required></textarea>
+                            <textarea class="form-control" id="mensaje" name="mensaje" rows="5"
+                                      placeholder="Tu mensaje aquí..." required
+                                      aria-required="true"
+                                      aria-label="Mensaje"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Enviar mensaje</button>
                     </form>
