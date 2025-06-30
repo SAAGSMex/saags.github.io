@@ -41,10 +41,10 @@
         }
 
         /* Fondo de estrellas */
+        /* Fondo de estrellas: Corrección para móviles */
         .bg-stars {
             position: fixed;
-            top: 0;
-            left: 0;
+            top: 0; left: 0;
             width: 100vw;
             height: 100vh;
             background: #0a1128 url("https://images2.alphacoders.com/825/825785.jpg") center center/cover no-repeat;
@@ -52,17 +52,17 @@
             pointer-events: none;
         }
 
-        @media (max-width: 767.98px) {
+        @media (max-width: 991.98px) {
             .bg-stars {
-                position: absolute;
+                position: absolute !important; /* Cambia a absolute en móvil */
                 width: 100vw;
                 height: 100vh;
                 min-height: 100%;
-                background-attachment: scroll !important; /* Fuerza background normal */
+                background-attachment: scroll !important;
                 background-size: cover !important;
                 background-repeat: no-repeat !important;
                 background-position: center center !important;
-                z-index: -1;
+                filter: none !important; /* Si algún filtro genera borrosidad */
             }
         }
 
