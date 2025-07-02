@@ -279,8 +279,11 @@
             font-size: 0.85em;       /* Tamaño del texto pequeño */
         }
 
-        /* ===== GALERÍA con Bootstrap Mejorada (imágenes grandes, iguales y diseño de fondo) ===== */
+        /* ===== GALERÍA Bootstrap Mejorada (imágenes grandes, centradas, sin espacios laterales ni exceso de fondo en móvil/tablet) ===== */
         .gallery-card {
+            max-width: 100%;
+            width: 100%;
+            margin: 0;
             background: linear-gradient(
                 135deg,
                 rgba(24,27,31,0.93) 0%,
@@ -303,40 +306,105 @@
             border-color: #ffe066;
         }
 
+        /* Área de imagen adaptable, compacta en todos los lados */
         .gallery-card .bg-dark {
-            background: rgba(24, 27, 31, 0.035) !important;
-            height: 340px;
-            overflow: hidden;
-            border-radius: 1.1rem 1.1rem 0 0;
+            width: 99.5%;
+            margin: 0.1em auto 0.1em auto;
+            aspect-ratio: 16/9;
             display: flex;
             align-items: center;
             justify-content: center;
+            border-radius: 1.1rem 1.1rem 0 0;
+            overflow: hidden;
             padding: 0;
+            min-height: 0;
+            background: rgba(24, 27, 31, 0.035) !important;
         }
 
+        /* Uniformidad y compactación en todos los tamaños */
         @media (max-width: 991.98px) {
+            #galeria .row {
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+            }
+            #galeria [class^="col-"], 
+            #galeria [class*=" col-"] {
+                padding-left: 2px !important;
+                padding-right: 2px !important;
+            }
             .gallery-card .bg-dark {
-                height: 220px;
+                aspect-ratio: 1/1;
+                width: 100% !important;
+                margin: 0.05em auto 0.1em auto;
             }
         }
+
+        /* === MÓVIL: Fondo y área de imagen sin exceso lateral ni vertical === */
         @media (max-width: 767.98px) {
+            #galeria > .container {
+                width: 100vw !important;
+                max-width: 100vw !important;
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+            }
+            #galeria .row {
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+            }
+            #galeria [class^="col-"], 
+            #galeria [class*=" col-"] {
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+            }
+            .gallery-card {
+                border-radius: 0.7rem;
+                margin: 0 !important;
+            }
             .gallery-card .bg-dark {
-                height: 180px;
+                /* Elimina aspect-ratio: el alto lo define la imagen */
+                aspect-ratio: unset !important;
+                width: 100% !important;
+                height: auto !important;
+                min-height: 0 !important;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 0.7rem 0.7rem 0 0;
+                padding: 0;
+                margin: 0 auto 0.05em auto;
+                background: rgba(24, 27, 31, 0.035) !important;
+            }
+            .gallery-card picture,
+            .gallery-card img {
+                width: 100% !important;
+                height: auto !important;
+                max-width: 100vw !important;
+                max-height: 70vw !important; /* Puedes ajustar el 70vw según prefieras */
+                object-fit: contain !important;
+                object-position: center;
+                border-radius: 0.7rem 0.7rem 0 0;
+                background: transparent !important;
+                display: block;
+                margin: 0;
+                padding: 0;
             }
         }
 
         .gallery-card img,
         .gallery-card picture {
-            max-width: 100%;
-            max-height: 100%;
-            width: auto;
+            width: 100%;
             height: 100%;
-            object-fit: contain;  /* Muestra la imagen completa, sin recortar ni deformar */
+            object-fit: contain;
             object-position: center;
             background: transparent !important;
             border-radius: 1.1rem 1.1rem 0 0;
-            transition: filter 0.18s;
             display: block;
+            margin: 0;
+            padding: 0;
+            transition: filter 0.18s;
+            box-shadow: none;
         }
 
         .gallery-card:hover img {
@@ -349,6 +417,8 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            padding-top: 0.45em;
+            padding-bottom: 0.2em;
         }
 
         .gallery-card h5,
@@ -360,7 +430,7 @@
             color: #7cb9e8;
             font-size: 1.13rem;
             font-weight: 800;
-            margin-bottom: 0.7rem;
+            margin-bottom: 0.5rem;
             letter-spacing: 0.015em;
         }
 
@@ -369,7 +439,7 @@
             font-size: 1.05rem;
             margin-bottom: 0.1rem;
         }
-
+        
         /* Footer */
         .footer {
             background-color: rgba(7, 11, 35, 0.9);
@@ -833,15 +903,14 @@
           <!-- Tarjeta 1 -->
           <div class="col-12 col-sm-6 col-lg-4 mb-4">
             <div class="gallery-card shadow-lg border-0 overflow-hidden p-0">
-              <div class="bg-dark position-relative w-100 d-flex align-items-center justify-content-center" style="height:340px;">
+              <div class="bg-dark position-relative w-100 d-flex align-items-center justify-content-center">
                 <a href="img/galeria/galaxia.jpg" class="glightbox d-block w-100 h-100" data-gallery="galeria"
                    data-title="Galaxia de Andrómeda&lt;br&gt;&lt;small&gt;Fotografía: Manuel Rodríguez Huerta&lt;/small&gt;" aria-label="Ver imagen ampliada de Galaxia de Andrómeda">
                   <picture>
                     <source srcset="img/galeria/galaxia.webp" type="image/webp">
                     <img src="img/galeria/galaxia.jpg"
                          alt="Galaxia de Andrómeda, Fotografía tomada por Manuel Rodríguez Huerta"
-                         class="img-fluid d-block mx-auto"
-                         style="max-width: 100%; max-height: 100%; width: auto; height: 100%; object-fit: contain;"
+                         class="img-fluid"
                          loading="lazy" width="800" height="600">
                   </picture>
                 </a>
@@ -855,15 +924,14 @@
           <!-- Tarjeta 2 -->
           <div class="col-12 col-sm-6 col-lg-4 mb-4">
             <div class="gallery-card shadow-lg border-0 overflow-hidden p-0">
-              <div class="bg-dark position-relative w-100 d-flex align-items-center justify-content-center" style="height:340px;">
+              <div class="bg-dark position-relative w-100 d-flex align-items-center justify-content-center">
                 <a href="img/galeria/nebulosa.jpg" class="glightbox d-block w-100 h-100" data-gallery="galeria"
                    data-title="Nebulosa Rosea&lt;br&gt;&lt;small&gt;Fotografía: Luis Sánchez de Alba&lt;/small&gt;" aria-label="Ver imagen ampliada de Nebulosa Rosea">
                   <picture>
                     <source srcset="img/galeria/nebulosa.webp" type="image/webp">
                     <img src="img/galeria/nebulosa.jpg"
                          alt="Nebulosa Rosea, Fotografía tomada por Luis Sánchez de Alba"
-                         class="img-fluid d-block mx-auto"
-                         style="max-width: 100%; max-height: 100%; width: auto; height: 100%; object-fit: contain;"
+                         class="img-fluid"
                          loading="lazy" width="800" height="600">
                   </picture>
                 </a>
@@ -877,15 +945,14 @@
           <!-- Tarjeta 3 -->
           <div class="col-12 col-sm-6 col-lg-4 mb-4">
             <div class="gallery-card shadow-lg border-0 overflow-hidden p-0">
-              <div class="bg-dark position-relative w-100 d-flex align-items-center justify-content-center" style="height:340px;">
+              <div class="bg-dark position-relative w-100 d-flex align-items-center justify-content-center">
                 <a href="img/galeria/via_lactea.jpg" class="glightbox d-block w-100 h-100" data-gallery="galeria"
                    data-title="Vía Láctea en la zona del Cisne&lt;br&gt;&lt;small&gt;Fotografía: Alfredo Lomas Torres&lt;/small&gt;" aria-label="Ver imagen ampliada de Vía Láctea en la zona del Cisne">
                   <picture>
                     <source srcset="img/galeria/via_lactea.webp" type="image/webp">
                     <img src="img/galeria/via_lactea.jpg"
                          alt="Vía Láctea en la zona del Cisne, Fotografía tomada por Alfredo Lomas Torres"
-                         class="img-fluid d-block mx-auto"
-                         style="max-width: 100%; max-height: 100%; width: auto; height: 100%; object-fit: contain;"
+                         class="img-fluid"
                          loading="lazy" width="800" height="600">
                   </picture>
                 </a>
@@ -899,15 +966,14 @@
           <!-- Tarjeta 4 -->
           <div class="col-12 col-sm-6 col-lg-4 mb-4">
             <div class="gallery-card shadow-lg border-0 overflow-hidden p-0">
-              <div class="bg-dark position-relative w-100 d-flex align-items-center justify-content-center" style="height:340px;">
+              <div class="bg-dark position-relative w-100 d-flex align-items-center justify-content-center">
                 <a href="img/galeria/cumulo.jpg" class="glightbox d-block w-100 h-100" data-gallery="galeria"
                    data-title="Cúmulo estelar de las Pléyades&lt;br&gt;&lt;small&gt;Fotografía: Luis Jorge Manzanero&lt;/small&gt;" aria-label="Ver imagen ampliada de Cúmulo estelar de las Pléyades">
                   <picture>
                     <source srcset="img/galeria/cumulo.webp" type="image/webp">
                     <img src="img/galeria/cumulo.jpg"
                          alt="Cúmulo estelar de las Pléyades, Fotografía tomada por Luis Jorge Manzanero"
-                         class="img-fluid d-block mx-auto"
-                         style="max-width: 100%; max-height: 100%; width: auto; height: 100%; object-fit: contain;"
+                         class="img-fluid"
                          loading="lazy" width="800" height="600">
                   </picture>
                 </a>
@@ -921,15 +987,14 @@
           <!-- Tarjeta 5 -->
           <div class="col-12 col-sm-6 col-lg-4 mb-4">
             <div class="gallery-card shadow-lg border-0 overflow-hidden p-0">
-              <div class="bg-dark position-relative w-100 d-flex align-items-center justify-content-center" style="height:340px;">
+              <div class="bg-dark position-relative w-100 d-flex align-items-center justify-content-center">
                 <a href="img/galeria/eclipse.jpg" class="glightbox d-block w-100 h-100" data-gallery="galeria"
                    data-title="Luna de Sangre y eclipse total&lt;br&gt;&lt;small&gt;Fotografía: Miguel Medina&lt;/small&gt;" aria-label="Ver imagen ampliada de Luna de Sangre y el eclipse total">
                   <picture>
                     <source srcset="img/galeria/eclipse.webp" type="image/webp">
                     <img src="img/galeria/eclipse.jpg"
                          alt="Luna de Sangre y el eclipse total, Fotografía tomada por Miguel Medina"
-                         class="img-fluid d-block mx-auto"
-                         style="max-width: 100%; max-height: 100%; width: auto; height: 100%; object-fit: contain;"
+                         class="img-fluid"
                          loading="lazy" width="800" height="600">
                   </picture>
                 </a>
@@ -943,15 +1008,14 @@
           <!-- Tarjeta 6 -->
           <div class="col-12 col-sm-6 col-lg-4 mb-4">
             <div class="gallery-card shadow-lg border-0 overflow-hidden p-0">
-              <div class="bg-dark position-relative w-100 d-flex align-items-center justify-content-center" style="height:340px;">
+              <div class="bg-dark position-relative w-100 d-flex align-items-center justify-content-center">
                 <a href="img/galeria/luna.jpg" class="glightbox d-block w-100 h-100" data-gallery="galeria"
                    data-title="Luna&lt;br&gt;&lt;small&gt;Fotografía: Luis Sánchez de Alba&lt;/small&gt;" aria-label="Ver imagen ampliada de Luna">
                   <picture>
                     <source srcset="img/galeria/luna.webp" type="image/webp">
                     <img src="img/galeria/luna.jpg"
                          alt="Luna, Fotografía tomada por Luis Sánchez de Alba"
-                         class="img-fluid d-block mx-auto"
-                         style="max-width: 100%; max-height: 100%; width: auto; height: 100%; object-fit: contain;"
+                         class="img-fluid"
                          loading="lazy" width="800" height="600">
                   </picture>
                 </a>
