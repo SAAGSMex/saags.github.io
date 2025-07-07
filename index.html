@@ -439,6 +439,15 @@
             font-size: 1.05rem;
             margin-bottom: 0.1rem;
         }
+
+        /* Calendario astronómico */
+        .astro-event {
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            background-color: rgba(13, 36, 90, 0.7);
+            border-left: 4px solid #7cb9e8;
+        }
         
         /* Footer */
         .footer {
@@ -482,15 +491,6 @@
             font-size: 2.5rem;
             font-weight: bold;
             color: #7cb9e8;
-        }
-
-        /* Calendario astronómico */
-        .astro-event {
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            background-color: rgba(13, 36, 90, 0.7);
-            border-left: 4px solid #7cb9e8;
         }
 
         /* Tooltip estilizado */
@@ -560,16 +560,6 @@
             box-shadow: 0 1px 6px #217a3b24;
             transition: opacity 0.3s;
         }
-
-        /* Estilo visual para enlaces externos: ícono de salida */
-        .enlace-externo::after {
-            content: " ↗";
-            font-size: 0.92em;
-            color: #7cb9e8;
-            vertical-align: text-top;
-            opacity: 0.7;
-        }
-
     </style>
 </head>
 <body>
@@ -853,10 +843,10 @@
                     </div>
 
                     <div class="col-md-6 mb-4">
-                    <div class="event-card shadow-lg border-0 overflow-hidden p-0" aria-label="Evento: Café Espacial Series, 14 Junio" style="background: #181b1f;">
+                    <div class="event-card shadow-lg border-0 overflow-hidden p-0" aria-label="Evento: Café Espacial Series, 2 de Agosto" style="background: #181b1f;">
                         <!-- Imagen destacada extendida y centrada -->
                         <div class="bg-dark position-relative w-100" style="height:270px; overflow:hidden;">
-                        <img src="https://scontent.fagu3-1.fna.fbcdn.net/v/t39.30808-6/494630830_122131358798750230_5796049578020212720_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=833d8c&_nc_ohc=yN6RrVCWMwEQ7kNvwHB-VGX&_nc_oc=AdkrPlbAVAMViGfLB7yivg3XRWVgHBDdQ_QtFdtWnVAjv_iRJwxWsW2tu9IK5bs4WJtwyaFMkLLqO_6bi-npJvY_&_nc_zt=23&_nc_ht=scontent.fagu3-1.fna&_nc_gid=5n0IbJ4LSEE_4AAEmqQ28w&oh=00_AfMnF48zO8EjMOQLFPWD4Ow27hwlUOSO2N3_r0i44NTS_Q&oe=6868DABB"
+                        <img src="img/cafeesp1.avif"
                             class="img-fluid h-100 w-100 d-block mx-auto"
                             alt="Cartel del evento Café Espacial Series"
                             loading="lazy"
@@ -864,7 +854,7 @@
                         <!-- Fechas destacadas -->
                         <div class="position-absolute top-0 end-0 m-3 text-end" style="z-index:2;">
                             <span class="badge bg-primary fs-6 mb-1 px-3 py-2 shadow badge-evento" style="opacity:0.95;">
-                            14 de Junio<br><small>9:00 AM</small>
+                            2 de Agosto<br><small>9:00 AM</small>
                             </span><br>
                             <span class="badge bg-secondary fs-6 px-3 py-2 shadow badge-evento" style="opacity:0.95;">
                             Transmisión por Roku
@@ -886,7 +876,7 @@
                             <li>🎙️ Espacio conducido por Cabina 11</li>
                             <li>📺 Disponible en la plataforma Roku</li>
                         </ul>
-                        <p class="mb-0 text-light fst-italic">Agradecemos el espacio otorgado a Cabina 11. ¡Sintoniza este próximo sábado 14 de junio a las 9 AM!</p>
+                        <p class="mb-0 text-light fst-italic">Agradecemos el espacio otorgado a Cabina 11. ¡Sintoniza este próximo sábado 2 de agosto a las 9 AM!</p>
                         </div>
                     </div>
                     </div>
@@ -1157,7 +1147,7 @@
             <div class="row">
                 <div class="col-md-3 mb-4">
                     <div class="text-center" aria-label="Miembro del equipo: Dr. Miguel Ángel Pérez, Director">
-                        <img src="https://doadorsolidario.marchadorespelavida.org.br/packages/trustir/exclusiva/img/user_placeholder.png" alt="Foto de Dr. Miguel Ángel Pérez, Director"
+                        <img src="img/anonymous.png" alt="Foto de Dr. Miguel Ángel Pérez, Director"
                         class="mb-3 team-member img-fluid rounded-circle shadow"
                         style="width:200px; height:200px; object-fit:cover;"><!-- /api/placeholder/150/150-->
                         <h5>Dr. Miguel Ángel Pérez</h5>
@@ -1170,7 +1160,7 @@
                 </div>
                 <div class="col-md-3 mb-4">
                     <div class="text-center" aria-label="Miembro del equipo: Dra. Laura Mendoza, Coord. de Divulgación">
-                        <img src="https://doadorsolidario.marchadorespelavida.org.br/packages/trustir/exclusiva/img/user_placeholder.png" alt="Foto de Dra. Laura Mendoza, Coord. de Divulgación"
+                        <img src="img/anonymous.png" alt="Foto de Dra. Laura Mendoza, Coord. de Divulgación"
                         class="mb-3 team-member img-fluid rounded-circle shadow"
                         style="width:200px; height:200px; object-fit:cover;">
                         <h5>Dra. Laura Mendoza</h5>
@@ -1183,7 +1173,7 @@
                 </div>
                 <div class="col-md-3 mb-4">
                     <div class="text-center" aria-label="Miembro del equipo: Ing. Carlos Ramírez, Coord. de Observaciones">
-                        <img src="https://doadorsolidario.marchadorespelavida.org.br/packages/trustir/exclusiva/img/user_placeholder.png" alt="Foto de Ing. Carlos Ramírez, Coord. de Observaciones"
+                        <img src="img/anonymous.png" alt="Foto de Ing. Carlos Ramírez, Coord. de Observaciones"
                         class="mb-3 team-member img-fluid rounded-circle shadow"
                         style="width:200px; height:200px; object-fit:cover;">
                         <h5>Ing. Carlos Ramírez</h5>
@@ -1196,7 +1186,7 @@
                 </div>
                 <div class="col-md-3 mb-4">
                     <div class="text-center" aria-label="Miembro del equipo: Lic. Ana Sofía Torres, Secretaria">
-                        <img src="https://doadorsolidario.marchadorespelavida.org.br/packages/trustir/exclusiva/img/user_placeholder.png" alt="Foto de Lic. Ana Sofía Torres, Secretaria"
+                        <img src="img/anonymous.png" alt="Foto de Lic. Ana Sofía Torres, Secretaria"
                         class="mb-3 team-member img-fluid rounded-circle shadow"
                         style="width:200px; height:200px; object-fit:cover;">
                         <h5>Lic. Ana Sofía Torres</h5>
