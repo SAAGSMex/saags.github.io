@@ -15,12 +15,19 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="https://icon-library.com/images/crescent-moon-icon/crescent-moon-icon-7.jpg">
     <!--Preload de imágenes para mejorar el rendimiento-->
-    <link rel="preload" as="image" href="https://images2.alphacoders.com/825/825785.jpg">
     <link rel="preload" as="image" href="https://images4.alphacoders.com/137/1370823.png">
     <style>
-        /* Estilos personalizados */
+        /* ================================== */
+        /* === CONFIGURACIÓN Y ESTILOS GLOBALES === */
+        /* ================================== */
+
         :root {
             --navbar-height: 76px;
+        }
+
+        html {
+            scroll-padding-top: var(--navbar-height);
+            scroll-behavior: smooth;
         }
 
         body {
@@ -30,111 +37,111 @@
             position: relative;
         }
 
-        html {
-            scroll-padding-top: var(--navbar-height);
-            scroll-behavior: smooth;
-        }
-
         section {
             padding-top: calc(2rem + var(--navbar-height));
             margin-top: -var(--navbar-height);
         }
 
-        /* Fondo de estrellas */
+        /* Fondo de estrellas para Escritorio */
         .bg-stars {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: #0a1128 url("https://images2.alphacoders.com/825/825785.jpg") center center/cover no-repeat;
+            background: #0a1128 url("img/nebula-pattern.webp") center center/cover no-repeat;
             z-index: -1;
         }
 
-        /* Navbar Styles */
+        /* Títulos de sección */
+        .section-title {
+            color: #7cb9e8;
+            border-bottom: 2px solid #7cb9e8;
+            display: inline-block;
+            padding-bottom: 5px;
+            margin-bottom: 30px;
+        }
+
+        /* ================================== */
+        /* === BARRA DE NAVEGACIÓN (NAVBAR) === */
+        /* ================================== */
+
         .navbar {
             min-height: var(--navbar-height);
-            padding-top: 1.2rem !important;
-            padding-bottom: 1.2rem !important;
-            box-shadow: 0 2px 12px rgba(13,36,90,0.18);
-            background-color: rgba(13, 36, 90, 0.95) !important;
+            padding-top: 1.2rem;
+            padding-bottom: 1.2rem;
+            box-shadow: 0 2px 12px rgba(13, 36, 90, 0.18);
+            background-color: rgba(13, 36, 90, 0.95);
             border-bottom: 1.5px solid #304d9d;
             letter-spacing: 0.03em;
             display: flex;
             align-items: center;
         }
+
         .navbar .container {
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
-        .navbar-brand {
-            display: flex !important;
-            align-items: center !important;
+
+        .navbar .navbar-brand {
+            display: flex;
+            align-items: center;
             gap: 12px;
         }
-        .navbar-brand img {
-            height: 54px !important;
-            width: 54px !important;
+
+        .navbar .navbar-brand img {
+            height: 54px;
+            width: 54px;
             object-fit: cover;
             border-radius: 50%;
             box-shadow: 0 0 10px #1a3a8f77;
         }
-        .navbar-brand span {
+
+        .navbar .navbar-brand span {
             font-size: 2rem;
             font-weight: 700;
             letter-spacing: 0.06em;
-            color: #7cb9e8 !important;
+            color: #7cb9e8;
         }
+
         .navbar-nav {
             gap: 1.3rem;
             display: flex;
             align-items: center;
         }
+
         .navbar-nav .nav-link {
             font-size: 1.15rem;
             font-weight: 500;
-            padding: 0.6rem 1.2rem !important;
+            padding: 0.6rem 1.2rem;
             border-radius: 0.7rem;
-            color: #f0f0f0 !important;
+            color: #f0f0f0;
             transition: background 0.22s, color 0.22s, box-shadow 0.22s;
             margin: 0 0.1rem;
             letter-spacing: 0.04em;
         }
-        .navbar-nav .nav-link:hover, 
+
+        .navbar-nav .nav-link:hover,
         .navbar-nav .nav-link.active {
             background: rgba(124, 185, 232, 0.13);
-            color: #ffe066 !important;
+            color: #ffe066 !important; /* !important se mantiene para asegurar la sobreescritura del estado active */
             box-shadow: 0 2px 8px #7cb9e86c;
         }
+
         .navbar-dark .navbar-toggler {
             border: none;
             outline: none;
-            box-shadow: none !important;
+            box-shadow: none !important; /* Necesario para sobreescribir estilos de focus de Bootstrap */
         }
 
-        @media (max-width: 991.98px) {
-            .navbar-nav {
-                gap: 0.5rem;
-            }
-            .navbar-brand span {
-                font-size: 1.4rem;
-            }
-            .navbar-brand img {
-                height: 44px !important;
-                width: 44px !important;
-            }
-            .navbar {
-                padding-top: 0.8rem !important;
-                padding-bottom: 0.8rem !important;
-            }
-        }
-
-        /* Hero section */
+        /* ================================== */
+        /* === SECCIÓN HERO === */
+        /* ================================== */
+        
         .hero-section {
-            background: linear-gradient(to bottom, rgba(13, 36, 90, 0.7), rgba(7, 11, 35, 0.9)), 
-                url('https://images4.alphacoders.com/137/1370823.png') 
-                center/cover no-repeat;
+            background: linear-gradient(to bottom, rgba(13, 36, 90, 0.7), rgba(7, 11, 35, 0.9)),
+                url('https://images4.alphacoders.com/137/1370823.png') center/cover no-repeat;
             min-height: 80vh;
             display: flex;
             align-items: center;
@@ -145,20 +152,15 @@
             padding-bottom: 2rem;
         }
 
-        .section-title {
-            color: #7cb9e8;
-            border-bottom: 2px solid #7cb9e8;
-            display: inline-block;
-            padding-bottom: 5px;
-            margin-bottom: 30px;
-        }
-
-        /* ===== SECCIÓN ACTIVIDADES ===== */
+        /* ================================== */
+        /* === SECCIÓN ACTIVIDADES === */
+        /* ================================== */
+        
         #actividades .card {
-            background: linear-gradient(135deg, rgba(13,36,90,0.92) 80%, rgba(124,185,232,0.09) 100%);
+            background: linear-gradient(135deg, rgba(13, 36, 90, 0.92) 80%, rgba(124, 185, 232, 0.09) 100%);
             border: none;
             border-radius: 1.3rem;
-            box-shadow: 0 8px 32px 0 rgba(13,36,90, 0.17), 0 2px 8px 0 rgba(124,185,232,0.13);
+            box-shadow: 0 8px 32px 0 rgba(13, 36, 90, 0.17), 0 2px 8px 0 rgba(124, 185, 232, 0.13);
             transition: transform 0.22s cubic-bezier(0.4, 0.2, 0.2, 1), box-shadow 0.22s;
             overflow: hidden;
             margin-bottom: 2rem;
@@ -166,13 +168,13 @@
             flex-direction: column;
             height: 100%;
         }
+
         #actividades .card:hover {
             transform: translateY(-7px) scale(1.025);
-            box-shadow: 0 16px 40px 0 rgba(0,123,255,0.25), 0 4px 16px rgba(124,185,232,0.25);
+            box-shadow: 0 16px 40px 0 rgba(0, 123, 255, 0.25), 0 4px 16px rgba(124, 185, 232, 0.25);
             border-color: #f7c948;
         }
 
-        /* Imagen general de las cards */
         #actividades .card-img-top {
             width: 100%;
             height: 250px;
@@ -181,10 +183,11 @@
             background: #0a1128;
             border-top-left-radius: 1.3rem;
             border-top-right-radius: 1.3rem;
-            box-shadow: 0 2px 8px rgba(124,185,232,0.10);
+            box-shadow: 0 2px 8px rgba(124, 185, 232, 0.10);
             transition: filter 0.22s;
             padding: 0;
         }
+
         #actividades .img-ajustable {
             height: 250px;
             object-fit: contain;
@@ -192,6 +195,7 @@
             background: #0a1128;
             padding: 0;
         }
+
         #actividades .card:hover .card-img-top {
             filter: brightness(1.12) saturate(1.07);
         }
@@ -202,23 +206,27 @@
             font-weight: bold;
             letter-spacing: 0.03em;
             margin-bottom: 0.7rem;
-            text-shadow: 0 2px 8px rgba(13,36,90,0.18);
+            text-shadow: 0 2px 8px rgba(13, 36, 90, 0.18);
             font-family: 'Montserrat', sans-serif;
         }
+
         .card-actividad-title i {
             color: #ffe066;
             margin-right: 7px;
         }
+
         #actividades .card-body {
             padding: 1.2rem 1.1rem 0.7rem 1.1rem;
             background: transparent;
         }
+
         #actividades .card-text {
             color: #e7eaf6;
             font-size: 1rem;
             margin-bottom: 0;
             min-height: 80px;
         }
+
         #actividades .card-footer {
             background: transparent;
             border-top: none;
@@ -228,20 +236,20 @@
 
         #actividades .card-footer .btn {
             background: linear-gradient(90deg, #1a2540 50%, #304d9d 140%);
-            color: #f0f0f0; 
+            color: #f0f0f0;
             font-weight: 600;
             font-size: 1rem;
             padding: 0.55rem 1.5rem;
             border: none;
             border-radius: 100px;
-            box-shadow: 0 2px 12px 0 rgba(48,77,157,0.18);
+            box-shadow: 0 2px 12px 0 rgba(48, 77, 157, 0.18);
             transition: background 0.22s, color 0.22s, box-shadow 0.22s, transform 0.18s;
             text-transform: none;
             outline: none;
             letter-spacing: 0.02em;
         }
 
-        #actividades .card-footer .btn:hover, 
+        #actividades .card-footer .btn:hover,
         #actividades .card-footer .btn:focus {
             background: linear-gradient(90deg, #ffe066 10%, #233d6c 100%);
             color: #1a2540;
@@ -250,50 +258,36 @@
             text-decoration: none;
         }
 
-        /* Mejoras para sección Actividades en móviles */
-        @media (max-width: 767.98px) {
-            #actividades .card-img-top,
-            #actividades .img-ajustable {
-                height: 180px;
-                min-height: 120px;
-                object-fit: contain !important;
-                background: #0a1128;
-                border-radius: 1.1rem 1.1rem 0 0;
-                width: 100%;
-                display: block;
-            }
-        }
-
-        /* Event cards */
         .event-card {
             border-left: 4px solid #7cb9e8;
         }
 
-        /* Tamaño personalizado para los badges de eventos */
         .badge-evento {
-            font-size: 1.2rem;      /* Cambia el tamaño de la fuente */
-            padding: 0.2em 0.5em;    /* Ajusta el espacio interno */
+            font-size: 1.2rem;
+            padding: 0.2em 0.5em;
             line-height: 1.3;
         }
+
         .badge-evento small {
-            font-size: 0.85em;       /* Tamaño del texto pequeño */
+            font-size: 0.85em;
         }
 
-        /* ===== GALERÍA Bootstrap Mejorada (imágenes grandes, centradas, sin espacios laterales ni exceso de fondo en móvil/tablet) ===== */
+        /* ================================== */
+        /* === SECCIÓN GALERÍA === */
+        /* ================================== */
+
         .gallery-card {
             max-width: 100%;
             width: 100%;
             margin: 0;
-            background: linear-gradient(
-                135deg,
-                rgba(24,27,31,0.93) 0%,
-                rgba(24,27,31,0.88) 70%,
-                rgba(24,27,31,0.97) 100%
-            ) !important;
+            background: linear-gradient(135deg,
+                    rgba(24, 27, 31, 0.93) 0%,
+                    rgba(24, 27, 31, 0.88) 70%,
+                    rgba(24, 27, 31, 0.97) 100%);
             border-left: 4px solid #181b1f;
             border-radius: 1.1rem;
             overflow: hidden;
-            box-shadow: 0 2px 8px 0 rgba(24,27,31,0.07);
+            box-shadow: 0 2px 8px 0 rgba(24, 27, 31, 0.07);
             transition: transform 0.16s, box-shadow 0.18s;
             display: flex;
             flex-direction: column;
@@ -302,11 +296,10 @@
 
         .gallery-card:hover {
             transform: translateY(-7px) scale(1.024);
-            box-shadow: 0 12px 36px 0 rgba(120,180,255,0.18), 0 3px 12px 0 #7cb9e866;
+            box-shadow: 0 12px 36px 0 rgba(120, 180, 255, 0.18), 0 3px 12px 0 #7cb9e866;
             border-color: #ffe066;
         }
 
-        /* Área de imagen adaptable, compacta en todos los lados */
         .gallery-card .bg-dark {
             width: 99.5%;
             margin: 0.1em auto 0.1em auto;
@@ -320,85 +313,14 @@
             min-height: 0;
             background: rgba(24, 27, 31, 0.035) !important;
         }
-
-        /* Uniformidad y compactación en todos los tamaños */
-        @media (max-width: 991.98px) {
-            #galeria .row {
-                margin-left: 0 !important;
-                margin-right: 0 !important;
-            }
-            #galeria [class^="col-"], 
-            #galeria [class*=" col-"] {
-                padding-left: 2px !important;
-                padding-right: 2px !important;
-            }
-            .gallery-card .bg-dark {
-                aspect-ratio: 1/1;
-                width: 100% !important;
-                margin: 0.05em auto 0.1em auto;
-            }
-        }
-
-        /* === MÓVIL: Fondo y área de imagen sin exceso lateral ni vertical === */
-        @media (max-width: 767.98px) {
-            #galeria > .container {
-                width: 100vw !important;
-                max-width: 100vw !important;
-                padding-left: 0 !important;
-                padding-right: 0 !important;
-                margin-left: 0 !important;
-                margin-right: 0 !important;
-            }
-            #galeria .row {
-                margin-left: 0 !important;
-                margin-right: 0 !important;
-            }
-            #galeria [class^="col-"], 
-            #galeria [class*=" col-"] {
-                padding-left: 0 !important;
-                padding-right: 0 !important;
-            }
-            .gallery-card {
-                border-radius: 0.7rem;
-                margin: 0 !important;
-            }
-            .gallery-card .bg-dark {
-                /* Elimina aspect-ratio: el alto lo define la imagen */
-                aspect-ratio: unset !important;
-                width: 100% !important;
-                height: auto !important;
-                min-height: 0 !important;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                border-radius: 0.7rem 0.7rem 0 0;
-                padding: 0;
-                margin: 0 auto 0.05em auto;
-                background: rgba(24, 27, 31, 0.035) !important;
-            }
-            .gallery-card picture,
-            .gallery-card img {
-                width: 100% !important;
-                height: auto !important;
-                max-width: 100vw !important;
-                max-height: 70vw !important; /* Puedes ajustar el 70vw según prefieras */
-                object-fit: contain !important;
-                object-position: center;
-                border-radius: 0.7rem 0.7rem 0 0;
-                background: transparent !important;
-                display: block;
-                margin: 0;
-                padding: 0;
-            }
-        }
-
+        
         .gallery-card img,
         .gallery-card picture {
             width: 100%;
             height: 100%;
             object-fit: contain;
             object-position: center;
-            background: transparent !important;
+            background: transparent;
             border-radius: 1.1rem 1.1rem 0 0;
             display: block;
             margin: 0;
@@ -440,7 +362,10 @@
             margin-bottom: 0.1rem;
         }
 
-        /* Calendario astronómico */
+        /* ================================== */
+        /* === OTRAS SECCIONES === */
+        /* ================================== */
+        
         .astro-event {
             padding: 15px;
             border-radius: 5px;
@@ -448,38 +373,39 @@
             background-color: rgba(13, 36, 90, 0.7);
             border-left: 4px solid #7cb9e8;
         }
-        
-        /* Footer */
+
         .footer {
             background-color: rgba(7, 11, 35, 0.9);
             border-top: 1px solid #304d9d;
             padding: 40px 0;
         }
+
         .social-links a {
             color: #f0f0f0;
             margin-right: 15px;
             font-size: 1.5rem;
             transition: color 0.3s;
         }
+
         .social-links a:hover {
             color: #7cb9e8;
         }
 
-        /* Botones primarios generales */
         .btn-primary {
             background-color: #304d9d;
             border-color: #304d9d;
         }
+
         .btn-primary:hover {
             background-color: #1a3a8f;
             border-color: #1a3a8f;
         }
 
-        /* Equipo */
         .team-member img {
             border-radius: 50%;
             border: 3px solid #304d9d;
         }
+
         .count-box {
             background-color: rgba(13, 36, 90, 0.7);
             padding: 20px;
@@ -487,18 +413,19 @@
             border: 1px solid #304d9d;
             margin-bottom: 20px;
         }
+
         .count-number {
             font-size: 2.5rem;
             font-weight: bold;
             color: #7cb9e8;
         }
 
-        /* Tooltip estilizado */
         .custom-tooltip {
             position: relative;
             display: inline-block;
             cursor: pointer;
         }
+
         .tooltip-content {
             visibility: hidden;
             width: 200px;
@@ -516,41 +443,25 @@
             transition: opacity 0.3s;
             border: 1px solid #304d9d;
         }
+
         .custom-tooltip:hover .tooltip-content {
             visibility: visible;
             opacity: 1;
         }
 
-        /* Justificado de textos */
         .text-justify p,
         .text-justify ul,
-        .text-justify li {
-            text-align: justify;
-        }
-        #actividades .event-card p,
-        #actividades .event-card h5,
-        #actividades .event-card span,
-        #actividades .event-card {
-            text-align: justify;
-        }
+        .text-justify li,
+        #actividades .event-card,
         #galeria p,
-        #galeria .gallery-item p {
-            text-align: justify;
-        }
-        #calendario p,
-        #calendario ul,
-        #calendario li,
+        #galeria .gallery-item p,
         #calendario .astro-event,
-        #calendario .list-group-item {
-            text-align: justify;
-        }
-        #equipo p,
+        #calendario .list-group-item,
         #equipo .team-member,
         #equipo .text-muted {
             text-align: justify;
         }
 
-        /* Mensaje de éxito */
         .mensaje-exito {
             font-size: 1rem;
             border-radius: 0.5rem;
@@ -559,6 +470,123 @@
             border: 1px solid #b2e2c5;
             box-shadow: 0 1px 6px #217a3b24;
             transition: opacity 0.3s;
+        }
+
+        /* ========================================================= */
+        /* === ESTILOS RESPONSIVOS UNIFICADOS (MEDIA QUERIES) === */
+        /* ========================================================= */
+
+        /* --- ESTILOS PARA TABLETS (991.98px o menos) --- */
+        @media (max-width: 991.98px) {
+
+            /* FIX: Rendimiento y nitidez del fondo en tablet */
+            .bg-stars {
+                display: none;
+            }
+            body {
+                background-image: url("img/nebula-pattern.webp");
+                background-repeat: repeat;
+                background-size: auto;
+                background-attachment: scroll;
+            }
+
+            /* Ajustes de Navbar para tablet */
+            .navbar {
+                padding-top: 0.8rem;
+                padding-bottom: 0.8rem;
+            }
+            .navbar-nav {
+                gap: 0.5rem;
+            }
+            .navbar-brand span {
+                font-size: 1.4rem;
+            }
+            .navbar-brand img {
+                height: 44px;
+                width: 44px;
+            }
+
+            /* Ajustes de Galería para tablet */
+            #galeria .row {
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+            }
+            #galeria [class^="col-"],
+            #galeria [class*=" col-"] {
+                padding-left: 2px !important;
+                padding-right: 2px !important;
+            }
+            .gallery-card .bg-dark {
+                aspect-ratio: 1/1;
+                width: 100%;
+                margin: 0.05em auto 0.1em auto;
+            }
+        }
+
+        /* --- ESTILOS PARA MÓVILES (767.98px o menos) --- */
+        @media (max-width: 767.98px) {
+            
+            /* Ajustes en Actividades */
+            #actividades .card-img-top,
+            #actividades .img-ajustable {
+                height: 180px;
+                min-height: 120px;
+                object-fit: contain !important;
+                background: #0a1128;
+                border-radius: 1.1rem 1.1rem 0 0;
+                width: 100%;
+                display: block;
+            }
+            
+            /* Ajustes en Galería para ocupar toda la pantalla sin bordes */
+            #galeria > .container {
+                width: 100vw;
+                max-width: 100vw;
+                padding-left: 0;
+                padding-right: 0;
+                margin-left: 0;
+                margin-right: 0;
+            }
+            #galeria .row {
+                margin-left: 0;
+                margin-right: 0;
+            }
+            #galeria [class^="col-"],
+            #galeria [class*=" col-"] {
+                padding-left: 0;
+                padding-right: 0;
+            }
+            .gallery-card {
+                border-radius: 0.7rem;
+                margin: 0 !important;
+            }
+            .gallery-card .bg-dark {
+                aspect-ratio: unset !important;
+                width: 100%;
+                height: auto;
+                min-height: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 0.7rem 0.7rem 0 0;
+                padding: 0;
+                margin: 0 auto 0.05em auto;
+                background: rgba(24, 27, 31, 0.035) !important;
+            }
+            .gallery-card picture,
+            .gallery-card img {
+                width: 100% !important;
+                height: auto !important;
+                max-width: 100vw !important;
+                max-height: 70vw !important;
+                object-fit: contain !important;
+                object-position: center;
+                border-radius: 0.7rem 0.7rem 0 0;
+                background: transparent !important;
+                display: block;
+                margin: 0;
+                padding: 0;
+            }
         }
     </style>
 </head>
@@ -1228,9 +1256,9 @@
                         <a href="#" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
                         <a href="#" aria-label="YouTube"><i class="fab fa-youtube" aria-hidden="true"></i></a>
                     </div>
-                    <h4 class="mt-4">Horario de atención</h4>
+                    <!--<h4 class="mt-4">Horario de atención</h4>
                     <p>Lunes a Viernes: 10:00 AM - 7:00 PM<br>
-                    Sábados: 10:00 AM - 2:00 PM</p>
+                    Sábados: 10:00 AM - 2:00 PM</p>>-->
                 </div>
                 <div class="col-lg-6">
                     <form aria-label="Formulario de contacto (demostrativo, no envía datos reales)" action="#" autocomplete="on" novalidate>
