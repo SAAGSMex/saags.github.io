@@ -449,18 +449,36 @@
             opacity: 1;
         }
 
-        .text-justify p,
-        .text-justify ul,
-        .text-justify li,
-        #actividades .event-card,
-        #galeria p,
-        #galeria .gallery-item p,
-        #calendario .astro-event,
-        #calendario .list-group-item,
-        #equipo .team-member,
-        #equipo .text-muted {
+        .text-justify {
             text-align: justify;
         }
+        .text-justify-responsive {
+            text-align: justify;
+        }
+
+        @media (max-width: 767.98px) {
+            /* Sección Próximos Eventos */
+            #actividades .text-justify-responsive,
+            #actividades .text-justify-responsive p,
+            #actividades .text-justify-responsive ul,
+            #actividades .text-justify-responsive li {
+                text-align: left !important;
+            }
+
+            /* Sección Nosotros */
+            #nosotros .text-justify-responsive,
+            #nosotros .text-justify-responsive p,
+            #nosotros .text-justify-responsive ul,
+            #nosotros .text-justify-responsive li {
+                text-align: left !important;
+            }
+
+            /* Sección Galería */
+            #galeria .text-justify-responsive,
+            #galeria .text-justify-responsive p {
+                text-align: center !important;
+            }
+        }  
 
         .mensaje-exito {
             font-size: 1rem;
@@ -588,6 +606,7 @@
                 padding: 0;
             }
         }
+           
     </style>
 </head>
 <body>
@@ -665,7 +684,7 @@
     <section id="nosotros" class="py-5" aria-labelledby="titulo-nosotros">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 mb-4 text-start">
+                <div class="col-lg-6 mb-4 text-justify-responsive">
                     <h2 class="section-title" id="titulo-nosotros">Nosotros</h2>
                     <p>La Sociedad Astronómica de Aguascalientes (SAAGS) es una organización sin fines de lucro, constituida en la Ciudad de Aguascalientes, Ags., México, el 29 de junio de 1991. Fue protocolizada mediante escritura pública por el Lic. Gabriel Villalobos Ramírez, Notario No. 3 y destacado astrónomo aguascalentense.</p>
                     <p>Está integrada por entusiastas aficionados a la astronomía y a las ciencias del espacio, y tiene como objetivos principales:</p>
@@ -853,7 +872,7 @@
                                 </div>
                             </div>
                             <!-- Contenido del evento -->
-                            <div class="p-4 text-start">
+                            <div class="p-4 text-justify-responsive">
                                 <div class="d-flex align-items-center mb-2 gap-3">
                                     <h5 class="mb-0 fw-bold text-info">El Hombre en la Luna</h5>
                                 </div>
@@ -890,7 +909,7 @@
                                 </div>
                             </div>
                             <!-- Contenido del evento -->
-                            <div class="p-4 text-start">
+                            <div class="p-4 text-justify-responsive">
                                 <div class="d-flex align-items-center mb-2 gap-3">
                                     <h5 class="mb-0 fw-bold text-info">Café Espacial Series: Aguascalientes Entidad Inteligente</h5>
                                 </div>
@@ -933,7 +952,7 @@
                   </picture>
                 </a>
               </div>
-              <div class="p-4">
+              <div class="p-4 text-justify-responsive">
                 <h5 class="mb-2 fw-bold text-info">Galaxia de Andrómeda</h5>
                 <p class="mb-0 text-light">Fotografía tomada por Manuel Rodríguez Huerta</p>
               </div>
@@ -954,7 +973,7 @@
                   </picture>
                 </a>
               </div>
-              <div class="p-4">
+              <div class="p-4 text-justify-responsive">
                 <h5 class="mb-2 fw-bold text-info">Nebulosa Rosea</h5>
                 <p class="mb-0 text-light">Fotografía tomada por Luis Sánchez de Alba</p>
               </div>
@@ -975,7 +994,7 @@
                   </picture>
                 </a>
               </div>
-              <div class="p-4">
+              <div class="p-4 text-justify-responsive">
                 <h5 class="mb-2 fw-bold text-info">Vía Láctea en la zona del Cisne</h5>
                 <p class="mb-0 text-light">Fotografía tomada por Alfredo Lomas Torres</p>
               </div>
@@ -996,7 +1015,7 @@
                   </picture>
                 </a>
               </div>
-              <div class="p-4">
+              <div class="p-4 text-justify-responsive">
                 <h5 class="mb-2 fw-bold text-info">Cúmulo estelar de las Pléyades</h5>
                 <p class="mb-0 text-light">Fotografía tomada por Luis Jorge Manzanero</p>
               </div>
@@ -1017,7 +1036,7 @@
                   </picture>
                 </a>
               </div>
-              <div class="p-4">
+              <div class="p-4 text-justify-responsive">
                 <h5 class="mb-2 fw-bold text-info">Luna de Sangre y el eclipse total</h5>
                 <p class="mb-0 text-light">Fotografía tomada por Miguel Medina</p>
               </div>
@@ -1038,7 +1057,7 @@
                   </picture>
                 </a>
               </div>
-              <div class="p-4">
+              <div class="p-4 text-justify-responsive">
                 <h5 class="mb-2 fw-bold text-info">Luna</h5>
                 <p class="mb-0 text-light">Fotografía tomada por Luis Sánchez de Alba</p>
               </div>
