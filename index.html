@@ -17,9 +17,9 @@
     <!--Preload de imágenes para mejorar el rendimiento-->
     <link rel="preload" as="image" href="https://images4.alphacoders.com/137/1370823.png">
     <style>
-        /* ================================== */
-        /* === CONFIGURACIÓN Y ESTILOS GLOBALES === */
-        /* ================================== */
+        /* ==========================================================================
+        1. CONFIGURACIÓN, VARIABLES Y ESTILOS GLOBALES
+        ========================================================================== */
 
         :root {
             --navbar-height: 76px;
@@ -31,385 +31,38 @@
         }
 
         body {
+            position: relative;
             font-family: 'Montserrat', sans-serif;
             background-color: #0a1128;
             color: #f0f0f0;
-            position: relative;
         }
 
-        section {
-            padding-top: calc(2rem + var(--navbar-height));
-            margin-top: -var(--navbar-height);
-        }
-
-        /* Fondo de estrellas para Escritorio */
+        /* Fondo de estrellas fijo para escritorio */
         .bg-stars {
             position: fixed;
             top: 0;
             left: 0;
+            z-index: -1;
             width: 100%;
             height: 100%;
             background: #0a1128 url("img/galaxybg_pc.webp") center center/cover no-repeat;
-            z-index: -1;
         }
 
-        /* Títulos de sección */
+
+        /* ==========================================================================
+        2. ESTILOS DE COMPONENTES REUTILIZABLES (Utilities & Components)
+        ========================================================================== */
+
+        /* --- Títulos de Sección --- */
         .section-title {
-            color: #7cb9e8;
-            border-bottom: 2px solid #7cb9e8;
             display: inline-block;
             padding-bottom: 5px;
             margin-bottom: 30px;
-        }
-
-        /* ================================== */
-        /* === BARRA DE NAVEGACIÓN (NAVBAR) === */
-        /* ================================== */
-
-        .navbar {
-            min-height: var(--navbar-height);
-            padding-top: 1.2rem;
-            padding-bottom: 1.2rem;
-            box-shadow: 0 2px 12px rgba(13, 36, 90, 0.18);
-            background-color: rgba(13, 36, 90, 0.95);
-            border-bottom: 1.5px solid #304d9d;
-            letter-spacing: 0.03em;
-            display: flex;
-            align-items: center;
-        }
-
-        .navbar .container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .navbar .navbar-brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .navbar .navbar-brand img {
-            height: 54px;
-            width: 54px;
-            object-fit: cover;
-            border-radius: 50%;
-            box-shadow: 0 0 10px #1a3a8f77;
-        }
-
-        .navbar .navbar-brand span {
-            font-size: 2rem;
-            font-weight: 700;
-            letter-spacing: 0.06em;
             color: #7cb9e8;
+            border-bottom: 2px solid #7cb9e8;
         }
 
-        .navbar-nav {
-            gap: 1.3rem;
-            display: flex;
-            align-items: center;
-        }
-
-        .navbar-nav .nav-link {
-            font-size: 1.15rem;
-            font-weight: 500;
-            padding: 0.6rem 1.2rem;
-            border-radius: 0.7rem;
-            color: #f0f0f0;
-            transition: background 0.22s, color 0.22s, box-shadow 0.22s;
-            margin: 0 0.1rem;
-            letter-spacing: 0.04em;
-        }
-
-        .navbar-nav .nav-link:hover,
-        .navbar-nav .nav-link.active {
-            background: rgba(124, 185, 232, 0.13);
-            color: #ffe066 !important; /* !important se mantiene para asegurar la sobreescritura del estado active */
-            box-shadow: 0 2px 8px #7cb9e86c;
-        }
-
-        .navbar-dark .navbar-toggler {
-            border: none;
-            outline: none;
-            box-shadow: none !important; /* Necesario para sobreescribir estilos de focus de Bootstrap */
-        }
-
-        /* ================================== */
-        /* === SECCIÓN HERO === */
-        /* ================================== */
-        
-        .hero-section {
-            background: linear-gradient(to bottom, rgba(13, 36, 90, 0.7), rgba(7, 11, 35, 0.9)),
-                url('https://images4.alphacoders.com/137/1370823.png') center/cover no-repeat;
-            min-height: 80vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-            padding-top: 0;
-            margin-top: 0;
-            padding-bottom: 2rem;
-        }
-
-        /* ================================== */
-        /* === SECCIÓN ACTIVIDADES === */
-        /* ================================== */
-        
-        #actividades .card {
-            background: linear-gradient(135deg, rgba(13, 36, 90, 0.92) 80%, rgba(124, 185, 232, 0.09) 100%);
-            border: none;
-            border-radius: 1.3rem;
-            box-shadow: 0 8px 32px 0 rgba(13, 36, 90, 0.17), 0 2px 8px 0 rgba(124, 185, 232, 0.13);
-            transition: transform 0.22s cubic-bezier(0.4, 0.2, 0.2, 1), box-shadow 0.22s;
-            overflow: hidden;
-            margin-bottom: 2rem;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-
-        #actividades .card:hover {
-            transform: translateY(-7px) scale(1.025);
-            box-shadow: 0 16px 40px 0 rgba(0, 123, 255, 0.25), 0 4px 16px rgba(124, 185, 232, 0.25);
-            border-color: #f7c948;
-        }
-
-        #actividades .card-img-top {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            object-position: center;
-            background: #0a1128;
-            border-top-left-radius: 1.3rem;
-            border-top-right-radius: 1.3rem;
-            box-shadow: 0 2px 8px rgba(124, 185, 232, 0.10);
-            transition: filter 0.22s;
-            padding: 0;
-        }
-
-        #actividades .img-ajustable {
-            height: 250px;
-            object-fit: contain;
-            width: 100%;
-            background: #0a1128;
-            padding: 0;
-        }
-
-        #actividades .card:hover .card-img-top {
-            filter: brightness(1.12) saturate(1.07);
-        }
-
-        .card-actividad-title {
-            color: #ffe066;
-            font-size: 1.2rem;
-            font-weight: bold;
-            letter-spacing: 0.03em;
-            margin-bottom: 0.7rem;
-            text-shadow: 0 2px 8px rgba(13, 36, 90, 0.18);
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .card-actividad-title i {
-            color: #ffe066;
-            margin-right: 7px;
-        }
-
-        #actividades .card-body {
-            padding: 1.2rem 1.1rem 0.7rem 1.1rem;
-            background: transparent;
-        }
-
-        #actividades .card-text {
-            color: #e7eaf6;
-            font-size: 1rem;
-            margin-bottom: 0;
-            min-height: 80px;
-        }
-
-        #actividades .card-footer {
-            background: transparent;
-            border-top: none;
-            padding-bottom: 1.1rem;
-            padding-top: 0.3rem;
-        }
-
-        #actividades .card-footer .btn {
-          display: block;
-          width: 90%;
-          margin: 0.7rem auto 0 auto;
-          padding: 1rem 0;
-          font-size: 1.3rem;
-          font-weight: 700;
-          line-height: 1.4;
-          letter-spacing: 0.02em;
-          background: linear-gradient(90deg, #1a2540 55%, #304d9d 130%);
-          color: #fff;
-          border: none;
-          border-radius: 1.6rem;
-          box-shadow: 0 4px 18px rgba(32, 56, 151, 0.13), 0 2px 8px #0002;
-          text-align: center;
-          cursor: pointer;
-          transition: background 0.28s, color 0.18s, box-shadow 0.18s, transform 0.16s;
-        }
-
-        #actividades .card-footer .btn:hover,
-        #actividades .card-footer .btn:focus {
-          background: linear-gradient(90deg, #ffe066 10%, #233d6c 100%);
-          color: #1a2540;
-          box-shadow: 0 6px 24px #ffe06644, 0 2px 8px #7cb9e866;
-          transform: translateY(-2px) scale(1.04);
-        }
-
-        @media (max-width: 768px) {
-          #actividades .card-footer .btn {
-            font-size: 1.07rem;
-            padding: 0.85rem 0;
-            width: 98%;
-          }
-        }
-
-        @media (max-width: 576px) {
-          #actividades .card-footer .btn {
-            font-size: 1rem;
-            padding: 0.7rem 0;
-            width: 98%;
-          }
-        }
-
-        .event-card {
-            border-left: 4px solid #7cb9e8;
-        }
-
-        .badge-evento {
-            font-size: 1.2rem;
-            padding: 0.2em 0.5em;
-            line-height: 1.3;
-        }
-
-        .badge-evento small {
-            font-size: 0.85em;
-        }
-
-        /* ================================== */
-        /* === SECCIÓN GALERÍA === */
-        /* ================================== */
-
-        .gallery-card {
-            max-width: 100%;
-            width: 100%;
-            margin: 0;
-            background: linear-gradient(135deg,
-                    rgba(24, 27, 31, 0.93) 0%,
-                    rgba(24, 27, 31, 0.88) 70%,
-                    rgba(24, 27, 31, 0.97) 100%);
-            border-left: 4px solid #181b1f;
-            border-radius: 1.1rem;
-            overflow: hidden;
-            box-shadow: 0 2px 8px 0 rgba(24, 27, 31, 0.07);
-            transition: transform 0.16s, box-shadow 0.18s;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-
-        .gallery-card:hover {
-            transform: translateY(-7px) scale(1.024);
-            box-shadow: 0 12px 36px 0 rgba(120, 180, 255, 0.18), 0 3px 12px 0 #7cb9e866;
-            border-color: #ffe066;
-        }
-
-        .gallery-card .bg-dark {
-            width: 99.5%;
-            margin: 0.1em auto 0.1em auto;
-            aspect-ratio: 16/9;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 1.1rem 1.1rem 0 0;
-            overflow: hidden;
-            padding: 0;
-            min-height: 0;
-            background: rgba(24, 27, 31, 0.035) !important;
-        }
-        
-        .gallery-card img,
-        .gallery-card picture {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            object-position: center;
-            background: transparent;
-            border-radius: 1.1rem 1.1rem 0 0;
-            display: block;
-            margin: 0;
-            padding: 0;
-            transition: filter 0.18s;
-            box-shadow: none;
-        }
-
-        .gallery-card:hover img {
-            filter: brightness(1.11) saturate(1.09);
-        }
-
-        .gallery-card .p-4 {
-            background: transparent;
-            flex: 1 1 auto;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding-top: 0.45em;
-            padding-bottom: 0.2em;
-        }
-
-        .gallery-card h5,
-        .gallery-card p {
-            text-shadow: 0 2px 12px #000b, 0 1.5px 8px #181b1f66;
-        }
-
-        .gallery-card h5 {
-            color: #7cb9e8;
-            font-size: 1.13rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-            letter-spacing: 0.015em;
-        }
-
-        .gallery-card p {
-            color: #e7eaf6;
-            font-size: 1.05rem;
-            margin-bottom: 0.1rem;
-        }
-
-        /* ================================== */
-        /* === OTRAS SECCIONES === */
-        /* ================================== */
-        
-        .astro-event {
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            background-color: rgba(13, 36, 90, 0.7);
-            border-left: 4px solid #7cb9e8;
-        }
-
-        .footer {
-            background-color: rgba(7, 11, 35, 0.9);
-            border-top: 1px solid #304d9d;
-            padding: 40px 0;
-        }
-
-        .social-links a {
-            color: #f0f0f0;
-            margin-right: 15px;
-            font-size: 1.5rem;
-            transition: color 0.3s;
-        }
-
-        .social-links a:hover {
-            color: #7cb9e8;
-        }
-
+        /* --- Botones --- */
         .btn-primary {
             background-color: #304d9d;
             border-color: #304d9d;
@@ -420,17 +73,13 @@
             border-color: #1a3a8f;
         }
 
-        .team-member img {
-            border-radius: 50%;
-            border: 3px solid #304d9d;
-        }
-
+        /* --- Cajas de Contador --- */
         .count-box {
-            background-color: rgba(13, 36, 90, 0.7);
             padding: 20px;
-            border-radius: 5px;
-            border: 1px solid #304d9d;
             margin-bottom: 20px;
+            background-color: rgba(13, 36, 90, 0.7);
+            border: 1px solid #304d9d;
+            border-radius: 5px;
         }
 
         .count-number {
@@ -439,6 +88,7 @@
             color: #7cb9e8;
         }
 
+        /* --- Tooltips Personalizados --- */
         .custom-tooltip {
             position: relative;
             display: inline-block;
@@ -446,21 +96,21 @@
         }
 
         .tooltip-content {
-            visibility: hidden;
-            width: 200px;
-            background-color: rgba(13, 36, 90, 0.95);
-            color: #fff;
-            text-align: center;
-            border-radius: 6px;
-            padding: 10px;
             position: absolute;
-            z-index: 1;
             bottom: 125%;
             left: 50%;
+            z-index: 1;
+            visibility: hidden;
+            width: 200px;
             margin-left: -100px;
+            padding: 10px;
+            color: #fff;
+            text-align: center;
+            background-color: rgba(13, 36, 90, 0.95);
+            border: 1px solid #304d9d;
+            border-radius: 6px;
             opacity: 0;
             transition: opacity 0.3s;
-            border: 1px solid #304d9d;
         }
 
         .custom-tooltip:hover .tooltip-content {
@@ -468,55 +118,351 @@
             opacity: 1;
         }
 
-        .text-justify {
-            text-align: justify;
-        }
-        .text-justify-responsive {
-            text-align: justify;
-        }
-
-        @media (max-width: 767.98px) {
-            /* Sección Próximos Eventos */
-            #actividades .text-justify-responsive,
-            #actividades .text-justify-responsive p,
-            #actividades .text-justify-responsive ul,
-            #actividades .text-justify-responsive li {
-                text-align: left !important;
-            }
-
-            /* Sección Nosotros */
-            #nosotros .text-justify-responsive,
-            #nosotros .text-justify-responsive p,
-            #nosotros .text-justify-responsive ul,
-            #nosotros .text-justify-responsive li {
-                text-align: left !important;
-            }
-
-            /* Sección Galería */
-            #galeria .text-justify-responsive,
-            #galeria .text-justify-responsive p {
-                text-align: center !important;
-            }
-        }  
-
+        /* --- Mensajes de Feedback --- */
         .mensaje-exito {
             font-size: 1rem;
-            border-radius: 0.5rem;
-            background: #d1f1da;
             color: #217a3b;
+            background: #d1f1da;
             border: 1px solid #b2e2c5;
+            border-radius: 0.5rem;
             box-shadow: 0 1px 6px #217a3b24;
             transition: opacity 0.3s;
         }
 
-        /* ========================================================= */
-        /* === ESTILOS RESPONSIVOS UNIFICADOS (MEDIA QUERIES) === */
-        /* ========================================================= */
+        /* --- Clases de Texto --- */
+        .text-justify {
+            text-align: justify;
+        }
 
-        /* --- ESTILOS PARA TABLETS (991.98px o menos) --- */
+        .text-justify-responsive {
+            text-align: justify;
+        }
+
+
+        /* ==========================================================================
+        3. ESTILOS DE SECCIONES ESPECÍFICAS
+        ========================================================================== */
+
+        /* --- Barra de Navegación (Navbar) --- */
+        .navbar {
+            display: flex;
+            align-items: center;
+            min-height: var(--navbar-height);
+            padding: 1.2rem 0;
+            letter-spacing: 0.03em;
+            background-color: rgba(13, 36, 90, 0.95);
+            border-bottom: 1.5px solid #304d9d;
+            box-shadow: 0 2px 12px rgba(13, 36, 90, 0.18);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .navbar-brand img {
+            width: 54px;
+            height: 54px;
+            object-fit: cover;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #1a3a8f77;
+        }
+
+        .navbar-brand span {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            color: #7cb9e8;
+        }
+
+        .navbar-nav {
+            display: flex;
+            align-items: center;
+            gap: 1.3rem;
+        }
+
+        .navbar-nav .nav-link {
+            padding: 0.6rem 1.2rem;
+            margin: 0 0.1rem;
+            font-size: 1.15rem;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            color: #f0f0f0;
+            border-radius: 0.7rem;
+            transition: background 0.22s, color 0.22s, box-shadow 0.22s;
+        }
+
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
+            color: #ffe066 !important;
+            background: rgba(124, 185, 232, 0.13);
+            box-shadow: 0 2px 8px #7cb9e86c;
+        }
+
+        .navbar-dark .navbar-toggler {
+            border: none;
+            outline: none;
+            box-shadow: none !important;
+        }
+
+        /* --- Sección Hero --- */
+        .hero-section {
+            display: flex;
+            align-items: center;
+            position: relative;
+            min-height: 80vh;
+            padding: 0 0 2rem 0;
+            margin: 0;
+            background: linear-gradient(to bottom, rgba(13, 36, 90, 0.7), rgba(7, 11, 35, 0.9)), url('https://images4.alphacoders.com/137/1370823.png') center/cover no-repeat;
+            overflow: hidden;
+        }
+
+        /* --- Sección Actividades --- */
+        #actividades .card {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, rgba(13, 36, 90, 0.92) 80%, rgba(124, 185, 232, 0.09) 100%);
+            border: none;
+            border-radius: 1.3rem;
+            box-shadow: 0 8px 32px 0 rgba(13, 36, 90, 0.17), 0 2px 8px 0 rgba(124, 185, 232, 0.13);
+            transition: transform 0.22s cubic-bezier(0.4, 0.2, 0.2, 1), box-shadow 0.22s;
+            overflow: hidden;
+        }
+
+        #actividades .card:hover {
+            transform: translateY(-7px) scale(1.025);
+            border-color: #f7c948;
+            box-shadow: 0 16px 40px 0 rgba(0, 123, 255, 0.25), 0 4px 16px rgba(124, 185, 232, 0.25);
+        }
+
+        #actividades .card-img-top {
+            width: 100%;
+            height: 250px;
+            padding: 0;
+            object-fit: cover;
+            object-position: center;
+            background: #0a1128;
+            border-top-left-radius: 1.3rem;
+            border-top-right-radius: 1.3rem;
+            box-shadow: 0 2px 8px rgba(124, 185, 232, 0.10);
+            transition: filter 0.22s;
+        }
+
+        #actividades .card:hover .card-img-top {
+            filter: brightness(1.12) saturate(1.07);
+        }
+
+        #actividades .img-ajustable {
+            width: 100%;
+            height: 250px;
+            padding: 0;
+            object-fit: contain;
+            background: #0a1128;
+        }
+
+        #actividades .card-body {
+            padding: 1.2rem 1.1rem 0.7rem 1.1rem;
+            background: transparent;
+        }
+
+        .card-actividad-title {
+            margin-bottom: 0.7rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem;
+            font-weight: bold;
+            letter-spacing: 0.03em;
+            color: #ffe066;
+            text-shadow: 0 2px 8px rgba(13, 36, 90, 0.18);
+        }
+
+        .card-actividad-title i {
+            margin-right: 7px;
+            color: #ffe066;
+        }
+
+        #actividades .card-text {
+            min-height: 80px;
+            margin-bottom: 0;
+            font-size: 1rem;
+            color: #e7eaf6;
+        }
+
+        #actividades .card-footer {
+            padding: 0.3rem 0 1.1rem 0;
+            background: transparent;
+            border-top: none;
+        }
+
+        #actividades .card-footer .btn {
+            display: block;
+            width: 90%;
+            margin: 0.7rem auto 0 auto;
+            padding: 1rem 0;
+            font-size: 1.3rem;
+            font-weight: 700;
+            line-height: 1.4;
+            letter-spacing: 0.02em;
+            color: #fff;
+            text-align: center;
+            background: linear-gradient(90deg, #1a2540 55%, #304d9d 130%);
+            border: none;
+            border-radius: 1.6rem;
+            box-shadow: 0 4px 18px rgba(32, 56, 151, 0.13), 0 2px 8px #0002;
+            cursor: pointer;
+            transition: background 0.28s, color 0.18s, box-shadow 0.18s, transform 0.16s;
+        }
+
+        #actividades .card-footer .btn:active {
+            transform: translateY(-2px) scale(1.04);
+            color: #1a2540;
+            background: linear-gradient(90deg, #ffe066 10%, #233d6c 100%);
+            box-shadow: 0 6px 24px #ffe06644, 0 2px 8px #7cb9e866;
+        }
+
+        .event-card {
+            border-left: 4px solid #7cb9e8;
+        }
+
+        .badge-evento {
+            padding: 0.2em 0.5em;
+            font-size: 1.2rem;
+            line-height: 1.3;
+        }
+
+        .badge-evento small {
+            font-size: 0.85em;
+        }
+
+        /* --- Sección Galería --- */
+        .gallery-card {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            margin: 0;
+            background: linear-gradient(135deg, rgba(24, 27, 31, 0.93) 0%, rgba(24, 27, 31, 0.88) 70%, rgba(24, 27, 31, 0.97) 100%);
+            border-left: 4px solid #181b1f;
+            border-radius: 1.1rem;
+            box-shadow: 0 2px 8px 0 rgba(24, 27, 31, 0.07);
+            transition: transform 0.16s, box-shadow 0.18s;
+            overflow: hidden;
+        }
+
+        .gallery-card:hover {
+            transform: translateY(-7px) scale(1.024);
+            border-color: #ffe066;
+            box-shadow: 0 12px 36px 0 rgba(120, 180, 255, 0.18), 0 3px 12px 0 #7cb9e866;
+        }
+
+        .gallery-card .bg-dark {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 99.5%;
+            min-height: 0;
+            margin: 0.1em auto;
+            padding: 0;
+            background: rgba(24, 27, 31, 0.035) !important;
+            border-radius: 1.1rem 1.1rem 0 0;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+        }
+
+        .gallery-card img,
+        .gallery-card picture {
+            display: block;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            object-fit: contain;
+            object-position: center;
+            background: transparent;
+            border-radius: 1.1rem 1.1rem 0 0;
+            box-shadow: none;
+            transition: filter 0.18s;
+        }
+
+        .gallery-card:hover img {
+            filter: brightness(1.11) saturate(1.09);
+        }
+
+        .gallery-card .p-4 {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            flex: 1 1 auto;
+            padding: 0.45em 1rem 0.2em 1rem;
+            background: transparent;
+        }
+
+        .gallery-card h5 {
+            margin-bottom: 0.5rem;
+            font-size: 1.13rem;
+            font-weight: 800;
+            letter-spacing: 0.015em;
+            color: #7cb9e8;
+            text-shadow: 0 2px 12px #000b, 0 1.5px 8px #181b1f66;
+        }
+
+        .gallery-card p {
+            margin-bottom: 0.1rem;
+            font-size: 1.05rem;
+            color: #e7eaf6;
+            text-shadow: 0 2px 12px #000b, 0 1.5px 8px #181b1f66;
+        }
+
+        /* --- Sección Equipo (Team) --- */
+        .team-member img {
+            border: 3px solid #304d9d;
+            border-radius: 50%;
+        }
+
+        /* --- Sección Footer --- */
+        .footer {
+            padding: 40px 0;
+            background-color: rgba(7, 11, 35, 0.9);
+            border-top: 1px solid #304d9d;
+        }
+
+        .social-links a {
+            margin-right: 15px;
+            font-size: 1.5rem;
+            color: #f0f0f0;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #7cb9e8;
+        }
+
+
+        /* ==========================================================================
+        4. ESTILOS RESPONSIVOS (Media Queries)
+        ========================================================================== */
+
+        /* --- Hover/Focus solo en dispositivos con puntero --- */
+        @media (hover: hover) and (pointer: fine) {
+            #actividades .card-footer .btn:hover,
+            #actividades .card-footer .btn:focus {
+                transform: translateY(-2px) scale(1.04);
+                color: #1a2540;
+                background: linear-gradient(90deg, #ffe066 10%, #233d6c 100%);
+                box-shadow: 0 6px 24px #ffe06644, 0 2px 8px #7cb9e866;
+            }
+        }
+
+        /* --- Tablets (hasta 991.98px) --- */
         @media (max-width: 991.98px) {
-
-            /* FIX: Rendimiento y nitidez del fondo en tablet */
+            /* Fondo alternativo para tablets (mejor rendimiento) */
             .bg-stars {
                 display: none;
             }
@@ -527,43 +473,47 @@
                 background-attachment: scroll;
             }
 
-            /* Ajustes de Navbar para tablet */
+            /* Navbar en tablet */
             .navbar {
-                padding-top: 0.8rem;
-                padding-bottom: 0.8rem;
+                padding: 0.8rem 0;
             }
-            .navbar-nav {
-                gap: 0.5rem;
+            .navbar-brand img {
+                width: 44px;
+                height: 44px;
             }
             .navbar-brand span {
                 font-size: 1.4rem;
             }
-            .navbar-brand img {
-                height: 44px;
-                width: 44px;
+            .navbar-nav {
+                gap: 0.5rem;
             }
 
-            /* Ajustes de Galería para tablet */
+            /* Galería en tablet */
             #galeria .row {
                 margin-left: 0 !important;
                 margin-right: 0 !important;
             }
-            #galeria [class^="col-"],
-            #galeria [class*=" col-"] {
+            #galeria [class*="col-"] {
                 padding-left: 2px !important;
                 padding-right: 2px !important;
             }
             .gallery-card .bg-dark {
-                aspect-ratio: 1/1;
                 width: 100%;
                 margin: 0.05em auto 0.1em auto;
+                aspect-ratio: 1/1;
             }
         }
 
-        /* --- ESTILOS PARA MÓVILES (767.98px o menos) --- */
+        /* --- Móviles (hasta 767.98px) --- */
         @media (max-width: 767.98px) {
+            /* Botones de actividades en móvil */
+            #actividades .card-footer .btn {
+                width: 98%;
+                padding: 0.85rem 0;
+                font-size: 1.07rem;
+            }
             
-            /* Ajustes en Actividades */
+            /* Imágenes de actividades en móvil */
             #actividades .card-img-top,
             #actividades .img-ajustable {
                 height: 180px;
@@ -571,44 +521,32 @@
                 object-fit: contain !important;
                 background: #0a1128;
                 border-radius: 1.1rem 1.1rem 0 0;
-                width: 100%;
-                display: block;
             }
-            
-            /* Ajustes en Galería para ocupar toda la pantalla sin bordes */
+
+            /* Galería en móvil (pantalla completa) */
             #galeria > .container {
                 width: 100vw;
                 max-width: 100vw;
-                padding-left: 0;
-                padding-right: 0;
-                margin-left: 0;
-                margin-right: 0;
+                padding: 0;
+                margin: 0;
             }
-            #galeria .row {
-                margin-left: 0;
-                margin-right: 0;
-            }
-            #galeria [class^="col-"],
-            #galeria [class*=" col-"] {
-                padding-left: 0;
-                padding-right: 0;
+            #galeria .row,
+            #galeria [class*="col-"] {
+                padding: 0;
+                margin: 0;
             }
             .gallery-card {
-                border-radius: 0.7rem;
                 margin: 0 !important;
+                border-radius: 0.7rem;
             }
             .gallery-card .bg-dark {
-                aspect-ratio: unset !important;
                 width: 100%;
                 height: auto;
-                min-height: 0;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                border-radius: 0.7rem 0.7rem 0 0;
-                padding: 0;
                 margin: 0 auto 0.05em auto;
+                padding: 0;
                 background: rgba(24, 27, 31, 0.035) !important;
+                border-radius: 0.7rem 0.7rem 0 0;
+                aspect-ratio: unset !important;
             }
             .gallery-card picture,
             .gallery-card img {
@@ -617,15 +555,27 @@
                 max-width: 100vw !important;
                 max-height: 70vw !important;
                 object-fit: contain !important;
-                object-position: center;
-                border-radius: 0.7rem 0.7rem 0 0;
                 background: transparent !important;
-                display: block;
-                margin: 0;
-                padding: 0;
+                border-radius: 0.7rem 0.7rem 0 0;
+            }
+
+            /* Justificación de texto en móvil */
+            #actividades .text-justify-responsive,
+            #nosotros .text-justify-responsive {
+                text-align: left !important;
+            }
+            #galeria .text-justify-responsive {
+                text-align: center !important;
             }
         }
-           
+
+        /* --- Móviles pequeños (hasta 576px) --- */
+        @media (max-width: 576px) {
+            #actividades .card-footer .btn {
+                padding: 0.7rem 0;
+                font-size: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1391,26 +1341,35 @@
     
     <!-- Javascript personalizado para mejorar la navegación y la experiencia del usuario -->
     <script>
-        // NAVBAR: cierre automático, scroll instantáneo y resalte del enlace activo
+        // =========================================================================
+        // SCRIPT DE NAVEGACIÓN PRINCIPAL (PARA PC Y MÓVIL)
+        // =========================================================================
         document.addEventListener('DOMContentLoaded', function() {
+
+            // --- MANEJO DE LA BARRA DE NAVEGACIÓN (NAVBAR) ---
             const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
             const navbarCollapse = document.querySelector('.navbar-collapse');
-            const sections = Array.from(navLinks)
-                .filter(link => link.getAttribute('href').startsWith('#'))
-                .map(link => document.querySelector(link.getAttribute('href')))
-                .filter(Boolean);
 
             navLinks.forEach(function(link) {
+                // Este evento 'click' funciona tanto para el ratón en PC como para un toque en móvil.
                 link.addEventListener('click', function(e) {
                     const href = this.getAttribute('href');
+
+                    // CASO 1: El enlace es un ancla para hacer scroll en la misma página.
+                    // Esta lógica es universal para PC y móvil.
                     if (href && href.startsWith('#')) {
                         const section = document.querySelector(href);
                         if (section) {
-                            e.preventDefault();
+                            e.preventDefault(); // Detenemos la navegación por defecto SÓLO para anclas.
                             section.scrollIntoView({ behavior: 'auto' });
-                            history.replaceState(null, null, href);
+                            history.replaceState(null, null, href); // Actualiza la URL
                         }
                     }
+                    // CASO 2: El enlace es externo o a otra página.
+                    // No hacemos nada, así que el navegador navega a la nueva página (funciona en PC y móvil).
+
+                    // ESTA PARTE ES CLAVE PARA EL MENÚ DE HAMBURGUESA EN MÓVIL:
+                    // Cierra el menú desplegable si está abierto después de cualquier clic.
                     if (navbarCollapse && navbarCollapse.classList.contains('show')) {
                         const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
                         if (bsCollapse) {
@@ -1420,30 +1379,32 @@
                 });
             });
 
+            // --- RESALTADO DEL ENLACE ACTIVO AL HACER SCROLL (Funciona en PC y móvil) ---
+            const sections = Array.from(document.querySelectorAll('section[id]'));
+
             function updateActiveNav() {
-                let currentSectionIndex = 0;
-                const scrollPosition = window.scrollY + (window.innerHeight / 4);
-                sections.forEach((section, idx) => {
-                    if (section && section.offsetTop <= scrollPosition) {
-                        currentSectionIndex = idx;
+                // La posición del scroll se calcula igual en cualquier dispositivo.
+                const scrollPosition = window.scrollY + (window.innerHeight / 3);
+                let currentSectionId = null;
+
+                sections.forEach(section => {
+                    if (section.offsetTop <= scrollPosition) {
+                        currentSectionId = section.id;
                     }
                 });
-                navLinks.forEach((link, idx) => {
-                    if (
-                        link.getAttribute('href').startsWith('#') &&
-                        idx === currentSectionIndex
-                    ) {
-                        link.setAttribute('aria-current', 'page');
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    link.removeAttribute('aria-current');
+                    if (link.getAttribute('href') === `#${currentSectionId}`) {
                         link.classList.add('active');
-                    } else {
-                        link.removeAttribute('aria-current');
-                        link.classList.remove('active');
+                        link.setAttribute('aria-current', 'page');
                     }
                 });
             }
-            updateActiveNav();
+
             window.addEventListener('scroll', updateActiveNav);
-            window.addEventListener('hashchange', updateActiveNav);
+            window.addEventListener('load', updateActiveNav);
         });
 
         // FORMULARIO DE CONTACTO: validación personalizada, accesibilidad y mensaje de éxito
@@ -1550,13 +1511,25 @@
             }
         });
 
-        //Botón de Actividades: quitar focus al soltar
-        document.querySelectorAll('.card-footer .btn').forEach(function(btn){
-            btn.addEventListener('mouseup', function(){
-                this.blur();
+        // SOLUCIÓN MEJORADA PARA BOTONES DE ACTIVIDADES: Evitar "sticky hover/focus"
+        document.addEventListener('DOMContentLoaded', function() {
+            const activityButtons = document.querySelectorAll('#actividades .card-footer .btn');
+
+            activityButtons.forEach(function(button) {
+                // Al finalizar un toque o un clic, forzamos la pérdida de foco.
+                // Usamos un pequeño timeout para asegurar que se ejecuta después de la acción del navegador.
+                const removeFocus = function(event) {
+                    // No prevenimos la navegación si es un enlace real
+                    // event.preventDefault(); 
+                    setTimeout(() => {
+                        this.blur();
+                    }, 150); // Un pequeño retardo para asegurar que funciona
+                };
+
+                button.addEventListener('mouseup', removeFocus);
+                button.addEventListener('touchend', removeFocus);
             });
         });
-       
         
         </script>
         <!-- Bootstrap JS Bundle with Popper -->
