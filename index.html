@@ -420,6 +420,61 @@
             text-shadow: 0 2px 12px #000b, 0 1.5px 8px #181b1f66;
         }
 
+        /* --- Sección Calendario --- */
+        .astro-event {
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            background-color: rgba(13, 36, 90, 0.7);
+            border-left: 4px solid #7cb9e8;
+        }
+
+        #calendario .list-group-item {
+            text-align: justify;
+            background-color: rgba(10, 17, 40, 0.7) !important;
+            border: none;
+            border-bottom: 1px solid rgba(48, 77, 157, 0.3);
+            color: #f0f0f0 !important;
+            padding: 10px 15px;
+        }
+
+        #calendario .badge {
+            background-color: #304d9d;
+            color: #ffffff;
+            font-weight: 600;
+            min-width: 36px;
+            text-align: center;
+        }
+
+        #calendario h5 {
+            color: #7cb9e8;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            border-bottom: 1px solid rgba(124, 185, 232, 0.3);
+            padding-bottom: 8px;
+        }
+
+        #calendario .btn-primary {
+            background: linear-gradient(90deg, #1a2540 50%, #304d9d 140%);
+            color: #f0f0f0;
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 0.55rem 1.5rem;
+            border: none;
+            border-radius: 100px;
+            box-shadow: 0 2px 12px 0 rgba(48, 77, 157, 0.18);
+            transition: background 0.22s, color 0.22s, box-shadow 0.22s, transform 0.18s;
+        }
+
+        #calendario .btn-primary:hover,
+        #calendario .btn-primary:focus {
+            background: linear-gradient(90deg, #ffe066 10%, #233d6c 100%);
+            color: #1a2540;
+            box-shadow: 0 6px 24px #ffe06666, 0 2px 8px #7cb9e866;
+            transform: translateY(-2px) scale(1.06);
+            text-decoration: none;
+        }
+
         /* --- Sección Equipo (Team) --- */
         .team-member img {
             border: 3px solid #304d9d;
@@ -1067,84 +1122,85 @@
                 <!-- Abril -->
                 <div class="col-md-6 mb-3">
                     <div class="astro-event" aria-label="Eventos de Abril 2025">
-                    <h5 class="mb-2">Abril</h5>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item bg-dark text-light">
-                        <span class="badge bg-primary me-2">8</span>
-                        Eclipse solar total visible en el norte de México (NO visible en Aguascalientes, pero transmitido por redes)
-                        </li>
-                        <li class="list-group-item bg-dark text-light">
-                        <span class="badge bg-primary me-2">23</span>
-                        Lluvia de meteoros Líridas
-                        </li>
-                    </ul>
+                        <h5 class="mb-2">Abril</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item bg-dark text-light">
+                                <span class="badge bg-primary me-2">8</span>
+                                Eclipse solar total visible en el norte de México (NO visible en Aguascalientes, pero transmitido por redes)
+                            </li>
+                            <li class="list-group-item bg-dark text-light">
+                                <span class="badge bg-primary me-2">23</span>
+                                Lluvia de meteoros Líridas
+                            </li>
+                        </ul>
                     </div>
                 </div>
 
                 <!-- Mayo -->
                 <div class="col-md-6 mb-3">
                     <div class="astro-event" aria-label="Eventos de Mayo 2025">
-                    <h5 class="mb-2">Mayo</h5>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item bg-dark text-light">
-                        <span class="badge bg-primary me-2">5-6</span>
-                        Lluvia de meteoros Eta Acuáridas
-                        </li>
-                        <li class="list-group-item bg-dark text-light">
-                        <span class="badge bg-primary me-2">18</span>
-                        Conjunción Venus-Marte
-                        </li>
-                        <li class="list-group-item bg-dark text-light">
-                        <span class="badge bg-primary me-2">23</span>
-                        Luna Llena – "Luna de las Flores"
-                        </li>
+                        <h5 class="mb-2">Mayo</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item bg-dark text-light">
+                                <span class="badge bg-primary me-2">5-6</span>
+                                Lluvia de meteoros Eta Acuáridas
+                            </li>
+                            <li class="list-group-item bg-dark text-light">
+                                <span class="badge bg-primary me-2">18</span>
+                                Conjunción Venus-Marte
+                            </li>
+                            <li class="list-group-item bg-dark text-light">
+                                <span class="badge bg-primary me-2">23</span>
+                                Luna Llena – "Luna de las Flores"
+                            </li>
+                        </ul>
                     </div>
                 </div>
 
                 <!-- Agosto -->
                 <div class="col-md-6 mb-3">
                     <div class="astro-event" aria-label="Eventos de Agosto 2025">
-                    <h5 class="mb-2">Agosto</h5>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item bg-dark text-light">
-                        <span class="badge bg-primary me-2">12-13</span>
-                        Lluvia de meteoros Perseidas (una de las más intensas del año)
-                        </li>
-                    </ul>
+                        <h5 class="mb-2">Agosto</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item bg-dark text-light">
+                                <span class="badge bg-primary me-2">12-13</span>
+                                Lluvia de meteoros Perseidas (una de las más intensas del año)
+                            </li>
+                        </ul>
                     </div>
                 </div>
 
                 <!-- Octubre -->
                 <div class="col-md-6 mb-3">
                     <div class="astro-event" aria-label="Eventos de Octubre 2025">
-                    <h5 class="mb-2">Octubre</h5>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item bg-dark text-light">
-                        <span class="badge bg-primary me-2">17</span>
-                        Eclipse parcial de Luna visible en Aguascalientes
-                        </li>
-                        <li class="list-group-item bg-dark text-light">
-                        <span class="badge bg-primary me-2">21-22</span>
-                        Lluvia de meteoros Oriónidas
-                        </li>
-                    </ul>
+                        <h5 class="mb-2">Octubre</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item bg-dark text-light">
+                                <span class="badge bg-primary me-2">17</span>
+                                Eclipse parcial de Luna visible en Aguascalientes
+                            </li>
+                            <li class="list-group-item bg-dark text-light">
+                                <span class="badge bg-primary me-2">21-22</span>
+                                Lluvia de meteoros Oriónidas
+                            </li>
+                        </ul>
                     </div>
                 </div>
 
                 <!-- Diciembre -->
                 <div class="col-md-6 mb-3">
                     <div class="astro-event" aria-label="Eventos de Diciembre 2025">
-                    <h5 class="mb-2">Diciembre</h5>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item bg-dark text-light">
-                        <span class="badge bg-primary me-2">13-14</span>
-                        Lluvia de meteoros Gemínidas
-                        </li>
-                        <li class="list-group-item bg-dark text-light">
-                        <span class="badge bg-primary me-2">21</span>
-                        Solsticio de invierno
-                        </li>
-                    </ul>
+                        <h5 class="mb-2">Diciembre</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item bg-dark text-light">
+                                <span class="badge bg-primary me-2">13-14</span>
+                                Lluvia de meteoros Gemínidas
+                            </li>
+                            <li class="list-group-item bg-dark text-light">
+                                <span class="badge bg-primary me-2">21</span>
+                                Solsticio de invierno
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
