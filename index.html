@@ -224,6 +224,16 @@
             overflow: hidden;
         }
 
+        /* --- Fondo para el texto de la sección Nosotros --- */
+        .nosotros-text-bg {
+            background: rgba(10, 17, 40, 0.68); /* oscuro y semitransparente */
+            padding: 1.5rem 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 2px 16px #0a112850;
+            /* Opcional: margen inferior si quieres más separación */
+            margin-bottom: 2rem;
+        }
+
         /* --- Sección Actividades --- */
         #actividades .card {
             display: flex;
@@ -709,31 +719,33 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 mb-4 text-justify-responsive">
-                    <h2 class="section-title" id="titulo-nosotros">Nosotros</h2>
-                    <p>La Sociedad Astronómica de Aguascalientes (SAAGS) es una organización sin fines de lucro, constituida en la Ciudad de Aguascalientes, Ags., México, el 29 de junio de 1991. Fue protocolizada mediante escritura pública por el Lic. Gabriel Villalobos Ramírez, Notario No. 3 y destacado astrónomo aguascalentense.</p>
-                    <p>Está integrada por entusiastas aficionados a la astronomía y a las ciencias del espacio, y tiene como objetivos principales:</p>
-                    <ul>
-                        <li>La difusión de la Astronomía y ciencias afines.</li>
-                        <li>Promover la afición por la ciencia de la Astronomía.</li>
-                        <li>La organización de toda clase de actividades para el mejoramiento de la práctica de esta ciencia.</li>
-                        <li>El establecimiento de conferencias, cursos y seminarios, así como actividades de investigación.</li>
-                        <li>Establecer relaciones con organizaciones afines en el país y en el extranjero.</li>
-                        <li>Participar en la elaboración y difusión de programas de investigación, eventos astronómicos y noticias científicas.</li>
-                    </ul>
-                    <h4 class="mt-4">Principios</h4>
-                    <p>La organización no persigue fines políticos, lucrativos o religiosos, ni es medio para estos fines. Presenta conferencias regularmente para instituciones y agrupaciones, y proporciona boletines a la prensa, radio y televisión locales sobre los principales eventos astronómicos.</p>
-                    <h4 class="mt-4">Reconocimientos y Relaciones</h4>
-                    <ul>
-                        <li>Figura en los directorios de AstroRed México y de la revista internacional <em>Sky & Telescope</em>.</li>
-                        <li>Mantiene relaciones con otras sociedades astronómicas del país, así como con el Observatorio Astronómico del Monte Wilson en Los Ángeles, California, a través de su programa "Telescopios para la Educación".</li>
-                    </ul>
-                    <h4 class="mt-4">Fundadores y presidentes</h4>
-                    <ul>
-                        <li>Arq. Francisco Aguayo Mora (+)</li>
-                        <li>Don Guillermo Hesselbach Velasco (+)</li>
-                        <li>Ing. Luis Gerardo Castillo Macías (+)</li>
-                        <li>Ing. Manuel Rodríguez Huerta</li>
-                    </ul>
+                    <div class="nosotros-text-bg">
+                        <h2 class="section-title" id="titulo-nosotros">Nosotros</h2>
+                        <p>La Sociedad Astronómica de Aguascalientes (SAAGS) es una organización sin fines de lucro, constituida en la Ciudad de Aguascalientes, Ags., México, el 29 de junio de 1991. Fue protocolizada mediante escritura pública por el Lic. Gabriel Villalobos Ramírez, Notario No. 3 y destacado astrónomo aguascalentense.</p>
+                        <p>Está integrada por entusiastas aficionados a la astronomía y a las ciencias del espacio, y tiene como objetivos principales:</p>
+                        <ul>
+                            <li>La difusión de la Astronomía y ciencias afines.</li>
+                            <li>Promover la afición por la ciencia de la Astronomía.</li>
+                            <li>La organización de toda clase de actividades para el mejoramiento de la práctica de esta ciencia.</li>
+                            <li>El establecimiento de conferencias, cursos y seminarios, así como actividades de investigación.</li>
+                            <li>Establecer relaciones con organizaciones afines en el país y en el extranjero.</li>
+                            <li>Participar en la elaboración y difusión de programas de investigación, eventos astronómicos y noticias científicas.</li>
+                        </ul>
+                        <h4 class="mt-4">Principios</h4>
+                        <p>La organización no persigue fines políticos, lucrativos o religiosos, ni es medio para estos fines. Presenta conferencias regularmente para instituciones y agrupaciones, y proporciona boletines a la prensa, radio y televisión locales sobre los principales eventos astronómicos.</p>
+                        <h4 class="mt-4">Reconocimientos y Relaciones</h4>
+                        <ul>
+                            <li>Figura en los directorios de AstroRed México y de la revista internacional <em>Sky & Telescope</em>.</li>
+                            <li>Mantiene relaciones con otras sociedades astronómicas del país, así como con el Observatorio Astronómico del Monte Wilson en Los Ángeles, California, a través de su programa "Telescopios para la Educación".</li>
+                        </ul>
+                        <h4 class="mt-4">Fundadores y presidentes</h4>
+                        <ul>
+                            <li>Arq. Francisco Aguayo Mora (+)</li>
+                            <li>Don Guillermo Hesselbach Velasco (+)</li>
+                            <li>Ing. Luis Gerardo Castillo Macías (+)</li>
+                            <li>Ing. Manuel Rodríguez Huerta</li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="row">
@@ -1295,9 +1307,8 @@
                     <h4 class="mt-4">Síguenos</h4>
                     <div class="social-links mt-3" aria-label="Redes sociales de la Sociedad Astronómica de Aguascalientes">
                         <a href="https://www.facebook.com/groups/saags" target="_blank" aria-label="Facebook"><i class="fab fa-facebook" aria-hidden="true"></i></a>
-                        <a href="#" aria-label="X (Twitter)"><i class="fab fa-x-twitter" aria-hidden="true"></i></a>
-                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
-                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube" aria-hidden="true"></i></a>
+                        <a href="https://www.instagram.com/investel.mx/" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                        <a href="https://www.youtube.com/@investel601" aria-label="YouTube"><i class="fab fa-youtube" aria-hidden="true"></i></a>
                     </div>
                     <!--<h4 class="mt-4">Horario de atención</h4>
                     <p>Lunes a Viernes: 10:00 AM - 7:00 PM<br>
