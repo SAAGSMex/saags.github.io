@@ -569,6 +569,59 @@
             }
         }
 
+        @media (min-width: 768px) {
+            body.glightbox-open .gslide-description.description-bottom {
+                background: #181b1f !important;
+                color: #17d5ff !important;
+                border-radius: 0.3em !important;
+                padding: 0.09em 2em !important;  /* Solo vertical reducido */
+                font-family: 'Montserrat', 'Segoe UI', 'Arial', sans-serif !important;
+                font-size: 1.3rem !important;
+                font-weight: 500 !important;
+                text-align: left !important;
+                box-shadow: 0 2px 24px #0007 !important;
+                margin-bottom: 2em !important;
+                letter-spacing: 0.01em !important;
+            }
+            body.glightbox-open .gslide-description.description-bottom strong,
+            body.glightbox-open .gslide-description.description-bottom h3,
+            body.glightbox-open .gslide-description.description-bottom h4 {
+                color: #17d5ff !important;
+                font-weight: 500 !important;
+                font-size: 1.08em !important;
+                font-family: inherit !important;
+                margin-bottom: 0 !important;
+                text-align: left !important;
+                letter-spacing: 0.01em !important;
+                text-shadow: none !important;
+                display: block;
+            }
+            body.glightbox-open .gslide-description.description-bottom small {
+                color: #fff !important;
+                font-size: 1em !important;
+                font-weight: 350 !important;
+                font-family: inherit !important;
+                text-align: left !important;
+                display: block;
+                margin-top: 0.25em;
+            }
+        }
+        @media (max-width: 767.98px) {
+            body.glightbox-open .gslide-description.description-bottom {
+                padding: 0.06em 1em !important; /* Solo vertical reducido en móvil */
+                text-align: left !important;
+            }
+            body.glightbox-open .gslide-description.description-bottom small {
+                color: #fff !important;
+                font-size: 0.98em !important;
+                font-weight: 350 !important;
+                font-family: inherit !important;
+                text-align: left !important;
+                display: block;
+                margin-top: 0.25em;
+            }
+        }
+
         /* --- Móviles (hasta 767.98px) --- */
         @media (max-width: 767.98px) {
             /* Botones de actividades en móvil */
@@ -780,6 +833,12 @@
                             <img src="img/nosotros/telescopio.jpg" alt="Observación astronómica SAAGS" class="img-fluid rounded shadow">
                         </picture>
                     </div>
+                    <div class="pt-3">
+                        <picture>
+                            <source srcset="img/nosotros/turismo_astronomico.webp" type="image/webp">
+                            <img src="img/nosotros/turismo_astronomico.jpg" alt="Turismo astronómico SAAGS" class="img-fluid rounded shadow">
+                        </picture>
+                    </div>
                 </div>
             </div>
         </div>
@@ -917,14 +976,20 @@
                         <div class="event-card shadow-lg border-0 overflow-hidden p-0" aria-label="Evento: Observación lunar, 19 Julio 2025" style="background: #181b1f;">
                             <!-- Imagen destacada extendida y centrada -->
                             <div class="bg-dark position-relative w-100" style="height:270px; overflow:hidden;">
-                                <picture>
-                                    <source srcset="img/actividades/proximos_eventos/Astronaut.webp" type="image/webp">
-                                    <img src="img/actividades/proximos_eventos/Astronaut.jpg"
-                                        class="img-fluid h-100 w-100 d-block mx-auto"
-                                        alt="Cartel del evento El Hombre en la Luna"
-                                        loading="lazy"
-                                        style="object-fit:contain; background: #222;">
-                                </picture>
+                                <a href="img/actividades/proximos_eventos/Astronaut.jpg"
+                                    class="glightbox d-block w-100 h-100"
+                                    data-gallery="actividades"
+                                    data-title="El Hombre en la Luna&lt;br&gt;&lt;small&gt;Evento especial de observación lunar&lt;/small&gt;"
+                                    aria-label="Ver imagen ampliada del evento El Hombre en la Luna">
+                                    <picture>
+                                        <source srcset="img/actividades/proximos_eventos/Astronaut.webp" type="image/webp">
+                                        <img src="img/actividades/proximos_eventos/Astronaut.jpg"
+                                            class="img-fluid h-100 w-100 d-block mx-auto"
+                                            alt="Cartel del evento El Hombre en la Luna"
+                                            loading="lazy"
+                                            style="object-fit:contain; background: #222;">
+                                    </picture>
+                                </a>
                                 <!-- Fechas destacadas -->
                                 <div class="position-absolute top-0 end-0 m-3 text-end" style="z-index:2;">
                                     <span class="badge bg-primary fs-6 mb-1 px-3 py-2 shadow badge-evento" style="opacity:0.95;">
@@ -1015,6 +1080,7 @@
                     data-title="Galaxia de Andrómeda&lt;br&gt;&lt;small&gt;Fotografía: Manuel Rodríguez Huerta&lt;/small&gt;"
                     aria-label="Ver imagen ampliada de Galaxia de Andrómeda">
                     <picture>
+                        <source srcset="img/galeria/galaxia.avif" type="image/avif">
                         <source srcset="img/galeria/galaxia.webp" type="image/webp">
                         <img src="img/galeria/galaxia.jpg"
                             alt="Galaxia de Andrómeda, Fotografía tomada por Manuel Rodríguez Huerta"
