@@ -610,13 +610,29 @@
             body.glightbox-open .gslide-description.description-bottom {
                 padding: 0.06em 1em !important;
                 text-align: left !important;
-                margin-top: 0 !important;         /* pegado a la imagen */
+                margin-top: -1.2em !important;    /* Pegado a la imagen */
                 margin-bottom: 0.2em !important;
+                font-size: 1.15rem !important;
+                font-family: 'Montserrat', 'Segoe UI', 'Arial', sans-serif !important;
             }
+            /* Título en negritas y grande */
+            body.glightbox-open .gslide-description.description-bottom strong,
+            body.glightbox-open .gslide-description.description-bottom h3,
+            body.glightbox-open .gslide-description.description-bottom h4 {
+                font-size: 1.28em !important;
+                font-weight: 700 !important;       /* Negritas */
+                color: #17d5ff !important;
+                margin-bottom: 0 !important;
+                text-align: left !important;
+                letter-spacing: 0.01em !important;
+                text-shadow: none !important;
+                display: block;
+            }
+            /* Subtítulo pequeño y normal */
             body.glightbox-open .gslide-description.description-bottom small {
                 color: #fff !important;
-                font-size: 0.98em !important;
-                font-weight: 300 !important;
+                font-size: 0.85em !important;      /* Más pequeño */
+                font-weight: 400 !important;       /* Sin negritas */
                 font-family: inherit !important;
                 text-align: left !important;
                 display: block;
