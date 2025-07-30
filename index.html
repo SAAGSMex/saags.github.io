@@ -26,8 +26,8 @@
         }
 
         html {
-            scroll-padding-top: var(--navbar-height);
             scroll-behavior: smooth;
+            scroll-padding-top: var(--navbar-height);
         }
 
         body {
@@ -1396,233 +1396,192 @@
     </footer>
     
     <!-- Javascript personalizado para mejorar la navegación y la experiencia del usuario -->
+
+    <!-- Librerías Externas (deben ir primero) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+
+    <!-- Script Personalizado -->
     <script>
+    document.addEventListener('DOMContentLoaded', function() {
+
         // =========================================================================
-        // SCRIPT DE NAVEGACIÓN PRINCIPAL (PARA PC Y MÓVIL)
+        // 1. LÓGICA PARA CERRAR MENÚ MÓVIL (SIN INTERFERIR EN NAVEGACIÓN)
         // =========================================================================
-        document.addEventListener('DOMContentLoaded', function() {
+        // Seleccionamos TODOS los enlaces dentro del menú desplegable
+        const navLinksInMenu = document.querySelectorAll('#navbarNav .nav-link');
+        const navbarCollapse = document.getElementById('navbarNav');
+        const bsCollapse = navbarCollapse ? new bootstrap.Collapse(navbarCollapse, { toggle: false }) : null;
 
-            // --- MANEJO DE LA BARRA DE NAVEGACIÓN (NAVBAR) ---
-            const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
-            const navbarCollapse = document.querySelector('.navbar-collapse');
-
-            navLinks.forEach(function(link) {
-                // Este evento 'click' funciona tanto para el ratón en PC como para un toque en móvil.
-                link.addEventListener('click', function(e) {
-                    const href = this.getAttribute('href');
-
-                    // CASO 1: El enlace es un ancla para hacer scroll en la misma página.
-                    // Esta lógica es universal para PC y móvil.
-                    if (href && href.startsWith('#')) {
-                        const section = document.querySelector(href);
-                        if (section) {
-                            e.preventDefault(); // Detenemos la navegación por defecto SÓLO para anclas.
-                            section.scrollIntoView({ behavior: 'auto' });
-                            history.replaceState(null, null, href); // Actualiza la URL
-                        }
-                    }
-                    // CASO 2: El enlace es externo o a otra página.
-                    // No hacemos nada, así que el navegador navega a la nueva página (funciona en PC y móvil).
-
-                    // ESTA PARTE ES CLAVE PARA EL MENÚ DE HAMBURGUESA EN MÓVIL:
-                    // Cierra el menú desplegable si está abierto después de cualquier clic.
-                    if (navbarCollapse && navbarCollapse.classList.contains('show')) {
-                        const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
-                        if (bsCollapse) {
-                            bsCollapse.hide();
-                        }
-                    }
-                });
+        navLinksInMenu.forEach(link => {
+            link.addEventListener('click', () => {
+                // NO hay e.preventDefault(). Dejamos que el enlace funcione 100% nativo.
+                // Si el menú está abierto, lo cerramos.
+                if (bsCollapse && navbarCollapse.classList.contains('show')) {
+                    bsCollapse.hide();
+                }
             });
-
-            // --- RESALTADO DEL ENLACE ACTIVO AL HACER SCROLL (Funciona en PC y móvil) ---
-            const sections = Array.from(document.querySelectorAll('section[id]'));
-
-            function updateActiveNav() {
-                // La posición del scroll se calcula igual en cualquier dispositivo.
-                const scrollPosition = window.scrollY + (window.innerHeight / 3);
-                let currentSectionId = null;
-
-                sections.forEach(section => {
-                    if (section.offsetTop <= scrollPosition) {
-                        currentSectionId = section.id;
-                    }
-                });
-
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    link.removeAttribute('aria-current');
-                    if (link.getAttribute('href') === `#${currentSectionId}`) {
-                        link.classList.add('active');
-                        link.setAttribute('aria-current', 'page');
-                    }
-                });
-            }
-
-            window.addEventListener('scroll', updateActiveNav);
-            window.addEventListener('load', updateActiveNav);
         });
 
-        // FORMULARIO DE CONTACTO: validación personalizada, accesibilidad y mensaje de éxito
-        document.addEventListener('DOMContentLoaded', function() {
-            const contactoForm = document.querySelector('#contacto form');
-            if(contactoForm) {
-                contactoForm.addEventListener('submit', function(e) {
-                    // Elimina mensajes de error previos
-                    contactoForm.querySelectorAll('.mensaje-error').forEach(el => el.remove());
-                    let valido = true;
+        // =========================================================================
+        // 2. RESALTADO ACTIVO EFICIENTE CON INTERSECTION OBSERVER
+        // =========================================================================
+        const sections = document.querySelectorAll('section[id]');
+        const navLinksForObserver = document.querySelectorAll('.navbar-nav .nav-link');
 
-                    // Campos
-                    const nombre = contactoForm.querySelector('#nombre');
-                    const email = contactoForm.querySelector('#email');
-                    const asunto = contactoForm.querySelector('#asunto');
-                    const mensaje = contactoForm.querySelector('#mensaje');
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px 0px -50% 0px',
+            threshold: 0
+        };
 
-                    // Validación personalizada
-                    if (!nombre.value.trim()) {
-                        mostrarMensajeError(nombre, "El nombre es obligatorio.");
-                        valido = false;
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navLinksForObserver.forEach(link => {
+                        link.classList.remove('active');
+                        link.removeAttribute('aria-current');
+                    });
+                    const activeLink = document.querySelector(`.navbar-nav a[href="#${id}"]`);
+                    if (activeLink) {
+                        activeLink.classList.add('active');
+                        activeLink.setAttribute('aria-current', 'page');
                     }
-                    if (!email.value.trim() || !/^[\w\.-]+@[\w\.-]+\.\w{2,}$/.test(email.value)) {
-                        mostrarMensajeError(email, "Introduce un correo electrónico válido.");
-                        valido = false;
-                    }
-                    if (!asunto.value.trim()) {
-                        mostrarMensajeError(asunto, "El asunto es obligatorio.");
-                        valido = false;
-                    }
-                    if (!mensaje.value.trim()) {
-                        mostrarMensajeError(mensaje, "El mensaje es obligatorio.");
-                        valido = false;
-                    }
+                }
+            });
+        }, observerOptions);
 
-                    if (!valido) {
-                        e.preventDefault();
-                        return;
-                    }
+        sections.forEach(section => {
+            if (section.id) sectionObserver.observe(section);
+        });
 
-                    e.preventDefault();
+        // =========================================================================
+        // 3. ENLACES EXTERNOS SE ABREN EN NUEVA PESTAÑA
+        // =========================================================================
+        document.querySelectorAll('a[href]').forEach(link => {
+            if (/^https?:\/\//.test(link.href) && link.hostname !== window.location.hostname) {
+                link.setAttribute('target', '_blank');
+                link.setAttribute('rel', 'noopener noreferrer');
+            }
+        });
+
+        // =========================================================================
+        // 4. INICIALIZACIÓN DE GLIGHTBOX
+        // =========================================================================
+        if (typeof GLightbox === 'function') {
+            GLightbox({
+                selector: '.glightbox',
+                touchNavigation: true,
+                loop: true,
+                closeButton: true
+            });
+        }
+
+        // =========================================================================
+        // 5. VALIDACIÓN DE FORMULARIOS Y MEJORAS DE UX
+        // =========================================================================
+        
+        // Función accesible para mostrar mensaje de error
+        function mostrarMensajeError(input, mensaje) {
+            let errorDiv = document.createElement('div');
+            errorDiv.className = 'mensaje-error alert alert-danger mt-2 py-2 px-3';
+            errorDiv.setAttribute('role', 'alert');
+            errorDiv.setAttribute('aria-live', 'assertive');
+            errorDiv.textContent = mensaje;
+            if (input.parentElement.classList.contains('input-group')) {
+                input.parentElement.parentElement.appendChild(errorDiv);
+            } else {
+                input.parentElement.appendChild(errorDiv);
+            }
+            setTimeout(() => { errorDiv.remove(); }, 5000);
+        }
+
+        // Función accesible para mostrar mensaje de éxito
+        function mostrarMensajeExito(parent, mensaje) {
+            let mensajePrevio = parent.querySelector('.mensaje-exito');
+            if (mensajePrevio) mensajePrevio.remove();
+            const div = document.createElement('div');
+            div.className = 'mensaje-exito alert alert-success mt-2 mb-0 py-2 px-3 text-center';
+            div.setAttribute('role', 'status');
+            div.setAttribute('aria-live', 'polite');
+            div.textContent = mensaje;
+            parent.appendChild(div);
+            setTimeout(() => { div.remove(); }, 4000);
+        }
+        
+        // Formulario de Contacto
+        const contactoForm = document.querySelector('#contacto form');
+        if (contactoForm) {
+            contactoForm.addEventListener('submit', function(e) {
+                e.preventDefault(); // Prevenimos el envío real, ya que es un demo
+                contactoForm.querySelectorAll('.mensaje-error').forEach(el => el.remove());
+                let valido = true;
+                const nombre = contactoForm.querySelector('#nombre');
+                const email = contactoForm.querySelector('#email');
+                const asunto = contactoForm.querySelector('#asunto');
+                const mensaje = contactoForm.querySelector('#mensaje');
+
+                if (!nombre.value.trim()) {
+                    mostrarMensajeError(nombre, "El nombre es obligatorio.");
+                    valido = false;
+                }
+                if (!email.value.trim() || !/^[\w\.-]+@[\w\.-]+\.\w{2,}$/.test(email.value)) {
+                    mostrarMensajeError(email, "Introduce un correo electrónico válido.");
+                    valido = false;
+                }
+                if (!asunto.value.trim()) {
+                    mostrarMensajeError(asunto, "El asunto es obligatorio.");
+                    valido = false;
+                }
+                if (!mensaje.value.trim()) {
+                    mostrarMensajeError(mensaje, "El mensaje es obligatorio.");
+                    valido = false;
+                }
+
+                if (valido) {
                     contactoForm.reset();
-                    mostrarMensajeExito(contactoForm, "El mensaje ha sido enviado con éxito.");
-                });
-            }
-
-            // BOLETÍN INFORMATIVO (footer): validación personalizada y mensaje de éxito
-            const newsletterForm = document.querySelector('.footer form');
-            if (newsletterForm) {
-                newsletterForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    newsletterForm.querySelectorAll('.mensaje-error').forEach(el => el.remove());
-                    const newsletterInput = newsletterForm.querySelector('input[type="email"]');
-                    if (!newsletterInput.value.trim() || !/^[\w\.-]+@[\w\.-]+\.\w{2,}$/.test(newsletterInput.value)) {
-                        mostrarMensajeError(newsletterInput, "Introduce un correo electrónico válido.");
-                        return;
-                    }
-                    newsletterInput.value = '';
-                    mostrarMensajeExito(newsletterForm.querySelector('.input-group'), "¡Te has suscrito con éxito!");
-                });
-            }
-
-            // Función accesible para mostrar mensaje de error
-            function mostrarMensajeError(input, mensaje) {
-                let errorDiv = document.createElement('div');
-                errorDiv.className = 'mensaje-error alert alert-danger mt-2 py-2 px-3';
-                errorDiv.setAttribute('role', 'alert');
-                errorDiv.setAttribute('aria-live', 'assertive');
-                errorDiv.textContent = mensaje;
-                if (input.parentElement) {
-                    input.parentElement.appendChild(errorDiv);
-                } else {
-                    input.after(errorDiv);
-                }
-                setTimeout(() => { errorDiv.remove(); }, 5000);
-            }
-
-            // Función accesible para mostrar mensaje de éxito
-            function mostrarMensajeExito(parent, mensaje) {
-                let mensajePrevio = parent.querySelector('.mensaje-exito');
-                if (mensajePrevio) mensajePrevio.remove();
-
-                const div = document.createElement('div');
-                div.className = 'mensaje-exito alert alert-success mt-2 mb-0 py-2 px-3 text-center';
-                div.setAttribute('role', 'status');
-                div.setAttribute('aria-live', 'polite');
-                div.textContent = mensaje;
-                parent.appendChild(div);
-
-                setTimeout(() => { div.remove(); }, 4000);
-            }
-        });
-
-        //Animaciones del botón "Nuestras actividades"
-        document.addEventListener('DOMContentLoaded', function() {
-            const btnActividades = document.getElementById('btn-actividades');
-            if (btnActividades) {
-                btnActividades.addEventListener('animationend', function(e) {
-                    if (e.animationName === 'fadeInUp') {
-                        btnActividades.classList.remove('animate__fadeInUp');
-                        btnActividades.classList.add('animate__pulse', 'animate__infinite');
-                    }
-                }, { once: true });
-            }
-        });
-
-        // SOLUCIÓN MEJORADA PARA BOTONES DE ACTIVIDADES: Evitar "sticky hover/focus"
-        document.addEventListener('DOMContentLoaded', function() {
-            const activityButtons = document.querySelectorAll('#actividades .card-footer .btn');
-
-            activityButtons.forEach(function(button) {
-                // Al finalizar un toque o un clic, forzamos la pérdida de foco.
-                // Usamos un pequeño timeout para asegurar que se ejecuta después de la acción del navegador.
-                const removeFocus = function(event) {
-                    // No prevenimos la navegación si es un enlace real
-                    // event.preventDefault(); 
-                    setTimeout(() => {
-                        this.blur();
-                    }, 150); // Un pequeño retardo para asegurar que funciona
-                };
-
-                button.addEventListener('mouseup', removeFocus);
-                button.addEventListener('touchend', removeFocus);
-            });
-        });
-        
-        </script>
-        <!-- Bootstrap JS Bundle with Popper -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-        
-        <!-- GLightbox JS -->
-        <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
-        
-        <script>
-        // Script para clasificar y mejorar enlaces internos, anclas y externos
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('a[href]').forEach(function(link) {
-                const href = link.getAttribute('href');
-                // Enlace de ancla interna
-                if (href.startsWith('#')) {
-                    link.classList.add('enlace-ancla-interna');
-                }
-                // Enlace externo: http(s) y dominio distinto
-                else if (/^https?:\/\//.test(href) && !href.includes(window.location.hostname)) {
-                    link.setAttribute('target', '_blank');
-                    link.setAttribute('rel', 'noopener');
-                    link.classList.add('enlace-externo');
-                }
-                // Enlace interno (relativo o mismo dominio)
-                else {
-                    link.classList.add('enlace-interno');
+                    mostrarMensajeExito(contactoForm, "¡Mensaje enviado con éxito! (demostración)");
                 }
             });
+        }
+
+        // Boletín Informativo (footer)
+        const newsletterForm = document.querySelector('.footer form');
+        if (newsletterForm) {
+            newsletterForm.addEventListener('submit', function(e) {
+                e.preventDefault(); // Prevenimos el envío real
+                newsletterForm.querySelectorAll('.mensaje-error').forEach(el => el.remove());
+                const newsletterInput = newsletterForm.querySelector('input[type="email"]');
+                if (!newsletterInput.value.trim() || !/^[\w\.-]+@[\w\.-]+\.\w{2,}$/.test(newsletterInput.value)) {
+                    mostrarMensajeError(newsletterInput, "Introduce un correo electrónico válido.");
+                    return;
+                }
+                newsletterInput.value = '';
+                mostrarMensajeExito(newsletterForm.querySelector('.input-group'), "¡Te has suscrito con éxito!");
+            });
+        }
+
+        // Animación del botón "Nuestras actividades"
+        const btnActividades = document.getElementById('btn-actividades');
+        if (btnActividades) {
+            btnActividades.addEventListener('animationend', function(e) {
+                if (e.animationName === 'fadeInUp') {
+                    btnActividades.classList.remove('animate__fadeInUp');
+                    btnActividades.classList.add('animate__pulse', 'animate__infinite');
+                }
+            }, { once: true });
+        }
+
+        // Solución para "sticky hover" en botones de actividades
+        const activityButtons = document.querySelectorAll('#actividades .card-footer .btn');
+        activityButtons.forEach(button => {
+            const removeFocus = () => setTimeout(() => button.blur(), 150);
+            button.addEventListener('mouseup', removeFocus);
+            button.addEventListener('touchend', removeFocus);
         });
-        </script>
-        <script>
-        GLightbox({
-            selector: '.glightbox',
-            touchNavigation: true,
-            loop: true,
-            closeButton: true
-        });
-    </script>
+
+    });
+    </script>     
 </body>
 </html>
