@@ -256,9 +256,10 @@
             box-shadow: 0 16px 40px 0 rgba(0, 123, 255, 0.25), 0 4px 16px rgba(124, 185, 232, 0.25);
         }
 
-        #actividades .card-img-top {
+        #actividades .card-img-top,
+        #actividades .img-ajustable {
             width: 100%;
-            height: 250px;
+            height: 300px; /* Ahora todas tienen 300px de alto */
             padding: 0;
             object-fit: cover;
             object-position: center;
@@ -271,14 +272,6 @@
 
         #actividades .card:hover .card-img-top {
             filter: brightness(1.12) saturate(1.07);
-        }
-
-        #actividades .img-ajustable {
-            width: 100%;
-            height: 250px;
-            padding: 0;
-            object-fit: contain;
-            background: #0a1128;
         }
 
         #actividades .card-body {
@@ -874,7 +867,7 @@
                     <div class="card bg-gradient-astro shadow-lg h-100" aria-label="Actividad: Observaciones Astronómicas Públicas">
                         <picture>
                             <source srcset="img/actividades/planetariotepezala.webp" type="image/webp">
-                            <img src="img/actividades/planetariotepezala.jpeg" width="414" height="285" class="card-img-top" alt="Observaciones astronómicas" aria-hidden="true">
+                            <img src="img/actividades/planetariotepezala.jpeg" width="414" height="300" class="card-img-top" alt="Observaciones astronómicas" aria-hidden="true">
                         </picture>
                         <div class="card-body">
                             <h5 class="card-actividad-title text-center">
@@ -891,7 +884,7 @@
                     <div class="card bg-gradient-astro shadow-lg h-100" aria-label="Actividad: Cursos, talleres y seminarios">
                         <picture>
                             <source srcset="img/actividades/astro_software.webp" type="image/webp">
-                            <img src="img/actividades/astro_software.png" width="414" height="239" class="card-img-top" alt="Cursos y talleres" aria-hidden="true">
+                            <img src="img/actividades/astro_software.png" width="414" height="300" class="card-img-top" alt="Cursos y talleres" aria-hidden="true">
                         </picture>
                         <div class="card-body">
                             <h5 class="card-actividad-title text-center">
@@ -908,7 +901,7 @@
                     <div class="card bg-gradient-astro shadow-lg h-100" aria-label="Actividad: Conferencias y charlas de divulgación">
                         <picture>
                             <source srcset="img/actividades/proyeccion.webp" type="image/webp">
-                            <img src="img/actividades/proyeccion.jpeg" width="414" height="276" class="card-img-top" alt="Conferencias" aria-hidden="true">
+                            <img src="img/actividades/proyeccion.jpeg" width="414" height="300" class="card-img-top" alt="Conferencias" aria-hidden="true">
                         </picture>
                         <div class="card-body">
                             <h5 class="card-actividad-title text-center">
@@ -925,7 +918,7 @@
                     <div class="card bg-gradient-astro shadow-lg h-100">
                         <picture>
                             <source srcset="img/actividades/news.webp" type="image/webp">
-                            <img src="img/actividades/news.jpg" width="414" height="325" class="card-img-top img-ajustable" alt="Medios">
+                            <img src="img/actividades/news.jpg" width="414" height="300" class="card-img-top img-ajustable" alt="Medios">
                         </picture>
                         <div class="card-body">
                             <h5 class="card-actividad-title text-center">
@@ -943,7 +936,7 @@
                         <picture>
                             <source srcset="img/actividades/skyandtelescope.webp" type="image/webp">
                             <source srcset="img/galaxia.avif" type="image/avif">
-                            <img src="img/actividades/skyandtelescope.jpg" width="414" height="414" class="card-img-top img-ajustable" alt="Colaboraciones">
+                            <img src="img/actividades/skyandtelescope.jpg" width="414" height="300" class="card-img-top img-ajustable" alt="Colaboraciones">
                         </picture>
                         <div class="card-body">
                             <h5 class="card-actividad-title text-center">
@@ -957,7 +950,7 @@
                     <div class="card bg-gradient-astro shadow-lg h-100">
                         <picture>
                             <source srcset="img/actividades/gruposaags.webp" type="image/webp">
-                            <img src="img/actividades/gruposaags.jpg" width="414" height="327" class="card-img-top img-ajustable" alt="Difusión">
+                            <img src="img/actividades/gruposaags.jpg" width="414" height="300" class="card-img-top img-ajustable" alt="Difusión">
                         </picture>
                         <div class="card-body">
                             <h5 class="card-actividad-title text-center">
@@ -974,7 +967,7 @@
                     <div class="card bg-gradient-astro shadow-lg h-100">
                         <picture>
                             <source srcset="img/actividades/logo_ags_ei.webp" type="image/webp">
-                            <img src="img/actividades/logo_ags_ei.png" width="414" height="233" class="card-img-top img-ajustable" alt="Difusión">
+                            <img src="img/actividades/logo_ags_ei.png" width="414" height="300" class="card-img-top img-ajustable" alt="Difusión">
                         </picture>
                         <div class="card-body">
                             <h5 class="card-actividad-title text-center">
