@@ -629,24 +629,9 @@
         /* Móviles (hasta 767.98px) */
         @media (max-width: 767.98px) {
             #actividades .card-footer .btn {
-                /* Tus ajustes de tamaño que ya estaban bien */
                 width: 98%;
                 padding: 0.85rem 0;
                 font-size: 1.07rem;
-
-                /* LA CORRECCIÓN: Definimos un ÚNICO background, eliminando el conflicto */
-                background: linear-gradient(90deg, #ffe066 10%, #233d6c 100%);
-                color: #1a2540;
-                box-shadow: 0 4px 15px #ffe06633, 0 2px 6px #7cb9e855;
-
-                /* Reseteamos la transformación para que no se vea "presionado" por defecto */
-                transform: none; 
-            }
-
-            /*  EFECTO AL PRESIONAR EN MÓVIL */
-            #actividades .card-footer .btn:active {
-                transform: scale(0.98); 
-                filter: brightness(1.1);
             }
             
             /* Imágenes de actividades en móvil */
