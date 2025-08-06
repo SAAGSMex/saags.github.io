@@ -19,9 +19,7 @@
     <link rel="preload" as="image" href="img/background/galaxybg_pc.webp">
     <link rel="preload" as="image" href="img/background/galaxybg_100.webp">
     <style>
-        /* ==========================================================================
-        1. CONFIGURACIÓN, VARIABLES Y ESTILOS GLOBALES
-        ========================================================================== */
+        /* 1. CONFIGURACIÓN, VARIABLES Y ESTILOS GLOBALES */
 
         :root {
             --navbar-height: 76px;
@@ -51,9 +49,7 @@
         }
 
 
-        /* ==========================================================================
-        2. ESTILOS DE COMPONENTES REUTILIZABLES (Utilities & Components)
-        ========================================================================== */
+        /* 2. ESTILOS DE COMPONENTES REUTILIZABLES (Utilities & Components) */
 
         /* --- Títulos de Sección --- */
         .section-title {
@@ -141,11 +137,9 @@
         }
 
 
-        /* ==========================================================================
-        3. ESTILOS DE SECCIONES ESPECÍFICAS
-        ========================================================================== */
+        /* 3. ESTILOS DE SECCIONES ESPECÍFICAS */
 
-        /* --- Barra de Navegación (Navbar) --- */
+        /* Barra de Navegación (Navbar) */
         .navbar {
             display: flex;
             align-items: center;
@@ -214,7 +208,7 @@
             box-shadow: none !important;
         }
 
-        /* --- Sección Hero --- */
+        /* Sección Hero */
         .hero-section {
             display: flex;
             align-items: center;
@@ -236,7 +230,7 @@
             margin-bottom: 2rem;
         }
 
-        /* --- Sección Actividades --- */
+        /* Sección Actividades */
         #actividades .card {
             display: flex;
             flex-direction: column;
@@ -259,12 +253,12 @@
         #actividades .card-img-top,
         #actividades .img-ajustable {
             width: 100%;
-            height: 300px; /* Ahora todas tienen 300px de alto */
+            aspect-ratio: 4 / 3; 
             padding: 0;
             object-fit: cover;
             object-position: center;
             background: #0a1128;
-            border-top-left-radius: 1.3rem;
+            border-top-left-radius: 1.3rem; 
             border-top-right-radius: 1.3rem;
             box-shadow: 0 2px 8px rgba(124, 185, 232, 0.10);
             transition: filter 0.22s;
@@ -347,7 +341,7 @@
             font-size: 0.85em;
         }
 
-        /* --- Sección Galería --- */
+        /* Sección Galería */
         .gallery-card {
             display: flex;
             flex-direction: column;
@@ -425,7 +419,7 @@
             text-shadow: 0 2px 12px #000b, 0 1.5px 8px #181b1f66;
         }
 
-        /* --- Sección Calendario --- */
+        /* Sección Calendario */
         .astro-event {
             padding: 15px;
             border-radius: 5px;
@@ -480,7 +474,7 @@
             text-decoration: none;
         }
 
-        /* --- Sección Equipo (Team) --- */
+        /* Sección Equipo (Team) */
         .team-member img {
             border: 3px solid #304d9d;
             border-radius: 50%;
@@ -504,12 +498,9 @@
             color: #7cb9e8;
         }
 
+        /* 4. ESTILOS RESPONSIVOS (Media Queries) */
 
-        /* ==========================================================================
-        4. ESTILOS RESPONSIVOS (Media Queries)
-        ========================================================================== */
-
-        /* --- Hover/Focus solo en dispositivos con puntero --- */
+        /* Hover/Focus solo en dispositivos con puntero */
         @media (hover: hover) and (pointer: fine) {
             #actividades .card-footer .btn:hover,
             #actividades .card-footer .btn:focus {
@@ -520,7 +511,7 @@
             }
         }
 
-        /* --- Tablets (hasta 991.98px) --- */
+        /* Tablets (hasta 991.98px) */
         @media (max-width: 991.98px) {
             /* Fondo alternativo para tablets (mejor rendimiento) */
             .bg-stars {
@@ -635,22 +626,33 @@
             }
         }
 
-        /* --- Móviles (hasta 767.98px) --- */
+        /* Móviles (hasta 767.98px) */
         @media (max-width: 767.98px) {
-            /* Botones de actividades en móvil */
             #actividades .card-footer .btn {
+                /* Tus ajustes de tamaño que ya estaban bien */
                 width: 98%;
                 padding: 0.85rem 0;
                 font-size: 1.07rem;
+
+                /* LA CORRECCIÓN: Definimos un ÚNICO background, eliminando el conflicto */
+                background: linear-gradient(90deg, #ffe066 10%, #233d6c 100%);
+                color: #1a2540;
+                box-shadow: 0 4px 15px #ffe06633, 0 2px 6px #7cb9e855;
+
+                /* Reseteamos la transformación para que no se vea "presionado" por defecto */
+                transform: none; 
+            }
+
+            /*  EFECTO AL PRESIONAR EN MÓVIL */
+            #actividades .card-footer .btn:active {
+                transform: scale(0.98); 
+                filter: brightness(1.1);
             }
             
             /* Imágenes de actividades en móvil */
             #actividades .card-img-top,
             #actividades .img-ajustable {
-                height: 180px;
-                min-height: 120px;
-                object-fit: contain !important;
-                background: #0a1128;
+                /* Aquí solo cambiamos lo que es diferente en móvil, como el radio del borde */
                 border-radius: 1.1rem 1.1rem 0 0;
             }
 
@@ -700,7 +702,7 @@
             }
         }
 
-        /* --- Móviles pequeños (hasta 576px) --- */
+        /* Móviles pequeños (hasta 576px) */
         @media (max-width: 576px) {
             #actividades .card-footer .btn {
                 padding: 0.7rem 0;
