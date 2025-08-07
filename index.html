@@ -923,7 +923,7 @@
                             <p class="card-text">Colaboramos con prensa, radio y televisión local para informar a la comunidad sobre eventos astronómicos relevantes como eclipses, lluvias de meteoros, conjunciones y más.</p>
                         </div>
                         <div class="card-footer text-center">
-                            <a href="https://www.heraldo.mx/tendremos-el-telescoio-mas-grande-de-la-region/" class="btn btn-primary btn-sm" aria-label="Ver noticias sobre eventos astronómicos">Noticias</a>
+                            <a href="https://www.heraldo.mx/el-diablo-aparece-en-el-cielo-nocturno/#google_vignette" class="btn btn-primary btn-sm" aria-label="Ver noticias sobre eventos astronómicos">Noticias</a>
                         </div>
                     </div>
                 </div>
@@ -1574,10 +1574,7 @@
     <!-- Script Personalizado -->
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-
-        // =========================================================================
         // 1. LÓGICA PARA CERRAR MENÚ MÓVIL (SIN INTERFERIR EN NAVEGACIÓN)
-        // =========================================================================
         // Seleccionamos TODOS los enlaces dentro del menú desplegable
         const navLinksInMenu = document.querySelectorAll('#navbarNav .nav-link');
         const navbarCollapse = document.getElementById('navbarNav');
@@ -1593,9 +1590,7 @@
             });
         });
 
-        // =========================================================================
         // 2. RESALTADO ACTIVO EFICIENTE CON INTERSECTION OBSERVER
-        // =========================================================================
         const sections = document.querySelectorAll('section[id]');
         const navLinksForObserver = document.querySelectorAll('.navbar-nav .nav-link');
 
@@ -1626,19 +1621,14 @@
             if (section.id) sectionObserver.observe(section);
         });
 
-        // =========================================================================
         // 3. ENLACES EXTERNOS SE ABREN EN NUEVA PESTAÑA
-        // =========================================================================
         document.querySelectorAll('a[href]').forEach(link => {
             if (/^https?:\/\//.test(link.href) && link.hostname !== window.location.hostname) {
                 link.setAttribute('target', '_blank');
                 link.setAttribute('rel', 'noopener noreferrer');
             }
         });
-
-        // =========================================================================
         // 4. INICIALIZACIÓN DE GLIGHTBOX
-        // =========================================================================
         if (typeof GLightbox === 'function') {
             GLightbox({
                 selector: '.glightbox',
@@ -1648,9 +1638,7 @@
             });
         }
 
-        // =========================================================================
         // 5. VALIDACIÓN DE FORMULARIOS Y MEJORAS DE UX
-        // =========================================================================
         
         // Función accesible para mostrar mensaje de error
         function mostrarMensajeError(input, mensaje) {
