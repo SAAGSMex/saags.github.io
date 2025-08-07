@@ -629,25 +629,30 @@
         /* Móviles (hasta 767.98px) */
         @media (max-width: 767.98px) {
             #actividades .card-footer .btn {
-                width: 98%;
-                padding: 0.85rem 0;
-                font-size: 1.07rem;
+                width: 90%;
+                margin: 0.7rem auto 0 auto;
+                padding: 1rem 0;
+                font-size: 1.3rem;
+                font-weight: 700;
+                line-height: 1.4;
+                letter-spacing: 0.02em;
+                color: #fff;
+                text-align: center;
+                background: linear-gradient(90deg, #1a2540 55%, #304d9d 130%);
+                border: none;
+                border-radius: 1.6rem;
+                box-shadow: 0 4px 18px rgba(32, 56, 151, 0.13), 0 2px 8px #0002;
+                cursor: pointer;
+                transition: background 0.28s, color 0.18s, box-shadow 0.18s, transform 0.16s;
             }
 
-            #actividades .card-footer .btn:hover,
-            #actividades .card-footer .btn:focus,
-            #actividades .card-footer .btn:active { /* <-- Se añade :active aquí */
+            #actividades .card-footer .btn:active {
                 transform: translateY(-2px) scale(1.04);
                 color: #1a2540;
                 background: linear-gradient(90deg, #ffe066 10%, #233d6c 100%);
                 box-shadow: 0 6px 24px #ffe06644, 0 2px 8px #7cb9e866;
-            }
-            
-            /* Imágenes de actividades en móvil */
-            #actividades .card-img-top,
-            #actividades .img-ajustable {
-                /* Aquí solo cambiamos lo que es diferente en móvil, como el radio del borde */
-                border-radius: 1.1rem 1.1rem 0 0;
+                outline: none; /* Elimina el borde de enfoque */
+                transition: all 0.5s ease; /* Duración del efecto */
             }
 
             /* Galería en móvil (pantalla completa) */
@@ -1574,7 +1579,18 @@
     <!-- Script Personalizado -->
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // 1. LÓGICA PARA CERRAR MENÚ MÓVIL (SIN INTERFERIR EN NAVEGACIÓN)
+        // Animación del botón "Nuestras actividades"
+        const btnActividades = document.getElementById('btn-actividades');
+        if (btnActividades) {
+            btnActividades.addEventListener('animationend', function(e) {
+                if (e.animationName === 'fadeInUp') {
+                    btnActividades.classList.remove('animate__fadeInUp');
+                    btnActividades.classList.add('animate__pulse', 'animate__infinite');
+                }
+            }, { once: true });
+        }
+
+        // 1. LÓGICA PARA CERRAR NAVBAR (SIN INTERFERIR EN NAVEGACIÓN)
         // Seleccionamos TODOS los enlaces dentro del menú desplegable
         const navLinksInMenu = document.querySelectorAll('#navbarNav .nav-link');
         const navbarCollapse = document.getElementById('navbarNav');
@@ -1720,24 +1736,7 @@
             });
         }
 
-        // Animación del botón "Nuestras actividades"
-        const btnActividades = document.getElementById('btn-actividades');
-        if (btnActividades) {
-            btnActividades.addEventListener('animationend', function(e) {
-                if (e.animationName === 'fadeInUp') {
-                    btnActividades.classList.remove('animate__fadeInUp');
-                    btnActividades.classList.add('animate__pulse', 'animate__infinite');
-                }
-            }, { once: true });
-        }
-
-        // Solución para "sticky hover" en botones de actividades
-        const activityButtons = document.querySelectorAll('#actividades .card-footer .btn');
-        activityButtons.forEach(button => {
-            const removeFocus = () => setTimeout(() => button.blur(), 150);
-            button.addEventListener('mouseup', removeFocus);
-            button.addEventListener('touchend', removeFocus);
-        });
+        
 
     });
     </script>     
