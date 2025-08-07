@@ -1611,25 +1611,29 @@
         // 4. Feedback visual mejorado y navegación controlada para botones de actividades (solucion de sticky hoover)
         const activityButtons = document.querySelectorAll('#actividades .card-footer .btn');
         activityButtons.forEach(button => {
-            // Usamos el evento 'click' porque es más robusto y funciona para ratón y toque.
-            // Le pasamos el objeto 'event' (e) para poder controlarlo.
+            
             const handleClick = (e) => {
-                // 1. Prevenimos que el enlace navegue inmediatamente.
+                // 1. Prevenimos la navegación automática para tomar el control.
                 e.preventDefault();
 
-                // 2. Guardamos la URL a la que queremos ir.
+                // 2. Guardamos la URL de destino del enlace.
                 const destination = button.href;
 
-                // 3. Añadimos la clase para el efecto visual. ¡Ahora sí se verá!
+                // 3. Añadimos la clase para el feedback visual inmediato.
                 button.classList.add('btn-touched');
 
-                // 4. Creamos un retardo.
+                // 4. ¡LA PIEZA CLAVE! Quitamos el foco INMEDIATAMENTE.
+                // Esto resuelve el problema del "sticky hover" si el usuario navega
+                // y luego presiona el botón "atrás" del navegador.
+                button.blur();
+
+                // 5. Esperamos un momento para que el efecto sea visible, y LUEGO navegamos.
                 setTimeout(() => {
-                    // 5. Después del retardo, navegamos a la URL guardada usando JavaScript.
                     window.location.href = destination;
-                }, 300); // 300ms es un buen tiempo para que el usuario vea el efecto.
+                }, 300); // 300ms de feedback visual.
             };
 
+            // Usamos el evento 'click' que es universal para ratón y toque.
             button.addEventListener('click', handleClick);
         });
 
