@@ -320,7 +320,8 @@
             transition: background 0.28s, color 0.18s, box-shadow 0.18s, transform 0.16s;
         }
 
-        #actividades .card-footer .btn:active {
+        #actividades .card-footer .btn:active,
+        #actividades .card-footer .btn.btn-touched {
             transform: translateY(-2px) scale(1.04);
             color: #1a2540;
             background: linear-gradient(90deg, #ffe066 10%, #233d6c 100%);
@@ -628,33 +629,6 @@
 
         /* Móviles (hasta 767.98px) */
         @media (max-width: 767.98px) {
-            #actividades .card-footer .btn {
-                width: 90%;
-                margin: 0.7rem auto 0 auto;
-                padding: 1rem 0;
-                font-size: 1.3rem;
-                font-weight: 700;
-                line-height: 1.4;
-                letter-spacing: 0.02em;
-                color: #fff;
-                text-align: center;
-                background: linear-gradient(90deg, #1a2540 55%, #304d9d 130%);
-                border: none;
-                border-radius: 1.6rem;
-                box-shadow: 0 4px 18px rgba(32, 56, 151, 0.13), 0 2px 8px #0002;
-                cursor: pointer;
-                transition: background 0.28s, color 0.18s, box-shadow 0.18s, transform 0.16s;
-            }
-
-            #actividades .card-footer .btn:active {
-                transform: translateY(-2px) scale(1.04);
-                color: #1a2540;
-                background: linear-gradient(90deg, #ffe066 10%, #233d6c 100%);
-                box-shadow: 0 6px 24px #ffe06644, 0 2px 8px #7cb9e866;
-                outline: none; /* Elimina el borde de enfoque */
-                transition: all 0.5s ease; /* Duración del efecto */
-            }
-
             /* Galería en móvil (pantalla completa) */
             #galeria > .container {
                 width: 100vw;
@@ -877,7 +851,7 @@
                             <p class="card-text">Realizamos sesiones de observación para todo público, utilizando telescopios astronómicos en diversos espacios de la ciudad. Estas jornadas están orientadas tanto a la apreciación estética del cielo como al conocimiento científico.</p>
                         </div>
                         <div class="card-footer text-center">
-                            <a href="#" class="btn btn-primary btn-sm" aria-label="Ver próximas observaciones públicas">Próximas observaciones</a>
+                            <a href="https://rancholacienega.com/ecoturismo/inicio/planes-y-paquetes/astronomico/" class="btn btn-primary btn-sm" aria-label="Ver próximas observaciones públicas">Próximas observaciones</a>
                         </div>
                     </div>
                 </div>
@@ -894,7 +868,7 @@
                             <p class="card-text">Impartimos cursos básicos y avanzados sobre astronomía general, astrofotografía, construcción de telescopios y uso de software astronómico, tanto en modalidad presencial como en línea.</p>
                         </div>
                         <div class="card-footer text-center">
-                            <a href="https://rancholacienega.com/ecoturismo/inicio/planes-y-paquetes/astronomico/" class="btn btn-primary btn-sm" aria-label="Ver programación de cursos y talleres">Ver programación</a>
+                            <a href="https://rancholacienega.com/ecoturismo/BLOG/sesion-astronomica/" class="btn btn-primary btn-sm" aria-label="Ver programación de cursos y talleres">Ver programación</a>
                         </div>
                     </div>
                 </div>
@@ -909,9 +883,6 @@
                                 <i class="fa-solid fa-moon" aria-hidden="true"></i> Conferencias y charlas de divulgación
                             </h5>
                             <p class="card-text">Se ofrecen conferencias regulares a instituciones educativas, agrupaciones y medios, así como charlas para estudiantes y público general. Los temas abarcan desde fenómenos celestes hasta historia y tecnología astronómica.</p>
-                        </div>
-                        <div class="card-footer text-center">
-                            <a href="#" class="btn btn-primary btn-sm" aria-label="Ver próximas conferencias">Próximas conferencias</a>
                         </div>
                     </div>
                 </div>
@@ -1456,16 +1427,10 @@
                 <div class="col-lg-6 mb-4">
                     <h4>Información de contacto</h4>
                     <ul class="list-unstyled">
-                        <li class="mb-3"><i class="fas fa-map-marker-alt me-2" aria-hidden="true"></i> Av. Universidad 940, Ciudad Universitaria, Aguascalientes, Ags.</li>
                         <li class="mb-3"><i class="fas fa-phone me-2" aria-hidden="true"></i> +52 449 395 6080</li>
                         <li class="mb-3"><i class="fas fa-envelope me-2" aria-hidden="true"></i>
                             <a href="mailto:segovia1107@hotmail.com" style="color: white;">segovia1107@hotmail.com</a>,
                             <a href="mailto:saagsawb@gmail.com" style="color: white;">saagsawb@gmail.com</a>
-                        </li>
-                        <li class="mb-3">
-                            <a href="https://www.facebook.com/groups/saags/?locale=es_LA" target="_blank" style="color: inherit;" aria-label="Grupo de Facebook Sociedad Astronómica de Aguascalientes, A.C.">
-                                <i class="fab fa-facebook-f me-2" aria-hidden="true"></i>Sociedad Astronómica de Aguascalientes, A.C.
-                            </a>
                         </li>
                     </ul>
                     <h4 class="mt-4">Síguenos</h4>
@@ -1579,7 +1544,7 @@
     <!-- Script Personalizado -->
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Animación del botón "Nuestras actividades"
+        // 1. Animación del botón "Nuestras actividades"
         const btnActividades = document.getElementById('btn-actividades');
         if (btnActividades) {
             btnActividades.addEventListener('animationend', function(e) {
@@ -1590,7 +1555,7 @@
             }, { once: true });
         }
 
-        // 1. LÓGICA PARA CERRAR NAVBAR (SIN INTERFERIR EN NAVEGACIÓN)
+        // 2. LÓGICA PARA CERRAR NAVBAR (SIN INTERFERIR EN NAVEGACIÓN)
         // Seleccionamos TODOS los enlaces dentro del menú desplegable
         const navLinksInMenu = document.querySelectorAll('#navbarNav .nav-link');
         const navbarCollapse = document.getElementById('navbarNav');
@@ -1606,24 +1571,30 @@
             });
         });
 
-        // 2. RESALTADO ACTIVO EFICIENTE CON INTERSECTION OBSERVER
+       // 3. RESALTADO ACTIVO EFICIENTE CON INTERSECTION OBSERVER
         const sections = document.querySelectorAll('section[id]');
         const navLinksForObserver = document.querySelectorAll('.navbar-nav .nav-link');
 
+        // Opciones del observador corregidas para una mejor experiencia de usuario
         const observerOptions = {
             root: null,
-            rootMargin: '0px 0px -50% 0px',
+            // El margen superior es -76px (la altura del navbar) para que la sección se active justo cuando pasa por debajo de la barra.
+            // El margen inferior es -40% para evitar que se activen dos enlaces a la vez si una sección es muy alta.
+            rootMargin: '-76px 0px -40% 0px',
             threshold: 0
         };
 
+        // ESTA ES LA ÚNICA DECLARACIÓN QUE DEBE EXISTIR
         const sectionObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const id = entry.target.getAttribute('id');
+                    
                     navLinksForObserver.forEach(link => {
                         link.classList.remove('active');
                         link.removeAttribute('aria-current');
                     });
+
                     const activeLink = document.querySelector(`.navbar-nav a[href="#${id}"]`);
                     if (activeLink) {
                         activeLink.classList.add('active');
@@ -1637,14 +1608,40 @@
             if (section.id) sectionObserver.observe(section);
         });
 
-        // 3. ENLACES EXTERNOS SE ABREN EN NUEVA PESTAÑA
+        // 4. Feedback visual mejorado y navegación controlada para botones de actividades (solucion de sticky hoover)
+        const activityButtons = document.querySelectorAll('#actividades .card-footer .btn');
+        activityButtons.forEach(button => {
+            // Usamos el evento 'click' porque es más robusto y funciona para ratón y toque.
+            // Le pasamos el objeto 'event' (e) para poder controlarlo.
+            const handleClick = (e) => {
+                // 1. Prevenimos que el enlace navegue inmediatamente.
+                e.preventDefault();
+
+                // 2. Guardamos la URL a la que queremos ir.
+                const destination = button.href;
+
+                // 3. Añadimos la clase para el efecto visual. ¡Ahora sí se verá!
+                button.classList.add('btn-touched');
+
+                // 4. Creamos un retardo.
+                setTimeout(() => {
+                    // 5. Después del retardo, navegamos a la URL guardada usando JavaScript.
+                    window.location.href = destination;
+                }, 300); // 300ms es un buen tiempo para que el usuario vea el efecto.
+            };
+
+            button.addEventListener('click', handleClick);
+        });
+
+        // 5. ENLACES EXTERNOS SE ABREN EN NUEVA PESTAÑA
         document.querySelectorAll('a[href]').forEach(link => {
             if (/^https?:\/\//.test(link.href) && link.hostname !== window.location.hostname) {
                 link.setAttribute('target', '_blank');
                 link.setAttribute('rel', 'noopener noreferrer');
             }
         });
-        // 4. INICIALIZACIÓN DE GLIGHTBOX
+
+        // 6. INICIALIZACIÓN DE GLIGHTBOX
         if (typeof GLightbox === 'function') {
             GLightbox({
                 selector: '.glightbox',
@@ -1654,7 +1651,7 @@
             });
         }
 
-        // 5. VALIDACIÓN DE FORMULARIOS Y MEJORAS DE UX
+        // 7. VALIDACIÓN DE FORMULARIOS Y MEJORAS DE UX
         
         // Función accesible para mostrar mensaje de error
         function mostrarMensajeError(input, mensaje) {
@@ -1735,9 +1732,6 @@
                 mostrarMensajeExito(newsletterForm.querySelector('.input-group'), "¡Te has suscrito con éxito!");
             });
         }
-
-        
-
     });
     </script>     
 </body>
