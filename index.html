@@ -1608,44 +1608,48 @@
             if (section.id) sectionObserver.observe(section);
         });
 
-        // 4. Feedback visual mejorado y navegación controlada para botones de actividades (solucion de sticky hoover)
-        const activityButtons = document.querySelectorAll('#actividades .card-footer .btn');
-        activityButtons.forEach(button => {
-            
-            const handleClick = (e) => {
-                // 1. Prevenimos la navegación automática para tomar el control.
-                e.preventDefault();
-
-                // 2. Guardamos la URL de destino del enlace.
-                const destination = button.href;
-
-                // 3. Añadimos la clase para el feedback visual inmediato.
-                button.classList.add('btn-touched');
-
-                // 4. ¡LA PIEZA CLAVE! Quitamos el foco INMEDIATAMENTE.
-                // Esto resuelve el problema del "sticky hover" si el usuario navega
-                // y luego presiona el botón "atrás" del navegador.
-                button.blur();
-
-                // 5. Esperamos un momento para que el efecto sea visible, y LUEGO navegamos.
-                setTimeout(() => {
-                    window.location.href = destination;
-                }, 300); // 300ms de feedback visual.
-            };
-
-            // Usamos el evento 'click' que es universal para ratón y toque.
-            button.addEventListener('click', handleClick);
-        });
-
-        // 5. ENLACES EXTERNOS SE ABREN EN NUEVA PESTAÑA
+        // 4. GESTIÓN AVANZADA DE ENLACES (CON CLEANUP)
         document.querySelectorAll('a[href]').forEach(link => {
-            if (/^https?:\/\//.test(link.href) && link.hostname !== window.location.hostname) {
+            
+            // CASO 1: Es un botón de una tarjeta de actividad
+            if (link.matches('#actividades .card-footer .btn')) {
+                
+                const handleClick = (e) => {
+                    // 1. Prevenimos la navegación para controlarla
+                    e.preventDefault();
+                    
+                    // 2. Guardamos el destino
+                    const destination = link.href;
+
+                    // 3. Añadimos el feedback visual
+                    link.classList.add('btn-touched');
+                    
+                    // 4. Quitamos el foco para evitar sticky :focus
+                    link.blur();
+
+                    // 5. Después de un retardo, hacemos DOS cosas:
+                    //    - Abrimos el enlace.
+                    //    - Limpiamos la clase para que el botón esté normal al regresar.
+                    setTimeout(() => {
+                        // Abre el enlace en una nueva pestaña
+                        window.open(destination, '_blank', 'noopener,noreferrer');
+                        
+                        // ¡LA PIEZA FALTANTE! Elimina la clase del efecto visual.
+                        link.classList.remove('btn-touched');
+                    }, 300); // 300ms de feedback visual.
+                };
+                
+                link.addEventListener('click', handleClick);
+
+            // CASO 2: Es CUALQUIER OTRO enlace externo (que no sea un botón de actividad)
+            } else if (/^https?:\/\//.test(link.href) && link.hostname !== window.location.hostname) {
+                // A estos solo les ponemos el target="_blank"
                 link.setAttribute('target', '_blank');
                 link.setAttribute('rel', 'noopener noreferrer');
             }
         });
 
-        // 6. INICIALIZACIÓN DE GLIGHTBOX
+        // 5. INICIALIZACIÓN DE GLIGHTBOX
         if (typeof GLightbox === 'function') {
             GLightbox({
                 selector: '.glightbox',
@@ -1655,8 +1659,7 @@
             });
         }
 
-        // 7. VALIDACIÓN DE FORMULARIOS Y MEJORAS DE UX
-        
+        // 6. VALIDACIÓN DE FORMULARIOS Y MEJORAS DE UX
         // Función accesible para mostrar mensaje de error
         function mostrarMensajeError(input, mensaje) {
             let errorDiv = document.createElement('div');
