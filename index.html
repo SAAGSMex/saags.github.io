@@ -638,26 +638,25 @@
         }
 
         /* CÓDIGO DE GLIGHTBOX */
-        /* ESTILOS BASE (Móvil) */
+        
 
         /* Contenedor principal de la descripción */
         .gslide-description {
             background: rgba(24, 27, 31, 0.95) !important;
-            padding: 1rem 1.2rem !important;
-            border-top: 3px solid #7cb9e8;
+            padding: 0.5rem 0.9rem !important;
             border-radius: 0 0 8px 8px !important;
             text-align: left !important;
             box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
             /* Para el móvil, lo pegamos un poco a la imagen */
-            margin-top: -1rem !important; 
-            margin-bottom: 0.5rem !important;
+            margin-top: 0 !important; 
+            margin-bottom: 0rem !important;
         }
 
         /* Título (h4) - El más grande */
         .gslide-description h4 {
             color: #17d5ff !important;
             font-family: 'Montserrat', sans-serif;
-            font-size: 1.2rem !important;
+            font-size: 1.4rem !important;
             font-weight: 700 !important;
             line-height: 1.3 !important;
             margin: 0 0 0.6rem 0 !important; /* Espacio debajo */
@@ -667,7 +666,7 @@
         .gslide-description p {
             color: #e7eaf6 !important;
             font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
-            font-size: 1.1rem !important; /* Claramente más pequeño que el título */
+            font-size: 1.2rem !important; /* Claramente más pequeño que el título */
             font-weight: 400 !important;
             line-height: 1.6 !important;
             margin: 0 0 0.8rem 0 !important; /* Espacio debajo */
@@ -682,30 +681,6 @@
             font-weight: 500 !important;
             opacity: 0.8 !important; /* Más sutil */
             margin: 0 !important;
-        }
-
-
-        /* --- ESTILOS PARA TABLET Y ESCRITORIO (Pantallas más grandes) --- */
-        @media (min-width: 768px) {
-            /* En pantallas grandes, separamos la descripción de la imagen */
-            .gslide-description {
-                margin-top: 0 !important;
-                margin-bottom: 2rem !important;
-                padding: 1.2rem 1.8rem !important;
-            }
-
-            /* Aumentamos ligeramente la fuente para mejor legibilidad */
-            .gslide-description h4 {
-                font-size: 1.4rem !important;
-            }
-
-            .gslide-description p {
-                font-size: 1rem !important;
-            }
-
-            .gslide-description small {
-                font-size: 0.9rem !important;
-            }
         }
 
         /* Móviles (hasta 767.98px) */
@@ -755,8 +730,6 @@
                 text-align: center !important;
             }
         }
-
-
     </style>
 </head>
 <body>
