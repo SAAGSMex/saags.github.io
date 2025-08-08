@@ -1626,37 +1626,70 @@
                     Sábados: 10:00 AM - 2:00 PM</p>>-->
                 </div>
                 <div class="col-lg-6">
-                    <form aria-label="Formulario de contacto (demostrativo, no envía datos reales)" action="#" autocomplete="on" novalidate>
+                    <form action="#" method="post" autocomplete="on" novalidate>
                         <div class="mb-3">
-                            <label for="nombre" class="form-label">Nombre completo</label>
-                            <input type="text" class="form-control" id="nombre" name="nombre"
-                                   placeholder="Tu nombre" required
-                                   aria-required="true"
-                                   aria-label="Nombre completo">
+                            <label for="nombre" class="form-label">Nombre</label>
+                            <input
+                            type="text"
+                            class="form-control"
+                            id="nombre"
+                            name="nombre"
+                            autocomplete="given-name"
+                            required
+                            placeholder="Tu nombre">
                         </div>
+
+                        <div class="mb-3">
+                            <label for="apellidos" class="form-label">Apellidos</label>
+                            <input
+                            type="text"
+                            class="form-control"
+                            id="apellidos"
+                            name="apellidos"
+                            autocomplete="family-name"
+                            required
+                            placeholder="Tus apellidos">
+                        </div>
+
                         <div class="mb-3">
                             <label for="email" class="form-label">Correo electrónico</label>
-                            <input type="email" class="form-control" id="email" name="email"
-                                   placeholder="tucorreo@ejemplo.com" required
-                                   aria-required="true"
-                                   aria-label="Correo electrónico"
-                                   aria-describedby="ayuda-email">
-                            <small id="ayuda-email" class="form-text text-muted">Nunca compartiremos tu correo con nadie más.</small>
+                            <input
+                            type="email"
+                            class="form-control"
+                            id="email"
+                            name="email"
+                            autocomplete="email"
+                            placeholder="nombre@dominio.com"
+                            required
+                            aria-describedby="ayuda-email">
+                            <div id="ayuda-email" class="form-text text-muted">
+                            Nunca compartiremos tu correo con nadie más.
+                            </div>
                         </div>
+
                         <div class="mb-3">
-                            <label for="asunto" class="form-label">Asunto</label>
-                            <input type="text" class="form-control" id="asunto" name="asunto"
-                                   placeholder="Asunto del mensaje" required
-                                   aria-required="true"
-                                   aria-label="Asunto del mensaje">
+                            <label for="telefono" class="form-label">Teléfono</label>
+                            <input
+                            type="tel"
+                            class="form-control"
+                            id="telefono"
+                            name="telefono"
+                            autocomplete="tel"
+                            inputmode="tel"
+                            placeholder="+52 449 123 4567">
                         </div>
+
                         <div class="mb-3">
                             <label for="mensaje" class="form-label">Mensaje</label>
-                            <textarea class="form-control" id="mensaje" name="mensaje" rows="5"
-                                      placeholder="Tu mensaje aquí..." required
-                                      aria-required="true"
-                                      aria-label="Mensaje"></textarea>
+                            <textarea
+                            class="form-control"
+                            id="mensaje"
+                            name="mensaje"
+                            rows="4"
+                            placeholder="Escribe tu mensaje..."
+                            required></textarea>
                         </div>
+
                         <button type="submit" class="btn btn-primary">Enviar mensaje</button>
                     </form>
                 </div>
