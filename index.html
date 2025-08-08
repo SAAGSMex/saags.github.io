@@ -220,7 +220,56 @@
             overflow: hidden;
         }
 
-        /* --- Fondo para el texto de la sección Nosotros --- */
+        .hero-section .btn {
+            padding: 0.9rem 2.2rem; /* Aumentamos el padding para más altura y anchura */
+            font-size: 1.25rem;    /* Hacemos la letra notablemente más grande */
+            font-weight: 600;      /* Un poco más de grosor en la fuente */
+            letter-spacing: 0.04em; /* Espacio entre letras para legibilidad */
+            border-width: 2px;     /* Hacemos el borde un poco más grueso */
+            border-radius: 50px;   /* Bordes totalmente redondeados para un look moderno */
+            transition: all 0.3s ease; /* Transición suave para todos los efectos */
+        }
+
+        /* --- Mejoras para el botón principal (azul) --- */
+        .hero-section .btn-primary {
+            background-color: #304d9d;
+            border-color: #304d9d;
+            box-shadow: 0 5px 20px rgba(48, 77, 157, 0.3); /* Sombra para que destaque */
+        }
+
+        .hero-section .btn-primary:hover {
+            background-color: #1a3a8f;
+            border-color: #1a3a8f;
+            transform: translateY(-3px); /* Efecto de levantamiento al pasar el ratón */
+            box-shadow: 0 8px 25px rgba(48, 77, 157, 0.4);
+        }
+
+        /* --- Mejoras para el botón secundario (blanco) --- */
+        .hero-section .btn-outline-light:hover {
+            color: #0a1128; /* Cambiamos el color del texto a oscuro para contraste */
+            background-color: #fff;
+            border-color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+        }
+
+        /* --- Estilo Personalizado para el Subtítulo del Hero --- */
+        .hero-section .lead {
+            font-size: 1.5rem;      /* Aumentamos significativamente el tamaño de la letra */
+            font-weight: 400;      /* Un peso de fuente ligero y elegante */
+            color: rgba(240, 240, 240, 0.9); /* Un blanco ligeramente transparente para que no compita con el título principal */
+            letter-spacing: 0.05em; /* Aumentamos el espacio entre letras para un look más "aéreo" */
+            
+            /* Efecto de sombra para mejorar la legibilidad sobre el fondo */
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6); 
+            
+            /* Limitamos el ancho para que no se extienda demasiado en pantallas grandes */
+            max-width: 650px; 
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* --- Sección Nosotros --- */
         .nosotros-text-bg {
             background: rgba(10, 17, 40, 0.68); /* oscuro y semitransparente */
             padding: 1.5rem 2rem;
@@ -269,7 +318,7 @@
         }
 
         #actividades .card-body {
-            padding: 1.2rem 1.1rem 0.7rem 1.1rem;
+            padding: 1.2rem 1.1rem 0 1.1rem;
             background: transparent;
         }
 
@@ -289,7 +338,6 @@
         }
 
         #actividades .card-text {
-            min-height: 80px;
             margin-bottom: 0;
             font-size: 1rem;
             color: #e7eaf6;
@@ -302,10 +350,9 @@
         }
 
         #actividades .card-footer .btn {
-            display: block;
-            width: 90%;
-            margin: 0.7rem auto 0 auto;
-            padding: 1rem 0;
+            display: inline-block;  
+            margin-top: 0.1rem; 
+            padding: 1rem 2rem; 
             font-size: 1.3rem;
             font-weight: 700;
             line-height: 1.4;
@@ -418,6 +465,40 @@
             font-size: 1.05rem;
             color: #e7eaf6;
             text-shadow: 0 2px 12px #000b, 0 1.5px 8px #181b1f66;
+        }
+
+        .btn-galeria {
+            /* --- Diseño Base --- */
+            padding: 0.8rem 2.5rem; /* Relleno generoso */
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 0.05em; /* Un poco más de espacio entre letras */
+            text-transform: uppercase; /* MAYÚSCULAS para un look más formal */
+            color: #f0f0f0;
+            background: linear-gradient(145deg, #1a3a8f, #304d9d);
+            border: 2px solid rgba(124, 185, 232, 0.3); /* Borde semitransparente */
+            border-radius: 50px; /* Bordes totalmente redondeados */
+            box-shadow: 0 4px 15px rgba(13, 36, 90, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        /* --- Efecto al pasar el ratón por encima (:hover) --- */
+        .btn-galeria:hover {
+            color: #fff;
+            background: linear-gradient(145deg, #304d9d, #1a3a8f);
+            border-color: rgba(124, 185, 232, 0.8); /* Borde más brillante */
+            box-shadow: 0 8px 25px rgba(124, 185, 232, 0.3);
+            transform: translateY(-3px); /* Ligero levantamiento */
+        }
+
+        /* --- Efecto al hacer clic (:active) --- */
+        .btn-galeria:active {
+            background: #ffe066; /* Fondo amarillo brillante para el feedback */
+            color: #0a1128; /* Texto oscuro para contraste */
+            border-color: #ffe066;
+            box-shadow: 0 2px 5px rgba(13, 36, 90, 0.5);
+            transform: translateY(1px); /* Efecto de "presionado" */
+            transition: all 0.1s ease; /* Transición más rápida para el clic */
         }
 
         /* Sección Calendario */
@@ -1214,7 +1295,10 @@
           </div>
         </div>
         <div class="text-center mt-4">
-          <a href="#" class="btn btn-primary btn-lg" aria-label="Ver más fotografías de la galería">Ver más fotografías</a>
+          <a href="#" class="btn btn-primary btn-lg btn-galeria" aria-label="Ver más fotografías de la galería">Ver más fotografías</a>
+        </div>
+        <div class="text-center mt-4">
+          <a href="https://rancholacienega.com/ecoturismo/BLOG/coleccion-mrh/" class="btn btn-primary btn-lg btn-galeria mt-3" aria-label="Ver astrofotografía de MRH">Astrofotografía de MRH</a>
         </div>
       </div>
     </section>
