@@ -1380,6 +1380,10 @@
                 <!-- Botón "Ver más" con ID -->
                 <a href="#" id="btn-ver-mas" class="btn btn-primary btn-lg btn-galeria" aria-label="Ver más fotografías de la galería">Ver más fotografías</a>
             </div>
+            <!-- NUEVO Botón "Ver menos", oculto por defecto -->
+            <div class="text-center mt-4">
+                <a href="#galeria" id="btn-ver-menos" class="btn btn-secondary btn-lg btn-galeria d-none" aria-label="Ver menos fotografías de la galería">Ver menos</a>
+            </div>
             <div class="text-center mt-4">
                 <!-- Botón de Astrofotografía -->
                 <a href="https://rancholacienega.com/ecoturismo/BLOG/coleccion-mrh/" class="btn btn-primary btn-lg btn-galeria mt-3" aria-label="Ver astrofotografía de MRH">Astrofotografía de MRH</a>
@@ -1824,16 +1828,18 @@
             });
         }
 
-        // --- FUNCIONALIDAD PARA EL BOTÓN "VER MÁS FOTOGRAFÍAS" ---
+        // --- FUNCIONALIDAD PARA EL BOTÓN "VER MÁS FOTOGRAFÍAS" Y "VER MENOS FOTOGRAFÍAS" ---
         const btnVerMas = document.getElementById('btn-ver-mas');
+        const btnVerMenos = document.getElementById('btn-ver-menos');
         const galeriaOculta = document.getElementById('galeria-oculta');
 
-        if (btnVerMas && galeriaOculta) {
+        if (btnVerMas && btnVerMenos && galeriaOculta) {
             // Almacenamos la instancia de GLightbox para poder recargarla.
             let lightbox = GLightbox({
                 selector: '.glightbox'
             });
 
+            // Funcionalidad para el botón "Ver más"
             btnVerMas.addEventListener('click', function(e) {
                 // 1. Prevenimos que el enlace '#' salte la página
                 e.preventDefault();
@@ -1844,8 +1850,26 @@
                 // 3. Ocultamos el botón "Ver más" para que no se pueda volver a hacer clic
                 btnVerMas.style.display = 'none';
 
-                // 4. Recargamos la instancia de GLightbox para que encuentre las nuevas imágenes
+                // 4. Mostramos el botón "Ver menos"
+                btnVerMenos.classList.remove('d-none');
+
+                // 5. Recargamos la instancia de GLightbox para que encuentre las nuevas imágenes
                 lightbox.reload();
+            });
+
+            // Funcionalidad para el botón "Ver menos"
+            btnVerMenos.addEventListener('click', function(e) {
+                // 1. Prevenimos que el enlace '#' salte la página
+                e.preventDefault();
+
+                // 2. Ocultamos nuevamente la galería añadiendo la clase 'd-none'
+                galeriaOculta.classList.add('d-none');
+
+                // 3. Ocultamos el botón "Ver menos"
+                btnVerMenos.classList.add('d-none');
+
+                // 4. Mostramos el botón "Ver más"
+                btnVerMas.style.display = 'inline-block';
             });
         }
 
