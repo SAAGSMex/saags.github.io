@@ -637,74 +637,74 @@
             }
         }
 
-        @media (min-width: 768px) {
-            body.glightbox-open .gslide-description.description-bottom {
-                background: #181b1f !important;
-                color: #17d5ff !important;
-                border-radius: 0.3em !important;
-                padding: 0.09em 2em !important;  /* Solo vertical reducido */
-                font-family: 'Montserrat', 'Segoe UI', 'Arial', sans-serif !important;
-                font-size: 1.3rem !important;
-                font-weight: 500 !important;
-                text-align: left !important;
-                box-shadow: 0 2px 24px #0007 !important;
-                margin-bottom: 2em !important;
-                letter-spacing: 0.01em !important;
-            }
-            body.glightbox-open .gslide-description.description-bottom strong,
-            body.glightbox-open .gslide-description.description-bottom h3,
-            body.glightbox-open .gslide-description.description-bottom h4 {
-                color: #17d5ff !important;
-                font-weight: 500 !important;
-                font-size: 1.08em !important;
-                font-family: inherit !important;
-                margin-bottom: 0 !important;
-                text-align: left !important;
-                letter-spacing: 0.01em !important;
-                text-shadow: none !important;
-                display: block;
-            }
-            body.glightbox-open .gslide-description.description-bottom small {
-                color: #fff !important;
-                font-size: 1em !important;
-                font-weight: 350 !important;
-                font-family: inherit !important;
-                text-align: left !important;
-                display: block;
-                margin-top: 0.25em;
-            }
+        /* CÓDIGO DE GLIGHTBOX */
+        /* ESTILOS BASE (Móvil) */
+
+        /* Contenedor principal de la descripción */
+        .gslide-description {
+            background: rgba(24, 27, 31, 0.95) !important;
+            padding: 1rem 1.2rem !important;
+            border-top: 3px solid #7cb9e8;
+            border-radius: 0 0 8px 8px !important;
+            text-align: left !important;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+            /* Para el móvil, lo pegamos un poco a la imagen */
+            margin-top: -1rem !important; 
+            margin-bottom: 0.5rem !important;
         }
-        @media (max-width: 767.98px) {
-            body.glightbox-open .gslide-description.description-bottom {
-                padding: 0.06em 1em !important;
-                text-align: left !important;
-                margin-top: -1.2em !important;    /* Pegado a la imagen */
-                margin-bottom: 0.2em !important;
-                font-size: 1.15rem !important;
-                font-family: 'Montserrat', 'Segoe UI', 'Arial', sans-serif !important;
+
+        /* Título (h4) - El más grande */
+        .gslide-description h4 {
+            color: #17d5ff !important;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem !important;
+            font-weight: 700 !important;
+            line-height: 1.3 !important;
+            margin: 0 0 0.6rem 0 !important; /* Espacio debajo */
+        }
+
+        /* Párrafo de descripción (p) - Mediano */
+        .gslide-description p {
+            color: #e7eaf6 !important;
+            font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+            font-size: 1.1rem !important; /* Claramente más pequeño que el título */
+            font-weight: 400 !important;
+            line-height: 1.6 !important;
+            margin: 0 0 0.8rem 0 !important; /* Espacio debajo */
+        }
+
+        /* Créditos (small) - El más pequeño y sutil */
+        .gslide-description small {
+            display: block !important;
+            color: #e7eaf6 !important;
+            font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+            font-size: 1.1rem !important; /* El más pequeño de todos */
+            font-weight: 500 !important;
+            opacity: 0.8 !important; /* Más sutil */
+            margin: 0 !important;
+        }
+
+
+        /* --- ESTILOS PARA TABLET Y ESCRITORIO (Pantallas más grandes) --- */
+        @media (min-width: 768px) {
+            /* En pantallas grandes, separamos la descripción de la imagen */
+            .gslide-description {
+                margin-top: 0 !important;
+                margin-bottom: 2rem !important;
+                padding: 1.2rem 1.8rem !important;
             }
-            /* Título en negritas y grande */
-            body.glightbox-open .gslide-description.description-bottom strong,
-            body.glightbox-open .gslide-description.description-bottom h3,
-            body.glightbox-open .gslide-description.description-bottom h4 {
-                font-size: 1.28em !important;
-                font-weight: 700 !important;       /* Negritas */
-                color: #17d5ff !important;
-                margin-bottom: 0 !important;
-                text-align: left !important;
-                letter-spacing: 0.01em !important;
-                text-shadow: none !important;
-                display: block;
+
+            /* Aumentamos ligeramente la fuente para mejor legibilidad */
+            .gslide-description h4 {
+                font-size: 1.4rem !important;
             }
-            /* Subtítulo pequeño y normal */
-            body.glightbox-open .gslide-description.description-bottom small {
-                color: #fff !important;
-                font-size: 0.85em !important;      /* Más pequeño */
-                font-weight: 400 !important;       /* Sin negritas */
-                font-family: inherit !important;
-                text-align: left !important;
-                display: block;
-                margin-top: 0.06em;
+
+            .gslide-description p {
+                font-size: 1rem !important;
+            }
+
+            .gslide-description small {
+                font-size: 0.9rem !important;
             }
         }
 
@@ -1127,180 +1127,211 @@
         </div>
     </section>
 
-    <!-- Sección Galería (imágenes grandes, completas, mismas dimensiones, sin recorte) -->
+    <!-- SECCIÓN DE GALERÍA -->
     <section id="galeria" class="py-5" aria-labelledby="titulo-galeria">
-      <div class="container">
-        <h2 class="section-title text-center mb-5" id="titulo-galeria">Galería de Astrofotografía</h2>
-        <div class="row">
-          <!-- Tarjeta 1 -->
-          <div class="col-12 col-sm-6 col-lg-4 mb-4">
-            <div class="gallery-card shadow-lg border-0 overflow-hidden p-0">
-              <div class="bg-dark position-relative w-100 d-flex align-items-center justify-content-center">
-                <a href="img/galeria/galaxia.jpg"
-                    class="glightbox d-block w-100 h-100"
-                    data-gallery="galeria"
-                    data-title="Galaxia de Andrómeda&lt;br&gt;&lt;small&gt;Fotografía: Manuel Rodríguez Huerta&lt;/small&gt;"
-                    aria-label="Ver imagen ampliada de Galaxia de Andrómeda">
-                    <picture>
-                        <source srcset="img/galeria/galaxia.avif" type="image/avif">
-                        <source srcset="img/galeria/galaxia.webp" type="image/webp">
-                        <img src="img/galeria/galaxia.jpg"
-                            alt="Galaxia de Andrómeda, Fotografía tomada por Manuel Rodríguez Huerta"
-                            class="img-fluid"
-                            loading="lazy"
-                            width="1024"
-                            height="683">
-                    </picture>
-                </a>
-              </div>
-              <div class="p-4 text-justify-responsive">
-                <h5 class="mb-2 fw-bold text-info">Galaxia de Andrómeda</h5>
-                <p class="mb-0 text-light">Fotografía tomada por Manuel Rodríguez Huerta</p>
-              </div>
+        <div class="container">
+            <h2 class="section-title text-center mb-5" id="titulo-galeria">Galería de Astrofotografía</h2>
+            <div class="row">
+                <!-- Tarjeta 1 -->
+                <div class="col-12 col-sm-6 col-lg-4 mb-4">
+                    <div class="gallery-card shadow-lg border-0 overflow-hidden p-0">
+                        <div class="bg-dark position-relative w-100 d-flex align-items-center justify-content-center">
+                            <a href="img/galeria/galaxia.jpg" class="glightbox d-block w-100 h-100" data-gallery="galeria" data-title="<h4>Galaxia de Andrómeda</h4>
+                                <p>Capturada en la Sierra del Laurel, Aguascalientes, Bortle aprox. 3, el 18 de octubre de 2020.</p>
+                                <small>Créditos: Manuel Rodríguez Huerta</small>" aria-label="Ver imagen ampliada de Galaxia de Andrómeda">
+                                <picture>
+                                    <source srcset="img/galeria/galaxia.avif" type="image/avif">
+                                    <source srcset="img/galeria/galaxia.webp" type="image/webp">
+                                    <img src="img/galeria/galaxia.jpg" alt="Galaxia de Andrómeda, Fotografía tomada por Manuel Rodríguez Huerta" class="img-fluid" loading="lazy" width="1024" height="683">
+                                </picture>
+                            </a>
+                        </div>
+                        <div class="p-4 text-justify-responsive">
+                            <h5 class="mb-2 fw-bold text-info">Galaxia de Andrómeda</h5>
+                            <p class="mb-0 text-light">Creditos: Manuel Rodríguez Huerta</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Tarjeta 2 -->
+                <div class="col-12 col-sm-6 col-lg-4 mb-4">
+                    <div class="gallery-card shadow-lg border-0 overflow-hidden p-0">
+                        <div class="bg-dark position-relative w-100 d-flex align-items-center justify-content-center">
+                            <a href="img/galeria/nebulosa.jpg" class="glightbox d-block w-100 h-100" data-gallery="galeria" data-title="<h4>Nebulosa Roseta</h4>
+                                <p>NGC2244, Constelación Monoceros. Distancia: 5,200 Años Luz. Aguascalientes, Mexico.</p>
+                                <small>Creditos: Luis Sánchez de Alba</small>" aria-label="Ver imagen ampliada de Nebulosa Rosea">
+                                <picture>
+                                    <source srcset="img/galeria/nebulosa.webp" type="image/webp">
+                                    <img src="img/galeria/nebulosa.jpg" alt="Nebulosa Roseta, Fotografía tomada por Luis Sánchez de Alba" class="img-fluid" loading="lazy" width="1550" height="1600">
+                                </picture>
+                            </a>
+                        </div>
+                        <div class="p-4 text-justify-responsive">
+                            <h5 class="mb-2 fw-bold text-info">Nebulosa Roseta</h5>
+                            <p class="mb-0 text-light">Creditos: Luis Sánchez de Alba</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Tarjeta 3 -->
+                <div class="col-12 col-sm-6 col-lg-4 mb-4">
+                    <div class="gallery-card shadow-lg border-0 overflow-hidden p-0">
+                        <div class="bg-dark position-relative w-100 d-flex align-items-center justify-content-center">
+                            <a href="img/galeria/via_lactea.jpg" class="glightbox d-block w-100 h-100" data-gallery="galeria" data-title="Vía Láctea en la zona del Cisne<br><small>Fotografía: Alfredo Lomas Torres</small>" aria-label="Ver imagen ampliada de Vía Láctea en la zona del Cisne">
+                                <picture>
+                                    <source srcset="img/galeria/via_lactea.avif" type="image/avif">
+                                    <source srcset="img/galeria/via_lactea.webp" type="image/webp">
+                                    <img src="img/galeria/via_lactea.jpg" alt="Vía Láctea en la zona del Cisne, Fotografía tomada por Alfredo Lomas Torres" class="img-fluid" loading="lazy" width="1196" height="1600">
+                                </picture>
+                            </a>
+                        </div>
+                        <div class="p-4 text-justify-responsive">
+                            <h5 class="mb-2 fw-bold text-info">Vía Láctea en la zona del Cisne</h5>
+                            <p class="mb-0 text-light">Creditos: Alfredo Lomas Torres</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Tarjeta 4 -->
+                <div class="col-12 col-sm-6 col-lg-4 mb-4">
+                    <div class="gallery-card shadow-lg border-0 overflow-hidden p-0">
+                        <div class="bg-dark position-relative w-100 d-flex align-items-center justify-content-center">
+                            <a href="img/galeria/cumulo.jpg" class="glightbox d-block w-100 h-100" data-gallery="galeria" data-title="Cúmulo estelar de las Pléyades<br><small>Fotografía: Luis Jorge Manzanero</small>" aria-label="Ver imagen ampliada de Cúmulo estelar de las Pléyades">
+                                <picture>
+                                    <source srcset="img/galeria/cumulo.avif" type="image/avif">
+                                    <source srcset="img/galeria/cumulo.webp" type="image/webp">
+                                    <img src="img/galeria/cumulo.jpg" alt="Cúmulo estelar de las Pléyades, Fotografía tomada por Luis Jorge Manzanero" class="img-fluid" loading="lazy" width="1599" height="1063">
+                                </picture>
+                            </a>
+                        </div>
+                        <div class="p-4 text-justify-responsive">
+                            <h5 class="mb-2 fw-bold text-info">Cúmulo estelar de las Pléyades</h5>
+                            <p class="mb-0 text-light">Créditos: Luis Jorge Manzanero</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Tarjeta 5 -->
+                <div class="col-12 col-sm-6 col-lg-4 mb-4">
+                    <div class="gallery-card shadow-lg border-0 overflow-hidden p-0">
+                        <div class="bg-dark position-relative w-100 d-flex align-items-center justify-content-center">
+                            <a href="img/galeria/eclipse.jpg" class="glightbox d-block w-100 h-100" data-gallery="galeria" data-title="Luna de Sangre y eclipse total<br><small>Fotografía: Miguel Medina</small>" aria-label="Ver imagen ampliada de Luna de Sangre y el eclipse total">
+                                <picture>
+                                    <source srcset="img/galeria/eclipse.avif" type="image/avif">
+                                    <source srcset="img/galeria/eclipse.webp" type="image/webp">
+                                    <img src="img/galeria/eclipse.jpg" alt="Luna de Sangre y el eclipse total, Fotografía tomada por Miguel Medina" class="img-fluid" loading="lazy" width="2048" height="1532">
+                                </picture>
+                            </a>
+                        </div>
+                        <div class="p-4 text-justify-responsive">
+                            <h5 class="mb-2 fw-bold text-info">Luna de Sangre y el eclipse total</h5>
+                            <p class="mb-0 text-light">Créditos: Miguel Medina</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Tarjeta 6 -->
+                <div class="col-12 col-sm-6 col-lg-4 mb-4">
+                    <div class="gallery-card shadow-lg border-0 overflow-hidden p-0">
+                        <div class="bg-dark position-relative w-100 d-flex align-items-center justify-content-center">
+                            <a href="img/galeria/luna.jpg" class="glightbox d-block w-100 h-100" data-gallery="galeria" data-title="Luna<br><small>Fotografía: Luis Sánchez de Alba</small>" aria-label="Ver imagen ampliada de Luna">
+                                <picture>
+                                    <source srcset="img/galeria/luna.avif" type="image/avif">
+                                    <source srcset="img/galeria/luna.webp" type="image/webp">
+                                    <img src="img/galeria/luna.jpg" alt="Luna, Fotografía tomada por Luis Sánchez de Alba" class="img-fluid" loading="lazy" width="1556" height="1600">
+                                </picture>
+                            </a>
+                        </div>
+                        <div class="p-4 text-justify-responsive">
+                            <h5 class="mb-2 fw-bold text-info">Luna</h5>
+                            <p class="mb-0 text-light">Créditos: Luis Sánchez de Alba</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <!-- Tarjeta 2 -->
-          <div class="col-12 col-sm-6 col-lg-4 mb-4">
-            <div class="gallery-card shadow-lg border-0 overflow-hidden p-0">
-              <div class="bg-dark position-relative w-100 d-flex align-items-center justify-content-center">
-                <a href="img/galeria/nebulosa.jpg"
-                    class="glightbox d-block w-100 h-100"
-                    data-gallery="galeria"
-                    data-title="Nebulosa Rosea&lt;br&gt;&lt;small&gt;Fotografía: Luis Sánchez de Alba&lt;/small&gt;"
-                    aria-label="Ver imagen ampliada de Nebulosa Rosea">
-                    <picture>
-                        <source srcset="img/galeria/nebulosa.webp" type="image/webp">
-                        <img src="img/galeria/nebulosa.jpg"
-                            alt="Nebulosa Rosea, Fotografía tomada por Luis Sánchez de Alba"
-                            class="img-fluid"
-                            loading="lazy"
-                            width="1550"
-                            height="1600">
-                    </picture>
-                </a>
-              </div>
-              <div class="p-4 text-justify-responsive">
-                <h5 class="mb-2 fw-bold text-info">Nebulosa Rosea</h5>
-                <p class="mb-0 text-light">Fotografía tomada por Luis Sánchez de Alba</p>
-              </div>
+
+            <!-- GALERÍA OCULTA -->
+            <div id="galeria-oculta" class="d-none">
+                <div class="row">
+                    <!-- Tarjeta 7 -->
+                    <div class="col-12 col-sm-6 col-lg-4 mb-4">
+                        <div class="gallery-card shadow-lg border-0 overflow-hidden p-0">
+                            <div class="bg-dark position-relative w-100 d-flex align-items-center justify-content-center">
+                                <!-- El href apunta a la imagen grande para el lightbox -->
+                                <a href="img/galeria/galaxiaM.jpg" class="glightbox d-block w-100 h-100" data-gallery="galeria" data-title="Galaxia M<br><small>Fotografía: Manuel Rodríguez Huerta</small>" aria-label="Ver imagen ampliada de la Galaxia M">
+                                    <picture>
+                                        <source srcset="img/galeria/galaxiaM.webp" type="image/webp">
+                                        <img src="img/galeria/galaxiaM.jpg" alt="La galaxia M 101, el 19 de marzo del 2023, capturada en el campamento Yuca, Mesa de Pinos, Sierra Fría, Aguascalientes." class="img-fluid" loading="lazy" width="810" height="540">
+                                    </picture>
+                                </a>
+                            </div>
+                            <div class="p-4 text-justify-responsive">
+                                <h5 class="mb-2 fw-bold text-info">Galaxia M</h5>
+                                <p class="mb-0 text-light">Creditos: Manuel Rodríguez Huerta</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Tarjeta 8 -->
+                    <div class="col-12 col-sm-6 col-lg-4 mb-4">
+                        <div class="gallery-card shadow-lg border-0 overflow-hidden p-0">
+                            <div class="bg-dark position-relative w-100 d-flex align-items-center justify-content-center">
+                                <a href="img/galeria/COMETA_PONSBROOKS_y_GalaxiaM33.jpg" class="glightbox d-block w-100 h-100" data-gallery="galeria" data-title="Cometa Pons-Brooks y Galaxia M33<br><small>Fotografía: Luis Sánchez de Alba</small>" aria-label="Ver imagen ampliada del Cometa Pons-Brooks y Galaxia M33">
+                                    <picture>
+                                        <source srcset="img/galeria/COMETA_PONSBROOKS_y_GalaxiaM33.webp" type="image/webp">
+                                        <img src="img/galeria/COMETA_PONSBROOKS_y_GalaxiaM33.jpg" alt="Cometa Pons-Brooks y Galaxia M33, Fotografía tomada por Luis Sánchez de Alba" class="img-fluid" loading="lazy" width="2048" height="1624">
+                                    </picture>
+                                </a>
+                            </div>
+                            <div class="p-4 text-justify-responsive">
+                                <h5 class="mb-2 fw-bold text-info">Cometa Pons-Brooks y Galaxia M33</h5>
+                                <p class="mb-0 text-light">Creditos: Luis Sánchez de Alba</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Tarjeta 9 -->
+                    <div class="col-12 col-sm-6 col-lg-4 mb-4">
+                        <div class="gallery-card shadow-lg border-0 overflow-hidden p-0">
+                            <div class="bg-dark position-relative w-100 d-flex align-items-center justify-content-center">
+                                <a href="img/galeria/omegaCentauri.jpg" class="glightbox d-block w-100 h-100" data-gallery="galeria" data-title="Cúmulo globular Omega Centauri<br><small>Fotografía: Manuel Rodríguez Huerta</small>" aria-label="Ver imagen ampliada del Cúmulo globular Omega Centauri">
+                                    <picture>
+                                        <source srcset="img/galeria/omegaCentauri.webp" type="image/webp">
+                                        <img src="img/galeria/omegaCentauri.jpg" alt="El cúmulo globular Omega Centauri, el 19 de marzo del 2023, capturado en el campamento Yuca, Mesa de Pinos, Sierra Fría, Aguascalientes." class="img-fluid" loading="lazy" width="1600" height="900">
+                                    </picture>
+                                </a>
+                            </div>
+                            <div class="p-4 text-justify-responsive">
+                                <h5 class="mb-2 fw-bold text-info">Cúmulo globular Omega Centauri</h5>
+                                <p class="mb-0 text-light">Creditos: Manuel Rodríguez Huerta</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-4 mb-4">
+                        <div class="gallery-card shadow-lg border-0 overflow-hidden p-0">
+                            <div class="bg-dark position-relative w-100 d-flex align-items-center justify-content-center">
+                                <a href="img/galeria/cinturondeOrion.jpg" class="glightbox d-block w-100 h-100" data-gallery="galeria" data-title="Cinturón de Orión<br><small>Fotografía: Luis Sánchez de Alba</small>" aria-label="Ver imagen ampliada del Cinturón de Orión">
+                                    <picture>
+                                        <source srcset="img/galeria/cinturondeOrion.webp" type="image/webp">
+                                        <img src="img/galeria/cinturondeOrion.jpg" alt="Cinturon de Orión, con sus estrellas principales, Rigel y Betelguese y los 3 Reyes Magos (Alnitak, Alnilam y Mintaka). Sierra Fría, Aguascalientes, México." class="img-fluid" loading="lazy" width="2048" height="1152">
+                                    </picture>
+                                </a>
+                            </div>
+                            <div class="p-4 text-justify-responsive">
+                                <h5 class="mb-2 fw-bold text-info">Cinturon de Orion</h5>
+                                <p class="mb-0 text-light">Creditos: Luis Sanchez de Alba</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <!-- Tarjeta 3 -->
-          <div class="col-12 col-sm-6 col-lg-4 mb-4">
-            <div class="gallery-card shadow-lg border-0 overflow-hidden p-0">
-              <div class="bg-dark position-relative w-100 d-flex align-items-center justify-content-center">
-                <a href="img/galeria/via_lactea.jpg"
-                    class="glightbox d-block w-100 h-100"
-                    data-gallery="galeria"
-                    data-title="Vía Láctea en la zona del Cisne&lt;br&gt;&lt;small&gt;Fotografía: Alfredo Lomas Torres&lt;/small&gt;"
-                    aria-label="Ver imagen ampliada de Vía Láctea en la zona del Cisne">
-                    <picture>
-                        <source srcset="img/galeria/via_lactea.avif" type="image/avif">
-                        <source srcset="img/galeria/via_lactea.webp" type="image/webp">
-                        <img src="img/galeria/via_lactea.jpg"
-                            alt="Vía Láctea en la zona del Cisne, Fotografía tomada por Alfredo Lomas Torres"
-                            class="img-fluid"
-                            loading="lazy"
-                            width="1196"
-                            height="1600">
-                    </picture>
-                </a>
-              </div>
-              <div class="p-4 text-justify-responsive">
-                <h5 class="mb-2 fw-bold text-info">Vía Láctea en la zona del Cisne</h5>
-                <p class="mb-0 text-light">Fotografía tomada por Alfredo Lomas Torres</p>
-              </div>
+            <!-- FIN DE LA GALERÍA OCULTA -->
+
+            <div class="text-center mt-4">
+                <!-- Botón "Ver más" con ID -->
+                <a href="#" id="btn-ver-mas" class="btn btn-primary btn-lg btn-galeria" aria-label="Ver más fotografías de la galería">Ver más fotografías</a>
             </div>
-          </div>
-          <!-- Tarjeta 4 -->
-          <div class="col-12 col-sm-6 col-lg-4 mb-4">
-            <div class="gallery-card shadow-lg border-0 overflow-hidden p-0">
-              <div class="bg-dark position-relative w-100 d-flex align-items-center justify-content-center">
-                <a href="img/galeria/cumulo.jpg"
-                    class="glightbox d-block w-100 h-100"
-                    data-gallery="galeria"
-                    data-title="Cúmulo estelar de las Pléyades&lt;br&gt;&lt;small&gt;Fotografía: Luis Jorge Manzanero&lt;/small&gt;"
-                    aria-label="Ver imagen ampliada de Cúmulo estelar de las Pléyades">
-                    <picture>
-                        <source srcset="img/galeria/cumulo.avif" type="image/avif">
-                        <source srcset="img/galeria/cumulo.webp" type="image/webp">
-                        <img src="img/galeria/cumulo.jpg"
-                            alt="Cúmulo estelar de las Pléyades, Fotografía tomada por Luis Jorge Manzanero"
-                            class="img-fluid"
-                            loading="lazy"
-                            width="1599"
-                            height="1063">
-                    </picture>
-                </a>
-              </div>
-              <div class="p-4 text-justify-responsive">
-                <h5 class="mb-2 fw-bold text-info">Cúmulo estelar de las Pléyades</h5>
-                <p class="mb-0 text-light">Fotografía tomada por Luis Jorge Manzanero</p>
-              </div>
+            <div class="text-center mt-4">
+                <!-- Botón de Astrofotografía -->
+                <a href="https://rancholacienega.com/ecoturismo/BLOG/coleccion-mrh/" class="btn btn-primary btn-lg btn-galeria mt-3" aria-label="Ver astrofotografía de MRH">Astrofotografía de MRH</a>
             </div>
-          </div>
-          <!-- Tarjeta 5 -->
-          <div class="col-12 col-sm-6 col-lg-4 mb-4">
-            <div class="gallery-card shadow-lg border-0 overflow-hidden p-0">
-              <div class="bg-dark position-relative w-100 d-flex align-items-center justify-content-center">
-                <a href="img/galeria/eclipse.jpg"
-                    class="glightbox d-block w-100 h-100"
-                    data-gallery="galeria"
-                    data-title="Luna de Sangre y eclipse total&lt;br&gt;&lt;small&gt;Fotografía: Miguel Medina&lt;/small&gt;"
-                    aria-label="Ver imagen ampliada de Luna de Sangre y el eclipse total">
-                    <picture>
-                        <source srcset="img/galeria/eclipse.avif" type="image/avif">
-                        <source srcset="img/galeria/eclipse.webp" type="image/webp">
-                        <img src="img/galeria/eclipse.jpg"
-                            alt="Luna de Sangre y el eclipse total, Fotografía tomada por Miguel Medina"
-                            class="img-fluid"
-                            loading="lazy"
-                            width="2048"
-                            height="1532">
-                    </picture>
-                </a>
-              </div>
-              <div class="p-4 text-justify-responsive">
-                <h5 class="mb-2 fw-bold text-info">Luna de Sangre y el eclipse total</h5>
-                <p class="mb-0 text-light">Fotografía tomada por Miguel Medina</p>
-              </div>
-            </div>
-          </div>
-          <!-- Tarjeta 6 -->
-          <div class="col-12 col-sm-6 col-lg-4 mb-4">
-            <div class="gallery-card shadow-lg border-0 overflow-hidden p-0">
-              <div class="bg-dark position-relative w-100 d-flex align-items-center justify-content-center">
-                <a href="img/galeria/luna.jpg"
-                    class="glightbox d-block w-100 h-100"
-                    data-gallery="galeria"
-                    data-title="Luna&lt;br&gt;&lt;small&gt;Fotografía: Luis Sánchez de Alba&lt;/small&gt;"
-                    aria-label="Ver imagen ampliada de Luna">
-                    <picture>
-                        <source srcset="img/galeria/luna.avif" type="image/avif">
-                        <source srcset="img/galeria/luna.webp" type="image/webp">
-                        <img src="img/galeria/luna.jpg"
-                            alt="Luna, Fotografía tomada por Luis Sánchez de Alba"
-                            class="img-fluid"
-                            loading="lazy"
-                            width="1556"
-                            height="1600">
-                    </picture>
-                </a>
-              </div>
-              <div class="p-4 text-justify-responsive">
-                <h5 class="mb-2 fw-bold text-info">Luna</h5>
-                <p class="mb-0 text-light">Fotografía tomada por Luis Sánchez de Alba</p>
-              </div>
-            </div>
-          </div>
+
+            <!-- FIN DE LA SECCIÓN MODIFICADA -->
+
         </div>
-        <div class="text-center mt-4">
-          <a href="#" class="btn btn-primary btn-lg btn-galeria" aria-label="Ver más fotografías de la galería">Ver más fotografías</a>
-        </div>
-        <div class="text-center mt-4">
-          <a href="https://rancholacienega.com/ecoturismo/BLOG/coleccion-mrh/" class="btn btn-primary btn-lg btn-galeria mt-3" aria-label="Ver astrofotografía de MRH">Astrofotografía de MRH</a>
-        </div>
-      </div>
     </section>
 
 
@@ -1734,6 +1765,31 @@
                 touchNavigation: true,
                 loop: true,
                 closeButton: true
+            });
+        }
+
+        // --- FUNCIONALIDAD PARA EL BOTÓN "VER MÁS FOTOGRAFÍAS" ---
+        const btnVerMas = document.getElementById('btn-ver-mas');
+        const galeriaOculta = document.getElementById('galeria-oculta');
+
+        if (btnVerMas && galeriaOculta) {
+            // Almacenamos la instancia de GLightbox para poder recargarla.
+            let lightbox = GLightbox({
+                selector: '.glightbox'
+            });
+
+            btnVerMas.addEventListener('click', function(e) {
+                // 1. Prevenimos que el enlace '#' salte la página
+                e.preventDefault();
+
+                // 2. Mostramos la galería oculta quitando la clase 'd-none'
+                galeriaOculta.classList.remove('d-none');
+                
+                // 3. Ocultamos el botón "Ver más" para que no se pueda volver a hacer clic
+                btnVerMas.style.display = 'none';
+
+                // 4. Recargamos la instancia de GLightbox para que encuentre las nuevas imágenes
+                lightbox.reload();
             });
         }
 
