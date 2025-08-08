@@ -15,9 +15,9 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="img/head-navbar-hero/crescent-moon-icon-7.png">
     <!--Preload de imágenes para mejorar el rendimiento-->
-    <link rel="preload" as="image" href="img/head-navbar-hero/herogalaxy.png">
-    <link rel="preload" as="image" href="img/background/galaxybg_pc.webp">
-    <link rel="preload" as="image" href="img/background/galaxybg_100.webp">
+    <link rel="preload" href="img/head-navbar-hero/herogalaxy.webp" as="image">
+    <link rel="preload" href="img/background/galaxybg_pc.webp" as="image">
+    <link rel="preload" href="img/background/galaxybg_100.webp" as="image">
     <style>
         /* 1. CONFIGURACIÓN, VARIABLES Y ESTILOS GLOBALES */
 
@@ -208,65 +208,105 @@
             box-shadow: none !important;
         }
 
-        /* Sección Hero */
+        /* Sección Hero: imagen de fondo + overlay azul en una capa aparte */
         .hero-section {
-            display: flex;
-            align-items: center;
-            position: relative;
-            min-height: 80vh;
-            padding: 0 0 2rem 0;
-            margin: 0;
-            background: linear-gradient(to bottom, rgba(13, 36, 90, 0.7), rgba(7, 11, 35, 0.9)), url('img/head-navbar-hero/herogalaxy.png') center/cover no-repeat;
-            overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        min-height: 80vh;
+        padding: 0 1rem;
+        margin: 0;
+        overflow: hidden;
+        /* Fallback de color por si la imagen tarda */
+        background-color: #0d245a;
+        background-image: image-set(
+            url('img/head-navbar-hero/herogalaxy.webp') type('image/webp') 1x,
+            url('img/head-navbar-hero/herogalaxy.png') type('image/png') 1x
+        );
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
         }
 
+        /* Overlay azul translúcido independiente (siempre visible) */
+        .hero-section::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none; /* no bloquea clics */
+        background: linear-gradient(
+            to bottom,
+            rgba(13, 36, 90, 0.48),
+            rgba(7, 11, 35, 0.65)
+        );
+        z-index: 0; /* por debajo del contenido */
+        }
+
+        /* Contenido encima del overlay */
+        .hero-section > * {
+        position: relative;
+        z-index: 1;
+        }
+
+        /* Botones dentro de la sección Hero */
         .hero-section .btn {
-            padding: 0.9rem 2.2rem; /* Aumentamos el padding para más altura y anchura */
-            font-size: 1.25rem;    /* Hacemos la letra notablemente más grande */
-            font-weight: 600;      /* Un poco más de grosor en la fuente */
-            letter-spacing: 0.04em; /* Espacio entre letras para legibilidad */
-            border-width: 2px;     /* Hacemos el borde un poco más grueso */
-            border-radius: 50px;   /* Bordes totalmente redondeados para un look moderno */
-            transition: all 0.3s ease; /* Transición suave para todos los efectos */
+        padding: 0.9rem 2.2rem;
+        font-size: 1.25rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        border-width: 2px;
+        border-radius: 50px;
+        transition: all 0.3s ease;
         }
 
-        /* --- Mejoras para el botón principal (azul) --- */
         .hero-section .btn-primary {
-            background-color: #304d9d;
-            border-color: #304d9d;
-            box-shadow: 0 5px 20px rgba(48, 77, 157, 0.3); /* Sombra para que destaque */
+        background-color: #304d9d;
+        border-color: #304d9d;
+        box-shadow: 0 5px 20px rgba(48, 77, 157, 0.3);
         }
 
         .hero-section .btn-primary:hover {
-            background-color: #1a3a8f;
-            border-color: #1a3a8f;
-            transform: translateY(-3px); /* Efecto de levantamiento al pasar el ratón */
-            box-shadow: 0 8px 25px rgba(48, 77, 157, 0.4);
+        background-color: #1a3a8f;
+        border-color: #1a3a8f;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(48, 77, 157, 0.4);
         }
 
-        /* --- Mejoras para el botón secundario (blanco) --- */
         .hero-section .btn-outline-light:hover {
-            color: #0a1128; /* Cambiamos el color del texto a oscuro para contraste */
-            background-color: #fff;
-            border-color: #fff;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+        color: #0a1128;
+        background-color: #fff;
+        border-color: #fff;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
         }
 
-        /* --- Estilo Personalizado para el Subtítulo del Hero --- */
+        /* Subtítulo del Hero */
         .hero-section .lead {
-            font-size: 1.5rem;      /* Aumentamos significativamente el tamaño de la letra */
-            font-weight: 400;      /* Un peso de fuente ligero y elegante */
-            color: rgba(240, 240, 240, 0.9); /* Un blanco ligeramente transparente para que no compita con el título principal */
-            letter-spacing: 0.05em; /* Aumentamos el espacio entre letras para un look más "aéreo" */
-            
-            /* Efecto de sombra para mejorar la legibilidad sobre el fondo */
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6); 
-            
-            /* Limitamos el ancho para que no se extienda demasiado en pantallas grandes */
-            max-width: 650px; 
-            margin-left: auto;
-            margin-right: auto;
+        font-size: 1.5rem;
+        font-weight: 400;
+        color: rgba(240, 240, 240, 0.9);
+        letter-spacing: 0.05em;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+        max-width: 650px;
+        margin-left: auto;
+        margin-right: auto;
+        }
+
+        /* Animación de entrada (suave y no bloqueante) */
+        .hero-section {
+        animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(6px); }
+        to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Respeta usuarios con "reducir movimiento" */
+        @media (prefers-reduced-motion: reduce) {
+        .hero-section { animation: none; }
+        .hero-section .btn { transition: none; }
         }
 
         /* --- Sección Nosotros --- */
@@ -1210,8 +1250,8 @@
                     <div class="gallery-card shadow-lg border-0 overflow-hidden p-0">
                         <div class="bg-dark position-relative w-100 d-flex align-items-center justify-content-center">
                             <a href="img/galeria/luna.jpg" class="glightbox d-block w-100 h-100" data-gallery="galeria" data-title="<h4>Luna</h4>
-                                <p>La Luna siempre será uno de los objetos celestes más interesantes para contemplar, disfrutar y fotografiar…. 
-                                Luna 🌓 Llena del 14 de Febrero de 2025, desde Aguascalientes, México.</p>
+                                <p>Siempre será uno de los objetos celestes más interesantes para contemplar.</p> 
+                                <p>Luna Llena del 14 de Febrero de 2025, desde Aguascalientes, México.</p>
                                 <small>Créditos: Luis Sánchez de Alba</small>" aria-label="Ver imagen ampliada de Luna">
                                 <picture>
                                     <source srcset="img/galeria/luna.avif" type="image/avif">
