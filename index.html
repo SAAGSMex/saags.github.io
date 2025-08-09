@@ -870,96 +870,51 @@
 
     <!-- Sección Contacto accesible -->
     <section id="contacto" class="py-5 bg-dark" aria-labelledby="titulo-contacto">
-        <div class="container">
-            <h2 class="section-title text-center mb-5" id="titulo-contacto">Contáctanos</h2>
-            <div class="row">
-                <div class="col-lg-6 mb-4">
-                    <h4>Información de contacto</h4>
-                    <ul class="list-unstyled">
-                        <li class="mb-3"><i class="fas fa-phone me-2" aria-hidden="true"></i> +52 449 395 6080</li>
-                        <li class="mb-3"><i class="fas fa-envelope me-2" aria-hidden="true"></i>
-                            <a href="mailto:segovia1107@hotmail.com" style="color: white;">segovia1107@hotmail.com</a>,
-                            <a href="mailto:saagsawb@gmail.com" style="color: white;">saagsawb@gmail.com</a>
-                        </li>
-                    </ul>
-                    <h4 class="mt-4">Síguenos</h4>
-                    <div class="social-links mt-3" aria-label="Redes sociales de la Sociedad Astronómica de Aguascalientes">
-                        <a href="https://www.facebook.com/groups/saags" target="_blank" aria-label="Facebook"><i class="fab fa-facebook" aria-hidden="true"></i></a>
-                        <a href="https://www.instagram.com/investel.mx/" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
-                        <a href="https://www.youtube.com/@investel601" aria-label="YouTube"><i class="fab fa-youtube" aria-hidden="true"></i></a>
+        <div class="container d-flex justify-content-center">
+            <div class="w-100" style="max-width: 900px;">
+                <h2 class="section-title text-center mb-4" id="titulo-contacto">Contáctanos</h2>
+                <div class="mb-5">
+                    <h4 class="fw-bold">Información de contacto</h4>
+                    <div class="mb-2"><i class="fas fa-phone me-2" aria-hidden="true"></i> +52 449 395 6080</div>
+                    <div><i class="fas fa-envelope me-2" aria-hidden="true"></i>
+                        <a href="mailto:segovia1107@hotmail.com" style="color: white;">segovia1107@hotmail.com</a>,
+                        <a href="mailto:saagsawb@gmail.com" style="color: white;">saagsawb@gmail.com</a>
                     </div>
-                    <!--<h4 class="mt-4">Horario de atención</h4>
-                    <p>Lunes a Viernes: 10:00 AM - 7:00 PM<br>
-                    Sábados: 10:00 AM - 2:00 PM</p>>-->
                 </div>
-                <div class="col-lg-6">
-                    <form action="#" method="post" autocomplete="on" novalidate>
-                        <div class="mb-3">
+                <form action="#" method="post" autocomplete="on" novalidate>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
                             <label for="nombre" class="form-label">Nombre</label>
-                            <input
-                            type="text"
-                            class="form-control"
-                            id="nombre"
-                            name="nombre"
-                            autocomplete="given-name"
-                            required
-                            placeholder="Tu nombre">
+                            <input type="text" class="form-control" id="nombre" name="nombre" autocomplete="given-name" required placeholder="Tu nombre">
                         </div>
-
-                        <div class="mb-3">
+                        <div class="col-md-6 mb-3">
                             <label for="apellidos" class="form-label">Apellidos</label>
-                            <input
-                            type="text"
-                            class="form-control"
-                            id="apellidos"
-                            name="apellidos"
-                            autocomplete="family-name"
-                            required
-                            placeholder="Tus apellidos">
+                            <input type="text" class="form-control" id="apellidos" name="apellidos" autocomplete="family-name" required placeholder="Tus apellidos">
                         </div>
-
-                        <div class="mb-3">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
                             <label for="email" class="form-label">Correo electrónico</label>
-                            <input
-                            type="email"
-                            class="form-control"
-                            id="email"
-                            name="email"
-                            autocomplete="email"
-                            placeholder="nombre@dominio.com"
-                            required
-                            aria-describedby="ayuda-email">
-                            <div id="ayuda-email" class="form-text text-muted">
-                            Nunca compartiremos tu correo con nadie más.
-                            </div>
+                            <input type="email" class="form-control" id="email" name="email" autocomplete="email" placeholder="nombre@dominio.com" required aria-describedby="ayuda-email">
+                            <div id="ayuda-email" class="form-text text-muted">Nunca compartiremos tu correo con nadie más.</div>
                         </div>
-
-                        <div class="mb-3">
+                        <div class="col-md-6 mb-3">
                             <label for="telefono" class="form-label">Teléfono</label>
-                            <input
-                            type="tel"
-                            class="form-control"
-                            id="telefono"
-                            name="telefono"
-                            autocomplete="tel"
-                            inputmode="tel"
-                            placeholder="+52 449 123 4567">
+                            <input type="tel" class="form-control" id="telefono" name="telefono" autocomplete="tel" inputmode="tel" placeholder="+52 449 123 4567">
                         </div>
-
+                    </div>
+                    <div class="mb-3">
                         <div class="mb-3">
-                            <label for="mensaje" class="form-label">Mensaje</label>
-                            <textarea
-                            class="form-control"
-                            id="mensaje"
-                            name="mensaje"
-                            rows="4"
-                            placeholder="Escribe tu mensaje..."
-                            required></textarea>
+                            <label for="asunto" class="form-label">Asunto</label>
+                            <input type="text" class="form-control" id="asunto" name="asunto" required placeholder="Motivo de tu mensaje">
                         </div>
-
+                        <label for="mensaje" class="form-label">Mensaje</label>
+                        <textarea class="form-control" id="mensaje" name="mensaje" rows="4" placeholder="Escribe tu mensaje..." required></textarea>
+                    </div>
+                    <div class="text-center">
                         <button type="submit" class="btn btn-primary">Enviar mensaje</button>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         </div>
     </section>
@@ -968,11 +923,22 @@
     <footer class="footer" aria-label="Pie de página">
         <div class="container">
             <div class="row">
-                <div class="col-md-4 mb-4">
+                <div class="col-md-3 mb-4">
                     <h5>Sociedad Astronómica de Aguascalientes</h5>
                     <p>Promoviendo el conocimiento astronómico y la pasión por el universo desde 2010.</p>
                 </div>
-                <div class="col-md-4 mb-4">
+                <div class="col-md-3 mb-4">
+                    <h4 class="mt-4">Síguenos</h4>
+                    <div class="text-left mt-3">
+                        <div class="mb-2 text-light small" style="opacity:0.8;">¡Conéctate con la comunidad astronómica!</div>
+                        <div class="d-flex justify-content-left gap-3">
+                            <a href="https://www.facebook.com/groups/saags" target="_blank" aria-label="Facebook" class="fs-2 text-light"><i class="fab fa-facebook" aria-hidden="true"></i></a>
+                            <a href="https://www.instagram.com/investel.mx/" aria-label="Instagram" class="fs-2 text-light"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                            <a href="https://www.youtube.com/@investel601" aria-label="YouTube" class="fs-2 text-light"><i class="fab fa-youtube" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
                     <h5>Enlaces rápidos</h5>
                     <ul class="list-unstyled">
                         <li><a href="#nosotros" class="text-decoration-none text-light">Sobre nosotros</a></li>
@@ -981,7 +947,7 @@
                         <li><a href="#contacto" class="text-decoration-none text-light">Contacto</a></li>
                     </ul>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <h5>Boletín informativo</h5>
                     <p>Suscríbete para recibir novedades astronómicas y eventos</p>
                     <form class="needs-validation" novalidate aria-label="Formulario de suscripción al boletín (demostrativo, no funcional)">
