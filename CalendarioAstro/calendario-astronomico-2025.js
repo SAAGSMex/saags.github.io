@@ -7,7 +7,13 @@
  * - Toggle densidad
  * - Animación reveal
  */
-(function() {
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', calendarioInit);
+} else {
+  calendarioInit();
+}
+
+function calendarioInit() {
   const YEAR = 2025;
   const SELECTORS = {
     root: '#calendario',
@@ -20,10 +26,10 @@
   };
 
   const root = document.querySelector(SELECTORS.root);
-  if (!root) return console.warn('[Calendario] No se encontró el contenedor #calendario');
+    if (!root) return; // No advertencia si no hay calendario
 
   const controls = root.querySelector(SELECTORS.controls);
-  if (!controls) return console.warn('[Calendario] No se encontraron controles .calendar-controls');
+    if (!controls) return; // No advertencia si no hay controles
 
   const searchInput = controls.querySelector(SELECTORS.search);
   const themeBtn = controls.querySelector(SELECTORS.themeBtn);
@@ -432,4 +438,4 @@
 
   filterAndRender();
 
-})();
+}
