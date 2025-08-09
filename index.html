@@ -16,6 +16,8 @@
     <link rel="icon" type="image/png" href="img/head-navbar-hero/crescent-moon-icon-7.png">
     <!--Preload de imágenes para mejorar el rendimiento-->
     <link rel="preload" href="img/head-navbar-hero/herogalaxy.webp" as="image" fetchpriority="high" type="image/webp">
+    <!-- Preconexión a CDN de Bootstrap -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <style>
         /* 1. CONFIGURACIÓN, VARIABLES Y ESTILOS GLOBALES */
 
@@ -280,8 +282,8 @@
         pointer-events: none; /* no bloquea clics */
         background: linear-gradient(
             to bottom,
-            rgba(13, 36, 90, 0.4),
-            rgba(7, 11, 35, 0.6)
+            rgba(13, 36, 90, 0.48),
+            rgba(7, 11, 35, 0.65)
         );
         z-index: 0; /* por debajo del contenido */
         }
@@ -326,8 +328,8 @@
 
         /* Subtítulo del Hero */
         .hero-section .lead {
-        font-size: 1.5rem;
-        font-weight: 400;
+        font-size: 1.6rem;
+        font-weight: 450;
         color: rgba(240, 240, 240, 0.9);
         letter-spacing: 0.05em;
         text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
@@ -639,10 +641,80 @@
             text-decoration: none;
         }
 
-        /* Sección Equipo (Team) */
-        .team-member img {
-            border: 3px solid #304d9d;
-            border-radius: 50%;
+        /* ==== Equipo (ajustes anti-layout shift) ==== */
+        .team-card {
+            color:#fff;
+            padding:0;
+        }
+
+        .avatar-wrapper {
+            display:block;
+            width:225px;
+            aspect-ratio:1/1;
+            margin:0 auto 1rem;
+            border-radius:50%;
+            overflow:hidden;
+            background:#1d1f23;
+            border:3px solid #304d9d;
+            position:relative;
+        }
+
+        .avatar {
+            width:100%;
+            height:100%;
+            object-fit:cover;
+            display:block;
+        }
+
+        .team-name {
+            font-size:1.2rem;
+            font-weight:600;
+            margin:0 0 .35rem;
+            min-height:0.5em; /* una o dos líneas */
+        }
+
+        .team-role {
+            font-size:1.05rem;
+            margin:0 0 .75rem;
+            min-height:0em;
+        }
+
+        .team-social {
+            list-style:none;
+            display:flex;
+            justify-content:center;
+            gap:.75rem;
+            padding:0;
+            margin:0;
+            min-height:40px; /* reserva vertical */
+        }
+
+        .team-social li { margin:0; }
+
+        .team-social a {
+            width:32px;
+            height:32px;
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            border-radius:6px;
+            background:rgba(255,255,255,0.08);
+            color:#fff;
+            text-decoration:none;
+            transition:background .25s, transform .25s;
+            font-size:1rem;
+            line-height:1;
+        }
+
+        .team-social a:hover,
+        .team-social a:focus-visible {
+            background:#00b2d9;
+            transform:translateY(-3px);
+            outline:none;
+        }
+
+        @media (max-width:575.98px){
+        .avatar-wrapper { width:180px; }
         }
 
         /* --- Sección Footer --- */
@@ -721,7 +793,6 @@
         }
 
         /* CÓDIGO DE GLIGHTBOX */
-        
 
         /* Contenedor principal de la descripción */
         .gslide-description {
@@ -1567,79 +1638,79 @@
         </div>
     </section>
 
-    <!-- Sección Equipo accesible -->
+    <!-- Equipo -->
     <section id="equipo" class="py-5" aria-labelledby="titulo-equipo">
         <div class="container">
             <h2 class="section-title text-center mb-5" id="titulo-equipo">Nuestro Equipo</h2>
-            <div class="row">
-                <div class="col-md-3 mb-4">
-                    <div class="text-center" aria-label="Miembro del equipo: Dr. Miguel Ángel Pérez, Director">
-                        <picture>
-                            <source srcset="img/equipo/anonymous.webp" type="image/webp">
-                            <img src="img/equipo/anonymous.png"
-                                alt="Foto de Dra. Laura Mendoza, Coord. de Divulgación"
-                                class="mb-3 team-member img-fluid rounded-circle shadow"
-                                style="width:225px; height:225px; object-fit:cover;">
-                        </picture><!-- /api/placeholder/150/150-->
-                        <h5>Dr. Miguel Ángel Pérez</h5>
-                        <span class="cargo text-info" style="display: block;">Director</span>
-                        <div class="social-links small" aria-label="Redes sociales de Dr. Miguel Ángel Pérez">
-                            <a href="#" aria-label="X (Twitter) de Dr. Miguel Ángel Pérez"><i class="fab fa-x-twitter"></i></a>
-                            <a href="#" aria-label="LinkedIn de Dr. Miguel Ángel Pérez"><i class="fab fa-linkedin"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <div class="text-center" aria-label="Miembro del equipo: Dra. Laura Mendoza, Coord. de Divulgación">
-                        <picture>
-                            <source srcset="img/equipo/anonymous.webp" type="image/webp">
-                            <img src="img/equipo/anonymous.png"
-                                alt="Foto de Dra. Laura Mendoza, Coord. de Divulgación"
-                                class="mb-3 team-member img-fluid rounded-circle shadow"
-                                style="width:225px; height:225px; object-fit:cover;">
-                        </picture>
-                        <h5>Dra. Laura Mendoza</h5>
-                        <span class="cargo text-info" style="display: block;">Coord. de Divulgación</span>
-                        <div class="social-links small" aria-label="Redes sociales de Dra. Laura Mendoza">
-                            <a href="#" aria-label="X (Twitter) de Dra. Laura Mendoza"><i class="fab fa-x-twitter"></i></a>
-                            <a href="#" aria-label="LinkedIn de Dra. Laura Mendoza"><i class="fab fa-linkedin"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <div class="text-center" aria-label="Miembro del equipo: Ing. Carlos Ramírez, Coord. de Observaciones">
-                        <picture>
-                            <source srcset="img/equipo/anonymous.webp" type="image/webp">
-                            <img src="img/equipo/anonymous.png"
-                                alt="Foto de Dra. Laura Mendoza, Coord. de Divulgación"
-                                class="mb-3 team-member img-fluid rounded-circle shadow"
-                                style="width:225px; height:225px; object-fit:cover;">
-                        </picture>
-                        <h5>Ing. Carlos Ramírez</h5>
-                        <span class="cargo text-info" style="display: block;">Coord. de Observaciones</span>
-                        <div class="social-links small" aria-label="Redes sociales de Ing. Carlos Ramírez">
-                            <a href="#" aria-label="X (Twitter) de Ing. Carlos Ramírez"><i class="fab fa-x-twitter"></i></a>
-                            <a href="#" aria-label="Instagram de Ing. Carlos Ramírez"><i class="fab fa-instagram"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <div class="text-center" aria-label="Miembro del equipo: Lic. Ana Sofía Torres, Secretaria">
-                        <picture>
-                            <source srcset="img/equipo/anonymous.webp" type="image/webp">
-                            <img src="img/equipo/anonymous.png"
-                                alt="Foto de Dra. Laura Mendoza, Coord. de Divulgación"
-                                class="mb-3 team-member img-fluid rounded-circle shadow"
-                                style="width:225px; height:225px; object-fit:cover;">
-                        </picture>
-                        <h5>Lic. Ana Sofía Torres</h5>
-                        <span class="cargo text-info" style="display: block;">Secretaria</span>
-                        <div class="social-links small" aria-label="Redes sociales de Lic. Ana Sofía Torres">
-                            <a href="#" aria-label="LinkedIn de Lic. Ana Sofía Torres"><i class="fab fa-linkedin"></i></a>
-                            <a href="#" aria-label="Instagram de Lic. Ana Sofía Torres"><i class="fab fa-instagram"></i></a>
-                        </div>
-                    </div>
-                </div>
+            <div class="row g-4 justify-content-center">
+            <!-- Miembro 1 -->
+            <div class="col-6 col-md-3">
+                <article class="team-card text-center">
+                <picture class="avatar-wrapper">
+                    <source srcset="img/equipo/anonymous.webp" type="image/webp">
+                    <img src="img/equipo/anonymous.png"
+                        alt="Foto de Dr. Miguel Ángel Pérez"
+                        width="225" height="225" loading="lazy" decoding="async" class="avatar">
+                </picture>
+                <h5 class="team-name">Dr. Miguel Ángel Pérez</h5>
+                <p class="team-role text-info">Director</p>
+                <ul class="team-social" aria-label="Redes sociales de Dr. Miguel Ángel Pérez">
+                    <li><a href="#" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a></li>
+                    <li><a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a></li>
+                </ul>
+                </article>
+            </div>
+            <!-- Miembro 2 -->
+            <div class="col-6 col-md-3">
+                <article class="team-card text-center">
+                <picture class="avatar-wrapper">
+                    <source srcset="img/equipo/anonymous.webp" type="image/webp">
+                    <img src="img/equipo/anonymous.png"
+                        alt="Foto de Dra. Laura Mendoza"
+                        width="225" height="225" loading="lazy" decoding="async" class="avatar">
+                </picture>
+                <h5 class="team-name">Dra. Laura Mendoza</h5>
+                    <p class="team-role text-info">Coord. de Divulgación</p>
+                    <ul class="team-social" aria-label="Redes sociales de Dra. Laura Mendoza">
+                    <li><a href="#" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a></li>
+                    <li><a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a></li>
+                    </ul>
+                </article>
+            </div>
+            <!-- Miembro 3 -->
+            <div class="col-6 col-md-3">
+                <article class="team-card text-center">
+                <picture class="avatar-wrapper">
+                    <source srcset="img/equipo/anonymous.webp" type="image/webp">
+                    <img src="img/equipo/anonymous.png"
+                        alt="Foto de Ing. Carlos Ramírez"
+                        width="225" height="225" loading="lazy" decoding="async" class="avatar">
+                </picture>
+                <h5 class="team-name">Ing. Carlos Ramírez</h5>
+                <p class="team-role text-info">Coord. de Observaciones</p>
+                <ul class="team-social" aria-label="Redes sociales de Ing. Carlos Ramírez">
+                    <li><a href="#" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a></li>
+                    <li><a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a></li>
+                </ul>
+                </article>
+            </div>
+            <!-- Miembro 4 -->
+            <div class="col-6 col-md-3">
+                <article class="team-card text-center">
+                <picture class="avatar-wrapper">
+                    <source srcset="img/equipo/anonymous.webp" type="image/webp">
+                    <img src="img/equipo/anonymous.png"
+                        alt="Foto de Lic. Ana Sofía Torres"
+                        width="225" height="225" loading="lazy" decoding="async" class="avatar">
+                </picture>
+                <h5 class="team-name">Lic. Ana Sofía Torres</h5>
+                <p class="team-role text-info">Secretaria</p>
+                <ul class="team-social" aria-label="Redes sociales de Lic. Ana Sofía Torres">
+                    <li><a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a></li>
+                    <li><a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a></li>
+                </ul>
+                </article>
+            </div>
             </div>
         </div>
     </section>
@@ -1801,11 +1872,6 @@
 
     <!-- Script Personalizado -->
     <script>
-    // Activa animaciones solo después del primer frame (mejor para LCP)
-    requestAnimationFrame(() => {
-        document.documentElement.classList.add('hero-ready');
-    });
-    
     document.addEventListener('DOMContentLoaded', function() {
         // 1. Animación del botón "Nuestras actividades"
         const btnActividades = document.getElementById('btn-actividades');
