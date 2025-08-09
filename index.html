@@ -45,6 +45,25 @@
             --easing-standard: cubic-bezier(.4,.2,.2,1);
             --dur-fast: .18s;
             --dur-med: .3s;
+
+            /* calendario */
+            --c-fondo: #1b1f24;
+            --c-panel: #0d1f42;
+            --c-panel-alt: #09152b;
+            --c-borde: #2f5d9d;
+            --c-acento: #3286ff;
+            --c-acento-suave: #74b5ff;
+            --c-texto: #f0f2f6;
+            --c-texto-dim: #c3c9d4;
+            --rad-sm: 4px;
+            --rad-md: 8px;
+            --sp-1: .25rem;
+            --sp-2: .5rem;
+            --sp-3: .75rem;
+            --sp-4: 1rem;
+            --sp-5: 1.5rem;
+            --tr-fast: .18s;
+            --font-base: system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Ubuntu,"Helvetica Neue",Arial,sans-serif;
         }
 
         *,
@@ -586,60 +605,252 @@
             transition: all 0.1s ease; /* Transición más rápida para el clic */
         }
 
-        /* Sección Calendario */
-        .astro-event {
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            background-color: rgba(13, 36, 90, 0.7);
-            border-left: 4px solid #7cb9e8;
+        :root {
+            --c-fondo: #1b1f24;
+            --c-panel: #0d1f42;
+            --c-panel-alt: #09152b;
+            --c-borde: #2f5d9d;
+            --c-acento: #3286ff;
+            --c-acento-suave: #74b5ff;
+            --c-texto: #f0f2f6;
+            --c-texto-dim: #c3c9d4;
+            --rad-sm: 4px;
+            --rad-md: 8px;
+            --sp-1: .25rem;
+            --sp-2: .5rem;
+            --sp-3: .75rem;
+            --sp-4: 1rem;
+            --sp-5: 1.5rem;
+            --tr-fast: .18s;
+            --font-base: system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Ubuntu,"Helvetica Neue",Arial,sans-serif;
         }
 
-        #calendario .list-group-item {
-            text-align: justify;
-            background-color: rgba(10, 17, 40, 0.7) !important;
-            border: none;
-            border-bottom: 1px solid rgba(48, 77, 157, 0.3);
-            color: #f0f0f0 !important;
-            padding: 10px 15px;
+        .calendario {
+            font-family: var(--font-base);
+            background: var(--c-fondo);
+            color: var(--c-texto);
+            padding: var(--sp-5) clamp(1rem,4vw,3rem);
+            max-width: 1250px;
+            margin: 0 auto;
         }
 
-        #calendario .badge {
-            background-color: #304d9d;
-            color: #ffffff;
+        .calendario__header {
+            margin-bottom: var(--sp-4);
+        }
+
+        .calendario__title {
+            margin: 0 0 .25rem;
+            font-size: clamp(1.8rem, 2.4vw, 2.4rem);
             font-weight: 600;
-            min-width: 36px;
-            text-align: center;
+            letter-spacing: .5px;
+        }
+
+        .calendario__subtitle {
+            margin: 0 0 var(--sp-3);
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--c-texto-dim);
+        }
+
+        .calendario__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill,minmax(250px,1fr));
+            gap: clamp(.9rem,1.8vw,1.25rem);
+            align-items: start;
+            margin-bottom: var(--sp-4);
+        }
+
+        .mes {
+            background: linear-gradient(145deg,var(--c-panel) 0%,var(--c-panel-alt) 90%);
+            border: 1px solid rgba(50,134,255,.25);
+            border-radius: var(--rad-md);
+            padding: .65rem .75rem .5rem;
+            display: flex;
+            flex-direction: column;
+            gap: .35rem;
+            position: relative;
+            min-height: 158px;
+        }
+
+        .mes__titulo {
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: .5px;
+            color: var(--c-acento-suave);
+            padding: 0 0 .35rem;
+            border-bottom: 1px solid rgba(50,134,255,.25);
+        }
+
+        .eventos {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: .15rem;
+        }
+
+        .evento {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: .55rem;
+            align-items: start;
+            background: rgba(0,0,0,.18);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: var(--rad-sm);
+            padding: .35rem .5rem .4rem;
+            line-height: 1.25;
             font-size: 1rem;
         }
 
-        #calendario h5 {
-            color: #7cb9e8;
+        .evento:not(:last-child) {
+            margin-bottom: .15rem;
+        }
+
+        .evento__fecha {
+            background: var(--c-acento);
+            padding: .15rem .45rem;
+            border-radius: 16px;
             font-weight: 600;
-            letter-spacing: 0.02em;
-            border-bottom: 1px solid rgba(124, 185, 232, 0.3);
-            padding-bottom: 8px;
+            font-size: 1rem;
+            letter-spacing: .5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 2px;
+            color: #fff;
+            white-space: nowrap;
+            line-height: 1;
+            position: relative;
+            top: 1px;
         }
 
-        #calendario .btn-primary {
-            background: linear-gradient(90deg, #1a2540 50%, #304d9d 140%);
-            color: #f0f0f0;
-            font-weight: 700;
-            font-size: 1.25rem;
-            padding: 1.2rem 2rem;
-            border: none;
-            border-radius: 100px;
-            box-shadow: 0 2px 12px 0 rgba(48, 77, 157, 0.18);
-            transition: background 0.22s, color 0.22s, box-shadow 0.22s, transform 0.18s;
+        .evento__texto {
+            color: var(--c-texto);
         }
 
-        #calendario .btn-primary:hover,
-        #calendario .btn-primary:focus {
-            background: linear-gradient(90deg, #ffe066 10%, #233d6c 100%);
-            color: #1a2540;
-            box-shadow: 0 6px 24px #ffe06666, 0 2px 8px #7cb9e866;
-            transform: translateY(-2px) scale(1.06);
+        time { font-style: normal; }
+
+        .calendario__nota {
+            margin: 0 0 var(--sp-4);  /* elimina auto para que arranque al borde izquierdo */
+            max-width: 100%;          /* sin límite de caracteres */
+            width: 100%;
+            font-size: 1.1rem;
+            line-height: 1.35;
+            color: var(--c-texto-dim);
+            text-align: justify;
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            overflow-wrap: break-word;
+        }
+
+        .calendario__cta {
+            display: flex;
+            justify-content: center;
+            padding-bottom: .5rem;
+        }
+
+        /* BOTÓN CALENDARIO */
+        .btn-calendario {
+            --btn-h: 3.2rem;
+            --btn-radius: 56px;
+            --grad-a: #133460;
+            --grad-b: #1f4d92;
+            --grad-c: #0d0e63;
+            --text-color: #f0f6ff;
+
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: var(--btn-h);
+            padding: 1rem 1.5rem;
+            gap: .55rem;
+
+            font-family: inherit;
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: .6px;
+            line-height: 1;
+            color: var(--text-color);
             text-decoration: none;
+            cursor: pointer;
+
+            background: linear-gradient(
+                105deg,
+                var(--grad-a) 0%,
+                var(--grad-b) 52%,
+                var(--grad-c) 120%
+            );
+            background-size: 180% 180%;
+            border: none;
+            border-radius: var(--btn-radius);
+
+            box-shadow:
+                0 0 0 1px rgba(70,140,255,.35),
+                0 4px 14px -4px rgba(0,0,0,.6);
+
+            transition:
+                background-position .9s cubic-bezier(.55,.2,.2,1),
+                transform .38s cubic-bezier(.22,.9,.3,1),
+                box-shadow .38s,
+                color .3s;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .btn-calendario:hover {
+            background-position: 100% 50%;
+            transform: translateY(-4px);
+            box-shadow:
+                0 6px 24px -6px rgba(0,0,0,.7),
+                0 0 0 1px rgba(160,210,255,.4),
+                0 0 24px -6px rgba(50,140,255,.55);
+        }
+
+        .btn-calendario:focus-visible {
+        outline: none;
+        box-shadow:
+            0 0 0 2px #fff,
+            0 0 0 5px #2d7bff,
+            0 0 32px -4px #2d7bff;
+        }
+
+        .btn-calendario:active {
+        transform: translateY(-1px) scale(.96);
+        background-position: 15% 50%;
+        box-shadow:
+            0 2px 8px -2px rgba(0,0,0,.65),
+            0 0 0 1px rgba(90,160,255,.5);
+        transition: transform .15s, background-position .25s;
+        }
+
+        .btn-calendario:disabled,
+        .btn-calendario[aria-disabled="true"] {
+            opacity: .45;
+            cursor: not-allowed;
+            transform: none;
+            background-position: 50% 50%;
+        }
+
+        /* Variante “flat” para móviles muy pequeños (opcional) */
+        @media (max-width:480px){
+        .btn-calendario {
+            width: 100%;
+            padding: .95rem 1.4rem;
+            font-size: .95rem;
+            background-size: 140% 140%;
+            }
+        }
+
+        /* Respeto a reducción de movimiento */
+        @media (prefers-reduced-motion: reduce) {
+        .btn-calendario,
+        .btn-calendario:hover,
+        .btn-calendario:active {
+            transition: none;
+            transform: none;
+            background-position: 50% 50%;
+        }
         }
 
         /* ==== Equipo (ajustes anti-layout shift) ==== */
@@ -1523,119 +1734,127 @@
     </section>
 
 
-    <!-- Calendario Astronómico accesible -->
-    <section id="calendario" class="py-5 bg-dark" aria-labelledby="titulo-calendario">
-        <div class="container">
-            <h2 class="section-title text-center mb-5" id="titulo-calendario">Calendario Astronómico</h2>
-            <div class="row mb-4">
-                <div class="col-12 mb-4">
-                    <h3>Eventos astronómicos destacados – 2025</h3>
-                </div>
-                <!-- Enero -->
-                <div class="col-md-6 mb-3">
-                    <div class="astro-event" aria-label="Eventos de Enero 2025">
-                        <h5 class="mb-2">Enero</h5>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item bg-dark text-light">
-                                <span class="badge bg-primary me-2">3-4</span>
-                                Lluvia de meteoros Cuadrántidas (máximo el 4 de enero)
-                            </li>
-                            <li class="list-group-item bg-dark text-light">
-                                <span class="badge bg-primary me-2">13</span>
-                                Luna Nueva – cielo ideal para observar objetos de espacio profundo
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- Abril -->
-                <div class="col-md-6 mb-3">
-                    <div class="astro-event" aria-label="Eventos de Abril 2025">
-                        <h5 class="mb-2">Abril</h5>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item bg-dark text-light">
-                                <span class="badge bg-primary me-2">8</span>
-                                Eclipse solar total visible en el norte de México (NO visible en Aguascalientes, pero transmitido por redes)
-                            </li>
-                            <li class="list-group-item bg-dark text-light">
-                                <span class="badge bg-primary me-2">23</span>
-                                Lluvia de meteoros Líridas
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+    <section id="calendario" class="calendario" aria-labelledby="calendario-titulo">
+        <div class="calendario__header">
+            <h2 id="calendario-titulo" class="calendario__title">Calendario Astronómico</h2>
+            <h3 class="calendario__subtitle">Eventos astronómicos destacados – 2025</h3>
+        </div>
 
-                <!-- Mayo -->
-                <div class="col-md-6 mb-3">
-                    <div class="astro-event" aria-label="Eventos de Mayo 2025">
-                        <h5 class="mb-2">Mayo</h5>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item bg-dark text-light">
-                                <span class="badge bg-primary me-2">5-6</span>
-                                Lluvia de meteoros Eta Acuáridas
-                            </li>
-                            <li class="list-group-item bg-dark text-light">
-                                <span class="badge bg-primary me-2">18</span>
-                                Conjunción Venus-Marte
-                            </li>
-                            <li class="list-group-item bg-dark text-light">
-                                <span class="badge bg-primary me-2">23</span>
-                                Luna Llena – "Luna de las Flores"
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+        <div class="calendario__grid">
+            <!-- Mes: Enero -->
+            <article class="mes" aria-labelledby="mes-enero">
+            <h4 class="mes__titulo" id="mes-enero">Enero</h4>
+            <ul class="eventos">
+                <li class="evento">
+                <span class="evento__fecha">
+                    <time datetime="2025-01-03">3</time>–<time datetime="2025-01-04">4</time>
+                </span>
+                <span class="evento__texto">
+                    Lluvia de meteoros Cuadrántidas (máximo el <time datetime="2025-01-04">4</time>)
+                </span>
+                </li>
+                <li class="evento">
+                <span class="evento__fecha"><time datetime="2025-01-13">13</time></span>
+                <span class="evento__texto">Luna Nueva – cielo ideal para objetos de espacio profundo</span>
+                </li>
+            </ul>
+            </article>
 
-                <!-- Agosto -->
-                <div class="col-md-6 mb-3">
-                    <div class="astro-event" aria-label="Eventos de Agosto 2025">
-                        <h5 class="mb-2">Agosto</h5>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item bg-dark text-light">
-                                <span class="badge bg-primary me-2">12-13</span>
-                                Lluvia de meteoros Perseidas (una de las más intensas del año)
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+            <!-- Mes: Abril -->
+            <article class="mes" aria-labelledby="mes-abril">
+            <h4 class="mes__titulo" id="mes-abril">Abril</h4>
+            <ul class="eventos">
+                <li class="evento">
+                <span class="evento__fecha"><time datetime="2025-04-08">8</time></span>
+                <span class="evento__texto">Eclipse solar total (visible al norte de México, transmitido en redes)</span>
+                </li>
+                <li class="evento">
+                <span class="evento__fecha"><time datetime="2025-04-23">23</time></span>
+                <span class="evento__texto">Lluvia de meteoros Líridas</span>
+                </li>
+            </ul>
+            </article>
 
-                <!-- Octubre -->
-                <div class="col-md-6 mb-3">
-                    <div class="astro-event" aria-label="Eventos de Octubre 2025">
-                        <h5 class="mb-2">Octubre</h5>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item bg-dark text-light">
-                                <span class="badge bg-primary me-2">17</span>
-                                Eclipse parcial de Luna visible en Aguascalientes
-                            </li>
-                            <li class="list-group-item bg-dark text-light">
-                                <span class="badge bg-primary me-2">21-22</span>
-                                Lluvia de meteoros Oriónidas
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+            <!-- Mes: Mayo -->
+            <article class="mes" aria-labelledby="mes-mayo">
+            <h4 class="mes__titulo" id="mes-mayo">Mayo</h4>
+            <ul class="eventos">
+                <li class="evento">
+                <span class="evento__fecha">
+                    <time datetime="2025-05-05">5</time>–<time datetime="2025-05-06">6</time>
+                </span>
+                <span class="evento__texto">Lluvia de meteoros Eta Acuáridas</span>
+                </li>
+                <li class="evento">
+                <span class="evento__fecha"><time datetime="2025-05-18">18</time></span>
+                <span class="evento__texto">Conjunción Venus–Marte</span>
+                </li>
+                <li class="evento">
+                <span class="evento__fecha"><time datetime="2025-05-23">23</time></span>
+                <span class="evento__texto">Luna Llena – “Luna de las Flores”</span>
+                </li>
+            </ul>
+            </article>
 
-                <!-- Diciembre -->
-                <div class="col-md-6 mb-3">
-                    <div class="astro-event" aria-label="Eventos de Diciembre 2025">
-                        <h5 class="mb-2">Diciembre</h5>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item bg-dark text-light">
-                                <span class="badge bg-primary me-2">13-14</span>
-                                Lluvia de meteoros Gemínidas
-                            </li>
-                            <li class="list-group-item bg-dark text-light">
-                                <span class="badge bg-primary me-2">21</span>
-                                Solsticio de invierno
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <p>La Sociedad promueve actividades de observación durante estos eventos, así como charlas y transmisiones especiales cuando las condiciones lo permiten. Mantente al tanto de nuestras redes para conocer fechas, horarios y lugares específicos para participar.</p>
-            <div class="text-center">
-                <a href="CalendarioAstro/calendario-astronomico-2025.html" class="btn btn-primary btn-lg" aria-label="Acceso a calendario completo">Acceso a calendario completo</a>
-            </div>
+            <!-- Mes: Agosto -->
+            <article class="mes" aria-labelledby="mes-agosto">
+            <h4 class="mes__titulo" id="mes-agosto">Agosto</h4>
+            <ul class="eventos">
+                <li class="evento">
+                <span class="evento__fecha">
+                    <time datetime="2025-08-12">12</time>–<time datetime="2025-08-13">13</time>
+                </span>
+                <span class="evento__texto">Lluvia de meteoros Perseidas (una de las más intensas)</span>
+                </li>
+            </ul>
+            </article>
+
+            <!-- Mes: Octubre -->
+            <article class="mes" aria-labelledby="mes-octubre">
+            <h4 class="mes__titulo" id="mes-octubre">Octubre</h4>
+            <ul class="eventos">
+                <li class="evento">
+                <span class="evento__fecha"><time datetime="2025-10-17">17</time></span>
+                <span class="evento__texto">Eclipse parcial de Luna (visible en Aguascalientes)</span>
+                </li>
+                <li class="evento">
+                <span class="evento__fecha">
+                    <time datetime="2025-10-21">21</time>–<time datetime="2025-10-22">22</time>
+                </span>
+                <span class="evento__texto">Lluvia de meteoros Oriónidas</span>
+                </li>
+            </ul>
+            </article>
+
+            <!-- Mes: Diciembre -->
+            <article class="mes" aria-labelledby="mes-diciembre">
+            <h4 class="mes__titulo" id="mes-diciembre">Diciembre</h4>
+            <ul class="eventos">
+                <li class="evento">
+                <span class="evento__fecha">
+                    <time datetime="2025-12-13">13</time>–<time datetime="2025-12-14">14</time>
+                </span>
+                <span class="evento__texto">Lluvia de meteoros Gemínidas</span>
+                </li>
+                <li class="evento">
+                <span class="evento__fecha"><time datetime="2025-12-21">21</time></span>
+                <span class="evento__texto">Solsticio de invierno</span>
+                </li>
+            </ul>
+            </article>
+        </div>
+
+        <p class="calendario__nota">
+            La Sociedad promueve actividades de observación durante estos eventos, así como charlas y transmisiones especiales cuando las condiciones lo permiten. 
+            Mantente al tanto de nuestras redes para conocer fechas, horarios y lugares específicos para participar.
+        </p>
+
+        <div class="calendario__cta">
+            <a href="CalendarioAstro/calendario-astronomico-2025.html"
+                class="btn-calendario"
+                aria-label="Ver calendario astronómico completo 2025">
+                Calendario completo 2025
+            </a>
         </div>
     </section>
 
