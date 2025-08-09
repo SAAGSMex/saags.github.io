@@ -274,43 +274,55 @@
 
         /* Sección Hero: imagen de fondo + overlay azul en una capa aparte */
         .hero-section {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        min-height: 80vh;
-        padding: 0 1rem;
-        margin: 0;
-        overflow: hidden;
-        /* Fallback de color por si la imagen tarda */
-        background-color: #0d245a;
-        background-image: image-set(
-            url('img/head-navbar-hero/herogalaxy.webp') type('image/webp') 1x,
-            url('img/head-navbar-hero/herogalaxy.png') type('image/png') 1x
-        );
-        background-position: center;
-        background-size: cover;
-        background-repeat: no-repeat;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 100dvh;
+            min-height: calc(var(--vh, 1vh) * 100);
+            padding: clamp(2.2rem, 6vh, 5rem) 0 clamp(2.5rem, 7vh, 5.5rem);
+            background: #0d245a url('img/head-navbar-hero/herogalaxy.webp') center/cover no-repeat;
+            overflow: clip;
         }
 
-        /* Overlay azul translúcido independiente (siempre visible) */
         .hero-section::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        pointer-events: none; /* no bloquea clics */
-        background: linear-gradient(
-            to bottom,
-            rgba(13, 36, 90, 0.3),
-            rgba(7, 11, 35, 0.5)
-        );
-        z-index: 0; /* por debajo del contenido */
+            content:"";
+            position:absolute;
+            inset:0;
+            background:linear-gradient(
+                to bottom,
+                rgba(13,36,90,var(--overlay-top,.48)),
+                rgba(7,11,35,var(--overlay-bottom,.65))
+            );
+            pointer-events:none;
+            z-index:0;
         }
 
-        /* Contenido encima del overlay */
-        .hero-section > * {
-        position: relative;
-        z-index: 1;
+        .hero-inner {
+            width: min(100% - 2rem, 680px);
+            margin-inline: auto;
+            padding-inline: clamp(1rem,4vw,2rem);
+            padding-top: clamp(1.2rem, 3.5vh, 2.8rem);
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-section h1 {
+            margin: 0 0 1rem;
+            font-size: clamp(2.2rem, 7vw, 4rem);
+            line-height: 1.15;
+            overflow-wrap: anywhere;
+        }
+
+        .hero-section .lead {
+            font-size: clamp(1.05rem, 3vw, 2rem);
+            font-weight: 450;
+            max-width: 40ch;
+            margin: 0 auto 2.1rem;
+            color: rgba(240,240,240,.92);
+            text-shadow: 0 2px 8px rgba(0,0,0,.6);
+            letter-spacing: .04em;
         }
 
         /* Botones dentro de la sección Hero */
@@ -345,32 +357,17 @@
         box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
         }
 
-        /* Subtítulo del Hero */
-        .hero-section .lead {
-        font-size: 1.6rem;
-        font-weight: 450;
-        color: rgba(240, 240, 240, 0.9);
-        letter-spacing: 0.05em;
-        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
-        max-width: 650px;
-        margin-left: auto;
-        margin-right: auto;
-        }
-
-        /* Animación de entrada (suave y no bloqueante) */
+        @media (max-height: 560px){
         .hero-section {
-        animation: fadeIn 1s ease-out;
+            justify-content: flex-start;
+            padding-top: calc(var(--navbar-height) + 1rem + env(safe-area-inset-top));
+        }
+        .hero-inner { padding-top: 0; }
         }
 
-        @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(6px); }
-        to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Respeta usuarios con "reducir movimiento" */
-        @media (prefers-reduced-motion: reduce) {
-        .hero-section { animation: none; }
-        .hero-section .btn { transition: none; }
+        @media (max-width: 340px){
+        .hero-buttons .btn { min-width: 100%; }
+        .hero-section h1 { font-size: clamp(1.9rem, 8vw, 2.4rem); }
         }
 
         /* --- Sección Nosotros --- */
@@ -1095,6 +1092,23 @@
             #galeria .text-justify-responsive {
                 text-align: center !important;
             }
+        }
+
+        /* ==== ANTI-SCROLL HORIZONTAL GLOBAL ==== */
+        html, body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: clip; /* mejor que hidden: no crea nuevo contexto de formateo */
+        }
+
+        *, *::before, *::after {
+        box-sizing: border-box;
+        }
+
+        img, video, canvas, iframe {
+        max-width: 100%;
+        height: auto;
+        display: block;
         }
     </style>
 </head>
