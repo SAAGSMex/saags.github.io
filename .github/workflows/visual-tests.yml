@@ -1,0 +1,39 @@
+name: Visual Regression
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+jobs:
+  visual:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install deps
+        run: npm install
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps chromium firefox webkit
+
+      - name: Run visual tests
+        env:
+          CI: 'true'
+        run: npm run test:visual
+
+      - name: Upload visual outputs (si falla)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-output
+          path: tests/visual/output
+          retention-days: 7

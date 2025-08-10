@@ -1,0 +1,4 @@
+node_modules/
+playwright-report/
+trace.zip
+/tests/visual/output/

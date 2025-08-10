@@ -75,3 +75,51 @@ Consulta los créditos de imágenes y recursos en la sección correspondiente de
 ---
 
 ¡Explora el universo con nosotros!
+
+---
+
+## 📱 Guía de pruebas responsivas (2025)
+
+Para asegurar que el sitio funciona correctamente como prototipo multi-dispositivo, validar en estos rangos clave (usar herramientas de DevTools o dispositivos reales):
+
+1. Móviles pequeños (≤ 360px ancho)
+  - Verificar que el hero no queda cortado y los botones caben en 1 columna.
+  - Navbar colapsa correctamente y no genera scroll horizontal.
+  - Calendario pasa a 1 columna (minmax reducido) y los textos no se desbordan.
+
+2. Móviles estándar (375–430px)
+  - Botones mantienen legibilidad (fuente ~1rem+).
+  - Galería: tarjetas ajustan imagen sin deformación y el botón Ver más ocupa ancho completo si es necesario.
+
+3. Tablets vertical (600–834px)
+  - Layout de secciones mantiene márgenes laterales coherentes.
+  - Hero mantiene proporción y título no se solapa con navbar.
+
+4. Tablets horizontal / pantallas bajas (altura < 560px)
+  - Se aplica reducción de altura del navbar (60px) y el hero se adapta con --vh.
+
+5. Laptops (1024–1366px)
+  - Revisión de densidad de texto (no líneas demasiado largas > 85ch).
+  - Cards de Actividades mantienen alineación y efecto hover.
+
+6. Desktop amplio (≥ 1440px)
+  - Hero no muestra texto excesivamente ancho (clamp aplicado).
+  - Calendario distribuye columnas simétricamente (auto-fill minmax).
+
+### Checklist técnico de validación
+| Ítem | OK esperado |
+|------|-------------|
+| No scroll horizontal | body sin overflow-x salvo lightbox |
+| Navbar colapsable | Se cierra al pulsar un enlace |
+| Enlaces internos sin contaminar historial | Atrás del navegador no navega entre secciones |
+| Galería expandible | Ver más / Ver menos reinyecta lightbox |
+| Calendario adaptable | 4→3→2→1 columnas según ancho |
+| Imágenes fluidas | max-width:100% y object-fit correcto |
+| Altura móvil estable | --vh aplicado en cambios de orientación |
+
+### Sugerencia de herramientas
+- Chrome DevTools: Panel Dimensions presets + Lighthouse (Performance / Best Practices / SEO / Accessibility).
+- Firefox Responsive Design Mode para variaciones de densidad de píxeles.
+- Device simulators (o BrowserStack) para validar Safari iOS (ver comportamiento de --vh).
+
+Si detectas desbordes visuales, buscar primero: paddings grandes, textos sin wrap o imágenes con width fijo.

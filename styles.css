@@ -126,6 +126,89 @@ body {
   overflow-x: clip;
 }
 
+/* ----------------------------
+   Ajustes responsivos extras 2025-08:
+   - Mejor legibilidad en pantallas muy pequeñas (<420px)
+   - Optimización de hero y navegación intermedia (md)
+   - Calendario adaptable a 2 y 1 columna en anchos reducidos
+   - Correcciones de spacing para evitar scroll horizontal
+-------------------------------- */
+
+@media (max-width: 1199.98px) {
+  /* Reducir ligeramente el tamaño de títulos muy grandes en pantallas medianas para evitar saltos de línea incómodos */
+  .hero-section h1 { font-size: clamp(2rem, 5.2vw, 3.2rem); }
+}
+
+@media (max-width: 991.98px) {
+  /* Ajustar paddings verticales del hero para tablets en orientación horizontal */
+  .hero-section { padding-top: clamp(4.5rem, 10vh, 6rem); padding-bottom: clamp(2rem, 6vh, 4rem); }
+  .hero-section .lead { font-size: clamp(1rem, 2.6vw, 1.5rem); }
+}
+
+@media (max-width: 575.98px) {
+  /* Espaciado más compacto en secciones con mucho texto */
+  section { padding-left: 0.85rem; padding-right: 0.85rem; }
+  #nosotros .nosotros-text-bg { padding: 1.25rem 1.1rem; }
+  .navbar-nav .nav-link { font-size: 1rem; padding: .55rem .9rem; }
+  .event-card .badge-evento { font-size: 1rem; }
+  .event-card .p-4 { padding: 1.1rem 1rem; }
+  .hero-section .btn { font-size: 1.05rem; padding: .75rem 1.6rem; }
+  /* Grid de equipo: forzar 2 columnas más balanceadas */
+  #equipo .row.g-4 > [class*="col-"] { padding-left: 6px; padding-right: 6px; }
+  .team-card { font-size: .92rem; }
+  .team-name { font-size: 1.05rem; }
+  .team-role { font-size: .85rem; line-height: 1.2; }
+  .team-social a { width: 28px; height: 28px; font-size: .85rem; }
+}
+
+@media (max-width: 420px) {
+  /* Ultra small devices */
+  .navbar-brand span { font-size: 1.15rem; }
+  .hero-section h1 { font-size: clamp(1.7rem, 8.5vw, 2.2rem); }
+  .hero-section .lead { font-size: clamp(.95rem, 4vw, 1.15rem); }
+  .btn-galeria { width: 100%; font-size: 1rem; padding: .7rem 1.2rem; }
+  .calendario { padding-left: .75rem; padding-right: .75rem; }
+  .gallery-card h5 { font-size: 1rem; }
+  .gallery-card p { font-size: .95rem; }
+  .badge-evento { font-size: .9rem; }
+  .evento { font-size: .9rem; grid-template-columns: 1fr; }
+  .evento__fecha { margin-bottom: .25rem; }
+  /* Equipo ultra pequeño: reducir avatars */
+  .avatar-wrapper { width: 150px; }
+}
+
+/* Calendario: permitir columnas más angostas en móviles muy estrechos */
+@media (max-width: 360px) {
+  .calendario__grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+}
+@media (max-width: 320px) {
+  .calendario__grid { grid-template-columns: 1fr; }
+}
+
+/* Event cards: altura flexible en pantallas pequeñas para reducir scroll */
+@media (max-width: 575.98px) {
+  .event-card [style*="height:270px"],
+  .event-card .bg-dark[style*="height:270px"] { height: 52vw !important; max-height: 220px; }
+}
+
+/* Mejoras de accesibilidad / densidad para dispositivos con poca altura */
+@media (max-height: 520px) and (orientation: landscape) {
+  .navbar { min-height: 60px; }
+  :root { --navbar-height: 60px; }
+  .hero-section { min-height: calc(var(--vh, 1vh) * 100 - 10px); }
+  .hero-section h1 { font-size: clamp(1.6rem, 5.2vw, 2.4rem); }
+  .hero-section .lead { font-size: clamp(.9rem, 2.2vw, 1.1rem); margin-bottom: 1.2rem; }
+  .hero-section .btn { padding: .6rem 1.2rem; font-size: .95rem; }
+}
+
+/* Evitar que badges largos provoquen overflow en tarjetas del calendario */
+.evento__texto { word-break: break-word; }
+
+/* Ajuste de smoother scroll en iOS: mejorar inercia (solo Safari/WebKit) */
+@supports (-webkit-touch-callout: none) {
+  body { -webkit-overflow-scrolling: touch; }
+}
+
 /* 3. Utilidades: alineación y títulos de sección */
 .text-justify {
   text-align: justify;
@@ -915,6 +998,8 @@ time {
     margin: .05em auto .1em;
     aspect-ratio: 1 / 1;
   }
+  /* Reajuste de densidad en navbar colapsada */
+  .navbar-nav .nav-link { font-size: 1.05rem; }
 }
 
 /* Móviles */
