@@ -67,8 +67,8 @@ body.theme-light {
   font-size: var(--fz-base);
   line-height: var(--lh-base);
   color: var(--clr-text);
-  padding-top: 2.5rem;
-  padding-bottom: 2.5rem;
+  padding-top: 0.1rem;
+  padding-bottom: 0.1rem;
 }
 
 #calendario .section-title {
@@ -78,14 +78,14 @@ body.theme-light {
   background: var(--clr-accent-gradient);
   background-clip: text;
   color: transparent;
-  margin-bottom: .35rem;
+  margin-bottom: .10rem;
 }
 
 #calendario h4 {
   font-size: 1.05rem;
   font-weight: 500;
   color: var(--clr-text-soft);
-  margin-bottom: 1.7rem;
+  margin-bottom: 0.7rem;
 }
 
 /* ===== Controles (layout mejorado) ===== */

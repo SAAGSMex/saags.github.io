@@ -162,10 +162,10 @@ body {
   display: flex;
   align-items: center;
   min-height: var(--navbar-height);
-  padding: .65rem 0;
+  padding: .50rem 0;
   letter-spacing: .03em;
   background-color: rgba(13, 36, 90, 0.95);
-  border-bottom: 1.5px solid var(--color-border);
+  border-bottom: 0.5px solid var(--color-border);
   box-shadow: 0 2px 12px rgba(13, 36, 90, 0.18);
 }
 .navbar .container {
@@ -197,7 +197,7 @@ body {
   gap: 1.3rem;
 }
 .navbar-nav .nav-link {
-  padding: .6rem 1.2rem;
+  padding: .5rem 1.2rem;
   margin: 0 .1rem;
   font-size: 1.15rem;
   font-weight: 500;
@@ -325,7 +325,11 @@ body {
 /* 8. Actividades: tarjetas y eventos destacados */
 #actividades p {
   font-size: 1.1rem;
-  padding-bottom: 1.3rem;
+  margin-bottom: 0.7rem !important;
+  padding-bottom: 0.2rem !important;
+}
+#actividades .card-footer {
+  margin-top: 0.2rem !important;
 }
 #actividades .card {
   display: flex;
@@ -504,7 +508,7 @@ body {
 .btn-galeria:hover {
   color: #fff;
   background: linear-gradient(145deg, #304d9d, #1a3a8f);
-  border-color: rgba(124, 185, 232, 0.8);
+  border-color: rgba(36, 42, 99, 0.8);
   box-shadow: 0 8px 25px rgba(124, 185, 232, 0.3);
   transform: translateY(-3px);
 }
@@ -512,7 +516,7 @@ body {
   background: var(--color-accent-warm);
   color: #0a1128;
   border-color: var(--color-accent-warm);
-  box-shadow: 0 2px 5px rgba(13, 36, 90, 0.5);
+  box-shadow: 0 2px 5px rgba(7, 19, 46, 0.5);
   transform: translateY(1px);
   transition: all .1s ease;
 }
@@ -837,6 +841,9 @@ time {
     box-shadow: 0 6px 24px #ffe06644, 0 2px 8px #7cb9e866;
   }
 }
+  #actividades .section-title {
+    margin-bottom: 0.5rem !important;
+  }
 
 /* Tablets */
 @media (max-width: 991.98px) {

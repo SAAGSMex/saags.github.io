@@ -64,35 +64,138 @@ document.addEventListener('DOMContentLoaded', function() {
         if (section.id) sectionObserver.observe(section);
     });
 
-    // 4. GESTIÓN AVANZADA DE ENLACES (CON CLEANUP)
-    document.querySelectorAll('a[href]').forEach(link => {
-        // CASO 1: Es un botón de una tarjeta de actividad
-        if (link.matches('#actividades .card-footer .btn')) {
-            const handleClick = (e) => {
-                // 1. Prevenimos la navegación para controlarla
+    // 3.b NAVEGACIÓN INTERNA SIN AGREGAR ENTRADAS AL HISTORIAL
+    // Objetivo:
+    //  - Mantener los href="#seccion" (SEO / accesibilidad) pero evitar que cada click añada una entrada en el historial.
+    //  - Limitar la navegación interna SOLO a:
+    //      * Enlaces del navbar.
+    //      * Botones/enlaces que el autor marque con la clase .scroll-link o data-scroll
+    //  - Otros enlaces internos con # (no autorizados) no harán scroll (para cumplir el requisito).
+    //  - Actualizamos la URL con replaceState (o history.replaceState) para no crear nueva entrada.
+    //  - Añadimos smooth scroll y sincronizamos el estado activo del navbar al instante.
+
+    const internalNavSelectors = [
+        '#navbarNav .nav-link[href^="#"]',          // enlaces del menú principal
+        '.navbar-brand[href^="#"]',                // logo (#inicio)
+        '.footer .list-unstyled a[href^="#"]',     // enlaces rápidos footer
+        'a.scroll-link[href^="#"]',                // enlaces marcados
+        '[data-scroll][href^="#"]',                // atributo data-scroll
+        'a.btn[href^="#"]'                         // botones con hash
+    ];
+    const allowedInternalLinks = document.querySelectorAll(internalNavSelectors.join(','));
+    const NAV_ACTIVE_CLASS = 'active';
+    // Configuración: si quieres actualizar el hash sin crear historial pon a true.
+    const UPDATE_HASH = false; // Requisito: mantener URL limpia sin #
+
+    function clearHashFromUrl() {
+        // Elimina cualquier hash visible sin crear nueva entrada de historial
+        const clean = location.pathname + location.search;
+        try { history.replaceState(null, '', clean); } catch(_) {}
+    }
+
+    function activarLinkPorHash(hash) {
+        if (!hash) return;
+        const id = hash.replace('#','');
+        navLinksForObserver.forEach(l => { l.classList.remove(NAV_ACTIVE_CLASS); l.removeAttribute('aria-current'); });
+        const candidate = document.querySelector(`.navbar-nav a[href="#${id}"]`);
+        if (candidate) {
+            candidate.classList.add(NAV_ACTIVE_CLASS);
+            candidate.setAttribute('aria-current','page');
+        }
+    }
+
+    allowedInternalLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            const hash = link.getAttribute('href');
+            if (!hash || !hash.startsWith('#')) return; // no interno
+            // Siempre prevenimos para cualquier hash (incluyendo '#') para que nunca ensucie la URL.
+            e.preventDefault();
+            // Caso especial: href="#" (sin destino) => sólo limpiamos el hash si aparece temporalmente.
+            if (hash === '#' || hash.length === 1) {
+                clearHashFromUrl();
+                return;
+            }
+            const id = hash.slice(1);
+            const destino = document.getElementById(id);
+            if (destino) {
+                destino.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                activarLinkPorHash(hash);
+            }
+            // Incluso si no existe el destino, evitamos que el hash quede en la barra.
+            if (!UPDATE_HASH) {
+                clearHashFromUrl();
+            } else {
+                try { history.replaceState(null, '', hash); } catch(_) {}
+            }
+            if (bsCollapse && navbarCollapse.classList.contains('show')) bsCollapse.hide();
+        });
+    });
+
+    // Neutralizamos otros enlaces internos (no permitidos) para que no gestionen navegación
+    // pero conservamos su href para SEO / accesibilidad (solo evitamos el scroll por hash).
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        if ([...allowedInternalLinks].includes(a)) return; // permitido
+        a.addEventListener('click', (e) => {
+            // Evitamos que cambie el hash y genere historial
+            e.preventDefault();
+            // Podríamos opcionalmente mostrar feedback o ignorar.
+        });
+    });
+
+    // (Opcional) Activar el link correspondiente si la página carga ya con un hash
+    if (location.hash) {
+        const initial = location.hash;
+        const target = document.getElementById(initial.substring(1));
+        if (target) {
+            // Ejecutamos scroll manual y luego limpiamos hash para que desaparezca de la barra.
+            setTimeout(() => {
+                target.scrollIntoView({ behavior: 'instant', block: 'start' });
+                activarLinkPorHash(initial);
+                if (!UPDATE_HASH) clearHashFromUrl();
+            }, 15);
+        } else if (!UPDATE_HASH) {
+            clearHashFromUrl();
+        }
+    }
+
+    // 4. GESTIÓN AVANZADA DE ENLACES (REFACTORIZADA)
+    // 4.1 Botones de tarjetas de actividad: efecto visual + apertura inmediata en nueva pestaña SIN contaminar historial
+    document.querySelectorAll('#actividades .card-footer .btn[href]').forEach(btn => {
+        const rawHref = btn.getAttribute('href') || '';
+        const isInternalHash = rawHref.startsWith('#');
+        if (!isInternalHash) {
+            btn.setAttribute('rel','noopener noreferrer');
+            btn.setAttribute('target','_blank');
+        } else {
+            btn.setAttribute('role','button');
+            btn.setAttribute('aria-disabled','false');
+        }
+        if (!btn.classList.contains('js-enhanced')) {
+            btn.classList.add('js-enhanced');
+            btn.addEventListener('click', (e) => {
                 e.preventDefault();
-                // 2. Guardamos el destino
-                const destination = link.href;
-                // 3. Añadimos el feedback visual
-                link.classList.add('btn-touched');
-                // 4. Quitamos el foco para evitar sticky :focus
-                link.blur();
-                // 5. Después de un retardo, hacemos DOS cosas:
-                //    - Abrimos el enlace.
-                //    - Limpiamos la clase para que el botón esté normal al regresar.
-                setTimeout(() => {
-                    // Abre el enlace en una nueva pestaña
-                    window.open(destination, '_blank', 'noopener,noreferrer');
-                    // ¡LA PIEZA FALTANTE! Elimina la clase del efecto visual.
-                    link.classList.remove('btn-touched');
-                }, 300); // 300ms de feedback visual.
-            };
-            link.addEventListener('click', handleClick);
-        // CASO 2: Es CUALQUIER OTRO enlace externo (que no sea un botón de actividad)
-        } else if (/^https?:\/\//.test(link.href) && link.hostname !== window.location.hostname) {
-            // A estos solo les ponemos el target="_blank"
-            link.setAttribute('target', '_blank');
-            link.setAttribute('rel', 'noopener noreferrer');
+                btn.classList.add('btn-touched');
+                btn.blur();
+                // Abrimos inmediatamente para que el navegador lo considere acción directa del usuario
+                if (!isInternalHash) {
+                    try { window.open(btn.href, '_blank', 'noopener,noreferrer'); } catch(_) {}
+                }
+                // Quitamos efecto en el siguiente frame para asegurar repaint
+                setTimeout(() => btn.classList.remove('btn-touched'), 180);
+            });
+        }
+    });
+
+    // 4.2 Enlaces externos reales (excluye: botones ya tratados, mismos host, cualquier href con hash interno del mismo host)
+    document.querySelectorAll('a[href^="http"]').forEach(a => {
+        if (a.closest('#actividades .card-footer')) return; // ya gestionado arriba
+        const sameHost = a.hostname === window.location.hostname;
+        if (sameHost) return; // dejamos que funcione nativo (podría ser otra página interna)
+        // Evitar forzar target si ya definido manualmente
+        if (!a.hasAttribute('target')) a.setAttribute('target','_blank');
+        const existingRel = a.getAttribute('rel') || '';
+        if (!/noopener/.test(existingRel) || !/noreferrer/.test(existingRel)) {
+            a.setAttribute('rel', (existingRel + ' noopener noreferrer').trim());
         }
     });
 
@@ -224,4 +327,53 @@ document.addEventListener('DOMContentLoaded', function() {
             mostrarMensajeExito(newsletterForm.querySelector('.input-group'), "¡Te has suscrito con éxito!");
         });
     }
+
+    // 7. CONTROL DE BOTONES ATRÁS / ADELANTE DEL NAVEGADOR
+    // Requisito: solo deben permitir salir del sitio (previa confirmación / doble pulsación),
+    // ya que la navegación interna no crea historial. Implementamos un 'back trap' suave.
+    (function configurarBackTrap(){
+        if (!window.history || !history.pushState) return;
+        const EXIT_WINDOW_MS = 1400; // tiempo para segunda pulsación
+        let ultimaPulsacion = 0;
+        let activo = true;
+        const SENTINEL_KEY = '__saagsSentinel';
+
+        // Región accesible para mensajes efímeros
+        let live = document.getElementById('saags-live-region');
+        if (!live) {
+            live = document.createElement('div');
+            live.id = 'saags-live-region';
+            live.className = 'visually-hidden';
+            live.setAttribute('aria-live','polite');
+            document.body.appendChild(live);
+        }
+        function anunciar(msg){
+            if (!live) return;
+            live.textContent = msg;
+        }
+
+        // Reemplazamos el estado actual por un sentinel y añadimos uno extra para capturar la primera pulsación atrás.
+        try {
+            history.replaceState({ [SENTINEL_KEY]: 0 }, document.title, location.href);
+            history.pushState({ [SENTINEL_KEY]: 1 }, document.title, location.href);
+        } catch(_){ return; }
+
+        window.addEventListener('popstate', function(e){
+            if (!activo) return; // ya liberado
+            if (!e.state || e.state[SENTINEL_KEY] === undefined) return; // no es nuestro sentinel, permitir salida
+            const ahora = Date.now();
+            if (ahora - ultimaPulsacion < EXIT_WINDOW_MS) {
+                // Segunda pulsación rápida: liberar y ejecutar un back real para salir.
+                activo = false;
+                anunciar('Saliendo del sitio');
+                // Pequeño timeout para asegurar que el usuario vea el anuncio (opcional)
+                setTimeout(() => { history.back(); }, 40);
+            } else {
+                // Primera pulsación: reinsertamos un sentinel para seguir dentro y avisamos.
+                ultimaPulsacion = ahora;
+                anunciar('Pulsa atrás de nuevo para salir');
+                try { history.pushState({ [SENTINEL_KEY]: 1 }, document.title, location.href); } catch(_) {}
+            }
+        });
+    })();
 });
