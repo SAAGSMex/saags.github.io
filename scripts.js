@@ -49,39 +49,60 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // 3. RESALTADO ACTIVO EFICIENTE CON INTERSECTION OBSERVER
+    // 3. RESALTADO ACTIVO EFICIENTE CON INTERSECTION OBSERVER (dinámico según altura del navbar)
     const sections = document.querySelectorAll('section[id]');
     const navLinksForObserver = document.querySelectorAll('.navbar-nav .nav-link');
 
-    // Opciones del observador corregidas para una mejor experiencia de usuario
-    const observerOptions = {
-        root: null,
-        // El margen superior es -76px (la altura del navbar) para que la sección se active justo cuando pasa por debajo de la barra.
-        // El margen inferior es -40% para evitar que se activen dos enlaces a la vez si una sección es muy alta.
-        rootMargin: '-76px 0px -40% 0px',
-        threshold: 0
-    };
+    let sectionObserver = null;
 
-    // ESTA ES LA ÚNICA DECLARACIÓN QUE DEBE EXISTIR
-    const sectionObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const id = entry.target.getAttribute('id');
-                navLinksForObserver.forEach(link => {
-                    link.classList.remove('active');
-                    link.removeAttribute('aria-current');
-                });
-                const activeLink = document.querySelector(`.navbar-nav a[href="#${id}"]`);
-                if (activeLink) {
-                    activeLink.classList.add('active');
-                    activeLink.setAttribute('aria-current', 'page');
+    function computeRootMargin() {
+        // Lee la variable CSS --navbar-height (fallback a 76)
+        const raw = getComputedStyle(document.documentElement).getPropertyValue('--navbar-height').trim();
+        // Extrae número (puede venir con px) y hace fallback
+        const px = parseFloat(raw) || 76;
+        // Margen superior negativo = altura navbar; margen inferior negativo proporcional evita doble activación
+        // -40% mantiene lógica previa. Podría ajustarse si se desea mayor anticipación.
+        return `-${px}px 0px -40% 0px`;
+    }
+
+    function buildObserver() {
+        if (sectionObserver) {
+            sectionObserver.disconnect();
+        }
+        const options = {
+            root: null,
+            rootMargin: computeRootMargin(),
+            threshold: 0
+        };
+        sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navLinksForObserver.forEach(link => {
+                        link.classList.remove('active');
+                        link.removeAttribute('aria-current');
+                    });
+                    const activeLink = document.querySelector(`.navbar-nav a[href="#${id}"]`);
+                    if (activeLink) {
+                        activeLink.classList.add('active');
+                        activeLink.setAttribute('aria-current', 'page');
+                    }
                 }
-            }
-        });
-    }, observerOptions);
+            });
+        }, options);
+        sections.forEach(section => { if (section.id) sectionObserver.observe(section); });
+    }
 
-    sections.forEach(section => {
-        if (section.id) sectionObserver.observe(section);
+    buildObserver();
+
+    // Recalcular cuando la altura potencial del navbar pueda cambiar (resize/orientation)
+    let resizeTO = null;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTO);
+        resizeTO = setTimeout(buildObserver, 160); // debounce ligero
+    });
+    window.addEventListener('orientationchange', () => {
+        setTimeout(buildObserver, 120);
     });
 
     // 3.b NAVEGACIÓN INTERNA SIN AGREGAR ENTRADAS AL HISTORIAL
@@ -242,6 +263,54 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         // Exponer para depuración si se necesita
         window.saagsLightbox = saagsLightbox;
+
+        // --- Detección de orientación (vertical/horizontal) para ajustar layout ---
+        const applyOrientationClasses = () => {
+            const slides = document.querySelectorAll('.glightbox-container .gslide');
+            slides.forEach(slide => {
+                const img = slide.querySelector('.gslide-media img');
+                if (!img) return;
+                const setClass = () => {
+                    if (img.naturalWidth && img.naturalHeight) {
+                        slide.classList.toggle('is-portrait', img.naturalHeight > img.naturalWidth);
+                    }
+                };
+                if (img.complete) {
+                    setClass();
+                } else {
+                    img.addEventListener('load', setClass, { once: true });
+                }
+            });
+        };
+
+        saagsLightbox.on('open', () => {
+            applyOrientationClasses();
+            const galeriaSection = document.getElementById('galeria');
+            if (galeriaSection && galeriaSection.hasAttribute('aria-hidden')) {
+                galeriaSection.removeAttribute('aria-hidden');
+            }
+        });
+        saagsLightbox.on('slide_changed', () => {
+            applyOrientationClasses();
+            const galeriaSection = document.getElementById('galeria');
+            if (galeriaSection && galeriaSection.hasAttribute('aria-hidden')) {
+                galeriaSection.removeAttribute('aria-hidden');
+            }
+        });
+    }
+
+    // Observa mutaciones para impedir aria-hidden en #galeria cuando un link tiene focus
+    const galeriaSec = document.getElementById('galeria');
+    if (galeriaSec) {
+        const mo = new MutationObserver(() => {
+            if (galeriaSec.hasAttribute('aria-hidden')) {
+                const active = document.activeElement;
+                if (active && galeriaSec.contains(active)) {
+                    galeriaSec.removeAttribute('aria-hidden');
+                }
+            }
+        });
+        mo.observe(galeriaSec, { attributes:true, attributeFilter:['aria-hidden'] });
     }
 
     // --- FUNCIONALIDAD PARA EL BOTÓN "VER MÁS FOTOGRAFÍAS" Y "VER MENOS FOTOGRAFÍAS" ---

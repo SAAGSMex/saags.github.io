@@ -69,6 +69,15 @@ body {
   padding-top: var(--navbar-height);
 }
 
+/* === Utilidades globales añadidas === */
+.container-narrow { max-width: 820px; margin-inline: auto; width:100%; padding-left:clamp(1rem,2vw,1.5rem); padding-right:clamp(1rem,2vw,1.5rem); }
+.section-tight { padding-top: clamp(1.5rem, 4vh, 3rem); padding-bottom: clamp(1.5rem, 4vh, 3rem); }
+
+/* Media wrapper para eventos (sustituye inline style height:270px) */
+.event-card .event-media-wrap { height:270px; overflow:hidden; }
+@media (max-width: 575.98px){ .event-card .event-media-wrap { height:220px; } }
+@media (min-width: 992px){ .event-card .event-media-wrap { height:300px; } }
+
 /* Animaciones suaves para galería oculta */
 @keyframes galeriaFadeIn {
   0% { opacity: 0; transform: translateY(14px); }
@@ -143,6 +152,41 @@ body {
   /* Ajustar paddings verticales del hero para tablets en orientación horizontal */
   .hero-section { padding-top: clamp(4.5rem, 10vh, 6rem); padding-bottom: clamp(2rem, 6vh, 4rem); }
   .hero-section .lead { font-size: clamp(1rem, 2.6vw, 1.5rem); }
+}
+
+/* Tablets medianos (iPad mini / Air portrait ~768-991px) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .navbar .container { max-width: 100%; padding: 0 1rem; }
+  .navbar-brand img { width: 46px; height: 46px; }
+  .navbar-brand span { font-size: 1.55rem; letter-spacing: .04em; }
+  .navbar-nav { gap: .55rem; flex-wrap: nowrap; }
+  .navbar-nav .nav-link { padding: .45rem .7rem; font-size: .95rem; letter-spacing: .02em; }
+  .hero-section h1 { font-size: clamp(2.1rem, 4.9vw, 3.05rem); }
+  .hero-section .lead { max-width: 50ch; font-size: clamp(1rem, 1.9vw, 1.35rem); }
+}
+
+/* Tablets grandes (iPad Pro landscape 1024-1199px) refine before desktop */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .navbar .container { max-width: 100%; padding: 0 1.25rem; }
+  .navbar-brand img { width: 50px; height: 50px; }
+  .navbar-brand span { font-size: 1.7rem; }
+  .navbar-nav { gap: .8rem; }
+  .navbar-nav .nav-link { padding: .5rem .85rem; font-size: 1rem; }
+  .hero-section h1 { font-size: clamp(2.4rem, 4vw, 3.4rem); }
+  .hero-section .lead { font-size: clamp(1.05rem, 1.8vw, 1.45rem); }
+}
+
+/* Breakpoint banda problemática (820–860px) donde el menú podía desbordar */
+@media (min-width: 820px) and (max-width: 860px) {
+  .navbar-nav { gap: .45rem; }
+  .navbar-nav .nav-link { padding: .42rem .6rem; font-size: .9rem; }
+  .navbar-brand span { font-size: 1.45rem; }
+}
+
+/* Evitar saltos verticales si el menú se parte: forzar no-wrap y scroll horizontal suave si aún excede */
+@media (min-width: 768px) and (max-width: 950px) {
+  .navbar-nav { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+  .navbar-nav::-webkit-scrollbar { display: none; }
 }
 
 @media (max-width: 575.98px) {
@@ -541,6 +585,48 @@ body {
 }
 .badge-evento small {
   font-size: .85em;
+}
+
+/* Versión corta del enlace de Calendario: oculta por defecto */
+.nav-text-short { display: none; }
+.nav-text-full { display: inline; }
+
+/* Compresión específica para iPad Mini / Air (ancho 768–880px) */
+@media (min-width: 768px) and (max-width: 880px) {
+  .navbar-brand img { width: 42px; height: 42px; }
+  .navbar-brand span { font-size: 1.35rem; letter-spacing: .03em; }
+  .navbar-nav { gap: .35rem; }
+  .navbar-nav .nav-link {
+    padding: .38rem .55rem;
+    font-size: .82rem;
+    letter-spacing: .01em;
+    line-height: 1.1;
+  }
+  /* Mostrar versión corta del texto largo para ahorrar espacio */
+  .nav-text-full { display: none; }
+  .nav-text-short { display: inline; }
+  /* Evitar incremento de altura al comprimirse */
+  :root { --navbar-height: 70px; }
+  .navbar { min-height: var(--navbar-height); }
+}
+
+/* Mobile refinement: make event badges smaller so they block less of the poster */
+@media (max-width: 575.98px) {
+  .event-card .position-absolute.top-0.end-0 { margin: .55rem .55rem 0 0 !important; }
+  .event-card .badge-evento {
+    font-size: .9rem;           /* smaller text */
+    line-height: 1.15;
+    padding: .35em .6em .4em;   /* tighter box */
+    border-radius: 10px;        /* slightly rounder */
+    background: rgba(0,123,255,.85); /* more translucent */
+    backdrop-filter: blur(2px);
+  }
+  .event-card .badge-evento small {
+    font-size: .65em;           /* reduce secondary line */
+    line-height: 1.1;
+  }
+  /* vertical spacing between stacked badges */
+  .event-card .badge-evento + .badge-evento { margin-top: .4rem; }
 }
 
 /* 9. Galería: imágenes y recursos multimedia */
@@ -1005,10 +1091,11 @@ time {
 /* Móviles */
 @media (max-width: 767.98px) {
   #galeria > .container {
-    width: 100vw;
-    max-width: 100vw;
-    padding: 0;
-    margin: 0;
+  /* Avoid 100vw which can introduce horizontal scroll (accounts not for scrollbar width) */
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+  margin: 0;
   }
   #galeria .row,
   #galeria [class*="col-"] {
@@ -1045,4 +1132,314 @@ time {
   #galeria .text-justify-responsive {
     text-align: center !important;
   }
+}
+
+/* --- Responsive refinement patch (minimal overrides to fix mobile spacing & overflow) --- */
+@media (max-width: 575.98px) {
+  /* Navbar height reduction for small phones */
+  :root { --navbar-height: 68px; }
+  body { padding-top: var(--navbar-height); }
+  .navbar { padding: .55rem 0; }
+  .navbar-brand img { width: 48px; height: 48px; }
+  .navbar-brand span { font-size: 1.45rem; }
+  /* Normalize horizontal padding for main sections while letting hero keep its own */
+  section[id]:not(.hero-section) {
+    padding-left: 1.1rem;
+    padding-right: 1.1rem;
+  }
+  /* Reduce extra-large button sizing inside actividades cards */
+  #actividades .card-footer .btn {
+    padding: .85rem 1.25rem;
+    font-size: 1.05rem;
+    line-height: 1.3;
+  }
+  /* Calendar: make grid fit narrow phones without forcing horizontal scroll */
+  .calendario {
+    padding: var(--sp-5) 1rem;
+  }
+  .calendario__grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: .85rem;
+  }
+  .mes { min-height: auto; }
+  .evento { font-size: .95rem; }
+  .evento__fecha { font-size: .9rem; }
+  /* Hero buttons: force vertical stacking and full width for easier tapping */
+  .hero-buttons { flex-direction: column; align-items: stretch; }
+  .hero-buttons .btn { width: 100%; margin-bottom: .6rem; }
+  .hero-section h1 { font-size: clamp(1.9rem, 8.4vw, 2.55rem); }
+  .hero-section .lead { font-size: clamp(1rem, 4.5vw, 1.25rem); margin-bottom: 1.4rem; }
+  /* Nosotros text container compact */
+  #nosotros .nosotros-text-bg { margin-bottom: 1.5rem; }
+  /* Activity cards tighter body */
+  #actividades .card-body { padding: 1rem .9rem .3rem; }
+  #actividades p.card-text { font-size: .97rem; }
+  /* Event cards image aspect for narrow devices */
+  .event-card .bg-dark[style*="height:270px"] { height: 55vw !important; max-height: 230px; }
+  /* Gallery cards text size */
+  .gallery-card h5 { font-size: 1.02rem; }
+  .gallery-card p { font-size: .95rem; }
+  /* Equipo avatars slightly smaller already handled; adjust spacing */
+  #equipo .team-card { padding: .25rem 0 .8rem; }
+  .team-social { gap: .55rem; }
+  /* Contacto form adjustments */
+  #contacto form label { font-size: .9rem; }
+  #contacto form .form-control { padding: .55rem .85rem; font-size: .95rem; }
+  #contacto h4 { font-size: 1.1rem; }
+  #contacto .btn { padding: .75rem 1.4rem; font-size: 1.05rem; }
+  /* Footer adjustments */
+  .footer h5, .footer h4 { font-size: 1.05rem; }
+  .footer p, .footer li, .footer small { font-size: .85rem; }
+}
+
+@media (max-width: 420px) {
+  /* Slightly smaller calendar columns on ultra narrow devices */
+  .calendario__grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+  .navbar-brand span { font-size: 1.25rem; }
+  .hero-section h1 { font-size: clamp(1.7rem, 8.8vw, 2.2rem); }
+  .hero-section .lead { font-size: clamp(.95rem, 4.8vw, 1.1rem); }
+  #actividades .card-footer .btn { width: 100%; }
+}
+
+/* Ultra pequeños <380px: compactar aún más equipo y títulos */
+@media (max-width: 379.98px) {
+  .section-title { font-size: 1.05rem; }
+  .avatar-wrapper { width: 130px; }
+  .team-name { font-size: .95rem; }
+  .team-role { font-size: .75rem; }
+  .team-social a { width: 26px; height: 26px; font-size: .75rem; }
+  .hero-section .btn { padding: .65rem 1.1rem; font-size: .95rem; }
+}
+
+/* iPad / tablets grandes (portrait & landscape) */
+@media (min-width: 1024px) and (max-width: 1366px) {
+  .hero-section h1 { font-size: clamp(2.6rem, 4vw, 3.6rem); }
+  .hero-section .lead { font-size: clamp(1.15rem, 1.8vw, 1.6rem); }
+  #equipo .avatar-wrapper { width: 210px; }
+  .calendario__grid { grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
+  #actividades .card { margin-bottom: 2.2rem; }
+}
+
+/* Refuerzo en landscape iPad para evitar exceso de altura hero */
+@media (min-width: 1024px) and (max-width: 1366px) and (orientation: landscape) {
+  .hero-section { padding-top: clamp(5rem, 9vh, 6.5rem); padding-bottom: clamp(2.5rem, 9vh, 5rem); }
+}
+
+/* Ajuste de grid del equipo: asegurar envoltura limpia y consistencia de gaps */
+#equipo .row.g-4 { row-gap: 2.2rem; }
+.team-social { flex-wrap: wrap; }
+
+/* iPad Mini / ancho 768–820px: comprimir navbar y estabilizar sección equipo */
+@media (min-width: 768px) and (max-width: 820px) {
+  :root { --navbar-height: 70px; }
+  body { padding-top: var(--navbar-height); }
+  .navbar { padding: .55rem 0; }
+  .navbar-brand { gap: 8px; }
+  .navbar-brand img { width: 42px; height: 42px; }
+  .navbar-brand span { font-size: 1.35rem; letter-spacing: .03em; }
+  .navbar-nav { gap: .4rem; overflow-x: visible; }
+  .navbar-nav .nav-link { padding: .4rem .55rem; font-size: .82rem; letter-spacing: .015em; }
+  /* Enlace más largo (Calendario Astronómico) suele ocupar mucho; reducir aún más.
+     Si el orden cambia, actualizar nth-child según corresponda. */
+  .navbar-nav .nav-link:nth-child(5) { font-size: .72rem; padding: .38rem .5rem; }
+  /* Evitar salto de layout al navegar a #equipo */
+  #equipo { scroll-margin-top: calc(var(--navbar-height) + 12px); }
+  /* Reducir ligeramente avatar para que filas no empujen márgenes */
+  #equipo .avatar-wrapper { width: 200px; }
+}
+
+/* Forzar modo hamburguesa (collapse) solo entre 768 y 820px (iPad Mini / Air) */
+@media (min-width: 768px) and (max-width: 820px) {
+  /* Mostrar el botón toggler aunque navbar-expand-md normalmente lo oculte */
+  .navbar.navbar-expand-md .navbar-toggler { display: block; }
+  /* Ocultar el menú expandido por defecto */
+  .navbar.navbar-expand-md .navbar-collapse { display: none !important; }
+  /* Cuando Bootstrap agrega .show al colapsar, se muestra */
+  .navbar.navbar-expand-md .navbar-collapse.show { display: block !important; }
+  /* Estilos del panel desplegado: similar a móvil, fondo sólido y lista vertical */
+  .navbar.navbar-expand-md .navbar-collapse {
+    position: absolute;
+    top: var(--navbar-height);
+    left: 0; right: 0;
+    background: rgba(7,11,35,0.96);
+    backdrop-filter: blur(4px);
+    padding: .75rem 1rem 1rem;
+    border-bottom: 1px solid var(--color-border);
+    box-shadow: 0 8px 28px -6px rgba(0,0,0,.55);
+    animation: navSlideDown .35s var(--easing-standard);
+  }
+  @keyframes navSlideDown { from { opacity:0; transform: translateY(-8px);} to { opacity:1; transform: translateY(0);} }
+  .navbar.navbar-expand-md .navbar-nav { flex-direction: column; align-items: stretch; gap: .25rem; width: 100%; }
+  .navbar.navbar-expand-md .navbar-nav .nav-link {
+    width: 100%;
+    text-align: left;
+    padding: .65rem .9rem;
+    margin: 0;
+    font-size: .95rem;
+    border-radius: .55rem;
+  }
+  .navbar.navbar-expand-md .navbar-nav .nav-link + .nav-link { margin-top: .15rem; }
+  /* Ajuste de la versión corta del calendario: restablecer tamaño legible en panel */
+  .navbar.navbar-expand-md .navbar-collapse.show .nav-text-short { font-size: inherit; }
+}
+
+/* ---------------------------------------------
+   NAVBAR RESPONSIVE UNIFICADO >=768px
+   Objetivos:
+   - Evitar scroll horizontal y saltos
+   - Compresión progresiva con clamp
+   - Reducción específica del enlace más largo (Calendario)
+   - Restablecer tamaños más confortables en >=1200px
+---------------------------------------------- */
+@media (min-width: 768px) {
+  /* Mantener altura estándar para evitar desajustes de scroll al anclar */
+  :root { --navbar-height: 76px; }
+  body { padding-top: var(--navbar-height); }
+  .navbar { padding: .5rem 0; }
+  .navbar .container { max-width: 100%; padding: 0 1.1rem; }
+  .navbar-brand img { width: 46px; height: 46px; }
+  .navbar-brand span { font-size: clamp(1.25rem, 1rem + .8vw, 1.6rem); letter-spacing: .045em; }
+  .navbar-nav { flex-wrap: nowrap; gap: .5rem; }
+  .navbar-nav .nav-link {
+    padding: .42rem .65rem;
+    font-size: clamp(.74rem, .66rem + .35vw, .95rem);
+    letter-spacing: .02em;
+    flex: 0 1 auto;
+    white-space: nowrap;
+  }
+  /* Enlace más largo (ajuste por texto). Usa selector por contenido común. */
+  .navbar-nav .nav-link[href*="Calendario"],
+  .navbar-nav .nav-link[href*="calendario"],
+  .navbar-nav .nav-link:nth-child(5) {
+    font-size: clamp(.64rem, .58rem + .32vw, .86rem);
+    padding: .4rem .5rem;
+    letter-spacing: .01em;
+  }
+}
+
+/* Fallback de desplazamiento horizontal (solo cuando el menú NO está colapsado):
+   excluir 768–820 porque ahí usamos panel vertical hamburguesa */
+@media (min-width: 821px) and (max-width: 880px) {
+  .navbar-nav { overflow-x: auto; scrollbar-width: none; }
+  .navbar-nav::-webkit-scrollbar { display: none; }
+}
+
+/* Desktop ancho >=1200px: espaciar y ampliar ligeramente */
+@media (min-width: 1200px) {
+  :root { --navbar-height: 76px; }
+  body { padding-top: var(--navbar-height); }
+  .navbar { padding: .65rem 0; }
+  .navbar .container { padding: 0 1.5rem; }
+  .navbar-brand img { width: 54px; height: 54px; }
+  .navbar-brand span { font-size: 1.9rem; }
+  .navbar-nav { gap: 1rem; }
+  .navbar-nav .nav-link { font-size: 1.05rem; padding: .55rem 1rem; }
+  .navbar-nav .nav-link[href*="Calendario"],
+  .navbar-nav .nav-link[href*="calendario"],
+  .navbar-nav .nav-link:nth-child(5) { font-size: 1rem; padding: .52rem .85rem; }
+}
+
+/* --- Ajuste consolidado final para iPad Mini / Air (768–820px) ---
+   Coloca después del bloque unificado >=768 para asegurar precedencia. */
+@media (min-width: 768px) and (max-width: 820px) {
+  :root { --navbar-height: 70px !important; }
+  body { padding-top: var(--navbar-height) !important; }
+  .navbar { padding: .55rem 0 !important; }
+  /* Hero un poco más compacto para que el contenido principal no requiera tanto scroll inicial */
+  .hero-section { padding-top: clamp(4.2rem, 9vh, 5.5rem); padding-bottom: clamp(2rem, 6vh, 4rem); }
+  .hero-section h1 { font-size: clamp(2.1rem, 4.2vw, 3rem); }
+  .hero-section .lead { font-size: clamp(1rem, 1.6vw, 1.3rem); }
+  /* Secciones: reducir márgenes verticales si había saltos innecesarios */
+  section[id]:not(.hero-section) { scroll-margin-top: calc(var(--navbar-height) + 10px); }
+  /* Equipo: evitar overflow de columnas Bootstrap (4x25% en 768px ≈192px) */
+  #equipo .avatar-wrapper { width: 170px !important; max-width: 100%; }
+  #equipo .team-name { font-size: 1.05rem; }
+  #equipo .team-role { font-size: .9rem; }
+  /* Calendario: asegurar no se aplasten columnas si el padding reduce el ancho útil */
+  .calendario__grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+  /* Panel colapsado ya vertical: permitir fuente cómoda */
+  .navbar.navbar-expand-md .navbar-collapse .nav-link { font-size: .95rem !important; }
+}
+.gallery-compact-grid { row-gap: 1.25rem; }
+
+/* Optimización de espacio en galería >=768px */
+@media (min-width: 768px) {
+  #galeria { padding-top: 3.4rem; padding-bottom: 3.4rem; }
+  #galeria .section-title { margin-bottom: 2.4rem; }
+  #galeria .row > [class*="col-"] { margin-bottom: 2rem; }
+  #galeria .gallery-card { box-shadow: 0 3px 10px rgba(0,0,0,.45); }
+  #galeria .gallery-card .p-4 { padding: .75rem 1rem .55rem; }
+  #galeria .gallery-card h5 { margin-bottom: .45rem; font-size: 1.05rem; }
+  #galeria .gallery-card p { font-size: .95rem; }
+}
+
+@media (min-width: 992px) {
+  #galeria { padding-top: 3.2rem; padding-bottom: 3.2rem; }
+  #galeria .row > [class*="col-"] { margin-bottom: 2.1rem; }
+  #galeria .gallery-card .bg-dark { aspect-ratio: 4 / 3; }
+  #galeria .gallery-card h5 { font-size: 1.03rem; }
+  #galeria .gallery-card p { font-size: .93rem; }
+}
+
+@media (min-width: 1200px) {
+  #galeria .gallery-card { border-left-width: 3px; }
+  #galeria .gallery-card .p-4 { padding: .55rem .85rem .35rem; }
+}
+/* GLightbox refinado: progresivo móvil -> desktop */
+.glightbox-container .gslide {display:flex !important; flex-direction:column; justify-content:center; align-items:center; padding:0 !important;}
+.glightbox-container .gslide-media {display:flex !important; align-items:center; justify-content:center; width:100%; max-height:100%; margin:0 !important;}
+.glightbox-container .gslide-media img,.glightbox-clean .gslide-media img,.glightbox-modern .gslide-media img{object-fit:contain !important; width:auto !important; height:auto !important; max-width:calc(100vw - 44px); max-height:calc(100vh - 180px); background:#000 !important;}
+.glightbox-container .gslide.is-portrait .gslide-media img{max-width:calc(100vw - 60px); max-height:calc(100vh - 160px);} /* retratos: un poco más de ancho relativo */
+.gslide-description{width:100%; max-width:900px; background:rgba(24,27,31,.95)!important; padding:.65rem .95rem !important; max-height:240px; overflow-y:auto;}
+.gslide-description h4{font-size:1.25rem !important; margin:0 0 .55rem !important;}
+.gslide-description p{font-size:1rem !important; line-height:1.5 !important; margin:0 0 .6rem !important;}
+.gslide-description small{font-size:.85rem !important;}
+@media (max-width:575.98px){
+  .glightbox-container .gslide-media img{max-width:calc(100vw - 30px); max-height:calc(100vh - 220px);} /* más espacio descripción */
+  .gslide-description{max-height:260px; padding:.55rem .8rem !important;}
+  .gslide-description h4{font-size:1.15rem !important;}
+  .gslide-description p{font-size:.95rem !important;}
+  .gslide-description small{font-size:.78rem !important;}
+}
+@media (min-width:576px) and (max-width:767.98px){
+  .glightbox-container .gslide-media img{max-width:calc(100vw - 40px); max-height:calc(100vh - 210px);} /* tablets portrait */
+  .gslide-description{max-height:250px;}
+}
+@media (min-width:768px) and (max-width:991.98px){
+  .glightbox-container .gslide-media img{max-width:calc(100vw - 90px); max-height:calc(100vh - 200px);} /* Tablets: más área útil */
+  .gslide-description{max-width:860px; max-height:210px;}
+  /* Ajuste: dar más alto a la imagen y subirla (menos resta), descripción un poco más baja y con margen para no parecer que corta la foto */
+  .glightbox-container .gslide-media img{max-width:calc(100vw - 90px); max-height:calc(100vh - 170px);} /* +30px para la imagen */
+  .gslide-description{max-width:840px; max-height:190px; margin-top:.65rem;}
+  /* Imágenes verticales: dar todavía más alto y reducir descripción para que no tape */
+  .glightbox-container .gslide.is-portrait .gslide-media img{max-height:calc(100vh - 150px);} /* +20px vertical extra */
+  .glightbox-container .gslide.is-portrait .gslide-description{max-height:170px; margin-top:.55rem;}
+}
+@media (min-width:992px){
+  .glightbox-container .gslide-media img{max-width:calc(100vw - 220px); max-height:calc(100vh - 240px);} /* desktop mediano */
+  .gslide-description{max-height:210px;}
+}
+@media (min-width:1200px){
+  .glightbox-container .gslide-media img{max-width:calc(100vw - 280px); max-height:calc(100vh - 230px);} /* desktop grande */
+  .gslide-description{max-height:200px;}
+}
+
+/* Galería: ajustes de espaciado responsive conservando diseño base */
+@media (min-width:768px) and (max-width:991.98px){
+  #galeria .gallery-card .bg-dark { aspect-ratio:4 / 3; }
+  #galeria .gallery-card picture,#galeria .gallery-card img { object-fit:cover; }
+  #galeria .gallery-card .p-4 { padding:.6rem .85rem .45rem; }
+  #galeria .gallery-card h5 { font-size:1.02rem; }
+  #galeria .gallery-card p { font-size:.9rem; }
+}
+@media (max-width: 575.98px){
+  #galeria .gallery-card { border-left-width:3px; }
+  #galeria .row > [class*="col-"] { margin-bottom:1.3rem; }
+  #galeria .gallery-card .p-4 { padding:.6rem .75rem .45rem; }
+  #galeria .gallery-card h5 { font-size:1.05rem; }
+  #galeria .gallery-card p { font-size:.9rem; }
+}
+@media (min-width:576px) and (max-width:767.98px){
+  #galeria .row > [class*="col-"] { margin-bottom:1.6rem; }
+  #galeria { padding-top:3.1rem; padding-bottom:3.1rem; }
 }
