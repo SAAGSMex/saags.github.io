@@ -200,13 +200,28 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // 5. INICIALIZACIÓN DE GLIGHTBOX
+    // Antes de inicializar: quitar la clase .glightbox a los enlaces dentro de la galería oculta
+    // para que NO formen parte del conjunto navegable inicialmente.
+    let hiddenGalleryAnchors = [];
+    const hiddenGalleryContainerPre = document.getElementById('galeria-oculta');
+    if (hiddenGalleryContainerPre) {
+        hiddenGalleryAnchors = hiddenGalleryContainerPre.querySelectorAll('a.glightbox');
+        hiddenGalleryAnchors.forEach(a => {
+            a.classList.add('glightbox-hidden');
+            a.classList.remove('glightbox');
+        });
+    }
+
+    let saagsLightbox = null;
     if (typeof GLightbox === 'function') {
-        GLightbox({
+        saagsLightbox = GLightbox({
             selector: '.glightbox',
             touchNavigation: true,
-            loop: true,
+            loop: false, // No hacer loop: después de "Luna" no avanza a imágenes ocultas
             closeButton: true
         });
+        // Exponer para depuración si se necesita
+        window.saagsLightbox = saagsLightbox;
     }
 
     // --- FUNCIONALIDAD PARA EL BOTÓN "VER MÁS FOTOGRAFÍAS" Y "VER MENOS FOTOGRAFÍAS" ---
@@ -215,10 +230,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const galeriaOculta = document.getElementById('galeria-oculta');
 
     if (btnVerMas && btnVerMenos && galeriaOculta) {
-        // Almacenamos la instancia de GLightbox para poder recargarla.
-        let lightbox = GLightbox({
-            selector: '.glightbox'
-        });
+        // Ya existe una instancia global (saagsLightbox). Usamos esa referencia.
+        const lightbox = saagsLightbox;
+        // Referencia a los anchors ocultos (ya sin la clase .glightbox).
+        const hiddenAnchors = galeriaOculta.querySelectorAll('a.glightbox-hidden');
 
         // Funcionalidad para el botón "Ver más" con animación suave
         btnVerMas.addEventListener('click', function(e) {
@@ -236,8 +251,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Mostrar botón "Ver menos" con animación de entrada
                 btnVerMenos.classList.remove('d-none');
                 btnVerMenos.classList.add('btn-galeria-anim-show');
+                // Agregar nuevamente la clase .glightbox a los anchors ocultos para que ahora sí participen
+                hiddenAnchors.forEach(a => {
+                    a.classList.add('glightbox');
+                });
                 // Recargar lightbox para nuevas imágenes
-                lightbox.reload();
+                if (lightbox) lightbox.reload();
             };
             btnVerMas.addEventListener('animationend', onHideEnd);
         });
@@ -265,6 +284,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 btnVerMas.style.display = 'inline-block';
                 btnVerMas.classList.remove('btn-galeria-anim-hide');
                 btnVerMas.classList.add('btn-galeria-anim-show');
+                // Quitar de nuevo la clase .glightbox para que no sean navegables
+                hiddenAnchors.forEach(a => {
+                    a.classList.remove('glightbox');
+                });
+                if (lightbox) lightbox.reload();
             };
             btnVerMenos.addEventListener('animationend', onHideMenos);
         });
