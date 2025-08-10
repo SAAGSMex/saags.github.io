@@ -65,6 +65,39 @@ body {
   background: var(--color-bg);
   color: var(--color-text);
   min-height: 100dvh;
+  /* Reserva espacio fijo para el navbar flotante */
+  padding-top: var(--navbar-height);
+}
+
+/* Animaciones suaves para galería oculta */
+@keyframes galeriaFadeIn {
+  0% { opacity: 0; transform: translateY(14px); }
+  60% { opacity: 1; }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes galeriaFadeOut {
+  0% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(10px); }
+}
+@keyframes btnFadeOut {
+  0% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(.85); }
+}
+@keyframes btnFadeIn {
+  0% { opacity: 0; transform: scale(.85); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.galeria-anim-enter { animation: galeriaFadeIn .55s var(--easing-standard) both; }
+.galeria-anim-exit  { animation: galeriaFadeOut .4s var(--easing-standard) both; }
+.btn-galeria-anim-hide { animation: btnFadeOut .38s ease forwards; }
+.btn-galeria-anim-show { animation: btnFadeIn .34s ease both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .galeria-anim-enter,
+  .galeria-anim-exit,
+  .btn-galeria-anim-hide,
+  .btn-galeria-anim-show { animation: none !important; }
 }
 
 [id] {

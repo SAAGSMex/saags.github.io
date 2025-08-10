@@ -220,30 +220,53 @@ document.addEventListener('DOMContentLoaded', function() {
             selector: '.glightbox'
         });
 
-        // Funcionalidad para el botón "Ver más"
+        // Funcionalidad para el botón "Ver más" con animación suave
         btnVerMas.addEventListener('click', function(e) {
-            // 1. Prevenimos que el enlace '#' salte la página
             e.preventDefault();
-            // 2. Mostramos la galería oculta quitando la clase 'd-none'
-            galeriaOculta.classList.remove('d-none');
-            // 3. Ocultamos el botón "Ver más" para que no se pueda volver a hacer clic
-            btnVerMas.style.display = 'none';
-            // 4. Mostramos el botón "Ver menos"
-            btnVerMenos.classList.remove('d-none');
-            // 5. Recargamos la instancia de GLightbox para que encuentre las nuevas imágenes
-            lightbox.reload();
+            // Animamos desaparición del botón "Ver más"
+            btnVerMas.classList.remove('btn-galeria-anim-show');
+            btnVerMas.classList.add('btn-galeria-anim-hide');
+            // Al terminar la animación ocultamos y mostramos galería
+            const onHideEnd = () => {
+                btnVerMas.style.display = 'none';
+                btnVerMas.removeEventListener('animationend', onHideEnd);
+                // Mostrar galería animada
+                galeriaOculta.classList.remove('d-none');
+                galeriaOculta.classList.add('galeria-anim-enter');
+                // Mostrar botón "Ver menos" con animación de entrada
+                btnVerMenos.classList.remove('d-none');
+                btnVerMenos.classList.add('btn-galeria-anim-show');
+                // Recargar lightbox para nuevas imágenes
+                lightbox.reload();
+            };
+            btnVerMas.addEventListener('animationend', onHideEnd);
         });
 
-        // Funcionalidad para el botón "Ver menos"
+        // Funcionalidad para el botón "Ver menos" con animación de cierre
         btnVerMenos.addEventListener('click', function(e) {
-            // 1. Prevenimos que el enlace '#' salte la página
             e.preventDefault();
-            // 2. Ocultamos nuevamente la galería añadiendo la clase 'd-none'
-            galeriaOculta.classList.add('d-none');
-            // 3. Ocultamos el botón "Ver menos"
-            btnVerMenos.classList.add('d-none');
-            // 4. Mostramos el botón "Ver más"
-            btnVerMas.style.display = 'inline-block';
+            // Animar salida de la galería
+            galeriaOculta.classList.remove('galeria-anim-enter');
+            galeriaOculta.classList.add('galeria-anim-exit');
+            const onGalleryExit = () => {
+                galeriaOculta.classList.add('d-none');
+                galeriaOculta.classList.remove('galeria-anim-exit');
+                galeriaOculta.removeEventListener('animationend', onGalleryExit);
+            };
+            galeriaOculta.addEventListener('animationend', onGalleryExit);
+            // Animar botón "Ver menos" y re-aparecer "Ver más"
+            btnVerMenos.classList.remove('btn-galeria-anim-show');
+            btnVerMenos.classList.add('btn-galeria-anim-hide');
+            const onHideMenos = () => {
+                btnVerMenos.classList.add('d-none');
+                btnVerMenos.classList.remove('btn-galeria-anim-hide');
+                btnVerMenos.removeEventListener('animationend', onHideMenos);
+                // Reaparece "Ver más"
+                btnVerMas.style.display = 'inline-block';
+                btnVerMas.classList.remove('btn-galeria-anim-hide');
+                btnVerMas.classList.add('btn-galeria-anim-show');
+            };
+            btnVerMenos.addEventListener('animationend', onHideMenos);
         });
     }
 
