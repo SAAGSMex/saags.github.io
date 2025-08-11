@@ -5,6 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Página oficial de la Sociedad Astronómica de Aguascalientes (SAAGS)">
     <title>Sociedad Astronómica de Aguascalientes (SAAGS)</title>
+        <!--
+            SAAGS – index.html
+            Estructura base del sitio (single-page) con anclas internas.
+            Secciones principales (orden):
+                1. Hero / Inicio (#inicio)
+                2. Nosotros (#nosotros)
+                3. Actividades (#actividades)
+                4. Galería (#galeria)
+                5. Calendario astronómico (#calendario)
+                6. Equipo (#equipo)
+                7. Contacto / Footer (#contacto)
+
+            Decisiones técnicas destacadas:
+                - Carga diferida: librerías externas a través de preload+onload o defer.
+                - Imagen hero vía <picture> para evitar descargar versión grande en móvil.
+                - Fondo dinámico (.bg-stars) alterna resolución según breakpoint/DPR.
+                - Navbar: responsive temprano (hamburger <992px) para evitar overflow en tablets.
+                - Accesibilidad: roles/aria-label; anclas limpias sin contaminar historial (JS).
+                - Performance: WebP/AVIF donde aplica; lazy loading en imágenes no críticas.
+
+            Mantenimiento:
+                - Agregar nueva sección: seguir patrón <section id="..."> con heading etiquetado.
+                - Si se crean nuevas clases dinámicas via JS → añadir a safelist PurgeCSS.
+                - Mantener orden semántico de headings (h1 solo en hero, subsecciones h2/h3).
+        -->
         <!-- Bootstrap CSS -->
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <!-- Font Awesome para iconos -->

@@ -1,3 +1,43 @@
+/* ======================================================================
+  SAAGS – Hoja de Estilos Principal (styles.css)
+  ----------------------------------------------------------------------
+  Propósito
+  Define diseño global, utilidades, componentes y adaptaciones
+  responsive del sitio oficial de la Sociedad Astronómica de
+  Aguascalientes.
+
+  Filosofía
+  - Prioriza rendimiento (carga diferida, fondos condicionales).
+  - Accesibilidad pragmática (focus visible, contrastes, scroll-margin).
+  - Escalabilidad: secciones numeradas para localizar rápido.
+  - Evita dependencias adicionales (sólo Bootstrap + utilidades personalizadas).
+
+  Estructura (índice rápido)
+    1. Variables globales & design tokens
+    2. Reset & base tipográfica / body
+    3. Utilidades (layout helpers, contenedores, spacing)
+    4. Componentes (fondos, botones, tarjetas, contadores, animaciones)
+    5. Navbar y navegación
+    6. Hero (estructura y variantes responsive)
+    7. Sección "Nosotros" / contadores / equipo
+    8. Actividades & tarjetas de eventos
+    9. Galería (grid, lightbox helpers, animaciones)
+   10. Calendario astronómico (grid adaptable, badges)
+   11. Equipo (cards, social icons)
+   12. Footer
+   13. GLightbox overrides
+   14. Media queries agrupadas (breakpoints clave y ajustes condicionales)
+   15. Preferencias de usuario (reduced-motion, reduced-data)
+   16. Overrides específicos por rango (tablets, iPad, etc.)
+
+  Notas de mantenimiento
+  - Al agregar una nueva sección numérala y actualiza índice.
+  - Usa variables (tokens) antes de introducir nuevos valores fijos.
+  - Para eliminar selectores: verificar safelist en purgecss.config.cjs.
+  - Mantener comentarios concisos; más documentación va en README.
+
+  Última actualización doc: 2025-08-10
+  ====================================================================== */
 /* 1. Variables globales: paleta, tipografías y espaciados reutilizables */
 :root {
   --navbar-height: 76px;
@@ -1238,17 +1278,23 @@ time {
 
 /* Móviles */
 @media (max-width: 767.98px) {
-  /* Mejor nitidez en móviles: reactivamos capa .bg-stars y servimos versión 2x en pantallas de alta densidad */
-  .bg-stars {
-    display: block !important; /* sobrescribe display:none de <=991 */
+  /* Fondo móvil: mover imagen a pseudo-elemento fijo para evitar artefactos al combinar fondo + navbar fijo */
+  .bg-stars { display: none !important; }
+  body { position: relative; background: #0a1128; overflow-x: hidden; }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1; /* detrás de todo el contenido */
+    background: #0a1128 center/cover no-repeat;
     background-image: url("img/background/galaxybg_100.webp");
     background-image: image-set(
       url("img/background/galaxybg_100.webp") 1x,
       url("img/background/galaxybg_pc.webp") 2x
     );
+    will-change: transform; /* hint: scroll perf */
+    transform: translateZ(0); /* fuerza capa propia */
   }
-  /* Body queda con color base para evitar pintar dos fondos pesados */
-  body { background: #0a1128; }
   #galeria > .container {
   /* Avoid 100vw which can introduce horizontal scroll (accounts not for scrollbar width) */
   width: 100%;

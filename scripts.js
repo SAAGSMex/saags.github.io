@@ -1,4 +1,32 @@
-// Javascript personalizado para mejorar la navegación y la experiencia del usuario
+/**
+ * SAAGS – scripts.js
+ * ------------------------------------------------------------------
+ * Rol: Funcionalidad interactiva y mejoras UX/A11y sin frameworks.
+ * Alcance principal:
+ *  0. Ajuste dinámico de viewport (--vh) en móviles.
+ *  1. Animaciones progresivas para CTA inicial.
+ *  2. Cierre inteligente del navbar tras navegación.
+ *  3. IntersectionObserver para resaltar sección activa.
+ *  3.b Navegación interna sin ensuciar historial (# limpio) con smooth scroll.
+ *  4. Gestión avanzada de enlaces (externos / internos / botones actividad).
+ *  5. Inicialización y adaptación GLightbox (orientación vertical/horizontal).
+ *  6. Galería expandible (Ver más / Ver menos) con recarga dinámica de lightbox.
+ *  7. Validación / mensajes UX (placeholder futuro: formularios de contacto, etc.).
+ *  8. Salvaguarda de clases dinámicas (ver safelist PurgeCSS) – mantener sincronizadas.
+ *
+ * Principios:
+ *  - No contaminar historial: replaceState sobre pushState.
+ *  - Accesibilidad: aria-labels, aria-current, roles claros.
+ *  - Rendimiento: listeners mínimos, debounce de resize, lazy lightbox.
+ *  - Idempotencia: funciones que pueden reconstruirse tras cambios (observer rebuild).
+ *
+ * Mantenimiento:
+ *  - Añadir nuevas clases dinámicas → safelist en purgecss.config.cjs.
+ *  - Evitar dependencias globales nuevas; si son imprescindibles documentar en README.
+ *  - Prefijo JS-only: `.js-` recomendado para futuros selectores si se amplía.
+ *
+ * Última actualización doc: 2025-08-10
+ */
 
 // Script Personalizado
 document.addEventListener('DOMContentLoaded', function() {
