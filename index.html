@@ -24,8 +24,7 @@
         <!-- Preconexión a CDN de Bootstrap -->
         <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="stylesheet" href="styles.css">
-    <!-- Preload hero principal (AVIF) para mejorar LCP -->
-    <link rel="preload" as="image" href="img/head-navbar-hero/herogalaxy-optimized.webp" imagesrcset="img/head-navbar-hero/herogalaxy-optimized.webp" fetchpriority="high">
+    <!-- Hero: se carga vía <picture> responsivo; evitamos preload único para no descargar imagen grande en móviles -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js" defer></script>
     <!-- GLightbox diferido para mejorar rendimiento inicial -->
     <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js" defer></script>
@@ -86,8 +85,9 @@
         <div class="container text-center" style="position:relative;">
             <!-- Imagen principal para LCP optimizada con picture (AVIF/WebP + fallback) -->
             <picture style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:-1;">
-                <source srcset="img/head-navbar-hero/herogalaxy-optimized.webp" type="image/webp">
-                <img src="img/head-navbar-hero/herogalaxy.png" alt="Fondo galáctico" width="1200" height="400" style="width:100%;height:100%;object-fit:cover;" loading="eager" fetchpriority="high" decoding="async">
+                <!-- Único fondo hero: versión WebP + fallback PNG -->
+                <source srcset="img/head-navbar-hero/herogalaxy.webp" type="image/webp">
+                <img src="img/head-navbar-hero/herogalaxy.png" alt="Fondo galáctico" width="1600" height="900" style="width:100%;height:100%;object-fit:cover;" loading="eager" fetchpriority="high" decoding="async">
             </picture>
             <h1 class="display-3 mb-4 fw-bold text-white animate__animated animate__fadeInDown show fade" id="titulo-inicio">
                 Sociedad Astronómica de Aguascalientes
@@ -95,7 +95,8 @@
             <p class="lead mb-5 animate__animated animate__fadeInUp show fade">
                 Explorando el universo desde el corazón de México
             </p>
-            <div class="d-flex justify-content-center gap-3">
+            <!-- Botonera hero: se elimina gap-3 de Bootstrap para permitir control total via CSS personalizado -->
+            <div class="d-flex justify-content-center hero-buttons">
                 <a href="#actividades"
                 class="btn btn-primary btn-lg animate__animated animate__fadeInUp show fade"
                 id="btn-actividades"

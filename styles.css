@@ -143,37 +143,105 @@ body {
    - Correcciones de spacing para evitar scroll horizontal
 -------------------------------- */
 
-@media (max-width: 1199.98px) {
-  /* Reducir ligeramente el tamaño de títulos muy grandes en pantallas medianas para evitar saltos de línea incómodos */
-  .hero-section h1 { font-size: clamp(2rem, 5.2vw, 3.2rem); }
+/* Hero tipografía y botones unificados (aplica a todos los dispositivos) */
+.hero-section h1 { text-align: center; }
+/* Subtítulo centrado */
+.hero-section .lead { text-align: center; }
+.hero-body .hero-actions { display: flex; }
+.hero-section h1 { text-align: center; }
+/* Subtítulo centrado */
+.hero-section .lead { text-align: center; }
+.hero-body .hero-actions { display: flex; }
+.hero-section h1 {
+  margin: 0 0 1rem;
+  font-size: clamp(2.2rem, 7vw, 4rem);
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+.hero-section .lead {
+  font-size: clamp(1.05rem, 3vw, 2rem);
+  font-weight: 450;
+  max-width: 40ch;
+  margin: 0 auto 2.1rem;
+  color: rgba(240, 240, 240, .92);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, .6);
+  letter-spacing: .04em;
+}
+.hero-section .btn {
+  padding: .7rem 1.7rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  border-width: 2px;
+  border-radius: 50px;
+  transition: all .3s ease;
+}
+.hero-section .btn-primary {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  box-shadow: 0 5px 20px rgba(48, 77, 157, 0.3);
+}
+.hero-section .btn-primary:hover {
+  background-color: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(48, 77, 157, 0.4);
+}
+.hero-section .btn-outline-light:hover {
+  color: #0a1128;
+  background-color: #fff;
+  border-color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
 }
 
-@media (max-width: 991.98px) {
-  /* Ajustar paddings verticales del hero para tablets en orientación horizontal */
-  .hero-section { padding-top: clamp(4.5rem, 10vh, 6rem); padding-bottom: clamp(2rem, 6vh, 4rem); }
-  .hero-section .lead { font-size: clamp(1rem, 2.6vw, 1.5rem); }
-}
 
-/* Tablets medianos (iPad mini / Air portrait ~768-991px) */
-@media (min-width: 768px) and (max-width: 991.98px) {
-  .navbar .container { max-width: 100%; padding: 0 1rem; }
-  .navbar-brand img { width: 46px; height: 46px; }
-  .navbar-brand span { font-size: 1.55rem; letter-spacing: .04em; }
-  .navbar-nav { gap: .55rem; flex-wrap: nowrap; }
-  .navbar-nav .nav-link { padding: .45rem .7rem; font-size: .95rem; letter-spacing: .02em; }
-  .hero-section h1 { font-size: clamp(2.1rem, 4.9vw, 3.05rem); }
-  .hero-section .lead { max-width: 50ch; font-size: clamp(1rem, 1.9vw, 1.35rem); }
-}
-
-/* Tablets grandes (iPad Pro landscape 1024-1199px) refine before desktop */
-@media (min-width: 992px) and (max-width: 1199.98px) {
-  .navbar .container { max-width: 100%; padding: 0 1.25rem; }
-  .navbar-brand img { width: 50px; height: 50px; }
-  .navbar-brand span { font-size: 1.7rem; }
-  .navbar-nav { gap: .8rem; }
-  .navbar-nav .nav-link { padding: .5rem .85rem; font-size: 1rem; }
-  .hero-section h1 { font-size: clamp(2.4rem, 4vw, 3.4rem); }
-  .hero-section .lead { font-size: clamp(1.05rem, 1.8vw, 1.45rem); }
+/* Hero botones diseño especial >=768px (ajuste de proximidad) */
+@media (min-width: 768px) {
+  .hero-section .d-flex { 
+    justify-content: center; 
+    align-items: center; 
+    /* sin gap aquí; reservado para >=1024px */
+    flex-direction: row !important; 
+    flex-wrap: nowrap; 
+    max-width: 100%; 
+    overflow-x: clip; 
+    margin-inline: auto; 
+  }
+  .hero-section .d-flex .btn { white-space: nowrap; }
+  .hero-section .d-flex .btn { 
+    padding: .7rem 1.7rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+    letter-spacing: .04em;
+    border-width: 2px;
+    border-radius: 50px;
+    transition: background .35s, box-shadow .35s, transform .25s; 
+  }
+  .hero-section .btn-primary { 
+    background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-primary-hover) 100%); 
+    border: none; 
+    box-shadow: 0 6px 22px rgba(48,77,157,.35); 
+  }
+  .hero-section .btn-primary:hover, 
+  .hero-section .btn-primary:focus-visible { 
+    transform: translateY(-2px); 
+    box-shadow: 0 10px 26px rgba(48,77,157,.45); 
+    filter: brightness(1.08); 
+  }
+  .hero-section .btn-outline-light { 
+    background: #ffffff; 
+    color: #0a1128; 
+    border: 2px solid #ffffff; 
+    box-shadow: 0 6px 22px rgba(255,255,255,.18); 
+  }
+  .hero-section .btn-outline-light:hover, 
+  .hero-section .btn-outline-light:focus-visible { 
+    transform: translateY(-2px); 
+    box-shadow: 0 10px 28px rgba(255,255,255,.30); 
+    filter: brightness(1.05); 
+  }
+  .hero-section .d-flex .btn:focus-visible { outline: 3px solid #ffe066; outline-offset: 3px; }
 }
 
 /* Breakpoint banda problemática (820–860px) donde el menú podía desbordar */
@@ -279,7 +347,14 @@ body {
   z-index: -1;
   width: 100%;
   height: 100%;
-  background: #0a1128 url("img/background/galaxybg_pc.webp") center center / cover no-repeat;
+  /* Fallback base (PNG) para navegadores sin WebP */
+  background: #0a1128 url("img/head-navbar-hero/herogalaxy.png") center center / cover no-repeat;
+}
+/* Desktop >=992px con soporte WebP: usar galaxybg_pc.webp para el fondo global (excepto hero que tiene su <picture>) */
+@supports (background-image: url("img/background/galaxybg_pc.webp")) {
+  @media (min-width: 992px) {
+    .bg-stars { background-image: url("img/background/galaxybg_pc.webp"); }
+  }
 }
 
 /* Botón primario personalizado */
@@ -386,8 +461,8 @@ body {
   justify-content: center;
   min-height: 100dvh;
   min-height: calc(var(--vh, 1vh) * 100);
-  padding: clamp(2.2rem, 6vh, 5rem) 0 clamp(2.5rem, 7vh, 5.5rem);
-  background: #0d245a url("img/head-navbar-hero/herogalaxy.webp") center / cover no-repeat;
+  padding: clamp(2.2rem, 6vh, 5rem) 0 clamp(2.5rem, 7vh, 5.5rem); /* Ajuste de padding */
+  background: #0d245a; /* Solo color base, la imagen la aporta el <picture> interno */
   overflow: clip;
 }
 .hero-section::before {
@@ -429,18 +504,44 @@ body {
 .hero-section h1 { text-align: center; }
 /* Subtítulo centrado */
 .hero-section .lead { text-align: center; }
+/* --- Fix: asegurar que la imagen <picture> del hero sea visible (antes z-index:-1 la escondía) --- */
+.hero-section > .container > picture { z-index: 0 !important; pointer-events: none; }
+.hero-section::before { z-index: 1; }
+.hero-section > .container > *:not(picture) { position: relative; z-index: 2; }
 .hero-body .hero-actions { display: flex; }
-.hero-section h1 {
-  margin: 0 0 1rem;
-  font-size: clamp(2.2rem, 7vw, 4rem);
-  line-height: 1.15;
-  overflow-wrap: anywhere;
+/* Hero ajustado: eliminar espacios azules arriba/abajo */
+.hero-section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: calc(100dvh - var(--navbar-height));
+  padding: 0; /* quitamos padding externo que creaba franjas */
+  background: #0d245a; /* color base detrás de la imagen */
+  overflow: clip;
 }
+/* Recolocamos el espaciado interno en el contenedor del hero */
+.hero-section > .container {
+  padding-top: calc(var(--navbar-height) + 2.2rem) !important; /* separación desde navbar */
+  padding-bottom: 2.4rem !important; /* margen inferior reducido */
+}
+@media (max-width: 575.98px) {
+  .hero-section > .container { padding-top: calc(var(--navbar-height) + 1.6rem) !important; padding-bottom: 1.9rem !important; }
+}
+@media (min-width: 992px) {
+  .hero-section > .container { padding-top: calc(var(--navbar-height) + 3rem) !important; padding-bottom: 3rem !important; }
+}
+/* Tablets / mid-width (768–1023px): eliminar franjas azules extra */
+@media (min-width: 768px) and (max-width: 1023.98px) {
+  .hero-section { padding: 0 !important; }
+  .hero-section > .container { padding-top: calc(var(--navbar-height) + 1.4rem) !important; padding-bottom: 1.8rem !important; }
+}
+/* Compactar inicio de la sección Nosotros para que no aparezca un bloque azul intermedio */
+#nosotros { padding-top: 2.2rem !important; }
+@media (max-width: 575.98px) { #nosotros { padding-top: 1.6rem !important; } }
+/* Estilos tipográficos para el título y subtítulo del hero */
+.hero-section h1,
 .hero-section .lead {
-  font-size: clamp(1.05rem, 3vw, 2rem);
-  font-weight: 450;
-  max-width: 40ch;
-  margin: 0 auto 2.1rem;
   color: rgba(240, 240, 240, .92);
   text-shadow: 0 2px 8px rgba(0, 0, 0, .6);
   letter-spacing: .04em;
@@ -490,35 +591,31 @@ body {
   }
 }
 
-/* Ajustes de flex específicos para móviles del hero */
-@media (max-width: 575.98px) {
-  .hero-body, .hero-section > .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 0.75rem;
-  }
-  .hero-body h1, .hero-body .lead,
-  .hero-section > .container h1,
-  .hero-section > .container .lead { text-align: inherit; margin-left: 0; margin-right: 0; }
-  .hero-body .hero-actions,
-  .hero-section > .container .d-flex {
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: center;
-    width: 100%;
-  }
-  .hero-body .hero-actions .btn,
-  .hero-section > .container .d-flex .btn {
-    width: 100%;
-    max-width: 360px;
-    margin-inline: auto;
-  }
+/* Hero: centrar y apilar contenido en TODOS los dispositivos */
+.hero-body, .hero-section > .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.75rem;
 }
-@media (min-width: 576px) {
-  /* Mantener centrado también en >=576px */
-  .hero-body { align-items: center; }
+.hero-body h1, .hero-body .lead,
+.hero-section > .container h1,
+.hero-section > .container .lead { text-align: inherit; margin-left: 0; margin-right: 0; }
+.hero-body .hero-actions,
+.hero-section > .container .d-flex {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  width: 100%;
+  gap: .75rem;
+}
+.hero-body .hero-actions .btn,
+.hero-section > .container .d-flex .btn {
+  width: 100%;
+  max-width: 360px;
+  margin-inline: auto;
 }
 
 /* 7. Nosotros: presentación de la asociación */
@@ -1102,14 +1199,15 @@ time {
 
 /* Tablets */
 @media (max-width: 991.98px) {
-  .bg-stars {
-    display: none;
-  }
+  .bg-stars { display: none; }
+  /* Fondo móvil fallback PNG */
   body {
-    background-image: url("img/background/galaxybg_100.webp");
-    background-repeat: repeat;
-    background-size: auto;
+    background: #0a1128 url("img/head-navbar-hero/herogalaxy.png") top center / cover no-repeat;
     background-attachment: scroll;
+  }
+  /* Swap móvil/tablet: usar versión ligera galaxybg_100.webp si hay soporte */
+  @supports (background-image: url("img/background/galaxybg_100.webp")) {
+    body { background-image: url("img/background/galaxybg_100.webp"); }
   }
   .navbar {
     padding: .8rem 0;
@@ -1315,10 +1413,17 @@ time {
   #actividades .card { margin-bottom: 2.2rem; }
 }
 
-/* Refuerzo en landscape iPad para evitar exceso de altura hero */
-@media (min-width: 1024px) and (max-width: 1366px) and (orientation: landscape) {
-  .hero-section { padding-top: clamp(5rem, 9vh, 6.5rem); padding-bottom: clamp(2.5rem, 9vh, 5rem); }
+/* Gap solo para >=1024px (incluye 1366px y superiores) */
+@media (min-width: 1024px) {
+  /* El gap debe ir en el contenedor flex, no en cada botón */
+  .hero-section .d-flex { gap: .0rem; }
+  /* Asegura que ningún margen residual aumente la separación */
+  .hero-section .d-flex .btn { margin: 0; }
+  /* Reducir aún más: solapar levemente bordes con margen negativo ajustable */
+  .hero-section .d-flex .btn + .btn { margin-left: -20rem !important; }
 }
+
+/* Refuerzo en landscape iPad: ya no se modifica padding para mantener uniformidad */
 
 /* Ajuste de grid del equipo: asegurar envoltura limpia y consistencia de gaps */
 #equipo .row.g-4 { row-gap: 2.2rem; }
@@ -1432,6 +1537,23 @@ time {
   .navbar-nav .nav-link[href*="Calendario"],
   .navbar-nav .nav-link[href*="calendario"],
   .navbar-nav .nav-link:nth-child(5) { font-size: 1rem; padding: .52rem .85rem; }
+}
+
+/* (Regla reemplazada por bloque @supports para permitir fallback) */
+
+/* Ahorro de datos: eliminar imágenes de fondo pesadas */
+@media (prefers-reduced-data: reduce) {
+  body { background: #0a1128 !important; }
+  .bg-stars { background: #0a1128 !important; }
+}
+
+/* Calendario: forzar 1 columna (mes entero ancho completo) en móviles muy estrechos <412px */
+@media (max-width: 411.98px) {
+  .calendario__grid { grid-template-columns: 1fr !important; }
+  .mes { min-height: auto; }
+  /* Fecha compacta: dos columnas (auto fecha + texto) para que el pill no sea tan largo */
+  .evento { grid-template-columns: auto 1fr; }
+  .evento__fecha { margin-bottom: .15rem; width: auto; min-width: unset; }
 }
 
 /* --- Ajuste consolidado final para iPad Mini / Air (768–820px) ---
