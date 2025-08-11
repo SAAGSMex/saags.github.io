@@ -340,21 +340,21 @@ body {
 
 /* 4. Componentes: fondos, botones, contadores, feedback */
 
-/* Fondo estrellas */
+/* Fondo estrellas (solo color base; imágenes se asignan en media queries) */
 .bg-stars {
   position: fixed;
   inset: 0;
   z-index: -1;
   width: 100%;
   height: 100%;
-  /* Fallback base (PNG) para navegadores sin WebP */
-  background: #0a1128 url("img/head-navbar-hero/herogalaxy.png") center center / cover no-repeat;
+  background: #0a1128; /* color base si no carga la imagen */
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
-/* Desktop >=992px con soporte WebP: usar galaxybg_pc.webp para el fondo global (excepto hero que tiene su <picture>) */
-@supports (background-image: url("img/background/galaxybg_pc.webp")) {
-  @media (min-width: 992px) {
-    .bg-stars { background-image: url("img/background/galaxybg_pc.webp"); }
-  }
+/* Escritorio >=1024px: versión de mayor calidad */
+@media (min-width: 1024px) {
+  .bg-stars { background-image: url("img/background/galaxybg_pc.webp"); }
 }
 
 /* Botón primario personalizado */
@@ -630,8 +630,9 @@ body {
 /* 8. Actividades: tarjetas y eventos destacados */
 #actividades p {
   font-size: 1.1rem;
-  margin-bottom: 0.7rem !important;
-  padding-bottom: 0.2rem !important;
+  padding-top: 1.2rem;
+  margin-bottom: 1rem !important;
+  padding-bottom: 0.5rem !important;
 }
 #actividades .card-footer {
   margin-top: 0.2rem !important;
@@ -1200,14 +1201,10 @@ time {
 /* Tablets */
 @media (max-width: 991.98px) {
   .bg-stars { display: none; }
-  /* Fondo móvil fallback PNG */
+  /* Fondo móvil/tablet: versión ligera */
   body {
-    background: #0a1128 url("img/head-navbar-hero/herogalaxy.png") top center / cover no-repeat;
+    background: #0a1128 url("img/background/galaxybg_100.webp") top center / cover no-repeat;
     background-attachment: scroll;
-  }
-  /* Swap móvil/tablet: usar versión ligera galaxybg_100.webp si hay soporte */
-  @supports (background-image: url("img/background/galaxybg_100.webp")) {
-    body { background-image: url("img/background/galaxybg_100.webp"); }
   }
   .navbar {
     padding: .8rem 0;
@@ -1241,6 +1238,17 @@ time {
 
 /* Móviles */
 @media (max-width: 767.98px) {
+  /* Mejor nitidez en móviles: reactivamos capa .bg-stars y servimos versión 2x en pantallas de alta densidad */
+  .bg-stars {
+    display: block !important; /* sobrescribe display:none de <=991 */
+    background-image: url("img/background/galaxybg_100.webp");
+    background-image: image-set(
+      url("img/background/galaxybg_100.webp") 1x,
+      url("img/background/galaxybg_pc.webp") 2x
+    );
+  }
+  /* Body queda con color base para evitar pintar dos fondos pesados */
+  body { background: #0a1128; }
   #galeria > .container {
   /* Avoid 100vw which can introduce horizontal scroll (accounts not for scrollbar width) */
   width: 100%;
@@ -1659,4 +1667,32 @@ time {
 @media (min-width:576px) and (max-width:767.98px){
   #galeria .row > [class*="col-"] { margin-bottom:1.6rem; }
   #galeria { padding-top:3.1rem; padding-bottom:3.1rem; }
+}
+
+/* Layout de 1 columna para Actividades y Galería en dispositivos >412px y <1024px */
+@media (min-width: 413px) and (max-width: 1023.98px) {
+  #actividades .row > [class*="col-md-"],
+  #actividades .row > [class*="col-sm-"],
+  #actividades .row > [class*="col-lg-"],
+  #actividades .row > [class*="col-6"],
+  #galeria .row > [class*="col-sm-"],
+  #galeria .row > [class*="col-lg-"],
+  #galeria .row > [class*="col-12"],
+  #galeria .row > [class*="col-6"] {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+  #galeria .row { margin-left: 0; margin-right: 0; }
+  #galeria [class*="col-"] { padding-left: .5rem; padding-right: .5rem; }
+  /* Equipo en una sola columna */
+  #equipo .row > [class*="col-"] { flex: 0 0 100% !important; max-width: 100% !important; }
+  #equipo .team-card { max-width: 500px; margin-left: auto; margin-right: auto; }
+}
+
+/* Mejora de nitidez en tablets: usar imagen de mayor resolución */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  /* reactivar capa de estrellas con versión grande */
+  .bg-stars { display: block; background-image: url("img/background/galaxybg_pc.webp"); }
+  /* simplificar fondo del body para evitar doble descarga */
+  body { background: #0a1128; }
 }
