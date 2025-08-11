@@ -402,15 +402,34 @@ body {
   pointer-events: none;
   z-index: 0;
 }
-.hero-inner {
-  width: min(100% - 2rem, 680px);
+.hero-body {
+  width: min(100% - 2rem, 760px);
   margin-inline: auto;
   padding-inline: clamp(1rem, 4vw, 2rem);
   padding-top: clamp(1.2rem, 3.5vh, 2.8rem);
-  text-align: center;
   position: relative;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* centrado universal */
 }
+.hero-bg-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+.hero-bg-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.hero-section h1 { text-align: center; }
+/* Subtítulo centrado */
+.hero-section .lead { text-align: center; }
+.hero-body .hero-actions { display: flex; }
 .hero-section h1 {
   margin: 0 0 1rem;
   font-size: clamp(2.2rem, 7vw, 4rem);
@@ -459,9 +478,7 @@ body {
     justify-content: flex-start;
     padding-top: calc(var(--navbar-height) + 1rem + env(safe-area-inset-top));
   }
-  .hero-inner {
-    padding-top: 0;
-  }
+  .hero-body { padding-top: 0; }
 }
 
 @media (max-width: 340px) {
@@ -471,6 +488,37 @@ body {
   .hero-section h1 {
     font-size: clamp(1.9rem, 8vw, 2.4rem);
   }
+}
+
+/* Ajustes de flex específicos para móviles del hero */
+@media (max-width: 575.98px) {
+  .hero-body, .hero-section > .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.75rem;
+  }
+  .hero-body h1, .hero-body .lead,
+  .hero-section > .container h1,
+  .hero-section > .container .lead { text-align: inherit; margin-left: 0; margin-right: 0; }
+  .hero-body .hero-actions,
+  .hero-section > .container .d-flex {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    width: 100%;
+  }
+  .hero-body .hero-actions .btn,
+  .hero-section > .container .d-flex .btn {
+    width: 100%;
+    max-width: 360px;
+    margin-inline: auto;
+  }
+}
+@media (min-width: 576px) {
+  /* Mantener centrado también en >=576px */
+  .hero-body { align-items: center; }
 }
 
 /* 7. Nosotros: presentación de la asociación */
@@ -913,6 +961,10 @@ time {
 .team-card {
   color: #fff;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 .avatar-wrapper {
   display: block;
@@ -935,11 +987,12 @@ time {
   font-size: 1.2rem;
   font-weight: 600;
   margin: 0 0 .35rem;
-  min-height: .5em;
+  min-height: 1.4em; /* asegura alineación de filas aunque el nombre tenga 1 línea */
 }
 .team-role {
   font-size: 1.05rem;
   margin: 0 0 .75rem;
+  min-height: 1.3em; /* estabiliza altura antes de redes sociales */
 }
 .team-social {
   list-style: none;
@@ -1203,6 +1256,9 @@ time {
 
 /* Ultra pequeños <380px: compactar aún más equipo y títulos */
 @media (max-width: 379.98px) {
+  /* Equipo: layout consistente 2 columnas y mayor separación */
+  #equipo .row.g-4 { display: grid !important; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1.4rem 1rem; margin:0; }
+  #equipo .team-card { padding: .75rem 1rem 1.25rem; }
   .section-title { font-size: 1.05rem; }
   .avatar-wrapper { width: 130px; }
   .team-name { font-size: .95rem; }
@@ -1210,8 +1266,47 @@ time {
   .team-social a { width: 26px; height: 26px; font-size: .75rem; }
   .hero-section .btn { padding: .65rem 1.1rem; font-size: .95rem; }
 }
+@media (max-width: 411.98px) {
+  /* Equipo: forzar 1 columna en <412px y centrar contenido */
+  #equipo .row.g-4 { grid-template-columns: 1fr !important; gap: 1.25rem .5rem; justify-items: center; }
+  #equipo .row.g-4 > [class*="col-"] { width:100%; display:flex; justify-content:center; }
+  #equipo .team-card { padding: .8rem 1rem 1.3rem; text-align:center; width:100%; max-width:340px; }
+  #equipo .avatar-wrapper { width: clamp(170px,68vw,240px); margin-left:auto; margin-right:auto; }
+  /* Aumentar legibilidad en pantallas estrechas */
+  #equipo .team-name { font-size: clamp(1.05rem,4.6vw,1.28rem); }
+  #equipo .team-role { font-size: clamp(.9rem,3.9vw,1.05rem); }
+  #equipo .team-social { justify-content: center; gap: .85rem; }
+  #equipo .team-social a { width: 38px; height: 38px; font-size: 1.05rem; }
+}
 
 /* iPad / tablets grandes (portrait & landscape) */
+@media (max-width: 1023.98px) {
+  /* Galería: forzar 1 columna para mejorar legibilidad y evitar tarjetas demasiado juntas */
+  #galeria .row { display: grid !important; grid-template-columns: 1fr; gap: 1.75rem 0; }
+  #galeria .row > [class*="col-"] { width:100% !important; max-width:640px; margin-left:auto; margin-right:auto; }
+  #galeria .gallery-card { width:100%; }
+}
+
+/* === Hero centering universal override === */
+.hero-section > .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 100%;
+  min-height: calc(100dvh - var(--navbar-height));
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+.hero-section h1, .hero-section .lead { margin-left: auto; margin-right: auto; }
+@media (max-width: 991.98px) {
+  .hero-section > .container { padding-top: 2.5rem; padding-bottom: 2.5rem; }
+}
+@media (max-width: 575.98px) {
+  .hero-section > .container { padding-top: 3rem; padding-bottom: 3rem; }
+}
 @media (min-width: 1024px) and (max-width: 1366px) {
   .hero-section h1 { font-size: clamp(2.6rem, 4vw, 3.6rem); }
   .hero-section .lead { font-size: clamp(1.15rem, 1.8vw, 1.6rem); }
