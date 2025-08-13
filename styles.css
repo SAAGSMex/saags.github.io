@@ -404,15 +404,15 @@ body {
 }
 /* Tablets <=991.98px: fondo en body */
 @media (max-width: 991.98px) {
-  body { background: #0a1128 url("../img/background/galaxybg_100.webp?v=4") top center/cover no-repeat; }
+  body { background: #0a1128 url("../img/background/galaxybg_767.webp?v=4") top center/cover no-repeat; }
 }
 /* Móviles <768px: body::before */
 @media (max-width: 767.98px) {
   body::before {
-    background-image: url("../img/background/galaxybg_100.webp?v=4");
+    background-image: url("../img/background/galaxybg_767.webp?v=4");
     background-image: image-set(
-      url("../img/background/galaxybg_100.webp?v=4") 1x,
-      url("../img/background/galaxybg_pc.webp?v=4") 2x
+      url("../img/background/galaxybg_767.webp?v=4") 1x,
+      url("../img/background/galaxybg_767.webp?v=4") 2x
     );
   }
 }
@@ -1263,7 +1263,7 @@ time {
   .bg-stars { display: none; }
   /* Fondo móvil/tablet: versión ligera */
   body {
-  background: #0a1128 url("../img/background/galaxybg_100.webp?v=4") top center/cover no-repeat;
+  background: #0a1128 url("../img/background/galaxybg_767.webp?v=4") top center/cover no-repeat;
     background-attachment: scroll;
   }
   .navbar {
@@ -1307,9 +1307,9 @@ time {
     inset: 0;
     z-index: -1; /* detrás de todo el contenido */
     background: #0a1128 center/cover no-repeat;
-    background-image: url("../img/background/galaxybg_100.webp?v=4");
+    background-image: url("../img/background/galaxybg_767.webp?v=4");
     background-image: image-set(
-      url("../img/background/galaxybg_100.webp?v=4") 1x,
+      url("../img/background/galaxybg_767.webp?v=4") 1x,
       url("../img/background/galaxybg_pc.webp?v=4") 2x
     );
     will-change: transform; /* hint: scroll perf */
