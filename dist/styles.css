@@ -372,9 +372,11 @@ body {
   width: 100%;
   height: 100%;
   background: #0a1128; /* color base si no carga la imagen */
+  background-image: url("/img/background/galaxybg_pc.webp"); /* ruta absoluta correcta */
+  background-position: center;
   background-size: cover;
-  background-position: center center;
   background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 /* Escritorio >=1024px: versión de mayor calidad */
 @media (min-width: 1024px) {
@@ -519,7 +521,7 @@ body {
   background: #0d245a; /* color base detrás de la imagen */
   overflow: clip;
 }
-/* Recolocamos el espaciado interno en el contenedor del hero */
+ /* Recolocamos el espaciado interno en el contenedor del hero */
 .hero-section > .container {
   padding-top: calc(var(--navbar-height) + 2.2rem) !important; /* separación desde navbar */
   padding-bottom: 2.4rem !important; /* margen inferior reducido */
@@ -530,12 +532,12 @@ body {
 @media (min-width: 992px) {
   .hero-section > .container { padding-top: calc(var(--navbar-height) + 3rem) !important; padding-bottom: 3rem !important; }
 }
-/* Tablets / mid-width (768–1023px): eliminar franjas azules extra */
+ /* Tablets / mid-width (768–1023px): eliminar franjas azules extra */
 @media (min-width: 768px) and (max-width: 1023.98px) {
   .hero-section { padding: 0 !important; }
   .hero-section > .container { padding-top: calc(var(--navbar-height) + 1.4rem) !important; padding-bottom: 1.8rem !important; }
 }
-/* Compactar inicio de la sección Nosotros para que no aparezca un bloque azul intermedio */
+ /* Compactar inicio de la sección Nosotros para que no aparezca un bloque azul intermedio */
 #nosotros { padding-top: 2.2rem !important; }
 @media (max-width: 575.98px) { #nosotros { padding-top: 1.6rem !important; } }
 /* Estilos tipográficos para el título y subtítulo del hero */
