@@ -8,23 +8,26 @@
     "test:visual:chromium": "cross-env BROWSERS=chromium node tests/visual/run-visual-tests.mjs",
     "test:visual:update": "cross-env UPDATE_BASELINE=1 node tests/visual/run-visual-tests.mjs",
     "test:visual:update:chromium": "cross-env UPDATE_BASELINE=1 BROWSERS=chromium node tests/visual/run-visual-tests.mjs",
-    "lh": "lighthouse http://localhost:8080 --quiet --chrome-flags=\"--headless=new\" --only-categories=performance,accessibility,best-practices,seo --output=json --output-path=./lighthouse-report.json",
-  "lh:ci": "lhci autorun || echo 'LHCI completed with non-zero exit'",
-  "purge:css": "purgecss --config purgecss.config.cjs",
-  "minify:css": "postcss dist/styles.css -o dist/styles.min.css --env production",
-  "build:css": "npm run purge:css && npm run minify:css"
+  "lh": "lighthouse http://localhost:8080 --quiet --chrome-flags=\"--headless=new\" --only-categories=performance,accessibility,best-practices,seo --output=json --output-path=./lighthouse-report.json",
+  "lh:local": "lighthouse http://127.0.0.1:5501/index.html --quiet --no-enable-error-reporting --chrome-flags=\"--headless=new\" --only-categories=performance,accessibility,best-practices,seo --output=json --output-path=./lighthouse-report.json",
+    "lh:ci": "lhci autorun || echo 'LHCI completed with non-zero exit'",
+  "prebuild:css": "node -e \"require('fs').mkdirSync('dist', { recursive: true })\"",
+    "purge:css": "purgecss --config purgecss.config.cjs",
+    "minify:css": "postcss dist/styles.css -o dist/styles.min.css --env production",
+  "build:css": "npm run prebuild:css && npm run purge:css && npm run minify:css"
   },
   "devDependencies": {
+    "@lhci/cli": "^0.12.0",
+    "autoprefixer": "^10.4.0",
     "cross-env": "^7.0.3",
-    "playwright": "^1.46.0",
+    "cssnano": "^6.0.0",
+    "lighthouse": "^12.0.0",
     "pixelmatch": "^5.3.0",
+    "playwright": "^1.46.0",
     "pngjs": "^7.0.0",
-    "sharp": "^0.33.4",
-  "lighthouse": "^12.0.0",
-  "@lhci/cli": "^0.12.0",
-  "purgecss": "^5.0.0",
-  "postcss": "^8.4.0",
-  "autoprefixer": "^10.4.0",
-  "cssnano": "^6.0.0"
+    "postcss": "^8.4.0",
+    "postcss-cli": "^10.1.0",
+    "purgecss": "^5.0.0",
+    "sharp": "^0.33.4"
   }
-} 
+}

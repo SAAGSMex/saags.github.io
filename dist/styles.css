@@ -111,7 +111,6 @@ body {
 
 /* === Utilidades globales añadidas === */
 .container-narrow { max-width: 820px; margin-inline: auto; width:100%; padding-left:clamp(1rem,2vw,1.5rem); padding-right:clamp(1rem,2vw,1.5rem); }
-.section-tight { padding-top: clamp(1.5rem, 4vh, 3rem); padding-bottom: clamp(1.5rem, 4vh, 3rem); }
 
 /* Media wrapper para eventos (sustituye inline style height:270px) */
 .event-card .event-media-wrap { height:270px; overflow:hidden; }
@@ -153,19 +152,10 @@ body {
   scroll-margin-top: calc(var(--navbar-height) + 12px);
 }
 
-img,
-video,
-canvas,
-iframe {
+img {
   max-width: 100%;
   height: auto;
   display: block;
-}
-
-:focus-visible {
-  outline: 3px solid var(--color-accent-warm);
-  outline-offset: 2px;
-  border-radius: 4px;
 }
 
 html,
@@ -187,11 +177,9 @@ body {
 .hero-section h1 { text-align: center; }
 /* Subtítulo centrado */
 .hero-section .lead { text-align: center; }
-.hero-body .hero-actions { display: flex; }
 .hero-section h1 { text-align: center; }
 /* Subtítulo centrado */
 .hero-section .lead { text-align: center; }
-.hero-body .hero-actions { display: flex; }
 .hero-section h1 {
   margin: 0 0 1rem;
   font-size: clamp(2.2rem, 7vw, 4rem);
@@ -338,10 +326,6 @@ body {
 }
 
 /* Event cards: altura flexible en pantallas pequeñas para reducir scroll */
-@media (max-width: 575.98px) {
-  .event-card [style*="height:270px"],
-  .event-card .bg-dark[style*="height:270px"] { height: 52vw !important; max-height: 220px; }
-}
 
 /* Mejoras de accesibilidad / densidad para dispositivos con poca altura */
 @media (max-height: 520px) and (orientation: landscape) {
@@ -517,30 +501,6 @@ body {
   pointer-events: none;
   z-index: 0;
 }
-.hero-body {
-  width: min(100% - 2rem, 760px);
-  margin-inline: auto;
-  padding-inline: clamp(1rem, 4vw, 2rem);
-  padding-top: clamp(1.2rem, 3.5vh, 2.8rem);
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* centrado universal */
-}
-.hero-bg-media {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-}
-.hero-bg-media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
 .hero-section h1 { text-align: center; }
 /* Subtítulo centrado */
 .hero-section .lead { text-align: center; }
@@ -548,7 +508,6 @@ body {
 .hero-section > .container > picture { z-index: 0 !important; pointer-events: none; }
 .hero-section::before { z-index: 1; }
 .hero-section > .container > *:not(picture) { position: relative; z-index: 2; }
-.hero-body .hero-actions { display: flex; }
 /* Hero ajustado: eliminar espacios azules arriba/abajo */
 .hero-section {
   position: relative;
@@ -619,7 +578,6 @@ body {
     justify-content: flex-start;
     padding-top: calc(var(--navbar-height) + 1rem + env(safe-area-inset-top));
   }
-  .hero-body { padding-top: 0; }
 }
 
 @media (max-width: 340px) {
@@ -632,17 +590,17 @@ body {
 }
 
 /* Hero: centrar y apilar contenido en TODOS los dispositivos */
-.hero-body, .hero-section > .container {
+ .hero-section > .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   gap: 0.75rem;
 }
-.hero-body h1, .hero-body .lead,
+
 .hero-section > .container h1,
 .hero-section > .container .lead { text-align: inherit; margin-left: 0; margin-right: 0; }
-.hero-body .hero-actions,
+
 .hero-section > .container .d-flex {
   display: flex;
   flex-direction: column;
@@ -651,7 +609,7 @@ body {
   width: 100%;
   gap: .75rem;
 }
-.hero-body .hero-actions .btn,
+
 .hero-section > .container .d-flex .btn {
   width: 100%;
   max-width: 360px;
@@ -1176,15 +1134,6 @@ time {
   background-color: rgba(7, 11, 35, 0.9);
   border-top: 1px solid var(--color-border);
 }
-.social-links a {
-  margin-right: 15px;
-  font-size: 1.5rem;
-  color: var(--color-text);
-  transition: color .3s;
-}
-.social-links a:hover {
-  color: var(--color-accent);
-}
 
 /* 13. GLightbox: galería de imágenes y descripciones */
 .gslide-description {
@@ -1380,7 +1329,6 @@ time {
   #actividades .card-body { padding: 1rem .9rem .3rem; }
   #actividades p.card-text { font-size: .97rem; }
   /* Event cards image aspect for narrow devices */
-  .event-card .bg-dark[style*="height:270px"] { height: 55vw !important; max-height: 230px; }
   /* Gallery cards text size */
   .gallery-card h5 { font-size: 1.02rem; }
   .gallery-card p { font-size: .95rem; }
@@ -1505,36 +1453,11 @@ time {
 /* Forzar modo hamburguesa (collapse) solo entre 768 y 820px (iPad Mini / Air) */
 @media (min-width: 768px) and (max-width: 820px) {
   /* Mostrar el botón toggler aunque navbar-expand-md normalmente lo oculte */
-  .navbar.navbar-expand-md .navbar-toggler { display: block; }
   /* Ocultar el menú expandido por defecto */
-  .navbar.navbar-expand-md .navbar-collapse { display: none !important; }
   /* Cuando Bootstrap agrega .show al colapsar, se muestra */
-  .navbar.navbar-expand-md .navbar-collapse.show { display: block !important; }
   /* Estilos del panel desplegado: similar a móvil, fondo sólido y lista vertical */
-  .navbar.navbar-expand-md .navbar-collapse {
-    position: absolute;
-    top: var(--navbar-height);
-    left: 0; right: 0;
-    background: rgba(7,11,35,0.96);
-    backdrop-filter: blur(4px);
-    padding: .75rem 1rem 1rem;
-    border-bottom: 1px solid var(--color-border);
-    box-shadow: 0 8px 28px -6px rgba(0,0,0,.55);
-    animation: navSlideDown .35s var(--easing-standard);
-  }
   @keyframes navSlideDown { from { opacity:0; transform: translateY(-8px);} to { opacity:1; transform: translateY(0);} }
-  .navbar.navbar-expand-md .navbar-nav { flex-direction: column; align-items: stretch; gap: .25rem; width: 100%; }
-  .navbar.navbar-expand-md .navbar-nav .nav-link {
-    width: 100%;
-    text-align: left;
-    padding: .65rem .9rem;
-    margin: 0;
-    font-size: .95rem;
-    border-radius: .55rem;
-  }
-  .navbar.navbar-expand-md .navbar-nav .nav-link + .nav-link { margin-top: .15rem; }
   /* Ajuste de la versión corta del calendario: restablecer tamaño legible en panel */
-  .navbar.navbar-expand-md .navbar-collapse.show .nav-text-short { font-size: inherit; }
 }
 
 /* ---------------------------------------------
@@ -1629,9 +1552,7 @@ time {
   /* Calendario: asegurar no se aplasten columnas si el padding reduce el ancho útil */
   .calendario__grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
   /* Panel colapsado ya vertical: permitir fuente cómoda */
-  .navbar.navbar-expand-md .navbar-collapse .nav-link { font-size: .95rem !important; }
 }
-.gallery-compact-grid { row-gap: 1.25rem; }
 
 /* Optimización de espacio en galería >=768px */
 @media (min-width: 768px) {
@@ -1659,7 +1580,7 @@ time {
 /* GLightbox refinado: progresivo móvil -> desktop */
 .glightbox-container .gslide {display:flex !important; flex-direction:column; justify-content:center; align-items:center; padding:0 !important;}
 .glightbox-container .gslide-media {display:flex !important; align-items:center; justify-content:center; width:100%; max-height:100%; margin:0 !important;}
-.glightbox-container .gslide-media img,.glightbox-clean .gslide-media img,.glightbox-modern .gslide-media img{object-fit:contain !important; width:auto !important; height:auto !important; max-width:calc(100vw - 44px); max-height:calc(100vh - 180px); background:#000 !important;}
+.glightbox-container .gslide-media img,.glightbox-clean .gslide-media img{object-fit:contain !important; width:auto !important; height:auto !important; max-width:calc(100vw - 44px); max-height:calc(100vh - 180px); background:#000 !important;}
 .glightbox-container .gslide.is-portrait .gslide-media img{max-width:calc(100vw - 60px); max-height:calc(100vh - 160px);} /* retratos: un poco más de ancho relativo */
 .gslide-description{width:100%; max-width:900px; background:rgba(24,27,31,.95)!important; padding:.65rem .95rem !important; max-height:240px; overflow-y:auto;}
 .gslide-description h4{font-size:1.25rem !important; margin:0 0 .55rem !important;}

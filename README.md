@@ -8,14 +8,17 @@ El código ha ido evolucionando con iteraciones orientadas a: mejor experiencia 
 
 ## 🎯 Objetivo del proyecto
 
-Plataforma estática optimizada para difundir actividades astronómicas, eventos educativos y material visual de la Sociedad Astronómica de Aguascalientes. Sirve como demostración de buenas prácticas front‑end (rendimiento, accesibilidad, mantenibilidad) aplicadas sin frameworks pesados.
+Plataforma web estática para la Sociedad Astronómica de Aguascalientes que centraliza: presentación institucional, actividades, galería de astrofotografía, calendario astronómico, equipo y contacto. Se construyó con HTML5, CSS propio + Bootstrap (CDN) y JavaScript plano, priorizando rendimiento en móviles y accesibilidad básica. Incluye un flujo opcional para purgar/minificar CSS.
 
 ## 🚀 Contenido principal
 
-- **Calendario de eventos:** observaciones públicas, talleres, charlas y fenómenos destacados.
-- **Galería de astrofotografía:** imágenes optimizadas (WebP / AVIF cuando aplica) con lightbox adaptado para retratos y horizontales.
-- **Difusión y recursos:** noticias, apuntes y enlaces útiles para quienes empiezan.
-- **Equipo y contacto:** cómo unirte, colaborar o enviarnos tus fotos.
+- Inicio/Hero y navegación con anclas.
+- Nosotros: objetivos, principios y logros de la SAAGS.
+- Actividades y eventos: tarjetas informativas con enlaces externos.
+- Galería de astrofotografía: tarjetas con GLightbox (CDN) para ver imágenes.
+- Calendario astronómico: resumen en la página principal y enlace a página dedicada en `CalendarioAstro/`.
+- Equipo: tarjetas del equipo con redes.
+- Contacto: datos y formulario demostrativo (no envía, `action="#"`).
 
 ---
 
@@ -28,7 +31,7 @@ Plataforma estática optimizada para difundir actividades astronómicas, eventos
 | Rendimiento | Preload hero, imágenes modernas, clamp() tipográfico | Mejora LCP y legibilidad progresiva |
 | Accesibilidad | Scroll suave sin contaminar historial, control aria, focus-visible | Minimizar fricción al navegar con teclado |
 | Observación DOM | IntersectionObserver dinámico (rootMargin desde --navbar-height) | Evitar zonas tapadas por el navbar persistente |
-| QA | Lighthouse + pruebas visuales Playwright | Reproducibilidad y prevención de regresiones de UI |
+| QA | Pruebas visuales Playwright (incluidas) y Lighthouse (script) | Revisión visual y de rendimiento local |
 
 ### Arquitectura lógica
 
@@ -64,13 +67,13 @@ Extras recientes:
 ## 📁 Estructura (simplificada)
 
 ```
-index.html            # Página principal y layout
-styles.css            # Estilos centralizados (utilidades & componentes)
-scripts.js            # Comportamiento: observer, navegación, galería
-img/                  # Activos optimizados (WebP/AVIF/JPG)
-CalendarioAstro/      # Página / recursos del calendario astronómico
-package.json          # Scripts Lighthouse y pruebas visuales
-.lighthouserc.json    # Umbrales de auditoría
+index.html         # Página principal con todas las secciones
+styles.css         # Estilos globales y responsive (sin preprocesador)
+scripts.js         # Navegación, lightbox y mejoras de UX/A11y (vanilla JS)
+CalendarioAstro/   # Calendario astronómico (HTML/CSS/JS propio)
+img/               # Imágenes del sitio (WebP/AVIF/JPG/PNG)
+tests/visual/      # Pruebas visuales Playwright (baselines incluidas)
+purgecss.config.cjs, postcss.config.cjs # Config opcional de purga/minificado CSS
 ```
 
 Convención: se prefieren variables CSS globales (`:root`) para alturas, colores y spacings reutilizados; media queries escalonadas para ranges específicos (ej. 768–991.98px) en lugar de sobrescrituras dispersas.
@@ -102,9 +105,10 @@ Scripts disponibles (`package.json`):
 | Script | Descripción |
 |--------|-------------|
 | `lh` | Ejecuta Lighthouse headless (Performance, A11y, BP, SEO) y genera `lighthouse-report.json`. |
-| `lh:ci` | Corre Lighthouse CI con umbrales definidos en `.lighthouserc.json`. |
+| `lh:ci` | Autorun de LHCI (requiere configuración adicional, no incluida por defecto). |
 | `test:visual` | Pruebas visuales multi-navegador (Playwright) contra baselines. |
 | `test:visual:update` | Actualiza baselines de capturas si un cambio es intencional. |
+| `build:css` | Purga y minifica `styles.css` (salida en `dist/`). |
 
 Ejemplo rápido (sirviendo en otro puerto si usas live server):
 
@@ -115,8 +119,8 @@ npm run lh
 ### Visual regression (Playwright + pixelmatch)
 Se generan capturas de vistas clave; si hay difs sobre tolerancia se marca fallo. Útil tras modificar CSS global.
 
-### Lighthouse CI
-Umbrales configurados para impedir regresiones fuertes. Ajusta `.lighthouserc.json` si la naturaleza del contenido cambia (más scripts, media pesada, etc.).
+### Lighthouse
+Puedes usar `npm run lh` para una auditoría local puntual (no hay configuración de CI incluida).
 
 ## ♿ Accesibilidad (resumen)
 
@@ -149,6 +153,33 @@ Se agregó un flujo opcional para generar una hoja reducida:
 Safelist (evita eliminaciones inseguras) definido en `purgecss.config.cjs`: incluye patrones dinámicos (`animate__`, `fa-`, utilidades Bootstrap, clases GLightbox, etc.). Si agregas clases vía JS recuerda añadirlas ahí.
 
 Integración manual: enlaza `dist/styles.min.css` en `index.html` si decides usar la versión optimizada para producción.
+
+---
+
+## 🧰 ¿Cómo actualizar el contenido?
+
+Todo el contenido visible está en HTML/JS/CSS. No hay panel de administración.
+
+- Actividades: en `index.html`, sección `<section id="actividades">` duplica una tarjeta (`<div class="col-md-4 mb-4">...</div>`) y actualiza imágenes/textos/enlaces.
+- Galería: en `<section id="galeria">` duplica un bloque de tarjeta. La imagen grande se referencia dentro de `<a class="glightbox" href="img/...">`.
+- Calendario (resumen): en `index.html`, `<section id="calendario">` edita los `<article class="mes">` y sus `<li class="evento">`.
+- Calendario completo: en `CalendarioAstro/` edita `calendario-astronomico-2025.html` y `calendario-astronomico-2025.js/css`.
+- Equipo: en `<section id="equipo">` edita cada tarjeta (`.team-card`). Las fotos están en `img/equipo/`.
+- Contacto: teléfonos/emails se editan en la sección `<section id="contacto">`. El formulario es demostrativo (`action="#"`).
+- Fondos: se controlan desde `styles.css` con reglas por media query. En móviles `<768px` se usa `body::before` fijo; en tablets/desktop la capa `.bg-stars` aplica el fondo.
+
+Consejos:
+- Mantén nombres/formatos de imagen consistentes (preferir WebP/AVIF). 
+- Previsualiza en 414px, 768px, 1024px y 1366px.
+- Si cambias clases desde JS, añade a la safelist de `purgecss.config.cjs` antes de ejecutar `build:css`.
+
+---
+
+## 📄 Manuales
+
+Además de este README, se incluyen dos documentos en `docs/` para convertir a Word si se requiere entregar en `.docx`:
+- `docs/manual-usuario.md`: guía paso a paso para actualizar secciones, imágenes y calendario.
+- `docs/manual-tecnico.md`: estructura del proyecto, estilos, scripts y flujo de optimización.
 
 ## 🌠 Redes y contacto
 
