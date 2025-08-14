@@ -82,17 +82,24 @@ Convención: se prefieren variables CSS globales (`:root`) para alturas, colores
 
 ## 🤝 Contribuir
 
-¿Tienes una astrofoto, detectaste un bug visual en cierto ancho, o quieres mejorar accesibilidad? Abre un [issue](https://github.com/Sergioloeraco/saags.github.io/issues) con:
+¿Tienes una astrofoto, detectaste un bug visual en cierto ancho, o quieres mejorar accesibilidad? Abre un issue en el repositorio con: [issue](https://github.com/SAAGSMex/saags.github.io/issues) 
 
 1. Descripción breve.
 2. Pasos para reproducir (si aplica).
 3. Captura / ancho de viewport.
+
 
 Pull Requests: mantén los cambios centrados (una cosa a la vez) y evita re-formateos masivos para facilitar la revisión.
 
 Formato sugerido de commit: `feat:`, `fix:`, `perf:`, `docs:`, `style:`, `refactor:`, `test:`.
 
 Para astrofotografía añade créditos y equipo usado en la descripción.
+
+---
+
+## 🌐 Sitio web
+
+https://saagsmex.github.io/saags.github.io/
 
 ---
 
