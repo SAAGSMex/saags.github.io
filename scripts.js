@@ -43,6 +43,15 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     window.addEventListener('resize', fixHeroHeight);
+    // También actualizar en scroll en móviles
+    window.addEventListener('scroll', function() {
+        if (window.innerWidth < 768) {
+            // Actualiza --vh y la altura del hero
+            const vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+            fixHeroHeight();
+        }
+    });
     fixHeroHeight();
     // 0. Ajuste de viewport alto dinámico en móviles (usa --vh en CSS)
     (function fixMobileVH(){
@@ -63,6 +72,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         window.addEventListener('resize', onResize);
         window.addEventListener('orientationchange', setVh);
+        // También actualizar --vh en scroll en móviles
+        window.addEventListener('scroll', function() {
+            if (window.innerWidth < 768) setVh();
+        });
         setVh();
     })();
     // 1. Animación del botón "Nuestras actividades"

@@ -184,6 +184,48 @@ body {
 -------------------------------- */
 
 /* Hero tipografía y botones unificados (aplica a todos los dispositivos) */
+/* Hero cubre toda la pantalla y el fondo galaxy no deja hueco azul */
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  height: 100dvh;
+  width: 100vw;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  background: transparent;
+}
+@media (max-width: 767.98px) {
+  .hero-section {
+    min-height: 100vh;
+    height: 100dvh;
+    width: 100vw;
+    padding: 0;
+  }
+  .hero-section > .container {
+    min-height: 100vh;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-section picture,
+  .hero-section picture img {
+    min-height: 100vh !important;
+    height: 100dvh !important;
+    width: 100vw !important;
+    object-fit: cover;
+    position: absolute;
+    top: 0; left: 0;
+    z-index: 0;
+  }
+}
 .hero-section h1 { text-align: center; }
 /* Subtítulo centrado */
 .hero-section .lead { text-align: center; }
