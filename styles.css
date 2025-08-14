@@ -1,3 +1,33 @@
+@media (max-width: 767.98px) {
+  .hero-section {
+    background-attachment: fixed !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    min-height: 100vh !important;
+    height: 100dvh !important;
+    width: 100vw !important;
+    overflow: hidden !important;
+    position: relative !important;
+    will-change: unset !important;
+  }
+  .hero-section > .container,
+  .hero-section picture,
+  .hero-section picture img {
+    min-height: 100vh !important;
+    height: 100dvh !important;
+    width: 100vw !important;
+    object-fit: cover !important;
+    position: absolute !important;
+    top: 0; left: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .hero-section > .container > *:not(picture) {
+    position: relative;
+    z-index: 2;
+  }
+}
 /* ======================================================================
   SAAGS – Hoja de Estilos Principal (styles.css)
   ----------------------------------------------------------------------

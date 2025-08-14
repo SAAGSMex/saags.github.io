@@ -116,6 +116,8 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
     const allowedInternalLinks = document.querySelectorAll(internalNavSelectors.join(','));
     const NAV_ACTIVE_CLASS = 'active';
+    // Definir navLinksForObserver igual que allowedInternalLinks para evitar error
+    const navLinksForObserver = allowedInternalLinks;
     // Configuración: si quieres actualizar el hash sin crear historial pon a true.
     const UPDATE_HASH = false; // Requisito: mantener URL limpia sin #
 
