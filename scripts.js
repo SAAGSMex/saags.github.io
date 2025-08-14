@@ -126,10 +126,8 @@ document.addEventListener('DOMContentLoaded', function() {
     allowedInternalLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             const hash = link.getAttribute('href');
-            if (!hash || !hash.startsWith('#')) return; // no interno
-            // Siempre prevenimos para cualquier hash (incluyendo '#') para que nunca ensucie la URL.
+            if (!hash || !hash.startsWith('#')) return;
             e.preventDefault();
-            // Caso especial: href="#" (sin destino) => sólo limpiamos el hash si aparece temporalmente.
             if (hash === '#' || hash.length === 1) {
                 clearHashFromUrl();
                 return;
@@ -137,7 +135,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const id = hash.slice(1);
             const destino = document.getElementById(id);
             if (destino) {
-                // Scroll manual restando la altura del navbar, adaptado para móviles <768px
                 const navbar = document.querySelector('.navbar');
                 let navbarHeight = 0;
                 if (navbar) {
@@ -147,10 +144,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 const isMobile = window.innerWidth < 768;
                 let extraOffset = 0;
                 if (isMobile) {
-                    // Offset adicional para móviles pequeños
-                    extraOffset = 8; // px extra para evitar pegado visual
+                    extraOffset = 8;
                 } else if (window.innerWidth < 1024) {
-                    // Tablets
                     const bodyStyle = getComputedStyle(document.body);
                     const bodyPad = parseFloat(bodyStyle.paddingTop) || 0;
                     const bodyMargin = parseFloat(bodyStyle.marginTop) || 0;
@@ -159,11 +154,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 const rect = destino.getBoundingClientRect();
                 const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
                 let top = rect.top + scrollTop - navbarHeight - extraOffset;
-                if (isMobile && top < 0) top = 0;
+                // Protección extra: nunca scroll negativo
+                if (top < 0) top = 0;
+                // Fallback: si el scroll no cambia, usar scrollIntoView
+                const prevScroll = window.scrollY;
                 window.scrollTo({ top, behavior: 'smooth' });
+                setTimeout(() => {
+                    // Si después de 600ms el scroll no cambió, forzar scrollIntoView
+                    if (Math.abs(window.scrollY - top) > 2) return;
+                    destino.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 600);
                 activarLinkPorHash(hash);
             }
-            // Incluso si no existe el destino, evitamos que el hash quede en la barra.
             if (!UPDATE_HASH) {
                 clearHashFromUrl();
             } else {
