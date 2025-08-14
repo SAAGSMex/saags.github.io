@@ -38,9 +38,14 @@ Archivo: `styles.css`.
 - En móviles (<768px) el fondo se aplica con `body::before`.
 - En tablets/desktop la capa `.bg-stars` usa fondos adaptados.
 
+
 ## 7) Publicación
 - Si usas GitHub Pages, al hacer push a la rama principal, el sitio se actualiza.
 - Revisa en móvil (414px), tablet (768px) y laptop (1024px) tras cada cambio.
+
+## 8) Navegación interna y scroll
+
+Los enlaces del menú y botones con ancla (#) hacen scroll suave a la sección correspondiente, descontando la altura real del navbar. Esto evita que el contenido quede tapado o el scroll se "pegue". No hay scroll-jacking ni efectos agresivos.
 
 ## 8) Opcional: optimizar CSS
 - Ejecuta `npm run build:css` para generar `dist/styles.min.css`.

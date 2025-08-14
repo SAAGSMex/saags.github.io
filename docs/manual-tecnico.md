@@ -18,9 +18,10 @@
 - Tablet (768–991.98px) y Desktop (>=1024px): `.bg-stars` con `galaxybg_pc.webp`.
 - Imágenes en `img/background/`.
 
+
 ## JS clave
-- `computeRootMargin()` calcula margen del observer según `--navbar-height`.
-- Navegación interna limpia la URL con `history.replaceState`.
+- Navegación interna realiza scroll manual descontando la altura real del navbar (leyendo la variable --navbar-height o el alto real). Esto evita problemas de scroll-jacking y asegura que la sección quede perfectamente visible bajo el navbar fijo.
+- La URL se limpia con `history.replaceState`.
 - Botones de actividades abren en nueva pestaña con `rel="noopener noreferrer"`.
 
 ## Pruebas

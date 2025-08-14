@@ -30,7 +30,7 @@ Plataforma web estática para la Sociedad Astronómica de Aguascalientes que cen
 | Galería | GLightbox + ajustes CSS propios | Control preciso de retratos / landscape y descripción |
 | Rendimiento | Preload hero, imágenes modernas, clamp() tipográfico | Mejora LCP y legibilidad progresiva |
 | Accesibilidad | Scroll suave sin contaminar historial, control aria, focus-visible | Minimizar fricción al navegar con teclado |
-| Observación DOM | IntersectionObserver dinámico (rootMargin desde --navbar-height) | Evitar zonas tapadas por el navbar persistente |
+| Navegación interna | Scroll manual que descuenta la altura del navbar | Evita que el scroll se "pegue" o salte mal |
 | QA | Pruebas visuales Playwright (incluidas) y Lighthouse (script) | Revisión visual y de rendimiento local |
 
 ### Arquitectura lógica
@@ -48,7 +48,7 @@ tests/visual -> Pruebas de regresión visual (Playwright + pixelmatch)
 1. HTML base entrega estructura y navbar.
 2. CSS crítico (único archivo) se carga temprano (rel estándar).
 3. Fondos condicionales según breakpoint / density evitando descargas innecesarias.
-4. JS diferido inicializa observers, navegación limpia y lightbox cuando disponible.
+4. JS diferido inicializa navegación interna con scroll manual (sin scroll-jacking), y lightbox cuando disponible.
 
 ### Acciones automáticas internas
 - IntersectionObserver recalcula rootMargin basado en `--navbar-height` (adaptable).
@@ -129,10 +129,11 @@ Se generan capturas de vistas clave; si hay difs sobre tolerancia se marca fallo
 ### Lighthouse
 Puedes usar `npm run lh` para una auditoría local puntual (no hay configuración de CI incluida).
 
+
 ## ♿ Accesibilidad (resumen)
 
 - `object-fit:contain` en lightbox evita recortes informativos.
-- Ajustes de `scroll-margin-top` para anclas tras navbar fijo.
+- El scroll a secciones descuenta la altura del navbar de forma precisa (sin scroll-jacking).
 - `focus-visible` estilizado para navegación por teclado.
 - Prevención de uso incorrecto de `aria-hidden` cuando hay foco dentro de la galería.
 - Reducciones de movimiento respetan `prefers-reduced-motion`.
