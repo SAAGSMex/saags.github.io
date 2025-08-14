@@ -122,18 +122,20 @@ document.addEventListener('DOMContentLoaded', function() {
             const id = hash.slice(1);
             const destino = document.getElementById(id);
             if (destino) {
-                // Scroll manual restando la altura del navbar, ajustado para móviles/tablets
+                // Scroll manual restando la altura del navbar, adaptado para móviles <768px
                 const navbar = document.querySelector('.navbar');
                 let navbarHeight = 0;
                 if (navbar) {
                     const raw = getComputedStyle(document.documentElement).getPropertyValue('--navbar-height').trim();
                     navbarHeight = parseFloat(raw) || navbar.offsetHeight || 76;
                 }
-                // En móviles/tablets, aseguramos que el scroll nunca deje el contenido pegado
-                const isMobile = window.innerWidth < 1024;
+                const isMobile = window.innerWidth < 768;
                 let extraOffset = 0;
                 if (isMobile) {
-                    // Si hay margen superior en el body o padding-top, lo sumamos
+                    // Offset adicional para móviles pequeños
+                    extraOffset = 8; // px extra para evitar pegado visual
+                } else if (window.innerWidth < 1024) {
+                    // Tablets
                     const bodyStyle = getComputedStyle(document.body);
                     const bodyPad = parseFloat(bodyStyle.paddingTop) || 0;
                     const bodyMargin = parseFloat(bodyStyle.marginTop) || 0;
@@ -142,7 +144,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 const rect = destino.getBoundingClientRect();
                 const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
                 let top = rect.top + scrollTop - navbarHeight - extraOffset;
-                // En móviles, si el top es menor a 0, lo ajustamos a 0
                 if (isMobile && top < 0) top = 0;
                 window.scrollTo({ top, behavior: 'smooth' });
                 activarLinkPorHash(hash);
@@ -173,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const initial = location.hash;
         const target = document.getElementById(initial.substring(1));
         if (target) {
-            // Scroll manual restando la altura del navbar, ajustado para móviles/tablets
+            // Scroll manual restando la altura del navbar, adaptado para móviles <768px
             setTimeout(() => {
                 const navbar = document.querySelector('.navbar');
                 let navbarHeight = 0;
@@ -181,9 +182,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     const raw = getComputedStyle(document.documentElement).getPropertyValue('--navbar-height').trim();
                     navbarHeight = parseFloat(raw) || navbar.offsetHeight || 76;
                 }
-                const isMobile = window.innerWidth < 1024;
+                const isMobile = window.innerWidth < 768;
                 let extraOffset = 0;
                 if (isMobile) {
+                    extraOffset = 8;
+                } else if (window.innerWidth < 1024) {
                     const bodyStyle = getComputedStyle(document.body);
                     const bodyPad = parseFloat(bodyStyle.paddingTop) || 0;
                     const bodyMargin = parseFloat(bodyStyle.marginTop) || 0;
