@@ -78,60 +78,16 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // 3. RESALTADO ACTIVO EFICIENTE CON INTERSECTION OBSERVER (dinámico según altura del navbar)
-    const sections = document.querySelectorAll('section[id]');
-    const navLinksForObserver = document.querySelectorAll('.navbar-nav .nav-link');
-
-    let sectionObserver = null;
-
-    function computeRootMargin() {
-        // Lee la variable CSS --navbar-height (fallback a 76)
-        const raw = getComputedStyle(document.documentElement).getPropertyValue('--navbar-height').trim();
-        // Extrae número (puede venir con px) y hace fallback
-        const px = parseFloat(raw) || 76;
-        // Margen superior negativo = altura navbar; margen inferior negativo proporcional evita doble activación
-        // -40% mantiene lógica previa. Podría ajustarse si se desea mayor anticipación.
-        return `-${px}px 0px -40% 0px`;
-    }
-
-    function buildObserver() {
-        if (sectionObserver) {
-            sectionObserver.disconnect();
-        }
-        const options = {
-            root: null,
-            rootMargin: computeRootMargin(),
-            threshold: 0
-        };
-        sectionObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const id = entry.target.getAttribute('id');
-                    navLinksForObserver.forEach(link => {
-                        link.classList.remove('active');
-                        link.removeAttribute('aria-current');
-                    });
-                    const activeLink = document.querySelector(`.navbar-nav a[href="#${id}"]`);
-                    if (activeLink) {
-                        activeLink.classList.add('active');
-                        activeLink.setAttribute('aria-current', 'page');
-                    }
-                }
-            });
-        }, options);
-        sections.forEach(section => { if (section.id) sectionObserver.observe(section); });
-    }
-
-    buildObserver();
-
-    // Recalcular cuando la altura potencial del navbar pueda cambiar (resize/orientation)
-    let resizeTO = null;
-    window.addEventListener('resize', () => {
-        clearTimeout(resizeTO);
-        resizeTO = setTimeout(buildObserver, 160); // debounce ligero
-    });
-    window.addEventListener('orientationchange', () => {
-        setTimeout(buildObserver, 120);
-    });
+    // Puedes activar el observer si lo deseas, pero revisa primero el scroll personalizado de abajo.
+    // const sections = document.querySelectorAll('section[id]');
+    // const navLinksForObserver = document.querySelectorAll('.navbar-nav .nav-link');
+    // let sectionObserver = null;
+    // function computeRootMargin() { ... }
+    // function buildObserver() { ... }
+    // buildObserver();
+    // let resizeTO = null;
+    // window.addEventListener('resize', () => { ... });
+    // window.addEventListener('orientationchange', () => { ... });
 
     // 3.b NAVEGACIÓN INTERNA SIN AGREGAR ENTRADAS AL HISTORIAL
     // Objetivo:
@@ -187,7 +143,18 @@ document.addEventListener('DOMContentLoaded', function() {
             const id = hash.slice(1);
             const destino = document.getElementById(id);
             if (destino) {
-                destino.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                // Scroll manual restando la altura del navbar
+                const navbar = document.querySelector('.navbar');
+                let navbarHeight = 0;
+                if (navbar) {
+                    // Intenta leer la variable CSS --navbar-height
+                    const raw = getComputedStyle(document.documentElement).getPropertyValue('--navbar-height').trim();
+                    navbarHeight = parseFloat(raw) || navbar.offsetHeight || 76;
+                }
+                const rect = destino.getBoundingClientRect();
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const top = rect.top + scrollTop - navbarHeight;
+                window.scrollTo({ top, behavior: 'smooth' });
                 activarLinkPorHash(hash);
             }
             // Incluso si no existe el destino, evitamos que el hash quede en la barra.
@@ -216,9 +183,18 @@ document.addEventListener('DOMContentLoaded', function() {
         const initial = location.hash;
         const target = document.getElementById(initial.substring(1));
         if (target) {
-            // Ejecutamos scroll manual y luego limpiamos hash para que desaparezca de la barra.
+            // Scroll manual restando la altura del navbar
             setTimeout(() => {
-                target.scrollIntoView({ behavior: 'instant', block: 'start' });
+                const navbar = document.querySelector('.navbar');
+                let navbarHeight = 0;
+                if (navbar) {
+                    const raw = getComputedStyle(document.documentElement).getPropertyValue('--navbar-height').trim();
+                    navbarHeight = parseFloat(raw) || navbar.offsetHeight || 76;
+                }
+                const rect = target.getBoundingClientRect();
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const top = rect.top + scrollTop - navbarHeight;
+                window.scrollTo({ top, behavior: 'instant' });
                 activarLinkPorHash(initial);
                 if (!UPDATE_HASH) clearHashFromUrl();
             }, 15);
