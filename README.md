@@ -184,10 +184,11 @@ Consejos:
 ---
 
 ## 📄 Manuales
-
 Además de este README, se incluyen dos documentos en `docs/` para convertir a Word si se requiere entregar en `.docx`:
 - `docs/manual-usuario.md`: guía paso a paso para actualizar secciones, imágenes y calendario.
 - `docs/manual-tecnico.md`: estructura del proyecto, estilos, scripts y flujo de optimización.
+
+También está disponible un manual en formato Word listo para su uso en `docs/manual-saags.docx`.
 
 ## 🌠 Redes y contacto
 
