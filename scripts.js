@@ -78,27 +78,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // 3. RESALTADO ACTIVO EFICIENTE CON INTERSECTION OBSERVER (dinámico según altura del navbar)
-    // Puedes activar el observer si lo deseas, pero revisa primero el scroll personalizado de abajo.
-    // const sections = document.querySelectorAll('section[id]');
-    // const navLinksForObserver = document.querySelectorAll('.navbar-nav .nav-link');
-    // let sectionObserver = null;
-    // function computeRootMargin() { ... }
-    // function buildObserver() { ... }
-    // buildObserver();
-    // let resizeTO = null;
-    // window.addEventListener('resize', () => { ... });
-    // window.addEventListener('orientationchange', () => { ... });
-
-    // 3.b NAVEGACIÓN INTERNA SIN AGREGAR ENTRADAS AL HISTORIAL
-    // Objetivo:
-    //  - Mantener los href="#seccion" (SEO / accesibilidad) pero evitar que cada click añada una entrada en el historial.
-    //  - Limitar la navegación interna SOLO a:
-    //      * Enlaces del navbar.
-    //      * Botones/enlaces que el autor marque con la clase .scroll-link o data-scroll
-    //  - Otros enlaces internos con # (no autorizados) no harán scroll (para cumplir el requisito).
-    //  - Actualizamos la URL con replaceState (o history.replaceState) para no crear nueva entrada.
-    //  - Añadimos smooth scroll y sincronizamos el estado activo del navbar al instante.
-
     const internalNavSelectors = [
         '#navbarNav .nav-link[href^="#"]',          // enlaces del menú principal
         '.navbar-brand[href^="#"]',                // logo (#inicio)
@@ -143,17 +122,28 @@ document.addEventListener('DOMContentLoaded', function() {
             const id = hash.slice(1);
             const destino = document.getElementById(id);
             if (destino) {
-                // Scroll manual restando la altura del navbar
+                // Scroll manual restando la altura del navbar, ajustado para móviles/tablets
                 const navbar = document.querySelector('.navbar');
                 let navbarHeight = 0;
                 if (navbar) {
-                    // Intenta leer la variable CSS --navbar-height
                     const raw = getComputedStyle(document.documentElement).getPropertyValue('--navbar-height').trim();
                     navbarHeight = parseFloat(raw) || navbar.offsetHeight || 76;
                 }
+                // En móviles/tablets, aseguramos que el scroll nunca deje el contenido pegado
+                const isMobile = window.innerWidth < 1024;
+                let extraOffset = 0;
+                if (isMobile) {
+                    // Si hay margen superior en el body o padding-top, lo sumamos
+                    const bodyStyle = getComputedStyle(document.body);
+                    const bodyPad = parseFloat(bodyStyle.paddingTop) || 0;
+                    const bodyMargin = parseFloat(bodyStyle.marginTop) || 0;
+                    extraOffset = bodyPad + bodyMargin;
+                }
                 const rect = destino.getBoundingClientRect();
                 const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                const top = rect.top + scrollTop - navbarHeight;
+                let top = rect.top + scrollTop - navbarHeight - extraOffset;
+                // En móviles, si el top es menor a 0, lo ajustamos a 0
+                if (isMobile && top < 0) top = 0;
                 window.scrollTo({ top, behavior: 'smooth' });
                 activarLinkPorHash(hash);
             }
@@ -183,7 +173,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const initial = location.hash;
         const target = document.getElementById(initial.substring(1));
         if (target) {
-            // Scroll manual restando la altura del navbar
+            // Scroll manual restando la altura del navbar, ajustado para móviles/tablets
             setTimeout(() => {
                 const navbar = document.querySelector('.navbar');
                 let navbarHeight = 0;
@@ -191,9 +181,18 @@ document.addEventListener('DOMContentLoaded', function() {
                     const raw = getComputedStyle(document.documentElement).getPropertyValue('--navbar-height').trim();
                     navbarHeight = parseFloat(raw) || navbar.offsetHeight || 76;
                 }
+                const isMobile = window.innerWidth < 1024;
+                let extraOffset = 0;
+                if (isMobile) {
+                    const bodyStyle = getComputedStyle(document.body);
+                    const bodyPad = parseFloat(bodyStyle.paddingTop) || 0;
+                    const bodyMargin = parseFloat(bodyStyle.marginTop) || 0;
+                    extraOffset = bodyPad + bodyMargin;
+                }
                 const rect = target.getBoundingClientRect();
                 const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                const top = rect.top + scrollTop - navbarHeight;
+                let top = rect.top + scrollTop - navbarHeight - extraOffset;
+                if (isMobile && top < 0) top = 0;
                 window.scrollTo({ top, behavior: 'instant' });
                 activarLinkPorHash(initial);
                 if (!UPDATE_HASH) clearHashFromUrl();
