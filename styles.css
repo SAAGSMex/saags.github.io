@@ -1,3 +1,38 @@
+
+
+/* ====================
+   FONDOS MÓVIL: galaxybg_767mobile y herogalaxy_767 siempre estáticos
+   ==================== */
+@media (max-width: 767.98px) {
+  /* Fondo principal móvil: galaxybg_767mobile */
+  body, body::before {
+    background-attachment: fixed !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    will-change: unset !important;
+    transform: none !important;
+  }
+  .bg-stars {
+    background-image: url("../img/background/galaxybg_767mobile.webp?v=9") !important;
+    background-attachment: fixed !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    will-change: unset !important;
+    transform: none !important;
+  }
+  /* Fondo hero móvil: herogalaxy_767 */
+  .hero-section {
+    background-image: url('img/head-navbar-hero/herogalaxy_767.webp') !important;
+    background-attachment: fixed !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    will-change: unset !important;
+    transform: none !important;
+  }
+}
 @media (max-width: 767.98px) {
   .hero-section {
     background-attachment: fixed !important;
