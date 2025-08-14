@@ -47,13 +47,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // 0. Ajuste de viewport alto dinámico en móviles (usa --vh en CSS)
     (function fixMobileVH(){
         function setVh() {
-            const vh = window.innerHeight * 0.01; // 1vh real
+            const vh = window.innerHeight * 0.01;
             document.documentElement.style.setProperty('--vh', `${vh}px`);
         }
         let rAF, lastCall = 0;
         function onResize(){
             const now = Date.now();
-            if (now - lastCall < 90) { // debounce simple
+            if (now - lastCall < 90) {
                 cancelAnimationFrame(rAF);
                 rAF = requestAnimationFrame(setVh);
                 return;
@@ -62,6 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
             setVh();
         }
         window.addEventListener('resize', onResize);
+        window.addEventListener('orientationchange', setVh);
         setVh();
     })();
     // 1. Animación del botón "Nuestras actividades"

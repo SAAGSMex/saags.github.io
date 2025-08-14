@@ -1321,7 +1321,13 @@ time {
       url("../img/background/galaxybg_767.webp?v=4") 1x,
       url("../img/background/galaxybg_pc.webp?v=4") 2x
     );
-    /* will-change y transform eliminados para evitar glitches de scroll en móviles */
+    height: 100dvh;
+    min-height: 100dvh;
+    max-height: 100dvh;
+    /* Fallback para navegadores sin soporte 100dvh */
+    height: calc(var(--vh, 1vh) * 100);
+    min-height: calc(var(--vh, 1vh) * 100);
+    max-height: calc(var(--vh, 1vh) * 100);
   }
   /* Hero: evitar que la imagen de fondo se mueva al hacer scroll en móviles */
   .hero-section picture {
@@ -1329,7 +1335,9 @@ time {
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
+    min-height: 100dvh;
+    max-height: 100dvh;
     z-index: -2;
     pointer-events: none;
   }
@@ -1337,11 +1345,15 @@ time {
   .hero-section picture source {
     object-fit: cover;
     width: 100vw !important;
-    height: 100vh !important;
+    height: 100dvh !important;
     min-width: 100vw;
-    min-height: 100vh;
+    min-height: 100dvh;
     max-width: none;
     max-height: none;
+    /* Fallback para navegadores sin soporte 100dvh */
+    height: calc(var(--vh, 1vh) * 100) !important;
+    min-height: calc(var(--vh, 1vh) * 100);
+    max-height: calc(var(--vh, 1vh) * 100);
   }
 }
   #galeria > .container {
