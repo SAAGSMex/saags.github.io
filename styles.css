@@ -1,68 +1,3 @@
-
-
-/* ====================
-   FONDOS MÓVIL: galaxybg_767mobile y herogalaxy_767 siempre estáticos
-   ==================== */
-@media (max-width: 767.98px) {
-  /* Fondo principal móvil: galaxybg_767mobile */
-  body, body::before {
-    background-attachment: fixed !important;
-    background-size: cover !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-    will-change: unset !important;
-    transform: none !important;
-  }
-  .bg-stars {
-    background-image: url("../img/background/galaxybg_767mobile.webp?v=9") !important;
-    background-attachment: fixed !important;
-    background-size: cover !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-    will-change: unset !important;
-    transform: none !important;
-  }
-  /* Fondo hero móvil: herogalaxy_767 */
-  .hero-section {
-    background-image: url('img/head-navbar-hero/herogalaxy_767.webp') !important;
-    background-attachment: fixed !important;
-    background-size: cover !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-    will-change: unset !important;
-    transform: none !important;
-  }
-}
-@media (max-width: 767.98px) {
-  .hero-section {
-    background-attachment: fixed !important;
-    background-size: cover !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-    min-height: 100vh !important;
-    height: 100dvh !important;
-    width: 100vw !important;
-    overflow: hidden !important;
-    position: relative !important;
-    will-change: unset !important;
-  }
-  .hero-section > .container,
-  .hero-section picture,
-  .hero-section picture img {
-    min-height: 100vh !important;
-    height: 100dvh !important;
-    width: 100vw !important;
-    object-fit: cover !important;
-    position: absolute !important;
-    top: 0; left: 0;
-    z-index: 0;
-    pointer-events: none;
-  }
-  .hero-section > .container > *:not(picture) {
-    position: relative;
-    z-index: 2;
-  }
-}
 /* ======================================================================
   SAAGS – Hoja de Estilos Principal (styles.css)
   ----------------------------------------------------------------------
@@ -1781,4 +1716,77 @@ time {
 @media (max-width:767.98px){
   /* antes definía background-image en body:before con galaxybg_100.webp */
   body:before{content:none}
+}
+
+/* ====================
+   FONDOS MÓVIL: galaxybg_767mobile y herogalaxy_767 siempre estáticos
+   ==================== */
+@media (max-width: 767.98px) {
+  /* Fondo principal móvil: galaxybg_767mobile completamente estático */
+  body, body::before {
+    background-attachment: fixed !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    will-change: unset !important;
+    transform: none !important;
+    min-height: 100vh !important;
+    height: 100vh !important;
+    width: 100vw !important;
+  }
+  .bg-stars {
+    background-image: url("../img/background/galaxybg_767mobile.webp?v=9") !important;
+    background-attachment: fixed !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    will-change: unset !important;
+    transform: none !important;
+    min-height: 100vh !important;
+    height: 100vh !important;
+    width: 100vw !important;
+  }
+  /* Fondo hero móvil: herogalaxy_767 completamente estático */
+  .hero-section {
+    background-image: url('img/head-navbar-hero/herogalaxy_767.webp') !important;
+    background-attachment: fixed !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    will-change: unset !important;
+    transform: none !important;
+    min-height: 100vh !important;
+    height: 100vh !important;
+    width: 100vw !important;
+  }
+}
+@media (max-width: 767.98px) {
+  .hero-section {
+    background-attachment: fixed !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    min-height: 100vh !important;
+    height: 100dvh !important;
+    width: 100vw !important;
+    overflow: hidden !important;
+    position: relative !important;
+    will-change: unset !important;
+  }
+  .hero-section > .container,
+  .hero-section picture,
+  .hero-section picture img {
+    min-height: 100vh !important;
+    height: 100dvh !important;
+    width: 100vw !important;
+    object-fit: cover !important;
+    position: absolute !important;
+    top: 0; left: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .hero-section > .container > *:not(picture) {
+    position: relative;
+    z-index: 2;
+  }
 }
