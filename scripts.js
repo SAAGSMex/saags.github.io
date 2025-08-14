@@ -30,6 +30,20 @@
 
 // Script Personalizado
 document.addEventListener('DOMContentLoaded', function() {
+    // Ajuste de altura del hero en móviles para evitar desplazamiento del fondo
+    function fixHeroHeight() {
+        const hero = document.querySelector('.hero-section');
+        if (!hero) return;
+        if (window.innerWidth < 768) {
+            hero.style.minHeight = `calc(var(--vh, 1vh) * 100)`;
+            hero.style.position = 'relative';
+        } else {
+            hero.style.minHeight = '';
+            hero.style.position = '';
+        }
+    }
+    window.addEventListener('resize', fixHeroHeight);
+    fixHeroHeight();
     // 0. Ajuste de viewport alto dinámico en móviles (usa --vh en CSS)
     (function fixMobileVH(){
         function setVh() {

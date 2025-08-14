@@ -1268,7 +1268,7 @@ time {
   .bg-stars { display: block; }
   /* Fondo móvil/tablet: versión ligera */
   body {
-  background: #0a1128 url("../img/background/galaxybg_767.webp?v=4") top center/cover no-repeat;
+    background: #0a1128 url("../img/background/galaxybg_767.webp?v=4") top center/cover no-repeat;
     background-attachment: scroll;
   }
   .navbar {
@@ -1305,7 +1305,11 @@ time {
 @media (max-width: 767.98px) {
   /* Fondo móvil: mover imagen a pseudo-elemento fijo para evitar artefactos al combinar fondo + navbar fijo */
   .bg-stars { display: none !important; }
-  body { position: relative; background: #0a1128; overflow-x: hidden; }
+  body {
+    position: relative;
+    background: #0a1128;
+    overflow-x: hidden;
+  }
   body::before {
     content: "";
     position: absolute;
@@ -1321,12 +1325,16 @@ time {
   }
   /* Hero: evitar que la imagen de fondo se mueva al hacer scroll en móviles */
   .hero-section picture {
-    position: fixed !important;
-    top: 0; left: 0; width: 100vw; height: 100vh;
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
     z-index: -2;
     pointer-events: none;
   }
-  .hero-section picture img, .hero-section picture source {
+  .hero-section picture img,
+  .hero-section picture source {
     object-fit: cover;
     width: 100vw !important;
     height: 100vh !important;
@@ -1378,8 +1386,6 @@ time {
   #galeria .text-justify-responsive {
     text-align: center !important;
   }
-}
-
 /* --- Responsive refinement patch (minimal overrides to fix mobile spacing & overflow) --- */
 @media (max-width: 575.98px) {
   /* Navbar height reduction for small phones */
