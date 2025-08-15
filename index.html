@@ -30,33 +30,30 @@
                 - Si se crean nuevas clases dinámicas via JS → añadir a safelist PurgeCSS.
                 - Mantener orden semántico de headings (h1 solo en hero, subsecciones h2/h3).
         -->
-    <!-- Bootstrap CSS -->
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <!-- Bootstrap CSS -->
+        <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <!-- Font Awesome para iconos -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <!-- Animate.css -->
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <!-- GLightbox CSS -->
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
-        <link href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" rel="stylesheet">
-    </noscript>
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="img/head-navbar-hero/crescent-moon-icon-7.png">
-    <!--Preload de imágenes para mejorar el rendimiento-->
+        <!-- Animate.css -->
+        <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <!-- GLightbox CSS -->
+        <link rel="preload" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript>
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+            <link href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" rel="stylesheet">
+        </noscript>
+        <!-- Favicon -->
+        <link rel="icon" type="image/png" href="img/head-navbar-hero/crescent-moon-icon-7.png">
+        <!--Preload de imágenes para mejorar el rendimiento-->
     <!-- Preconexión a CDN de Bootstrap y jsDelivr -->
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <!-- En producción usa el CSS minificado generado en dist/ -->
-    <link rel="preload" href="dist/styles.min.css?v=7" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="stylesheet" href="dist/styles.min.css?v=7" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="dist/styles.min.css?v=7"></noscript>
+    <link rel="stylesheet" href="dist/styles.min.css?v=7"> 
     <!-- Hero: se carga vía <picture> responsivo; evitamos preload único para no descargar imagen grande en móviles -->
-    <!-- Preload solo de hero (móvil y desktop) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js" defer></script>
     <!-- GLightbox diferido para mejorar rendimiento inicial -->
     <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js" defer></script>
         <script src="scripts.js" defer></script>
@@ -116,15 +113,9 @@
         <div class="container text-center" style="position:relative;">
             <!-- Imagen principal para LCP optimizada con picture (AVIF/WebP + fallback) -->
             <picture style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:-1;">
-            <!-- <768: móvil -->
-            <source media="(max-width: 767.98px)" srcset="img/head-navbar-hero/herogalaxy_767.webp" type="image/webp">
-            <!-- ≥768: desktop -->
-            <source media="(min-width: 768px)" srcset="img/head-navbar-hero/herogalaxy.webp" type="image/webp">
-            <!-- Fallback (solo si no hay soporte WebP) -->
-            <img src="img/head-navbar-hero/herogalaxy.png"
-                alt="Fondo galáctico" width="1600" height="900"
-                style="width:100%;height:100%;object-fit:cover;"
-                loading="eager" fetchpriority="high" decoding="async">
+                <!-- Único fondo hero: versión WebP + fallback PNG -->
+                <source srcset="img/head-navbar-hero/herogalaxy.webp" type="image/webp">
+                <img src="img/head-navbar-hero/herogalaxy.png" alt="Fondo galáctico" width="1600" height="900" style="width:100%;height:100%;object-fit:cover;" loading="eager" fetchpriority="high" decoding="async">
             </picture>
             <h1 class="display-3 mb-4 fw-bold text-white animate__animated animate__fadeInDown show fade" id="titulo-inicio">
                 Sociedad Astronómica de Aguascalientes
@@ -242,7 +233,7 @@
                             <h5 class="card-actividad-title text-center">
                                 <i class="fa-solid fa-star" aria-hidden="true"></i> Observaciones Astronómicas Públicas
                             </h5>
-                            <p class="card-text text-center">Realizamos sesiones de observación para todo público, utilizando telescopios astronómicos en diversos espacios de la ciudad. Estas jornadas están orientadas tanto a la apreciación estética del cielo como al conocimiento científico.</p>
+                            <p class="card-text">Realizamos sesiones de observación para todo público, utilizando telescopios astronómicos en diversos espacios de la ciudad. Estas jornadas están orientadas tanto a la apreciación estética del cielo como al conocimiento científico.</p>
                         </div>
                         <div class="card-footer text-center">
                             <a href="https://rancholacienega.com/ecoturismo/inicio/planes-y-paquetes/astronomico/" class="btn btn-primary" aria-label="Ver próximas observaciones públicas">Próximas observaciones</a>
@@ -259,7 +250,7 @@
                             <h5 class="card-actividad-title text-center">
                                 <i class="fa-solid fa-meteor" aria-hidden="true"></i> Cursos, talleres y seminarios
                             </h5>
-                            <p class="card-text text-center">Impartimos cursos básicos y avanzados sobre astronomía general, astrofotografía, construcción de telescopios y uso de software astronómico, tanto en modalidad presencial como en línea.</p>
+                            <p class="card-text">Impartimos cursos básicos y avanzados sobre astronomía general, astrofotografía, construcción de telescopios y uso de software astronómico, tanto en modalidad presencial como en línea.</p>
                         </div>
                         <div class="card-footer text-center">
                             <a href="https://rancholacienega.com/ecoturismo/BLOG/sesion-astronomica/" class="btn btn-primary" aria-label="Ver programación de cursos y talleres">Ver programación</a>
@@ -276,7 +267,7 @@
                             <h5 class="card-actividad-title text-center">
                                 <i class="fa-solid fa-moon" aria-hidden="true"></i> Conferencias y charlas de divulgación
                             </h5>
-                            <p class="card-text text-center">Se ofrecen conferencias regulares a instituciones educativas, agrupaciones y medios, así como charlas para estudiantes y público general. Los temas abarcan desde fenómenos celestes hasta historia y tecnología astronómica.</p>
+                            <p class="card-text">Se ofrecen conferencias regulares a instituciones educativas, agrupaciones y medios, así como charlas para estudiantes y público general. Los temas abarcan desde fenómenos celestes hasta historia y tecnología astronómica.</p>
                         </div>
                     </div>
                 </div>
@@ -290,7 +281,7 @@
                             <h5 class="card-actividad-title text-center">
                                 <i class="fa-solid fa-bullhorn" aria-hidden="true"></i> Participación en medios de comunicación
                             </h5>
-                            <p class="card-text text-center">Colaboramos con prensa, radio y televisión local para informar a la comunidad sobre eventos astronómicos relevantes como eclipses, lluvias de meteoros, conjunciones y más.</p>
+                            <p class="card-text">Colaboramos con prensa, radio y televisión local para informar a la comunidad sobre eventos astronómicos relevantes como eclipses, lluvias de meteoros, conjunciones y más.</p>
                         </div>
                         <div class="card-footer text-center">
                             <a href="https://www.heraldo.mx/el-diablo-aparece-en-el-cielo-nocturno/#google_vignette" class="btn btn-primary" aria-label="Ver noticias sobre eventos astronómicos">Noticias</a>
@@ -308,7 +299,7 @@
                             <h5 class="card-actividad-title text-center">
                                 <i class="fa-solid fa-people-group" aria-hidden="true"></i> Colaboración nacional e internacional
                             </h5>
-                            <p class="card-text text-center">La Sociedad mantiene vínculos con organizaciones astronómicas de México y el extranjero, incluyendo su participación en redes como AstroRed México, la revista Sky & Telescope, y el programa internacional Telescopios para la Educación.</p>
+                            <p class="card-text">La Sociedad mantiene vínculos con organizaciones astronómicas de México y el extranjero, incluyendo su participación en redes como AstroRed México, la revista Sky & Telescope, y el programa internacional Telescopios para la Educación.</p>
                         </div>
                     </div>
                 </div>
@@ -322,7 +313,7 @@
                             <h5 class="card-actividad-title text-center">
                                 <i class="fa-solid fa-share-nodes" aria-hidden="true"></i> Difusión continua
                             </h5>
-                            <p class="card-text text-center">Se publica y comparte contenido científico y educativo en medios digitales, redes sociales y boletines informativos, con el fin de mantener un flujo constante de comunicación con la comunidad.</p>
+                            <p class="card-text">Se publica y comparte contenido científico y educativo en medios digitales, redes sociales y boletines informativos, con el fin de mantener un flujo constante de comunicación con la comunidad.</p>
                         </div>
                         <div class="card-footer text-center">
                             <a href="https://www.facebook.com/groups/saags/?locale=es_LA" class="btn btn-primary" aria-label="Unirse al grupo de Facebook de SAAGS">Grupo de Facebook</a>
@@ -339,7 +330,7 @@
                             <h5 class="card-actividad-title text-center">
                                 <i class="fa-solid fa-person-rays" aria-hidden="true"></i> Participación en Ferias y Eventos
                             </h5>
-                            <p class="card-text text-center">La SAAGS ha participado en eventos como la Feria del Libro de Aguascalientes, ofreciendo actividades lúdicas y observaciones astronómicas para el público en general.</p>
+                            <p class="card-text">La SAAGS ha participado en eventos como la Feria del Libro de Aguascalientes, ofreciendo actividades lúdicas y observaciones astronómicas para el público en general.</p>
                         </div>
                         <div class="card-footer text-center">
                             <a href="https://agsespacial.org/" class="btn btn-primary" aria-label="Visitar el sitio de AGS Espacial">AGS: EI</a>
@@ -415,8 +406,11 @@
                                 <!-- Fechas destacadas -->
                                 <div class="position-absolute top-0 end-0 m-3 text-end" style="z-index:2;">
                                     <span class="badge bg-primary fs-6 mb-1 px-3 py-2 shadow badge-evento" style="opacity:0.95;">
-                                    14 de Junio<br><small>9:00 AM</small>
+                                    2 de Agosto<br><small>9:00 AM</small>
                                     </span><br>
+                                    <span class="badge bg-secondary fs-6 px-3 py-2 shadow badge-evento" style="opacity:0.95;">
+                                    Transmisión por Roku
+                                    </span>
                                 </div>
                             </div>
                             <!-- Contenido del evento -->
@@ -578,6 +572,22 @@
                     <div class="col-12 col-sm-6 col-lg-4 mb-4">
                         <div class="gallery-card shadow-lg border-0 overflow-hidden p-0">
                             <div class="bg-dark position-relative w-100 d-flex align-items-center justify-content-center">
+                                <!-- El href apunta a la imagen grande para el lightbox -->
+                                <a href="img/galeria/galaxiaM.jpg" class="glightbox d-block w-100 h-100" data-gallery="galeria" data-title="<h4>Galaxia M</h4>
+                                    <p>La galaxia M 101, el 19 de marzo del 2023, capturada en el campamento Yuca, Mesa de Pinos, Sierra Fría, Aguascalientes.
+                                    <small>Créditos: Manuel Rodríguez Huerta</small>" aria-label="Ver imagen ampliada de la Galaxia M">
+                                    <picture>
+                                        <source srcset="img/galeria/galaxiaM.webp" type="image/webp">
+                                        <img src="img/galeria/galaxiaM.jpg" alt="La galaxia M 101, el 19 de marzo del 2023, capturada en el campamento Yuca, Mesa de Pinos, Sierra Fría, Aguascalientes." class="img-fluid" loading="lazy" width="810" height="540">
+                                    </picture>
+                                </a>
+                            </div>
+                            <div class="p-4 text-justify-responsive">
+                                <h5 class="mb-2 fw-bold text-info">Galaxia M</h5>
+                                <p class="mb-0 text-light">Creditos: Manuel Rodríguez Huerta</p>
+                            </div>
+                        </div>
+                    </div>
                     <!-- Tarjeta 8 -->
                     <div class="col-12 col-sm-6 col-lg-4 mb-4">
                         <div class="gallery-card shadow-lg border-0 overflow-hidden p-0">
@@ -830,11 +840,15 @@
                 <picture class="avatar-wrapper">
                     <source srcset="img/equipo/anonymous.webp" type="image/webp">
                     <img src="img/equipo/anonymous.png"
-                        alt="Foto de Ing. Alberto Segovia"
+                        alt="Foto de Dr. Miguel Ángel Pérez"
                         width="225" height="225" loading="lazy" decoding="async" class="avatar">
                 </picture>
-                <h5 class="team-name">Ing. Alberto Segovia</h5>
-                <p class="team-role text-info">Presidente</p>
+                <h5 class="team-name">Dr. Miguel Ángel Pérez</h5>
+                <p class="team-role text-info">Director</p>
+                <ul class="team-social" aria-label="Redes sociales de Dr. Miguel Ángel Pérez">
+                    <li><a href="#" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a></li>
+                    <li><a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a></li>
+                </ul>
                 </article>
             </div>
             <!-- Miembro 2 -->
@@ -843,11 +857,15 @@
                 <picture class="avatar-wrapper">
                     <source srcset="img/equipo/anonymous.webp" type="image/webp">
                     <img src="img/equipo/anonymous.png"
-                        alt="Foto de Ing. Manuel Rodriguez Huerta"
+                        alt="Foto de Dra. Laura Mendoza"
                         width="225" height="225" loading="lazy" decoding="async" class="avatar">
                 </picture>
-                <h5 class="team-name">Ing. Manuel Rodriguez Huerta</h5>
-                <p class="team-role text-info">Expresidente</p>
+                <h5 class="team-name">Dra. Laura Mendoza</h5>
+                    <p class="team-role text-info">Coord. de Divulgación</p>
+                    <ul class="team-social" aria-label="Redes sociales de Dra. Laura Mendoza">
+                    <li><a href="#" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a></li>
+                    <li><a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a></li>
+                    </ul>
                 </article>
             </div>
             <!-- Miembro 3 -->
@@ -856,11 +874,15 @@
                 <picture class="avatar-wrapper">
                     <source srcset="img/equipo/anonymous.webp" type="image/webp">
                     <img src="img/equipo/anonymous.png"
-                        alt="Foto de Julien Potier"
+                        alt="Foto de Ing. Carlos Ramírez"
                         width="225" height="225" loading="lazy" decoding="async" class="avatar">
                 </picture>
-                <h5 class="team-name">Julien Potier</h5>
-                <p class="team-role text-info">Vocal</p>
+                <h5 class="team-name">Ing. Carlos Ramírez</h5>
+                <p class="team-role text-info">Coord. de Observaciones</p>
+                <ul class="team-social" aria-label="Redes sociales de Ing. Carlos Ramírez">
+                    <li><a href="#" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a></li>
+                    <li><a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a></li>
+                </ul>
                 </article>
             </div>
             <!-- Miembro 4 -->
@@ -869,11 +891,15 @@
                 <picture class="avatar-wrapper">
                     <source srcset="img/equipo/anonymous.webp" type="image/webp">
                     <img src="img/equipo/anonymous.png"
-                        alt="Foto de Hernan Aguirre Campos"
+                        alt="Foto de Lic. Ana Sofía Torres"
                         width="225" height="225" loading="lazy" decoding="async" class="avatar">
                 </picture>
-                <h5 class="team-name">Hernan Aguirre Campos</h5>
-                <p class="team-role text-info">Miembro</p>
+                <h5 class="team-name">Lic. Ana Sofía Torres</h5>
+                <p class="team-role text-info">Secretaria</p>
+                <ul class="team-social" aria-label="Redes sociales de Lic. Ana Sofía Torres">
+                    <li><a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a></li>
+                    <li><a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a></li>
+                </ul>
                 </article>
             </div>
             </div>
