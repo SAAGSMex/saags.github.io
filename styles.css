@@ -1817,4 +1817,4 @@ time {
 @media (max-width:767.98px){
   /* antes definía background-image en body:before con galaxybg_100.webp */
   body:before{content:none}
-  }
+}
