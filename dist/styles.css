@@ -109,38 +109,43 @@ body {
   padding-top: var(--navbar-height);
 }
 
-/*bg-stars y backgrounds*/
 @media (max-width: 430px) {
-  .bg-stars {
-    position: absolute !important;
-    top: 0; left: 0; width: 100vw !important; height: 100vh !important;
-    min-width: 100vw !important; max-width: 100vw !important;
-    min-height: 100vh !important; max-height: 100vh !important;
-    z-index: -1;
-    background-attachment: scroll !important;
-    will-change: auto !important;
-    transform: none !important;
-    object-fit: none !important;
+  .hero-section {
+    min-height: 100vh !important;
+    height: 100vh !important;
+  }
+  .hero-section picture,
+  .hero-section picture > img,
+  .hero-section picture > source {
+    width: 100vw !important;
+    height: 100vh !important;
+    min-width: 100vw !important;
+    min-height: 100vh !important;
+    max-width: 100vw !important;
+    max-height: 100vh !important;
+    object-fit: cover !important;
+    object-position: center !important;
     transition: none !important;
   }
-  body { overflow-x: visible !important; }
-  body:before { content: none !important; }
 }
 @media (max-width: 360px) {
-  .bg-stars {
-    position: absolute !important;
-    top: 0; left: 0; width: 100vw !important; height: 100vh !important;
-    min-width: 100vw !important; max-width: 100vw !important;
-    min-height: 100vh !important; max-height: 100vh !important;
-    z-index: -1;
-    background-attachment: scroll !important;
-    will-change: auto !important;
-    transform: none !important;
-    object-fit: none !important;
+  .hero-section {
+    min-height: 100vh !important;
+    height: 100vh !important;
+  }
+  .hero-section picture,
+  .hero-section picture > img,
+  .hero-section picture > source {
+    width: 100vw !important;
+    height: 100vh !important;
+    min-width: 100vw !important;
+    min-height: 100vh !important;
+    max-width: 100vw !important;
+    max-height: 100vh !important;
+    object-fit: cover !important;
+    object-position: center !important;
     transition: none !important;
   }
-  body { overflow-x: visible !important; }
-  body:before { content: none !important; }
 }
 
 /* === Utilidades globales añadidas === */
