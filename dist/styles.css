@@ -274,6 +274,9 @@ body {
 
 /*btn hero*/
 @media (max-width: 430px) {
+  .section-title {
+    font-size: 2rem !important;
+  }
   .hero-section .btn, .hero-section .hero-buttons .btn, .hero-section .d-flex .btn {
     padding: .72rem 1.25em !important;
     width: auto !important;
@@ -286,6 +289,9 @@ body {
   }
 }
 @media (max-width: 360px) {
+  .section-title {
+    font-size: 1.5rem !important;
+  }
   .hero-section .btn, .hero-section .hero-buttons .btn, .hero-section .d-flex .btn {
   padding: .66rem 1em !important;
   width: auto !important;
@@ -324,24 +330,20 @@ body {
   /* Grid de equipo: forzar 2 columnas más balanceadas */
   #equipo .row.g-4 > [class*="col-"] { padding-left: 6px; padding-right: 6px; }
   .team-card { font-size: .92rem; }
-  .team-name { font-size: 1.05rem; }
-  .team-role { font-size: .85rem; line-height: 1.2; }
+  /* Removed duplicate .team-name and .team-role rules here; unified below */
 }
 
-@media (max-width: 420px) {
+@media (max-width: 430px) {
   /* Ultra small devices */
   .navbar-brand span { font-size: 1.15rem; }
   .hero-section h1 { font-size: clamp(1.7rem, 8.5vw, 2.2rem); }
   .hero-section .lead { font-size: clamp(.95rem, 4vw, 1.15rem); }
-  .btn-galeria { width: 100%; font-size: 1rem; padding: .7rem 1.2rem; }
   .calendario { padding-left: .75rem; padding-right: .75rem; }
   .gallery-card h5 { font-size: 1rem; }
   .gallery-card p { font-size: .95rem; }
   .badge-evento { font-size: .9rem; }
   .evento { font-size: .9rem; grid-template-columns: 1fr; }
   .evento__fecha { margin-bottom: .25rem; }
-  /* Equipo ultra pequeño: reducir avatars */
-  .avatar-wrapper { width: 150px; }
 }
 
 /* Calendario: permitir columnas más angostas en móviles muy estrechos */
@@ -882,7 +884,9 @@ body {
   text-shadow: 0 2px 12px #000b, 0 1.5px 8px #181b1f66;
 }
 .btn-galeria {
-  padding: .8rem 2.5rem;
+  width: fit-content; 
+  min-width: 0;
+  padding: .6em 1.1em;
   font-size: 1.2rem;
   font-weight: 600;
   letter-spacing: .05em;
@@ -1107,23 +1111,13 @@ time {
 }
   /* === Ajustes responsivos para sección equipo === */
   @media (max-width: 430px) {
-    .team-name {
-      font-size: 1.35rem;
-    }
-    .team-role {
-      font-size: 1.18rem;
-    }
-  }
-  
-  @media (max-width: 360px) {
-    .team-name {
-      font-size: 1.22rem;
-    }
-    .team-role {
-      font-size: 1.05rem;
-    }
-  }
-.avatar-wrapper {
+  /* Removed duplicate .team-name and .team-role rules for 430px; unified below */
+}
+
+@media (max-width: 360px) {
+  /* Removed duplicate .team-name and .team-role rules for 360px; unified below */
+}
+ .avatar-wrapper {
   display: block;
   width: 225px;
   aspect-ratio: 1 / 1;
@@ -1134,44 +1128,54 @@ time {
   border: 3px solid var(--color-border);
   position: relative;
 }
-.avatar {
+@media (max-width: 991.98px) {
+  .avatar-wrapper { width: 170px; }
+}
+@media (max-width: 575.98px) {
+  .avatar-wrapper { width: 100px; }
+}
+@media (max-width: 430px) {
+  .avatar-wrapper { width: 90px; }
+}
+@media (max-width: 360px) {
+  .avatar-wrapper { width: 48px; }
+}
+ .avatar {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
 }
+/* === Equipo: nombre y rol, deduplicado y responsive === */
 .team-name {
-  font-size: 1.45rem;
+  font-size: 1.25rem;
   font-weight: 600;
   margin: 0 0 .35rem;
   min-height: 1.4em; /* asegura alineación de filas aunque el nombre tenga 1 línea */
 }
 .team-role {
-  font-size: 1.22rem;
+  font-size: 1.15rem;
   margin: 0 0 .75rem;
   min-height: 1.3em; /* estabiliza altura antes de redes sociales */
-   color: var(--color-accent-warm);
-  }
-
-  @media (max-width: 430px) {
-    .team-name {
-      font-size: 1.32rem;
-    }
-    .team-role {
-      font-size: 1.13rem;
-      color: #ffb347;
-    }
-  }
-
-  @media (max-width: 360px) {
-    .team-name {
-      font-size: 1.18rem;
-    }
-    .team-role {
-      font-size: 1.01rem;
-      color: #ffb347;
-    }
+  color: var(--color-accent-warm);
 }
+@media (max-width: 991.98px) {
+  .team-name { font-size: 1.65rem; }
+  .team-role { font-size: 1.50rem; }
+}
+@media (max-width: 575.98px) {
+  .team-name { font-size: 1.6rem; }
+  .team-role { font-size: 1.45rem; }
+}
+@media (max-width: 430px) {
+  .team-name { font-size: 1.4rem; }
+  .team-role { font-size: 1.25rem; color: #ffb347; }
+}
+@media (max-width: 360px) {
+  .team-name { font-size: 1.4rem; }
+  .team-role { font-size: 1.25rem; }
+}
+
 @media (max-width: 575.98px) {
   .avatar-wrapper {
     width: 180px;
@@ -1448,8 +1452,7 @@ time {
   #equipo .team-card { padding: .75rem 1rem 1.25rem; }
   .section-title { font-size: 1.05rem; }
   .avatar-wrapper { width: 130px; }
-  .team-name { font-size: .95rem; }
-  .team-role { font-size: .75rem; }
+  /* Removed duplicate .team-role rule for 1502; unified above */
   .hero-section .btn { padding: .65rem 1.1rem; font-size: .95rem; }
 }
 @media (max-width: 411.98px) {
@@ -1458,9 +1461,6 @@ time {
   #equipo .row.g-4 > [class*="col-"] { width:100%; display:flex; justify-content:center; }
   #equipo .team-card { padding: .8rem 1rem 1.3rem; text-align:center; width:100%; max-width:340px; }
   #equipo .avatar-wrapper { width: clamp(170px,68vw,240px); margin-left:auto; margin-right:auto; }
-  /* Aumentar legibilidad en pantallas estrechas */
-  #equipo .team-name { font-size: clamp(1.05rem,4.6vw,1.28rem); }
-  #equipo .team-role { font-size: clamp(.9rem,3.9vw,1.05rem); }
 }
 
 /* iPad / tablets grandes (portrait & landscape) */
@@ -1634,8 +1634,6 @@ time {
   section[id]:not(.hero-section) { scroll-margin-top: calc(var(--navbar-height) + 10px); }
   /* Equipo: evitar overflow de columnas Bootstrap (4x25% en 768px ≈192px) */
   #equipo .avatar-wrapper { width: 170px !important; max-width: 100%; }
-  #equipo .team-name { font-size: 1.05rem; }
-  #equipo .team-role { font-size: .9rem; }
   /* Calendario: asegurar no se aplasten columnas si el padding reduce el ancho útil */
   .calendario__grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
   /* Panel colapsado ya vertical: permitir fuente cómoda */
