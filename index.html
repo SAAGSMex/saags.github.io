@@ -30,36 +30,36 @@
                 - Si se crean nuevas clases dinámicas via JS → añadir a safelist PurgeCSS.
                 - Mantener orden semántico de headings (h1 solo en hero, subsecciones h2/h3).
         -->
-        <!-- Bootstrap CSS -->
-        <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <!-- Bootstrap CSS -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <!-- Font Awesome para iconos -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <!-- Animate.css -->
-        <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <!-- GLightbox CSS -->
-        <link rel="preload" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript>
-            <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-            <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
-            <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
-            <link href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" rel="stylesheet">
-        </noscript>
-        <!-- Favicon -->
-        <link rel="icon" type="image/png" href="img/head-navbar-hero/crescent-moon-icon-7.png">
-        <!--Preload de imágenes para mejorar el rendimiento-->
+    <!-- Animate.css -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <!-- GLightbox CSS -->
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" rel="stylesheet">
+    </noscript>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="img/head-navbar-hero/crescent-moon-icon-7.png">
+    <!--Preload de imágenes para mejorar el rendimiento-->
     <!-- Preconexión a CDN de Bootstrap y jsDelivr -->
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <!-- En producción usa el CSS minificado generado en dist/ -->
     <link rel="stylesheet" href="dist/styles.min.css?v=7"> 
     <!-- Hero: se carga vía <picture> responsivo; evitamos preload único para no descargar imagen grande en móviles -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js" defer></script>
     <!-- GLightbox diferido para mejorar rendimiento inicial -->
     <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js" defer></script>
-        <script src="scripts.js" defer></script>
-        <script src="CalendarioAstro/calendario-astronomico-2025.js" defer></script>
-    </head>
-    <body>
+    <script src="scripts.js" defer></script>
+    <script src="CalendarioAstro/calendario-astronomico-2025.js" defer></script>
+</head>
+<body>
     <!-- Fondo de estrellas simplificado - una sola div con imagen de fondo -->
     <div class="bg-stars" aria-hidden="true"></div>
 
@@ -834,74 +834,58 @@
         <div class="container">
             <h2 class="section-title text-center mb-5" id="titulo-equipo">Nuestro Equipo</h2>
             <div class="row g-4 justify-content-center">
-            <!-- Miembro 1 -->
-            <div class="col-6 col-md-3">
-                <article class="team-card text-center">
-                <picture class="avatar-wrapper">
-                    <source srcset="img/equipo/anonymous.webp" type="image/webp">
-                    <img src="img/equipo/anonymous.png"
-                        alt="Foto de Dr. Miguel Ángel Pérez"
-                        width="225" height="225" loading="lazy" decoding="async" class="avatar">
-                </picture>
-                <h5 class="team-name">Dr. Miguel Ángel Pérez</h5>
-                <p class="team-role text-info">Director</p>
-                <ul class="team-social" aria-label="Redes sociales de Dr. Miguel Ángel Pérez">
-                    <li><a href="#" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a></li>
-                    <li><a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a></li>
-                </ul>
-                </article>
-            </div>
-            <!-- Miembro 2 -->
-            <div class="col-6 col-md-3">
-                <article class="team-card text-center">
-                <picture class="avatar-wrapper">
-                    <source srcset="img/equipo/anonymous.webp" type="image/webp">
-                    <img src="img/equipo/anonymous.png"
-                        alt="Foto de Dra. Laura Mendoza"
-                        width="225" height="225" loading="lazy" decoding="async" class="avatar">
-                </picture>
-                <h5 class="team-name">Dra. Laura Mendoza</h5>
-                    <p class="team-role text-info">Coord. de Divulgación</p>
-                    <ul class="team-social" aria-label="Redes sociales de Dra. Laura Mendoza">
-                    <li><a href="#" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a></li>
-                    <li><a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a></li>
-                    </ul>
-                </article>
-            </div>
-            <!-- Miembro 3 -->
-            <div class="col-6 col-md-3">
-                <article class="team-card text-center">
-                <picture class="avatar-wrapper">
-                    <source srcset="img/equipo/anonymous.webp" type="image/webp">
-                    <img src="img/equipo/anonymous.png"
-                        alt="Foto de Ing. Carlos Ramírez"
-                        width="225" height="225" loading="lazy" decoding="async" class="avatar">
-                </picture>
-                <h5 class="team-name">Ing. Carlos Ramírez</h5>
-                <p class="team-role text-info">Coord. de Observaciones</p>
-                <ul class="team-social" aria-label="Redes sociales de Ing. Carlos Ramírez">
-                    <li><a href="#" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a></li>
-                    <li><a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a></li>
-                </ul>
-                </article>
-            </div>
-            <!-- Miembro 4 -->
-            <div class="col-6 col-md-3">
-                <article class="team-card text-center">
-                <picture class="avatar-wrapper">
-                    <source srcset="img/equipo/anonymous.webp" type="image/webp">
-                    <img src="img/equipo/anonymous.png"
-                        alt="Foto de Lic. Ana Sofía Torres"
-                        width="225" height="225" loading="lazy" decoding="async" class="avatar">
-                </picture>
-                <h5 class="team-name">Lic. Ana Sofía Torres</h5>
-                <p class="team-role text-info">Secretaria</p>
-                <ul class="team-social" aria-label="Redes sociales de Lic. Ana Sofía Torres">
-                    <li><a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a></li>
-                    <li><a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a></li>
-                </ul>
-                </article>
-            </div>
+                <!-- Miembro 1 -->
+                <div class="col-6 col-md-3">
+                    <article class="team-card text-center">
+                    <picture class="avatar-wrapper">
+                        <source srcset="img/equipo/anonymous.webp" type="image/webp">
+                        <img src="img/equipo/anonymous.png"
+                            alt="Foto de Ing. Alberto Segovia"
+                            width="225" height="225" loading="lazy" decoding="async" class="avatar">
+                    </picture>
+                    <h5 class="team-name">Ing. Alberto Segovia</h5>
+                    <p class="team-role text-info">Presidente</p>
+                    </article>
+                </div>
+                <!-- Miembro 2 -->
+                <div class="col-6 col-md-3">
+                    <article class="team-card text-center">
+                    <picture class="avatar-wrapper">
+                        <source srcset="img/equipo/anonymous.webp" type="image/webp">
+                        <img src="img/equipo/anonymous.png"
+                            alt="Foto de Ing. Manuel Rodríguez Huerta"
+                            width="225" height="225" loading="lazy" decoding="async" class="avatar">
+                    </picture>
+                    <h5 class="team-name">Ing. Manuel Rodríguez Huerta</h5>
+                    <p class="team-role text-info">Expresidente</p>
+                    </article>
+                </div>
+                <!-- Miembro 3 -->
+                <div class="col-6 col-md-3">
+                    <article class="team-card text-center">
+                    <picture class="avatar-wrapper">
+                        <source srcset="img/equipo/anonymous.webp" type="image/webp">
+                        <img src="img/equipo/anonymous.png"
+                            alt="Foto de Julien Potier"
+                            width="225" height="225" loading="lazy" decoding="async" class="avatar">
+                    </picture>
+                    <h5 class="team-name">Julien Potier</h5>
+                    <p class="team-role text-info">Vocal</p>
+                    </article>
+                </div>
+                <!-- Miembro 4 -->
+                <div class="col-6 col-md-3">
+                    <article class="team-card text-center">
+                    <picture class="avatar-wrapper">
+                        <source srcset="img/equipo/anonymous.webp" type="image/webp">
+                        <img src="img/equipo/anonymous.png"
+                            alt="Foto de Hernan Aguirre Campos"
+                            width="225" height="225" loading="lazy" decoding="async" class="avatar">
+                    </picture>
+                    <h5 class="team-name">Hernan Aguirre Campos</h5>
+                    <p class="team-role text-info">Miembro</p>
+                    </article>
+                </div>
             </div>
         </div>
     </section>
