@@ -1752,12 +1752,18 @@ time {
 /* Móvil (≤767px): usa galaxybg_767mobile y muestra la capa */
 @media (max-width:767.98px){
   .bg-stars{
-    display:block!important; /* antes estaba oculto */
-    background-image:url("../img/background/galaxybg_767mobile.webp?v=9")!important;
-    background-size:cover;background-repeat:no-repeat;background-position:50% 0;
+    position: absolute !important;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    z-index: -1;
+    background-image: url("../img/background/galaxybg_767mobile.webp?v=9") !important;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 0;
+    background-attachment: scroll !important;
+    will-change: auto;
   }
-  body{background:var(--color-bg,#0a1128)!important}
-  body:before{content:none!important}
+  body { background: var(--color-bg,#0a1128) !important; overflow-x: visible !important; }
+  body:before { content: none !important; }
 }
 
 @media (max-width:991.98px){
