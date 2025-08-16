@@ -108,34 +108,38 @@
         </div>
     </nav>
 
-    <!-- Sección Hero / Inicio accesible -->
+    <!-- Hero Section -->
     <section id="inicio" class="hero-section" aria-labelledby="titulo-inicio">
-        <div class="container text-center" style="position:relative;">
-            <!-- Imagen principal para LCP optimizada con picture (AVIF/WebP + fallback) -->
-            <picture style="position:absolute;top:0;left:0;width:100%;height:100%;">
-                <!-- Único fondo hero: versión WebP + fallback PNG -->
-                <source srcset="img/head-navbar-hero/herogalaxy.webp" type="image/webp">
-                <img src="img/head-navbar-hero/herogalaxy.png" alt="Fondo galáctico" width="1600" height="900" style="width:100%;height:100%;object-fit:cover;" loading="eager" fetchpriority="high" decoding="async">
+        <div class="container text-center hero-container-fix">
+            <!-- Fondo hero: solo UNA imagen, estática, nunca crece ni se mueve -->
+            <picture class="hero-bg-picture" aria-hidden="true">
+                <source srcset="img/head-navbar-hero/herogalaxy_767.webp" media="(max-width: 430px)" type="image/webp">
+                <img src="img/head-navbar-hero/herogalaxy_767.webp"
+                     alt="Fondo galáctico"
+                     width="1600" height="900"
+                     loading="eager" fetchpriority="high" decoding="async">
             </picture>
-            <h1 class="display-3 mb-4 fw-bold text-white animate__animated animate__fadeInDown show fade" id="titulo-inicio">
-                Sociedad Astronómica de Aguascalientes
-            </h1>
-            <p class="lead mb-5 animate__animated animate__fadeInUp show fade">
-                Explorando el universo desde el corazón de México
-            </p>
-            <!-- Botonera hero: se elimina gap-3 de Bootstrap para permitir control total via CSS personalizado -->
-            <div class="d-flex justify-content-center hero-buttons">
-                <a href="#actividades"
-                class="btn btn-primary btn-lg animate__animated animate__fadeInUp show fade"
-                id="btn-actividades"
-                aria-label="Ver nuestras actividades de la sociedad">
-                    Nuestras actividades
-                </a>
-                <a href="#contacto"
-                class="btn btn-outline-light btn-lg animate__animated animate__fadeInUp show fade"
-                aria-label="Ir a la sección de contacto para unirse a la sociedad">
-                    Únete a nosotros
-                </a>
+            <!-- El contenido SIEMPRE encima del fondo -->
+            <div class="hero-content-fix">
+                <h1 class="display-3 mb-4 fw-bold text-white animate__animated animate__fadeInDown show fade" id="titulo-inicio">
+                    Sociedad Astronómica de Aguascalientes
+                </h1>
+                <p class="lead mb-5 animate__animated animate__fadeInUp show fade">
+                    Explorando el universo desde el corazón de México
+                </p>
+                <div class="d-flex justify-content-center hero-buttons">
+                    <a href="#actividades"
+                    class="btn btn-primary btn-lg animate__animated animate__fadeInUp show fade"
+                    id="btn-actividades"
+                    aria-label="Ver nuestras actividades de la sociedad">
+                        Nuestras actividades
+                    </a>
+                    <a href="#contacto"
+                    class="btn btn-outline-light btn-lg animate__animated animate__fadeInUp show fade"
+                    aria-label="Ir a la sección de contacto para unirse a la sociedad">
+                        Únete a nosotros
+                    </a>
+                </div>
             </div>
         </div>
     </section>
