@@ -30,39 +30,16 @@
 
 // Script Personalizado
 document.addEventListener('DOMContentLoaded', function() {
-    // Ajuste de altura del hero en móviles para evitar desplazamiento del fondo
-    function fixHeroHeight() {
-        const hero = document.querySelector('.hero-section');
-        if (!hero) return;
-        if (window.innerWidth < 768) {
-            hero.style.minHeight = `calc(var(--vh, 1vh) * 100)`;
-            hero.style.position = 'relative';
-        } else {
-            hero.style.minHeight = '';
-            hero.style.position = '';
-        }
-    }
-    window.addEventListener('resize', fixHeroHeight);
-    // También actualizar en scroll en móviles
-    window.addEventListener('scroll', function() {
-        if (window.innerWidth < 768) {
-            // Actualiza --vh y la altura del hero
-            const vh = window.innerHeight * 0.01;
-            document.documentElement.style.setProperty('--vh', `${vh}px`);
-            fixHeroHeight();
-        }
-    });
-    fixHeroHeight();
     // 0. Ajuste de viewport alto dinámico en móviles (usa --vh en CSS)
     (function fixMobileVH(){
         function setVh() {
-            const vh = window.innerHeight * 0.01;
+            const vh = window.innerHeight * 0.01; // 1vh real
             document.documentElement.style.setProperty('--vh', `${vh}px`);
         }
         let rAF, lastCall = 0;
         function onResize(){
             const now = Date.now();
-            if (now - lastCall < 90) {
+            if (now - lastCall < 90) { // debounce simple
                 cancelAnimationFrame(rAF);
                 rAF = requestAnimationFrame(setVh);
                 return;
@@ -71,11 +48,6 @@ document.addEventListener('DOMContentLoaded', function() {
             setVh();
         }
         window.addEventListener('resize', onResize);
-        window.addEventListener('orientationchange', setVh);
-        // También actualizar --vh en scroll en móviles
-        window.addEventListener('scroll', function() {
-            if (window.innerWidth < 768) setVh();
-        });
         setVh();
     })();
     // 1. Animación del botón "Nuestras actividades"
@@ -106,6 +78,71 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // 3. RESALTADO ACTIVO EFICIENTE CON INTERSECTION OBSERVER (dinámico según altura del navbar)
+    const sections = document.querySelectorAll('section[id]');
+    const navLinksForObserver = document.querySelectorAll('.navbar-nav .nav-link');
+
+    let sectionObserver = null;
+
+    function computeRootMargin() {
+        // Lee la variable CSS --navbar-height (fallback a 76)
+        const raw = getComputedStyle(document.documentElement).getPropertyValue('--navbar-height').trim();
+        // Extrae número (puede venir con px) y hace fallback
+        const px = parseFloat(raw) || 76;
+        // Margen superior negativo = altura navbar; margen inferior negativo proporcional evita doble activación
+        // -40% mantiene lógica previa. Podría ajustarse si se desea mayor anticipación.
+        return `-${px}px 0px -40% 0px`;
+    }
+
+    function buildObserver() {
+        if (sectionObserver) {
+            sectionObserver.disconnect();
+        }
+        const options = {
+            root: null,
+            rootMargin: computeRootMargin(),
+            threshold: 0
+        };
+        sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navLinksForObserver.forEach(link => {
+                        link.classList.remove('active');
+                        link.removeAttribute('aria-current');
+                    });
+                    const activeLink = document.querySelector(`.navbar-nav a[href="#${id}"]`);
+                    if (activeLink) {
+                        activeLink.classList.add('active');
+                        activeLink.setAttribute('aria-current', 'page');
+                    }
+                }
+            });
+        }, options);
+        sections.forEach(section => { if (section.id) sectionObserver.observe(section); });
+    }
+
+    buildObserver();
+
+    // Recalcular cuando la altura potencial del navbar pueda cambiar (resize/orientation)
+    let resizeTO = null;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTO);
+        resizeTO = setTimeout(buildObserver, 160); // debounce ligero
+    });
+    window.addEventListener('orientationchange', () => {
+        setTimeout(buildObserver, 120);
+    });
+
+    // 3.b NAVEGACIÓN INTERNA SIN AGREGAR ENTRADAS AL HISTORIAL
+    // Objetivo:
+    //  - Mantener los href="#seccion" (SEO / accesibilidad) pero evitar que cada click añada una entrada en el historial.
+    //  - Limitar la navegación interna SOLO a:
+    //      * Enlaces del navbar.
+    //      * Botones/enlaces que el autor marque con la clase .scroll-link o data-scroll
+    //  - Otros enlaces internos con # (no autorizados) no harán scroll (para cumplir el requisito).
+    //  - Actualizamos la URL con replaceState (o history.replaceState) para no crear nueva entrada.
+    //  - Añadimos smooth scroll y sincronizamos el estado activo del navbar al instante.
+
     const internalNavSelectors = [
         '#navbarNav .nav-link[href^="#"]',          // enlaces del menú principal
         '.navbar-brand[href^="#"]',                // logo (#inicio)
@@ -116,8 +153,6 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
     const allowedInternalLinks = document.querySelectorAll(internalNavSelectors.join(','));
     const NAV_ACTIVE_CLASS = 'active';
-    // Definir navLinksForObserver igual que allowedInternalLinks para evitar error
-    const navLinksForObserver = allowedInternalLinks;
     // Configuración: si quieres actualizar el hash sin crear historial pon a true.
     const UPDATE_HASH = false; // Requisito: mantener URL limpia sin #
 
@@ -141,8 +176,10 @@ document.addEventListener('DOMContentLoaded', function() {
     allowedInternalLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             const hash = link.getAttribute('href');
-            if (!hash || !hash.startsWith('#')) return;
+            if (!hash || !hash.startsWith('#')) return; // no interno
+            // Siempre prevenimos para cualquier hash (incluyendo '#') para que nunca ensucie la URL.
             e.preventDefault();
+            // Caso especial: href="#" (sin destino) => sólo limpiamos el hash si aparece temporalmente.
             if (hash === '#' || hash.length === 1) {
                 clearHashFromUrl();
                 return;
@@ -150,37 +187,10 @@ document.addEventListener('DOMContentLoaded', function() {
             const id = hash.slice(1);
             const destino = document.getElementById(id);
             if (destino) {
-                const navbar = document.querySelector('.navbar');
-                let navbarHeight = 0;
-                if (navbar) {
-                    const raw = getComputedStyle(document.documentElement).getPropertyValue('--navbar-height').trim();
-                    navbarHeight = parseFloat(raw) || navbar.offsetHeight || 76;
-                }
-                const isMobile = window.innerWidth < 768;
-                let extraOffset = 0;
-                if (isMobile) {
-                    extraOffset = 8;
-                } else if (window.innerWidth < 1024) {
-                    const bodyStyle = getComputedStyle(document.body);
-                    const bodyPad = parseFloat(bodyStyle.paddingTop) || 0;
-                    const bodyMargin = parseFloat(bodyStyle.marginTop) || 0;
-                    extraOffset = bodyPad + bodyMargin;
-                }
-                const rect = destino.getBoundingClientRect();
-                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                let top = rect.top + scrollTop - navbarHeight - extraOffset;
-                // Protección extra: nunca scroll negativo
-                if (top < 0) top = 0;
-                // Fallback: si el scroll no cambia, usar scrollIntoView
-                const prevScroll = window.scrollY;
-                window.scrollTo({ top, behavior: 'smooth' });
-                setTimeout(() => {
-                    // Si después de 600ms el scroll no cambió, forzar scrollIntoView
-                    if (Math.abs(window.scrollY - top) > 2) return;
-                    destino.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 600);
+                destino.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 activarLinkPorHash(hash);
             }
+            // Incluso si no existe el destino, evitamos que el hash quede en la barra.
             if (!UPDATE_HASH) {
                 clearHashFromUrl();
             } else {
@@ -206,29 +216,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const initial = location.hash;
         const target = document.getElementById(initial.substring(1));
         if (target) {
-            // Scroll manual restando la altura del navbar, adaptado para móviles <768px
+            // Ejecutamos scroll manual y luego limpiamos hash para que desaparezca de la barra.
             setTimeout(() => {
-                const navbar = document.querySelector('.navbar');
-                let navbarHeight = 0;
-                if (navbar) {
-                    const raw = getComputedStyle(document.documentElement).getPropertyValue('--navbar-height').trim();
-                    navbarHeight = parseFloat(raw) || navbar.offsetHeight || 76;
-                }
-                const isMobile = window.innerWidth < 768;
-                let extraOffset = 0;
-                if (isMobile) {
-                    extraOffset = 8;
-                } else if (window.innerWidth < 1024) {
-                    const bodyStyle = getComputedStyle(document.body);
-                    const bodyPad = parseFloat(bodyStyle.paddingTop) || 0;
-                    const bodyMargin = parseFloat(bodyStyle.marginTop) || 0;
-                    extraOffset = bodyPad + bodyMargin;
-                }
-                const rect = target.getBoundingClientRect();
-                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                let top = rect.top + scrollTop - navbarHeight - extraOffset;
-                if (isMobile && top < 0) top = 0;
-                window.scrollTo({ top, behavior: 'instant' });
+                target.scrollIntoView({ behavior: 'instant', block: 'start' });
                 activarLinkPorHash(initial);
                 if (!UPDATE_HASH) clearHashFromUrl();
             }, 15);
