@@ -53,6 +53,7 @@
     <!-- En producción usa el CSS minificado generado en dist/ -->
     <link rel="preload" href="dist/styles.min.css?v=7" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="stylesheet" href="dist/styles.min.css?v=7" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="dist/styles.min.css?v=7"></noscript>
     <!-- Hero: se carga vía <picture> responsivo; evitamos preload único para no descargar imagen grande en móviles -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js" defer></script>
     <!-- GLightbox diferido para mejorar rendimiento inicial -->
@@ -841,11 +842,15 @@
                 <picture class="avatar-wrapper">
                     <source srcset="img/equipo/anonymous.webp" type="image/webp">
                     <img src="img/equipo/anonymous.png"
-                        alt="Foto de Ing. Alberto Segovia"
+                        alt="Foto de Dr. Miguel Ángel Pérez"
                         width="225" height="225" loading="lazy" decoding="async" class="avatar">
                 </picture>
-                <h5 class="team-name">Ing. Alberto Segovia</h5>
-                <p class="team-role text-info">Presidente</p>
+                <h5 class="team-name">Dr. Miguel Ángel Pérez</h5>
+                <p class="team-role text-info">Director</p>
+                <ul class="team-social" aria-label="Redes sociales de Dr. Miguel Ángel Pérez">
+                    <li><a href="#" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a></li>
+                    <li><a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a></li>
+                </ul>
                 </article>
             </div>
             <!-- Miembro 2 -->
@@ -854,10 +859,10 @@
                 <picture class="avatar-wrapper">
                     <source srcset="img/equipo/anonymous.webp" type="image/webp">
                     <img src="img/equipo/anonymous.png"
-                        alt="Foto de Ing. Manuel Rodríguez Huerta"
+                        alt="Foto de Ing. Manuel Rodriguez Huerta"
                         width="225" height="225" loading="lazy" decoding="async" class="avatar">
                 </picture>
-                <h5 class="team-name">Ing. Manuel Rodríguez Huerta</h5>
+                <h5 class="team-name">Ing. Manuel Rodriguez Huerta</h5>
                 <p class="team-role text-info">Expresidente</p>
                 </article>
             </div>
@@ -867,11 +872,15 @@
                 <picture class="avatar-wrapper">
                     <source srcset="img/equipo/anonymous.webp" type="image/webp">
                     <img src="img/equipo/anonymous.png"
-                        alt="Foto de Julien Potier"
+                        alt="Foto de Ing. Carlos Ramírez"
                         width="225" height="225" loading="lazy" decoding="async" class="avatar">
                 </picture>
-                <h5 class="team-name">Julien Potier</h5>
-                <p class="team-role text-info">Vocal</p>
+                <h5 class="team-name">Ing. Carlos Ramírez</h5>
+                <p class="team-role text-info">Coord. de Observaciones</p>
+                <ul class="team-social" aria-label="Redes sociales de Ing. Carlos Ramírez">
+                    <li><a href="#" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a></li>
+                    <li><a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a></li>
+                </ul>
                 </article>
             </div>
             <!-- Miembro 4 -->
@@ -880,11 +889,11 @@
                 <picture class="avatar-wrapper">
                     <source srcset="img/equipo/anonymous.webp" type="image/webp">
                     <img src="img/equipo/anonymous.png"
-                        alt="Foto de Hernan Aguirre Campos"
+                        alt="Foto de Lic. Ana Sofía Torres"
                         width="225" height="225" loading="lazy" decoding="async" class="avatar">
                 </picture>
                 <h5 class="team-name">Hernan Aguirre Campos</h5>
-                <p class="team-role text-info">Secretaria</p>
+                <p class="team-role text-info">Miembro</p>
                 </article>
             </div>
             </div>
