@@ -3,7 +3,6 @@
  * ------------------------------------------------------------------
  * Rol: Funcionalidad interactiva y mejoras UX/A11y sin frameworks.
  * Alcance principal:
- *  0. Ajuste dinámico de viewport (--vh) en móviles.
  *  1. Animaciones progresivas para CTA inicial.
  *  2. Cierre inteligente del navbar tras navegación.
  *  3. IntersectionObserver para resaltar sección activa.
