@@ -215,9 +215,7 @@ body {
   .team-social a { width: 28px; height: 28px; font-size: .85rem; }
 }
 
-@media (max-width: 420px) {
-  /* Ultra small devices */
-  .navbar-brand span { font-size: 1.15rem; }
+@media (max-width: 430px) {
   .hero-section h1 { font-size: clamp(1.7rem, 8.5vw, 2.2rem); }
   .hero-section .lead { font-size: clamp(.95rem, 4vw, 1.15rem); }
   .btn-galeria { width: 100%; font-size: 1rem; padding: .7rem 1.2rem; }
@@ -315,13 +313,7 @@ body {
 
 /* Móvil <=767px: nuevo fondo ligero */
 @media (max-width: 767.98px) {
-  body::before {
-    background-image: url("../img/background/galaxybg_100.webp?v=4");
-    background-image: image-set(
-      url("../img/background/galaxybg_100.webp?v=4") 1x,
-      url("../img/background/galaxybg_pc.webp?v=4") 2x
-    );
-  }
+  /* body::before galactic background removed for hero-only background */
 }
 
 /* Botón primario personalizado */
@@ -1053,44 +1045,46 @@ time {
   font-weight: 600;
   margin: 0 0 .35rem;
   min-height: 1.4em; /* asegura alineación de filas aunque el nombre tenga 1 línea */
+  color: #ffe066;
 }
 .team-role {
   font-size: 1.05rem;
   margin: 0 0 .75rem;
   min-height: 1.3em; /* estabiliza altura antes de redes sociales */
+  color: #17d5ff;
 }
-.team-social {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  gap: .75rem;
-  padding: 0;
-  margin: 0;
-  min-height: 40px;
+
+@media (max-width: 430px) {
+  .avatar-wrapper {
+    width: 110px !important;
+    height: 110px !important;
+    min-width: 110px !important;
+    min-height: 110px !important;
+    max-width: 110px !important;
+    max-height: 110px !important;
+  }
+  .avatar {
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 100% !important;
+    min-height: 100% !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: cover !important;
+  }
 }
-.team-social li {
-  margin: 0;
+
+@media (max-width: 430px) {
+  .team-name {
+    font-size: 1.35rem !important;
+    font-weight: 450 !important;
+  }
+  .team-role {
+    font-size: 1.25rem !important;
+    font-weight: 380 !important;
+  }
 }
-.team-social a {
-  width: 32px;
-  height: 32px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 6px;
-  background: rgba(255, 255, 255, 0.08);
-  color: #fff;
-  text-decoration: none;
-  transition: background .25s, transform .25s;
-  font-size: 1rem;
-  line-height: 1;
-}
-.team-social a:hover,
-.team-social a:focus-visible {
-  background: #00b2d9;
-  transform: translateY(-3px);
-  outline: none;
-}
+
 @media (max-width: 575.98px) {
   .avatar-wrapper {
     width: 180px;
@@ -1212,21 +1206,7 @@ time {
     background: #0a1128;
     overflow-x: hidden;
   }
-  body::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1; /* detrás de todo el contenido */
-    background: #0a1128 center/cover no-repeat;
-    background-image: url("../img/background/galaxybg_767.webp?v=4");
-    background-image: image-set(
-      url("../img/background/galaxybg_767.webp?v=4") 1x,
-      url("../img/background/galaxybg_pc.webp?v=4") 2x
-    );
-    height: auto;
-    min-height: 100%;
-    max-height: none;
-  }
+  /* body::before galactic background removed for hero-only background */
   /* Hero: evitar que la imagen de fondo se mueva al hacer scroll en móviles */
   .hero-section {
     height: 100svh !important;
@@ -1741,7 +1721,7 @@ time {
    ==================== */
 @media (max-width: 767.98px) {
   /* Fondo principal móvil: galaxybg_767mobile completamente estático */
-  body, body::before {
+  body {
     background-attachment: fixed !important;
     background-size: cover !important;
     background-position: center !important;

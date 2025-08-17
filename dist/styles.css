@@ -174,103 +174,7 @@ body {
 -------------------------------- */
 
 /* Hero tipografía y botones unificados (aplica a todos los dispositivos) */
-.hero-section h1 { text-align: center; }
-/* Subtítulo centrado */
-.hero-section .lead { text-align: center; }
-.hero-section h1 { text-align: center; }
-/* Subtítulo centrado */
-.hero-section .lead { text-align: center; }
-.hero-section h1 {
-  margin: 0 0 1rem;
-  font-size: clamp(2.2rem, 7vw, 4rem);
-  line-height: 1.15;
-  overflow-wrap: anywhere;
-}
-.hero-section .lead {
-  font-size: clamp(1.05rem, 3vw, 2rem);
-  font-weight: 450;
-  max-width: 40ch;
-  margin: 0 auto 2.1rem;
-  color: rgba(240, 240, 240, .92);
-  text-shadow: 0 2px 8px rgba(0, 0, 0, .6);
-  letter-spacing: .04em;
-}
-.hero-section .btn {
-  padding: .7rem 1.7rem;
-  font-size: 1.6rem;
-  font-weight: 600;
-  letter-spacing: .04em;
-  border-width: 2px;
-  border-radius: 50px;
-  transition: all .3s ease;
-}
-.hero-section .btn-primary {
-  background-color: var(--color-primary);
-  border-color: var(--color-primary);
-  box-shadow: 0 5px 20px rgba(48, 77, 157, 0.3);
-}
-.hero-section .btn-primary:hover {
-  background-color: var(--color-primary-hover);
-  border-color: var(--color-primary-hover);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(48, 77, 157, 0.4);
-}
-.hero-section .btn-outline-light:hover {
-  color: #0a1128;
-  background-color: #fff;
-  border-color: #fff;
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
-}
 
-
-/* Hero botones diseño especial >=768px (ajuste de proximidad) */
-@media (min-width: 768px) {
-  .hero-section .d-flex { 
-    justify-content: center; 
-    align-items: center; 
-    /* sin gap aquí; reservado para >=1024px */
-    flex-direction: row !important; 
-    flex-wrap: nowrap; 
-    max-width: 100%; 
-    overflow-x: clip; 
-    margin-inline: auto; 
-  }
-  .hero-section .d-flex .btn { white-space: nowrap; }
-  .hero-section .d-flex .btn { 
-    padding: .7rem 1.7rem;
-    font-size: 1.6rem;
-    font-weight: 600;
-    letter-spacing: .04em;
-    border-width: 2px;
-    border-radius: 50px;
-    transition: background .35s, box-shadow .35s, transform .25s; 
-  }
-  .hero-section .btn-primary { 
-    background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-primary-hover) 100%); 
-    border: none; 
-    box-shadow: 0 6px 22px rgba(48,77,157,.35); 
-  }
-  .hero-section .btn-primary:hover, 
-  .hero-section .btn-primary:focus-visible { 
-    transform: translateY(-2px); 
-    box-shadow: 0 10px 26px rgba(48,77,157,.45); 
-    filter: brightness(1.08); 
-  }
-  .hero-section .btn-outline-light { 
-    background: #ffffff; 
-    color: #0a1128; 
-    border: 2px solid #ffffff; 
-    box-shadow: 0 6px 22px rgba(255,255,255,.18); 
-  }
-  .hero-section .btn-outline-light:hover, 
-  .hero-section .btn-outline-light:focus-visible { 
-    transform: translateY(-2px); 
-    box-shadow: 0 10px 28px rgba(255,255,255,.30); 
-    filter: brightness(1.05); 
-  }
-  .hero-section .d-flex .btn:focus-visible { outline: 3px solid #ffe066; outline-offset: 3px; }
-}
 
 /* Breakpoint banda problemática (820–860px) donde el menú podía desbordar */
 @media (min-width: 820px) and (max-width: 860px) {
@@ -298,12 +202,9 @@ body {
   .team-card { font-size: .92rem; }
   .team-name { font-size: 1.05rem; }
   .team-role { font-size: .85rem; line-height: 1.2; }
-  .team-social a { width: 28px; height: 28px; font-size: .85rem; }
 }
 
-@media (max-width: 420px) {
-  /* Ultra small devices */
-  .navbar-brand span { font-size: 1.15rem; }
+@media (max-width: 430px) {
   .hero-section h1 { font-size: clamp(1.7rem, 8.5vw, 2.2rem); }
   .hero-section .lead { font-size: clamp(.95rem, 4vw, 1.15rem); }
   .btn-galeria { width: 100%; font-size: 1rem; padding: .7rem 1.2rem; }
@@ -364,25 +265,29 @@ body {
 
 /* 4. Componentes: fondos, botones, contadores, feedback */
 
-/* Fondo estrellas (solo color base; imágenes se asignan en media queries) */
+/* Fondo estrellas: capa fija en GPU (sin background-attachment: fixed) */
 .bg-stars {
   position: fixed;
   inset: 0;
   z-index: -1;
   width: 100%;
   height: 100%;
-  background: #0a1128; /* color base si no carga la imagen */
-  background-image: url("../img/background/galaxybg_pc.webp?v=4");
-  background-position: center;
+  pointer-events: none;
+  background: #0a1128;           /* color base */
+  background-position: 50% 0;
   background-size: cover;
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  will-change: transform;
+  transform: translateZ(0);
 }
-/* Escritorio */
-@media (min-width: 1024px) {
+
+/* Desktop >=992px */
+@media (min-width: 992px) {
   .bg-stars { background-image: url("../img/background/galaxybg_pc.webp?v=4"); }
+  body { background: #0a1128; }
 }
-/* Tablets */
+
+/* Tablets 768–991px */
 @media (min-width: 768px) and (max-width: 991.98px) {
   .bg-stars { background-image: url("../img/background/galaxybg_pc.webp?v=4"); }
 }
@@ -390,15 +295,10 @@ body {
 @media (max-width: 991.98px) {
   body { background: #0a1128 url("../img/background/galaxybg_100.webp?v=4") top center/cover no-repeat; }
 }
-/* Móviles <768px: body::before */
+
+/* Móvil <=767px: nuevo fondo ligero */
 @media (max-width: 767.98px) {
-  body::before {
-    background-image: url("../img/background/galaxybg_100.webp?v=4");
-    background-image: image-set(
-      url("../img/background/galaxybg_100.webp?v=4") 1x,
-      url("../img/background/galaxybg_pc.webp?v=4") 2x
-    );
-  }
+  /* body::before galactic background removed for hero-only background */
 }
 
 /* Botón primario personalizado */
@@ -1104,44 +1004,46 @@ time {
   font-weight: 600;
   margin: 0 0 .35rem;
   min-height: 1.4em; /* asegura alineación de filas aunque el nombre tenga 1 línea */
+  color: #ffe066;
 }
 .team-role {
   font-size: 1.05rem;
   margin: 0 0 .75rem;
   min-height: 1.3em; /* estabiliza altura antes de redes sociales */
+  color: #17d5ff;
 }
-.team-social {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  gap: .75rem;
-  padding: 0;
-  margin: 0;
-  min-height: 40px;
+
+@media (max-width: 430px) {
+  .avatar-wrapper {
+    width: 110px !important;
+    height: 110px !important;
+    min-width: 110px !important;
+    min-height: 110px !important;
+    max-width: 110px !important;
+    max-height: 110px !important;
+  }
+  .avatar {
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 100% !important;
+    min-height: 100% !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: cover !important;
+  }
 }
-.team-social li {
-  margin: 0;
+
+@media (max-width: 430px) {
+  .team-name {
+    font-size: 1.35rem !important;
+    font-weight: 450 !important;
+  }
+  .team-role {
+    font-size: 1.25rem !important;
+    font-weight: 380 !important;
+  }
 }
-.team-social a {
-  width: 32px;
-  height: 32px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 6px;
-  background: rgba(255, 255, 255, 0.08);
-  color: #fff;
-  text-decoration: none;
-  transition: background .25s, transform .25s;
-  font-size: 1rem;
-  line-height: 1;
-}
-.team-social a:hover,
-.team-social a:focus-visible {
-  background: #00b2d9;
-  transform: translateY(-3px);
-  outline: none;
-}
+
 @media (max-width: 575.98px) {
   .avatar-wrapper {
     width: 180px;
@@ -1209,10 +1111,10 @@ time {
 
 /* Tablets */
 @media (max-width: 991.98px) {
-  .bg-stars { display: none; }
+  .bg-stars { display: block; }
   /* Fondo móvil/tablet: versión ligera */
   body {
-  background: #0a1128 url("../img/background/galaxybg_100.webp?v=4") top center/cover no-repeat;
+    background: #0a1128 url("../img/background/galaxybg_767.webp?v=4") top center/cover no-repeat;
     background-attachment: scroll;
   }
   .navbar {
@@ -1249,21 +1151,53 @@ time {
 @media (max-width: 767.98px) {
   /* Fondo móvil: mover imagen a pseudo-elemento fijo para evitar artefactos al combinar fondo + navbar fijo */
   .bg-stars { display: none !important; }
-  body { position: relative; background: #0a1128; overflow-x: hidden; }
-  body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: -1; /* detrás de todo el contenido */
-    background: #0a1128 center/cover no-repeat;
-    background-image: url("../img/background/galaxybg_100.webp?v=4");
-    background-image: image-set(
-      url("../img/background/galaxybg_100.webp?v=4") 1x,
-      url("../img/background/galaxybg_pc.webp?v=4") 2x
-    );
-    will-change: transform; /* hint: scroll perf */
-    transform: translateZ(0); /* fuerza capa propia */
+  body {
+    position: relative;
+    background: #0a1128;
+    overflow-x: hidden;
   }
+  /* body::before galactic background removed for hero-only background */
+  /* Hero: evitar que la imagen de fondo se mueva al hacer scroll en móviles */
+  .hero-section {
+    height: 100svh !important;
+    min-height: 100svh !important;
+    max-height: 100svh !important;
+    position: relative !important;
+    overflow: hidden !important;
+    background: transparent !important;
+  }
+  .hero-section picture {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    width: 100vw !important;
+    height: 100svh !important;
+    min-width: 100vw !important;
+    min-height: 100svh !important;
+    max-width: 100vw !important;
+    max-height: 100svh !important;
+    z-index: 0 !important;
+    pointer-events: none !important;
+  }
+  .hero-section picture img,
+  .hero-section picture source {
+    object-fit: cover !important;
+    width: 100vw !important;
+    height: 100svh !important;
+    min-width: 100vw !important;
+    min-height: 100svh !important;
+    max-width: 100vw !important;
+    max-height: 100svh !important;
+    background: none !important;
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+  .hero-section > .container > *:not(picture) {
+    position: relative !important;
+    z-index: 1 !important;
+  }
+}
   #galeria > .container {
   /* Avoid 100vw which can introduce horizontal scroll (accounts not for scrollbar width) */
   width: 100%;
@@ -1306,8 +1240,6 @@ time {
   #galeria .text-justify-responsive {
     text-align: center !important;
   }
-}
-
 /* --- Responsive refinement patch (minimal overrides to fix mobile spacing & overflow) --- */
 @media (max-width: 575.98px) {
   /* Navbar height reduction for small phones */
@@ -1354,7 +1286,6 @@ time {
   .gallery-card p { font-size: .95rem; }
   /* Equipo avatars slightly smaller already handled; adjust spacing */
   #equipo .team-card { padding: .25rem 0 .8rem; }
-  .team-social { gap: .55rem; }
   /* Contacto form adjustments */
   #contacto form label { font-size: .9rem; }
   #contacto form .form-control { padding: .55rem .85rem; font-size: .95rem; }
@@ -1383,7 +1314,6 @@ time {
   .avatar-wrapper { width: 130px; }
   .team-name { font-size: .95rem; }
   .team-role { font-size: .75rem; }
-  .team-social a { width: 26px; height: 26px; font-size: .75rem; }
   .hero-section .btn { padding: .65rem 1.1rem; font-size: .95rem; }
 }
 @media (max-width: 411.98px) {
@@ -1395,8 +1325,6 @@ time {
   /* Aumentar legibilidad en pantallas estrechas */
   #equipo .team-name { font-size: clamp(1.05rem,4.6vw,1.28rem); }
   #equipo .team-role { font-size: clamp(.9rem,3.9vw,1.05rem); }
-  #equipo .team-social { justify-content: center; gap: .85rem; }
-  #equipo .team-social a { width: 38px; height: 38px; font-size: 1.05rem; }
 }
 
 /* iPad / tablets grandes (portrait & landscape) */
@@ -1449,7 +1377,6 @@ time {
 
 /* Ajuste de grid del equipo: asegurar envoltura limpia y consistencia de gaps */
 #equipo .row.g-4 { row-gap: 2.2rem; }
-.team-social { flex-wrap: wrap; }
 
 /* iPad Mini / ancho 768–820px: comprimir navbar y estabilizar sección equipo */
 @media (min-width: 768px) and (max-width: 820px) {
@@ -1682,4 +1609,99 @@ time {
   .bg-stars { display: block; background-image: url("../img/background/galaxybg_pc.webp"); }
   /* simplificar fondo del body para evitar doble descarga */
   body { background: #0a1128; }
+}
+
+/* Móvil (≤767px): usa galaxybg_767mobile y muestra la capa */
+@media (max-width:767.98px){
+  .bg-stars{
+    display:block!important; /* antes estaba oculto */
+    background-image:url("../img/background/galaxybg_767mobile.webp?v=9")!important;
+    background-size:cover;background-repeat:no-repeat;background-position:50% 0;
+  }
+  body{background:var(--color-bg,#0a1128)!important}
+  body:before{content:none!important}
+}
+
+@media (max-width:991.98px){
+  /* antes: background:#0a1128 url(../img/background/galaxybg_100.webp?v=7) ... */
+  body{background:#0a1128}
+}
+
+
+@media (max-width:767.98px){
+  /* antes definía background-image en body:before con galaxybg_100.webp */
+  body:before{content:none}
+}
+
+/* ====================
+   FONDOS MÓVIL: galaxybg_767mobile y herogalaxy_767 siempre estáticos
+   ==================== */
+@media (max-width: 767.98px) {
+  /* Fondo principal móvil: galaxybg_767mobile completamente estático */
+  body {
+    background-attachment: fixed !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    will-change: unset !important;
+    transform: none !important;
+    min-height: 100vh !important;
+    height: 100vh !important;
+    width: 100vw !important;
+  }
+  .bg-stars {
+    background-image: url("../img/background/galaxybg_767mobile.webp?v=9") !important;
+    background-attachment: fixed !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    will-change: unset !important;
+    transform: none !important;
+    min-height: 100vh !important;
+    height: 100vh !important;
+    width: 100vw !important;
+  }
+  /* Fondo hero móvil: herogalaxy_767 completamente estático */
+  .hero-section {
+    background-image: url('img/head-navbar-hero/herogalaxy_767.webp') !important;
+    background-attachment: fixed !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    will-change: unset !important;
+    transform: none !important;
+    min-height: 100vh !important;
+    height: 100vh !important;
+    width: 100vw !important;
+  }
+}
+@media (max-width: 767.98px) {
+  .hero-section {
+    background-attachment: fixed !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    min-height: 100vh !important;
+    height: 100dvh !important;
+    width: 100vw !important;
+    overflow: hidden !important;
+    position: relative !important;
+    will-change: unset !important;
+  }
+  .hero-section > .container,
+  .hero-section picture,
+  .hero-section picture img {
+    min-height: 100vh !important;
+    height: 100dvh !important;
+    width: 100vw !important;
+    object-fit: cover !important;
+    position: absolute !important;
+    top: 0; left: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .hero-section > .container > *:not(picture) {
+    position: relative;
+    z-index: 2;
+  }
 }
