@@ -374,45 +374,36 @@ body {
 }
 .navbar-brand img {
   width: 54px;
-  height: 54px;
-  object-fit: cover;
-  border-radius: 50%;
-  box-shadow: 0 0 10px #1a3a8f77;
+  .hero-section {
+    height: 100svh !important;
+    position: relative !important;
+    overflow: hidden !important;
+    background: transparent !important;
+  }
+  .hero-section picture {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    width: 100vw !important;
+    height: 100svh !important;
+    z-index: 0 !important;
+    pointer-events: none !important;
+  }
+  .hero-section picture img,
+  .hero-section picture source {
+    object-fit: cover !important;
+    width: 100vw !important;
+    height: 100svh !important;
+    background: none !important;
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+  .hero-section > .container > *:not(picture) {
+    position: relative !important;
+    z-index: 1 !important;
+  }
 }
-.navbar-brand span {
-  font-size: 2rem;
-  font-weight: 700;
-  letter-spacing: .06em;
-  color: var(--color-accent);
-}
-.navbar-nav {
-  display: flex;
-  align-items: center;
-  gap: 1.3rem;
-}
-.navbar-nav .nav-link {
-  padding: .5rem 1.2rem;
-  margin: 0 .1rem;
-  font-size: 1.15rem;
-  font-weight: 500;
-  letter-spacing: .04em;
-  color: var(--color-text);
-  border-radius: .7rem;
-  transition: background .22s, color .22s, box-shadow .22s;
-}
-.navbar-nav .nav-link:hover,
-.navbar-nav .nav-link.active {
-  color: var(--color-accent-warm) !important;
-  background: rgba(124, 185, 232, 0.13);
-  box-shadow: 0 2px 8px #7cb9e86c;
-}
-.navbar-dark .navbar-toggler {
-  border: none;
-  outline: none;
-  box-shadow: none !important;
-}
-
-/* 6. Hero: banner principal con fondo e intro */
 .hero-section {
   position: relative;
   display: flex;

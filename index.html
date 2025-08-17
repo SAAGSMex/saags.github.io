@@ -110,13 +110,17 @@
 
     <!-- Sección Hero / Inicio accesible -->
     <section id="inicio" class="hero-section" aria-labelledby="titulo-inicio">
-        <div class="container text-center" style="position:relative;">
-            <!-- Imagen principal para LCP optimizada con picture (AVIF/WebP + fallback) -->
-            <picture style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:-1;">
-                <!-- Fondo hero: WebP desktop, WebP mobile, fallback PNG -->
-                <source srcset="img/head-navbar-hero/herogalaxy_767.webp" media="(max-width: 767.98px)" type="image/webp">
+        <div class="container text-center hero-container-fix">
+            <!-- Fondo hero: solo UNA imagen, estática, nunca crece ni se mueve -->
+            <picture class="hero-bg-picture" aria-hidden="true">
+                <source srcset="img/head-navbar-hero/herogalaxy_767.webp" media="(max-width: 430px)" type="image/webp">
                 <source srcset="img/head-navbar-hero/herogalaxy.webp" media="(min-width: 768px)" type="image/webp">
-                <img src="img/head-navbar-hero/herogalaxy.png" alt="Fondo galáctico" width="1600" height="900" style="width:100%;height:100%;object-fit:cover;z-index:0;" loading="eager" fetchpriority="high" decoding="async">
+                <img src="img/head-navbar-hero/herogalaxy.png" alt="Fondo galáctico" width="1600" height="900" loading="eager" fetchpriority="high" decoding="async" style="width:100%;height:100%;object-fit:cover;">
+            </picture>
+                <style>
+                .hero-bg-picture { z-index: 0 !important; }
+                .hero-content-fix { position: relative !important; z-index: 1 !important; }
+                </style>
             </picture>
             <h1 class="display-3 mb-4 fw-bold text-white animate__animated animate__fadeInDown show fade" id="titulo-inicio">
                 Sociedad Astronómica de Aguascalientes
