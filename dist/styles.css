@@ -303,8 +303,6 @@ body {
 @media (max-width: 420px) {
   /* Ultra small devices */
   .navbar-brand span { font-size: 1.15rem; }
-  .hero-section h1 { font-size: clamp(1.7rem, 8.5vw, 2.2rem); }
-  .hero-section .lead { font-size: clamp(.95rem, 4vw, 1.15rem); }
   .btn-galeria { width: 100%; font-size: 1rem; padding: .7rem 1.2rem; }
   .calendario { padding-left: .75rem; padding-right: .75rem; }
   .gallery-card h5 { font-size: 1rem; }
@@ -1313,8 +1311,6 @@ time {
   /* Hero buttons: force vertical stacking and full width for easier tapping */
   .hero-buttons { flex-direction: column; align-items: stretch; }
   .hero-buttons .btn { width: 100%; margin-bottom: .6rem; }
-  .hero-section h1 { font-size: clamp(1.9rem, 8.4vw, 2.55rem); }
-  .hero-section .lead { font-size: clamp(1rem, 4.5vw, 1.25rem); margin-bottom: 1.4rem; }
   /* Nosotros text container compact */
   #nosotros .nosotros-text-bg { margin-bottom: 1.5rem; }
   /* Activity cards tighter body */
@@ -1340,8 +1336,6 @@ time {
   /* Slightly smaller calendar columns on ultra narrow devices */
   .calendario__grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
   .navbar-brand span { font-size: 1.25rem; }
-  .hero-section h1 { font-size: clamp(1.7rem, 8.8vw, 2.2rem); }
-  .hero-section .lead { font-size: clamp(.95rem, 4.8vw, 1.1rem); }
   #actividades .card-footer .btn { width: 100%; }
 }
 
@@ -1395,9 +1389,9 @@ time {
 @media (max-width: 575.98px) {
   .hero-section > .container { padding-top: 3rem; padding-bottom: 3rem; }
 }
+
+/* == REGLAS ACTUALIZADAS: TAMAÑOS DE FUENTE EN HERO == */
 @media (min-width: 1024px) and (max-width: 1366px) {
-  .hero-section h1 { font-size: clamp(2.6rem, 4vw, 3.6rem); }
-  .hero-section .lead { font-size: clamp(1.15rem, 1.8vw, 1.6rem); }
   #equipo .avatar-wrapper { width: 210px; }
   .calendario__grid { grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
   #actividades .card { margin-bottom: 2.2rem; }
@@ -1528,8 +1522,6 @@ time {
   .navbar { padding: .55rem 0 !important; }
   /* Hero un poco más compacto para que el contenido principal no requiera tanto scroll inicial */
   .hero-section { padding-top: clamp(4.2rem, 9vh, 5.5rem); padding-bottom: clamp(2rem, 6vh, 4rem); }
-  .hero-section h1 { font-size: clamp(2.1rem, 4.2vw, 3rem); }
-  .hero-section .lead { font-size: clamp(1rem, 1.6vw, 1.3rem); }
   /* Secciones: reducir márgenes verticales si había saltos innecesarios */
   section[id]:not(.hero-section) { scroll-margin-top: calc(var(--navbar-height) + 10px); }
   /* Equipo: evitar overflow de columnas Bootstrap (4x25% en 768px ≈192px) */
@@ -1670,4 +1662,37 @@ time {
 @media (max-width:767.98px){
   /* antes definía background-image en body:before con galaxybg_100.webp */
   body:before{content:none}
+}
+
+/* == REGLAS ACTUALIZADAS: TAMAÑOS DE FUENTE EN HERO == */
+
+/* Para dispositivos con ancho de hasta 430px (móviles pequeños) */
+@media (max-width: 430px) {
+  .hero-section h1 {
+    font-size: clamp(2.4rem, 11vw, 4rem);
+  }
+  .hero-section .lead { /* ¡Cambiado de 'p' a '.lead'! */
+    font-size: clamp(1.5rem, 5vw, 3rem);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .hero-section h1 {
+    font-size: clamp(3.2rem, 8vw, 4.5rem);
+  }
+  .hero-section .lead {
+    font-size: clamp(1.8rem, 2.6vw, 2.5rem);
+  }
+}
+
+/* Rango de Desktops y Laptops (más grandes que 1024px) */
+@media (min-width: 1024.02px) {
+  .hero-section h1 {
+    /* Hacemos el título aún más grande para pantallas de escritorio */
+    font-size: clamp(4.5rem, 6.5vw, 6rem);
+  }
+  .hero-section .lead {
+    /* El subtítulo también crece para mantener la proporción */
+    font-size: clamp(1.8rem, 2.2vw, 2.5rem);
+  }
 }
