@@ -53,16 +53,14 @@
     <!-- En producción usa el CSS minificado generado en dist/ -->
     <link rel="preload" href="dist/styles.min.css?v=7" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="stylesheet" href="dist/styles.min.css?v=7" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="dist/styles.min.css?v=7"></noscript>
-    <!-- Hero: se carga vía <picture> responsivo; evitamos preload único para no descargar imagen grande en móviles -->
-    <!-- Preload solo de hero (móvil y desktop) -->
-    <link rel="preload" as="image" href="img/head-navbar-hero/herogalaxy_767.webp" media="(max-width: 767.98px)" type="image/webp">
-    <link rel="preload" as="image" href="img/head-navbar-hero/herogalaxy.webp" media="(min-width: 768px)" type="image/webp">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js" defer></script>
+    <noscript>
+        <link rel="stylesheet" href="dist/styles.min.css?v=7">
+    </noscript>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js" defer></script>
     <!-- GLightbox diferido para mejorar rendimiento inicial -->
     <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js" defer></script>
-        <script src="scripts.js" defer></script>
-        <script src="CalendarioAstro/calendario-astronomico-2025.js" defer></script>
+    <script src="scripts.js" defer></script>
+    <script src="CalendarioAstro/calendario-astronomico-2025.js" defer></script>
     </head>
     <body>
     <!-- Fondo de estrellas simplificado - una sola div con imagen de fondo -->

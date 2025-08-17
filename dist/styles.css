@@ -1689,7 +1689,7 @@ time {
 @media (min-width: 1024.02px) {
   .hero-section h1 {
     /* Hacemos el título aún más grande para pantallas de escritorio */
-    font-size: clamp(4.5rem, 6.5vw, 6rem);
+    font-size: clamp(4.2rem, 6vw, 5rem);
   }
   .hero-section .lead {
     /* El subtítulo también crece para mantener la proporción */
