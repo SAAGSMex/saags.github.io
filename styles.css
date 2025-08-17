@@ -1228,26 +1228,44 @@ time {
     max-height: none;
   }
   /* Hero: evitar que la imagen de fondo se mueva al hacer scroll en móviles */
+  .hero-section {
+    height: 100svh !important;
+    min-height: 100svh !important;
+    max-height: 100svh !important;
+    position: relative !important;
+    overflow: hidden !important;
+    background: transparent !important;
+  }
   .hero-section picture {
     position: absolute !important;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: auto;
-    min-height: 100%;
-    max-height: none;
-    z-index: -2;
-    pointer-events: none;
+    width: 100vw !important;
+    height: 100svh !important;
+    min-width: 100vw !important;
+    min-height: 100svh !important;
+    max-width: 100vw !important;
+    max-height: 100svh !important;
+    z-index: 0 !important;
+    pointer-events: none !important;
   }
   .hero-section picture img,
   .hero-section picture source {
-    object-fit: cover;
+    object-fit: cover !important;
     width: 100vw !important;
-    height: auto !important;
-    min-width: 100vw;
-    min-height: 100%;
-    max-width: none;
-    max-height: none;
+    height: 100svh !important;
+    min-width: 100vw !important;
+    min-height: 100svh !important;
+    max-width: 100vw !important;
+    max-height: 100svh !important;
+    background: none !important;
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+  .hero-section > .container > *:not(picture) {
+    position: relative !important;
+    z-index: 1 !important;
   }
 }
   #galeria > .container {

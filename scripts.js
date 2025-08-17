@@ -30,26 +30,6 @@
 
 // Script Personalizado
 document.addEventListener('DOMContentLoaded', function() {
-    // 0. Ajuste de viewport alto dinámico en móviles (usa --vh en CSS)
-    (function fixMobileVH(){
-        function setVh() {
-            const vh = window.innerHeight * 0.01; // 1vh real
-            document.documentElement.style.setProperty('--vh', `${vh}px`);
-        }
-        let rAF, lastCall = 0;
-        function onResize(){
-            const now = Date.now();
-            if (now - lastCall < 90) { // debounce simple
-                cancelAnimationFrame(rAF);
-                rAF = requestAnimationFrame(setVh);
-                return;
-            }
-            lastCall = now;
-            setVh();
-        }
-        window.addEventListener('resize', onResize);
-        setVh();
-    })();
     // 1. Animación del botón "Nuestras actividades"
     const btnActividades = document.getElementById('btn-actividades');
     if (btnActividades) {
