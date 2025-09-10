@@ -3,7 +3,6 @@
  * ------------------------------------------------------------------
  * Rol: Funcionalidad interactiva y mejoras UX/A11y sin frameworks.
  * Alcance principal:
- *  0. Ajuste dinámico de viewport (--vh) en móviles.
  *  1. Animaciones progresivas para CTA inicial.
  *  2. Cierre inteligente del navbar tras navegación.
  *  3. IntersectionObserver para resaltar sección activa.
@@ -135,7 +134,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const allowedInternalLinks = document.querySelectorAll(internalNavSelectors.join(','));
     const NAV_ACTIVE_CLASS = 'active';
     // Configuración: si quieres actualizar el hash sin crear historial pon a true.
-    const UPDATE_HASH = false; // Requisito: mantener URL limpia sin #
+    const UPDATE_HASH = false; // Mantener URL sin hash visible
 
     function clearHashFromUrl() {
         // Elimina cualquier hash visible sin crear nueva entrada de historial
@@ -154,6 +153,15 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    function afterSmoothScroll(cb) {
+        let done = false;
+        const finish = () => { if (!done) { done = true; cb(); } };
+        // scrollend no está en todos los navegadores; usar timeout como fallback
+        const onEnd = () => { window.removeEventListener('scrollend', onEnd); finish(); };
+        window.addEventListener('scrollend', onEnd, { once: true });
+        setTimeout(finish, 500);
+    }
+
     allowedInternalLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             const hash = link.getAttribute('href');
@@ -162,7 +170,7 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             // Caso especial: href="#" (sin destino) => sólo limpiamos el hash si aparece temporalmente.
             if (hash === '#' || hash.length === 1) {
-                clearHashFromUrl();
+                afterSmoothScroll(clearHashFromUrl);
                 return;
             }
             const id = hash.slice(1);
@@ -172,36 +180,31 @@ document.addEventListener('DOMContentLoaded', function() {
                 activarLinkPorHash(hash);
             }
             // Incluso si no existe el destino, evitamos que el hash quede en la barra.
-            if (!UPDATE_HASH) {
-                clearHashFromUrl();
-            } else {
-                try { history.replaceState(null, '', hash); } catch(_) {}
+            afterSmoothScroll(() => {
+                if (!UPDATE_HASH) {
+                    clearHashFromUrl();
+                } else {
+                    try { history.replaceState(null, '', hash); } catch(_) {}
+                }
+            });
+            if (bsCollapse && navbarCollapse.classList.contains('show')) {
+                afterSmoothScroll(() => bsCollapse.hide());
             }
-            if (bsCollapse && navbarCollapse.classList.contains('show')) bsCollapse.hide();
         });
     });
 
-    // Neutralizamos otros enlaces internos (no permitidos) para que no gestionen navegación
-    // pero conservamos su href para SEO / accesibilidad (solo evitamos el scroll por hash).
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-        if ([...allowedInternalLinks].includes(a)) return; // permitido
-        a.addEventListener('click', (e) => {
-            // Evitamos que cambie el hash y genere historial
-            e.preventDefault();
-            // Podríamos opcionalmente mostrar feedback o ignorar.
-        });
-    });
+    // Nota: evitamos modificar el comportamiento de otros enlaces con hash para no introducir efectos colaterales.
 
     // (Opcional) Activar el link correspondiente si la página carga ya con un hash
     if (location.hash) {
         const initial = location.hash;
         const target = document.getElementById(initial.substring(1));
         if (target) {
-            // Ejecutamos scroll manual y luego limpiamos hash para que desaparezca de la barra.
+            // Ejecutamos scroll manual y luego limpiamos hash tras el fin del scroll.
             setTimeout(() => {
                 target.scrollIntoView({ behavior: 'instant', block: 'start' });
                 activarLinkPorHash(initial);
-                if (!UPDATE_HASH) clearHashFromUrl();
+                if (!UPDATE_HASH) afterSmoothScroll(clearHashFromUrl);
             }, 15);
         } else if (!UPDATE_HASH) {
             clearHashFromUrl();

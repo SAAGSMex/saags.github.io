@@ -330,7 +330,7 @@ body {
 @media (max-height: 520px) and (orientation: landscape) {
   .navbar { min-height: 60px; }
   :root { --navbar-height: 60px; }
-  .hero-section { min-height: calc(var(--vh, 1vh) * 100 - 10px); }
+  .hero-section { min-height: calc(100dvh - 10px); }
   .hero-section h1 { font-size: clamp(1.6rem, 5.2vw, 2.4rem); }
   .hero-section .lead { font-size: clamp(.9rem, 2.2vw, 1.1rem); margin-bottom: 1.2rem; }
   .hero-section .btn { padding: .6rem 1.2rem; font-size: .95rem; }
@@ -363,9 +363,8 @@ body {
 
 /* 4. Componentes: fondos, botones, contadores, feedback */
 
-/* Fondo de estrellas: Este selector ha sido reemplazado por body::before.
-   Se mantiene vacío para compatibilidad con el DOM existente. */
-/* moved to body::before for GPU-promoted, fixed background */ 
+/* Fondo de estrellas movido a body::before (capa fija y acelerada). 
+  Eliminamos estilos en .bg-stars para evitar conflictos. */
 
 /* Estrategia A: Fondo global fijo y acelerado por GPU en una capa separada */
 body::before {
@@ -502,7 +501,7 @@ body::before {
   flex-direction: column;
   justify-content: center;
   /* Estrategia A: usar 100dvh para altura de viewport confiable */
-  min-height: 100dvh;
+  min-height: calc(100dvh - var(--navbar-height));
   padding: clamp(2.2rem, 6vh, 5rem) 0 clamp(2.5rem, 7vh, 5.5rem); /* Ajuste de padding */
   background: #0d245a; /* Solo color base, la imagen la aporta el <picture> interno */
   overflow: visible;
@@ -526,33 +525,7 @@ body::before {
 .hero-section > .container > picture { z-index: 0 !important; pointer-events: none; }
 .hero-section::before { z-index: 1; }
 .hero-section > .container > *:not(picture) { position: relative; z-index: 2; }
-/* Hero ajustado: eliminar espacios azules arriba/abajo */
-.hero-section {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  min-height: calc(100dvh - var(--navbar-height));
-  padding: 0; /* quitamos padding externo que creaba franjas */
-  background: #0d245a; /* color base detrás de la imagen */
-  overflow: clip;
-}
- /* Recolocamos el espaciado interno en el contenedor del hero */
-.hero-section > .container {
-  padding-top: calc(var(--navbar-height) + 2.2rem) !important; /* separación desde navbar */
-  padding-bottom: 2.4rem !important; /* margen inferior reducido */
-}
-@media (max-width: 575.98px) {
-  .hero-section > .container { padding-top: calc(var(--navbar-height) + 1.6rem) !important; padding-bottom: 1.9rem !important; }
-}
-@media (min-width: 992px) {
-  .hero-section > .container { padding-top: calc(var(--navbar-height) + 3rem) !important; padding-bottom: 3rem !important; }
-}
- /* Tablets / mid-width (768–1023px): eliminar franjas azules extra */
-@media (min-width: 768px) and (max-width: 1023.98px) {
-  .hero-section { padding: 0 !important; }
-  .hero-section > .container { padding-top: calc(var(--navbar-height) + 1.4rem) !important; padding-bottom: 1.8rem !important; }
-}
+/* Hero spacing: el padding se maneja en el bloque principal para evitar franjas y overflow */
  /* Compactar inicio de la sección Nosotros para que no aparezca un bloque azul intermedio */
 #nosotros { padding-top: 2.2rem !important; }
 @media (max-width: 575.98px) { #nosotros { padding-top: 1.6rem !important; } }
@@ -1175,12 +1148,8 @@ time {
 
 /* Tablets */
 @media (max-width: 991.98px) {
-  .bg-stars { display: block; }
-  /* Fondo móvil/tablet: versión ligera */
-  body {
-  background: #0a1128 url("../img/background/galaxybg_767.webp?v=4") top center/cover no-repeat;
-    background-attachment: scroll;
-  }
+  /* Fondo móvil/tablet gestionado por body::before; mantener sólo color base en body */
+  body { background: #0a1128; }
   .navbar {
     padding: .8rem 0;
   }
@@ -1333,13 +1302,9 @@ time {
   .team-role { font-size: .75rem; }
   .hero-section .btn { padding: .65rem 1.1rem; font-size: .95rem; }
 }
-@media (max-width: 411.98px) {
-  /* Equipo: forzar 1 columna en <412px y centrar contenido */
-  #equipo .row.g-4 { grid-template-columns: 1fr !important; gap: 1.25rem .5rem; justify-items: center; }
-  #equipo .row.g-4 > [class*="col-"] { width:100%; display:flex; justify-content:center; }
-  #equipo .team-card { padding: .8rem 1rem 1.3rem; text-align:center; width:100%; max-width:340px; }
-  #equipo .avatar-wrapper { width: clamp(170px,68vw,240px); margin-left:auto; margin-right:auto; }
-  /* Aumentar legibilidad en pantallas estrechas */
+@media (max-width: 991.98px) {
+  /* Fondo móvil/tablet gestionado por body::before (no en body) */
+  body { background: #0a1128; }
   #equipo .team-name { font-size: clamp(1.05rem,4.6vw,1.28rem); }
   #equipo .team-role { font-size: clamp(.9rem,3.9vw,1.05rem); }
 }
@@ -1622,9 +1587,7 @@ time {
 
 /* Mejora de nitidez en tablets: usar imagen de mayor resolución */
 @media (min-width: 768px) and (max-width: 991.98px) {
-  /* reactivar capa de estrellas con versión grande */
-  .bg-stars { display: block; background-image: url("../img/background/galaxybg_pc.webp"); }
-  /* simplificar fondo del body para evitar doble descarga */
+  /* Fondo ya gestionado por body::before arriba */
   body { background: #0a1128; }
 }
 
