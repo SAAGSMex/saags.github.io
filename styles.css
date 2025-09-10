@@ -380,35 +380,40 @@ body {
 
 /* 4. Componentes: fondos, botones, contadores, feedback */
 
-/* Fondo estrellas: capa fija en GPU (sin background-attachment: fixed) */
-.bg-stars {
+/* Fondo de estrellas: Este selector ha sido reemplazado por body::before.
+   Se mantiene vacío para compatibilidad con el DOM existente. */
+/* moved to body::before for GPU-promoted, fixed background */ 
+
+/* Estrategia A: Fondo global fijo y acelerado por GPU en una capa separada */
+body::before {
+  content: '';
   position: fixed;
   inset: 0;
-  z-index: -1;
-  width: 100%;
-  height: 100%;
+  z-index: -1; /* detrás del contenido */
   pointer-events: none;
-  background: #0a1128;           /* color base */
+  /* Fondo base + posición */
+  background: #0a1128; /* color fallback */
   background-position: 50% 0;
   background-size: cover;
   background-repeat: no-repeat;
-  will-change: transform;
+  /* Promoción a capa de composición para evitar repintados por scroll */
   transform: translateZ(0);
+  will-change: transform;
 }
 
 /* Desktop >=992px */
 @media (min-width: 992px) {
-  .bg-stars { background-image: url("../img/background/galaxybg_pc.webp?v=4"); }
+  body::before { background-image: url("../img/background/galaxybg_pc.webp?v=4"); }
   body { background: #0a1128; }
 }
 
 /* Tablets 768–991px */
 @media (min-width: 768px) and (max-width: 991.98px) {
-  .bg-stars { background-image: url("../img/background/galaxybg_pc.webp?v=4"); }
+  body::before { background-image: url("../img/background/galaxybg_pc.webp?v=4"); }
 }
-/* Tablets <=991.98px: fondo en body */
 @media (max-width: 991.98px) {
-  body { background: #0a1128 url("../img/background/galaxybg_100.webp?v=4") top center/cover no-repeat; }
+  body { background: #0a1128; } /* evita doble descarga; fondo viene de body::before */
+  body::before { background-image: url("../img/background/galaxybg_100.webp?v=4"); }
 }
 
 /* Botón primario personalizado */
@@ -513,11 +518,11 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  /* Estrategia A: usar 100dvh para altura de viewport confiable */
   min-height: 100dvh;
-  min-height: calc(var(--vh, 1vh) * 100);
   padding: clamp(2.2rem, 6vh, 5rem) 0 clamp(2.5rem, 7vh, 5.5rem); /* Ajuste de padding */
   background: #0d245a; /* Solo color base, la imagen la aporta el <picture> interno */
-  overflow: clip;
+  overflow: visible;
 }
 .hero-section::before {
   content: "";
@@ -1740,59 +1745,10 @@ time {
   body { background: #0a1128; }
 }
 
-/* Móvil (≤767px): usa galaxybg_767mobile y muestra la capa */
-@media (max-width:767.98px){
-  .bg-stars{
-    display:block!important; /* antes estaba oculto */
-    background-image:url("../img/background/galaxybg_767mobile.webp?v=9")!important;
-    background-size:cover;background-repeat:no-repeat;background-position:50% 0;
-  }
-  body{background:var(--color-bg,#0a1128)!important}
-  body:before{content:none!important}
-}
-
-@media (max-width:991.98px){
-  /* antes: background:#0a1128 url(../img/background/galaxybg_100.webp?v=7) ... */
-  body{background:#0a1128}
-}
-
-@media (max-width:767.98px){
-  /* antes definía background-image en body:before con galaxybg_100.webp */
-  body:before{content:none}
-}
-
+/* Móvil (≤767px): usar versión ligera y mantener capa fija en body::before */
 @media (max-width: 767.98px) {
-  /* Fondo solo en .bg-stars */
-  .bg-stars {
-    display: block !important;
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    width: 100vw;
-    height: 100vh;
-    background: #0a1128 url("../img/background/galaxybg_767mobile.webp?v=9") center top/cover no-repeat !important;
-    will-change: transform;
-    transform: translateZ(0);
-    pointer-events: none;
-  }
-  body {
-    background: var(--color-bg, #0a1128) !important;
-    position: relative;
-    overflow-x: hidden;
-  }
+  body { background: var(--color-bg, #0a1128) !important; }
   body::before {
-    content: none !important;
-    background: none !important;
-  }
-  /* Hero: fuerza fondo solo color, sin imagen extra */
-  .hero-section {
-    background: #0d245a !important;
-  }
-  .hero-section::before {
-    background: linear-gradient(
-      to bottom,
-      rgba(13, 36, 90, var(--overlay-top, .48)),
-      rgba(7, 11, 35, var(--overlay-bottom, .65))
-    ) !important;
+    background-image: url("../img/background/galaxybg_767mobile.webp?v=9");
   }
 }
