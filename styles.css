@@ -316,6 +316,8 @@ body {
 @media (max-width: 420px) {
   /* Ultra small devices */
   .navbar-brand span { font-size: 1.15rem; }
+  .hero-section h1 { font-size: clamp(1.7rem, 8.5vw, 2.2rem); }
+  .hero-section .lead { font-size: clamp(.95rem, 4vw, 1.15rem); }
   .btn-galeria { width: 100%; font-size: 1rem; padding: .7rem 1.2rem; }
   .calendario { padding-left: .75rem; padding-right: .75rem; }
   .gallery-card h5 { font-size: 1rem; }
@@ -407,17 +409,6 @@ body {
 /* Tablets <=991.98px: fondo en body */
 @media (max-width: 991.98px) {
   body { background: #0a1128 url("../img/background/galaxybg_100.webp?v=4") top center/cover no-repeat; }
-}
-
-/* Móvil <=767px: nuevo fondo ligero */
-@media (max-width: 767.98px) {
-  body::before {
-    background-image: url("../img/background/galaxybg_100.webp?v=4");
-    background-image: image-set(
-      url("../img/background/galaxybg_100.webp?v=4") 1x,
-      url("../img/background/galaxybg_pc.webp?v=4") 2x
-    );
-  }
 }
 
 /* Botón primario personalizado */
@@ -1301,23 +1292,6 @@ time {
 
 /* Móviles */
 @media (max-width: 767.98px) {
-  /* Fondo móvil: mover imagen a pseudo-elemento fijo para evitar artefactos al combinar fondo + navbar fijo */
-  .bg-stars { display: none !important; }
-  body { position: relative; background: #0a1128; overflow-x: hidden; }
-  body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: -1; /* detrás de todo el contenido */
-    background: #0a1128 center/cover no-repeat;
-    background-image: url("../img/background/galaxybg_767.webp?v=4");
-    background-image: image-set(
-      url("../img/background/galaxybg_767.webp?v=4") 1x,
-      url("../img/background/galaxybg_pc.webp?v=4") 2x
-    );
-    will-change: transform; /* hint: scroll perf */
-    transform: translateZ(0); /* fuerza capa propia */
-  }
   #galeria > .container {
   /* Avoid 100vw which can introduce horizontal scroll (accounts not for scrollbar width) */
   width: 100%;
@@ -1395,6 +1369,8 @@ time {
   /* Hero buttons: force vertical stacking and full width for easier tapping */
   .hero-buttons { flex-direction: column; align-items: stretch; }
   .hero-buttons .btn { width: 100%; margin-bottom: .6rem; }
+  .hero-section h1 { font-size: clamp(1.9rem, 8.4vw, 2.55rem); }
+  .hero-section .lead { font-size: clamp(1rem, 4.5vw, 1.25rem); margin-bottom: 1.4rem; }
   /* Nosotros text container compact */
   #nosotros .nosotros-text-bg { margin-bottom: 1.5rem; }
   /* Activity cards tighter body */
@@ -1422,6 +1398,8 @@ time {
   /* Slightly smaller calendar columns on ultra narrow devices */
   .calendario__grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
   .navbar-brand span { font-size: 1.25rem; }
+  .hero-section h1 { font-size: clamp(1.7rem, 8.8vw, 2.2rem); }
+  .hero-section .lead { font-size: clamp(.95rem, 4.8vw, 1.1rem); }
   #actividades .card-footer .btn { width: 100%; }
 }
 
@@ -1478,9 +1456,9 @@ time {
 @media (max-width: 575.98px) {
   .hero-section > .container { padding-top: 3rem; padding-bottom: 3rem; }
 }
-
-/* == REGLAS ACTUALIZADAS: TAMAÑOS DE FUENTE EN HERO == */
 @media (min-width: 1024px) and (max-width: 1366px) {
+  .hero-section h1 { font-size: clamp(2.6rem, 4vw, 3.6rem); }
+  .hero-section .lead { font-size: clamp(1.15rem, 1.8vw, 1.6rem); }
   #equipo .avatar-wrapper { width: 210px; }
   .calendario__grid { grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
   #actividades .card { margin-bottom: 2.2rem; }
@@ -1637,6 +1615,8 @@ time {
   .navbar { padding: .55rem 0 !important; }
   /* Hero un poco más compacto para que el contenido principal no requiera tanto scroll inicial */
   .hero-section { padding-top: clamp(4.2rem, 9vh, 5.5rem); padding-bottom: clamp(2rem, 6vh, 4rem); }
+  .hero-section h1 { font-size: clamp(2.1rem, 4.2vw, 3rem); }
+  .hero-section .lead { font-size: clamp(1rem, 1.6vw, 1.3rem); }
   /* Secciones: reducir márgenes verticales si había saltos innecesarios */
   section[id]:not(.hero-section) { scroll-margin-top: calc(var(--navbar-height) + 10px); }
   /* Equipo: evitar overflow de columnas Bootstrap (4x25% en 768px ≈192px) */
@@ -1781,35 +1761,38 @@ time {
   body:before{content:none}
 }
 
-/* == REGLAS ACTUALIZADAS: TAMAÑOS DE FUENTE EN HERO == */
-
-/* Para dispositivos con ancho de hasta 430px (móviles pequeños) */
-@media (max-width: 430px) {
-  .hero-section h1 {
-    font-size: clamp(2.4rem, 11vw, 4rem);
+@media (max-width: 767.98px) {
+  /* Fondo solo en .bg-stars */
+  .bg-stars {
+    display: block !important;
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    width: 100vw;
+    height: 100vh;
+    background: #0a1128 url("../img/background/galaxybg_767mobile.webp?v=9") center top/cover no-repeat !important;
+    will-change: transform;
+    transform: translateZ(0);
+    pointer-events: none;
   }
-  .hero-section .lead { /* ¡Cambiado de 'p' a '.lead'! */
-    font-size: clamp(1.5rem, 5vw, 3rem);
+  body {
+    background: var(--color-bg, #0a1128) !important;
+    position: relative;
+    overflow-x: hidden;
   }
-}
-
-@media (min-width: 768px) and (max-width: 1024px) {
-  .hero-section h1 {
-    font-size: clamp(3.2rem, 8vw, 4.5rem);
+  body::before {
+    content: none !important;
+    background: none !important;
   }
-  .hero-section .lead {
-    font-size: clamp(1.8rem, 2.6vw, 2.5rem);
+  /* Hero: fuerza fondo solo color, sin imagen extra */
+  .hero-section {
+    background: #0d245a !important;
   }
-}
-
-/* Rango de Desktops y Laptops (más grandes que 1024px) */
-@media (min-width: 1024.02px) {
-  .hero-section h1 {
-    /* Hacemos el título aún más grande para pantallas de escritorio */
-    font-size: clamp(4.2rem, 6vw, 5rem);
-  }
-  .hero-section .lead {
-    /* El subtítulo también crece para mantener la proporción */
-    font-size: clamp(1.8rem, 2.2vw, 2.5rem);
+  .hero-section::before {
+    background: linear-gradient(
+      to bottom,
+      rgba(13, 36, 90, var(--overlay-top, .48)),
+      rgba(7, 11, 35, var(--overlay-bottom, .65))
+    ) !important;
   }
 }
