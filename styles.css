@@ -297,23 +297,18 @@ body {
 
 /* Desktop >=992px */
 @media (min-width: 992px) {
-  .bg-stars { background-image: url("../img/background/galaxybg_pc.webp?v=4"); }
+  .bg-stars { background-image: url("/img/background/galaxybg_pc.webp?v=4"); }
   body { background: #0a1128; }
 }
 
 /* Tablets 768–991px */
 @media (min-width: 768px) and (max-width: 991.98px) {
-  .bg-stars { background-image: url("../img/background/galaxybg_pc.webp?v=4"); }
-}
-/* Tablets <=991.98px: fondo en body */
-@media (max-width: 991.98px) {
-  body { background: #0a1128 url("../img/background/galaxybg_100.webp?v=4") top center/cover no-repeat; }
+  .bg-stars { background-image: url("/img/background/galaxybg_pc.webp?v=4"); }
+  /* Fondo tablet simplificado para evitar doble descarga */
+  body { background: #0a1128; }
 }
 
-/* Móvil <=767px: nuevo fondo ligero */
-@media (max-width: 767.98px) {
-  /* body::before galactic background removed for hero-only background */
-}
+
 
 /* Botón primario personalizado */
 .btn-primary {
@@ -1150,13 +1145,10 @@ time {
   }
 
 /* Tablets */
-@media (max-width: 991.98px) {
+@media (min-width: 768px) and (max-width: 991.98px) {
   .bg-stars { display: block; }
-  /* Fondo móvil/tablet: versión ligera */
-  body {
-    background: #0a1128 url("../img/background/galaxybg_767.webp?v=4") top center/cover no-repeat;
-    background-attachment: scroll;
-  }
+  /* Fondo tablet: usar color liso para evitar conflicto con móvil */
+  body { background: #0a1128; background-attachment: scroll; }
   .navbar {
     padding: .8rem 0;
   }
@@ -1189,55 +1181,46 @@ time {
 
 /* Móviles */
 @media (max-width: 767.98px) {
-  /* Fondo móvil: mover imagen a pseudo-elemento fijo para evitar artefactos al combinar fondo + navbar fijo */
-  .bg-stars { display: none !important; }
-  body {
-    position: relative;
-    background: #0a1128;
-    overflow-x: hidden;
+  /* ======================================================================
+   SOLUCIÓN DE FONDO PARA MÓVILES (RENDIMIENTO OPTIMIZADO)
+   ====================================================================== */
+  @media (max-width: 767.98px) {
+
+    /* 1. Ocultamos la capa .bg-stars que usa el fondo fijo en escritorio. */
+    .bg-stars {
+      display: none;
+    }
+
+    /* 2. Aplicamos el nuevo fondo directamente al body. */
+    body {
+      background-color: var(--color-bg, #0a1128);
+      /* ¡Aquí usamos tu nueva imagen de la Vía Láctea! */
+      background-image: url("../img/background/milkyway_bg_mobile.webp");
+      /* Soporte para pantallas de alta densidad (usa @2x/@3x si existen) */
+      background-image: -webkit-image-set(
+        url("../img/background/milkyway_bg_mobile.webp") 1x,
+        url("../img/background/galaxybg_pc.webp") 2x,
+        url("../img/background/galaxybg_pc.webp") 3x
+      );
+      background-image: image-set(
+        url("../img/background/milkyway_bg_mobile.webp") 1x,
+        url("../img/background/galaxybg_pc.webp") 2x,
+        url("../img/background/galaxybg_pc.webp") 3x
+      );
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+
+      /* 3. ¡ESTA ES LA CLAVE! El fondo se desplaza con el contenido,
+            lo que elimina el "scroll jank" y hace que sea súper fluido. */
+      background-attachment: scroll;
+    }
+    
+    /* 4. Nos aseguramos de que el pseudo-elemento ::before no interfiera. */
+    body::before {
+        content: none;
+    }
   }
-  /* body::before galactic background removed for hero-only background */
-  /* Hero: evitar que la imagen de fondo se mueva al hacer scroll en móviles */
-  .hero-section {
-    height: 100svh !important;
-    min-height: 100svh !important;
-    max-height: 100svh !important;
-    position: relative !important;
-    overflow: hidden !important;
-    background: transparent !important;
-  }
-  .hero-section picture {
-    position: absolute !important;
-    top: 0;
-    left: 0;
-    width: 100vw !important;
-    height: 100svh !important;
-    min-width: 100vw !important;
-    min-height: 100svh !important;
-    max-width: 100vw !important;
-    max-height: 100svh !important;
-    z-index: 0 !important;
-    pointer-events: none !important;
-  }
-  .hero-section picture img,
-  .hero-section picture source {
-    object-fit: cover !important;
-    width: 100vw !important;
-    height: 100svh !important;
-    min-width: 100vw !important;
-    min-height: 100svh !important;
-    max-width: 100vw !important;
-    max-height: 100svh !important;
-    background: none !important;
-    transition: none !important;
-    animation: none !important;
-    transform: none !important;
-  }
-  .hero-section > .container > *:not(picture) {
-    position: relative !important;
-    z-index: 1 !important;
-  }
-}
   #galeria > .container {
   /* Avoid 100vw which can introduce horizontal scroll (accounts not for scrollbar width) */
   width: 100%;
@@ -1280,6 +1263,32 @@ time {
   #galeria .text-justify-responsive {
     text-align: center !important;
   }
+}
+
+/* Forzar fondo móvil al final del archivo para evitar sobrescrituras */
+@media (max-width: 767.98px) {
+  .bg-stars { display: none !important; }
+  body {
+    background-color: var(--color-bg, #0a1128) !important;
+    background-image: url("../img/background/milkyway_bg_mobile.webp") !important;
+    background-image: -webkit-image-set(
+      url("../img/background/milkyway_bg_mobile.webp") 1x,
+      url("../img/background/milkyway_bg_mobile@2x.webp") 2x,
+      url("../img/background/milkyway_bg_mobile@3x.webp") 3x
+    ) !important;
+    background-image: image-set(
+      url("../img/background/milkyway_bg_mobile.webp") 1x,
+      url("../img/background/milkyway_bg_mobile@2x.webp") 2x,
+      url("../img/background/milkyway_bg_mobile@3x.webp") 3x
+    ) !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-attachment: scroll !important;
+  }
+  body::before { content: none !important; }
+}
+
 /* --- Responsive refinement patch (minimal overrides to fix mobile spacing & overflow) --- */
 @media (max-width: 575.98px) {
   /* Navbar height reduction for small phones */
@@ -1674,23 +1683,37 @@ time {
 /* Mejora de nitidez en tablets: usar imagen de mayor resolución */
 @media (min-width: 768px) and (max-width: 991.98px) {
   /* reactivar capa de estrellas con versión grande */
-  .bg-stars { display: block; background-image: url("../img/background/galaxybg_pc.webp"); }
+  .bg-stars { display: block; background-image: url("/img/background/galaxybg_pc.webp"); }
   /* simplificar fondo del body para evitar doble descarga */
   body { background: #0a1128; }
 }
 
-/* Móvil (≤767px): usa galaxybg_767mobile y muestra la capa */
+/* Móvil (≤767px): usa milkyway_bg_mobile.webp y oculta la capa para mejor rendimiento */
 @media (max-width:767.98px){
-  .bg-stars{
-    display:block!important; /* antes estaba oculto */
-    background-image:url("../img/background/galaxybg_767mobile.webp?v=9")!important;
-    background-size:cover;background-repeat:no-repeat;background-position:50% 0;
+  .bg-stars{ display:none!important }
+  body{
+    background-color: var(--color-bg,#0a1128) !important;
+    background-image: url("../img/background/milkyway_bg_mobile.webp") !important;
+    /* Soporte para pantallas de alta densidad (usa @2x/@3x si existen) */
+    background-image: -webkit-image-set(
+      url("../img/background/milkyway_bg_mobile.webp") 1x,
+      url("../img/background/milkyway_bg_mobile@2x.webp") 2x,
+      url("../img/background/milkyway_bg_mobile@3x.webp") 3x
+    ) !important;
+    background-image: image-set(
+      url("../img/background/milkyway_bg_mobile.webp") 1x,
+      url("../img/background/milkyway_bg_mobile@2x.webp") 2x,
+      url("../img/background/milkyway_bg_mobile@3x.webp") 3x
+    ) !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-attachment: scroll !important;
   }
-  body{background:var(--color-bg,#0a1128)!important}
-  body:before{content:none!important}
+  body:before{ content:none!important }
 }
 
-@media (max-width:991.98px){
+@media (min-width:768px) and (max-width:991.98px){
   /* antes: background:#0a1128 url(../img/background/galaxybg_100.webp?v=7) ... */
   body{background:#0a1128}
 }
@@ -1701,75 +1724,16 @@ time {
   body:before{content:none}
 }
 
-/* ====================
-   FONDOS MÓVIL: galaxybg_767mobile y herogalaxy_767 siempre estáticos
-   ==================== */
-@media (max-width: 767.98px) {
-  /* Fondo principal móvil: galaxybg_767mobile completamente estático */
+/* Móviles en pantallas de alta densidad (≈DPR 3): minimizar reescalado para evitar suavizado */
+@media (max-width: 767.98px) and (min-resolution: 3dppx) {
   body {
-    background-attachment: fixed !important;
-    background-size: cover !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-    will-change: unset !important;
-    transform: none !important;
-    min-height: 100vh !important;
-    height: 100vh !important;
-    width: 100vw !important;
-  }
-  .bg-stars {
-    background-image: url("../img/background/galaxybg_767mobile.webp?v=9") !important;
-    background-attachment: fixed !important;
-    background-size: cover !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-    will-change: unset !important;
-    transform: none !important;
-    min-height: 100vh !important;
-    height: 100vh !important;
-    width: 100vw !important;
-  }
-  /* Fondo hero móvil: herogalaxy_767 completamente estático */
-  .hero-section {
-    background-image: url('img/head-navbar-hero/herogalaxy_767.webp') !important;
-    background-attachment: fixed !important;
-    background-size: cover !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-    will-change: unset !important;
-    transform: none !important;
-    min-height: 100vh !important;
-    height: 100vh !important;
-    width: 100vw !important;
+    /* Anclar arriba y ocupar la altura de la ventana para reducir escalado excesivo */
+    background-position: top center !important;
+    background-size: auto 100vh !important; /* prioriza altura exacta sin ampliar de más el ancho */
   }
 }
+
+/* En móvil, usar el fondo del body (Milky) en lugar de la imagen interna del hero */
 @media (max-width: 767.98px) {
-  .hero-section {
-    background-attachment: fixed !important;
-    background-size: cover !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-    min-height: 100vh !important;
-    height: 100dvh !important;
-    width: 100vw !important;
-    overflow: hidden !important;
-    position: relative !important;
-    will-change: unset !important;
-  }
-  .hero-section > .container,
-  .hero-section picture,
-  .hero-section picture img {
-    min-height: 100vh !important;
-    height: 100dvh !important;
-    width: 100vw !important;
-    object-fit: cover !important;
-    position: absolute !important;
-    top: 0; left: 0;
-    z-index: 0;
-    pointer-events: none;
-  }
-  .hero-section > .container > *:not(picture) {
-    position: relative;
-    z-index: 2;
-  }
+  .hero-section > picture { display: none !important; }
 }

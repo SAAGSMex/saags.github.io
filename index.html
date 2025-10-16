@@ -51,7 +51,9 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <!-- En producción usa el CSS minificado generado en dist/ -->
-    <link rel="stylesheet" href="dist/styles.min.css?v=7"> 
+    <link rel="preload" href="dist/styles.min.css?v=9" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="dist/styles.min.css?v=9" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="dist/styles.min.css?v=9"></noscript>
     <!-- Hero: se carga vía <picture> responsivo; evitamos preload único para no descargar imagen grande en móviles -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js" defer></script>
     <!-- GLightbox diferido para mejorar rendimiento inicial -->
@@ -238,7 +240,7 @@
                             <h5 class="card-actividad-title text-center">
                                 <i class="fa-solid fa-star" aria-hidden="true"></i> Observaciones Astronómicas Públicas
                             </h5>
-                            <p class="card-text">Realizamos sesiones de observación para todo público, utilizando telescopios astronómicos en diversos espacios de la ciudad. Estas jornadas están orientadas tanto a la apreciación estética del cielo como al conocimiento científico.</p>
+                            <p class="card-text text-center">Realizamos sesiones de observación para todo público, utilizando telescopios astronómicos en diversos espacios de la ciudad. Estas jornadas están orientadas tanto a la apreciación estética del cielo como al conocimiento científico.</p>
                         </div>
                         <div class="card-footer text-center">
                             <a href="https://rancholacienega.com/ecoturismo/inicio/planes-y-paquetes/astronomico/" class="btn btn-primary" aria-label="Ver próximas observaciones públicas">Próximas observaciones</a>
@@ -255,7 +257,7 @@
                             <h5 class="card-actividad-title text-center">
                                 <i class="fa-solid fa-meteor" aria-hidden="true"></i> Cursos, talleres y seminarios
                             </h5>
-                            <p class="card-text">Impartimos cursos básicos y avanzados sobre astronomía general, astrofotografía, construcción de telescopios y uso de software astronómico, tanto en modalidad presencial como en línea.</p>
+                            <p class="card-text text-center">Impartimos cursos básicos y avanzados sobre astronomía general, astrofotografía, construcción de telescopios y uso de software astronómico, tanto en modalidad presencial como en línea.</p>
                         </div>
                         <div class="card-footer text-center">
                             <a href="https://rancholacienega.com/ecoturismo/BLOG/sesion-astronomica/" class="btn btn-primary" aria-label="Ver programación de cursos y talleres">Ver programación</a>
@@ -272,7 +274,7 @@
                             <h5 class="card-actividad-title text-center">
                                 <i class="fa-solid fa-moon" aria-hidden="true"></i> Conferencias y charlas de divulgación
                             </h5>
-                            <p class="card-text">Se ofrecen conferencias regulares a instituciones educativas, agrupaciones y medios, así como charlas para estudiantes y público general. Los temas abarcan desde fenómenos celestes hasta historia y tecnología astronómica.</p>
+                            <p class="card-text text-center">Se ofrecen conferencias regulares a instituciones educativas, agrupaciones y medios, así como charlas para estudiantes y público general. Los temas abarcan desde fenómenos celestes hasta historia y tecnología astronómica.</p>
                         </div>
                     </div>
                 </div>
@@ -286,7 +288,7 @@
                             <h5 class="card-actividad-title text-center">
                                 <i class="fa-solid fa-bullhorn" aria-hidden="true"></i> Participación en medios de comunicación
                             </h5>
-                            <p class="card-text">Colaboramos con prensa, radio y televisión local para informar a la comunidad sobre eventos astronómicos relevantes como eclipses, lluvias de meteoros, conjunciones y más.</p>
+                            <p class="card-text text-center">Colaboramos con prensa, radio y televisión local para informar a la comunidad sobre eventos astronómicos relevantes como eclipses, lluvias de meteoros, conjunciones y más.</p>
                         </div>
                         <div class="card-footer text-center">
                             <a href="https://www.heraldo.mx/el-diablo-aparece-en-el-cielo-nocturno/#google_vignette" class="btn btn-primary" aria-label="Ver noticias sobre eventos astronómicos">Noticias</a>
@@ -304,7 +306,7 @@
                             <h5 class="card-actividad-title text-center">
                                 <i class="fa-solid fa-people-group" aria-hidden="true"></i> Colaboración nacional e internacional
                             </h5>
-                            <p class="card-text">La Sociedad mantiene vínculos con organizaciones astronómicas de México y el extranjero, incluyendo su participación en redes como AstroRed México, la revista Sky & Telescope, y el programa internacional Telescopios para la Educación.</p>
+                            <p class="card-text text-center">La Sociedad mantiene vínculos con organizaciones astronómicas de México y el extranjero, incluyendo su participación en redes como AstroRed México, la revista Sky & Telescope, y el programa internacional Telescopios para la Educación.</p>
                         </div>
                     </div>
                 </div>
@@ -318,7 +320,7 @@
                             <h5 class="card-actividad-title text-center">
                                 <i class="fa-solid fa-share-nodes" aria-hidden="true"></i> Difusión continua
                             </h5>
-                            <p class="card-text">Se publica y comparte contenido científico y educativo en medios digitales, redes sociales y boletines informativos, con el fin de mantener un flujo constante de comunicación con la comunidad.</p>
+                            <p class="card-text text-center">Se publica y comparte contenido científico y educativo en medios digitales, redes sociales y boletines informativos, con el fin de mantener un flujo constante de comunicación con la comunidad.</p>
                         </div>
                         <div class="card-footer text-center">
                             <a href="https://www.facebook.com/groups/saags/?locale=es_LA" class="btn btn-primary" aria-label="Unirse al grupo de Facebook de SAAGS">Grupo de Facebook</a>
@@ -335,7 +337,7 @@
                             <h5 class="card-actividad-title text-center">
                                 <i class="fa-solid fa-person-rays" aria-hidden="true"></i> Participación en Ferias y Eventos
                             </h5>
-                            <p class="card-text">La SAAGS ha participado en eventos como la Feria del Libro de Aguascalientes, ofreciendo actividades lúdicas y observaciones astronómicas para el público en general.</p>
+                            <p class="card-text text-center">La SAAGS ha participado en eventos como la Feria del Libro de Aguascalientes, ofreciendo actividades lúdicas y observaciones astronómicas para el público en general.</p>
                         </div>
                         <div class="card-footer text-center">
                             <a href="https://agsespacial.org/" class="btn btn-primary" aria-label="Visitar el sitio de AGS Espacial">AGS: EI</a>
@@ -411,11 +413,8 @@
                                 <!-- Fechas destacadas -->
                                 <div class="position-absolute top-0 end-0 m-3 text-end" style="z-index:2;">
                                     <span class="badge bg-primary fs-6 mb-1 px-3 py-2 shadow badge-evento" style="opacity:0.95;">
-                                    2 de Agosto<br><small>9:00 AM</small>
+                                    14 de Junio<br><small>9:00 AM</small>
                                     </span><br>
-                                    <span class="badge bg-secondary fs-6 px-3 py-2 shadow badge-evento" style="opacity:0.95;">
-                                    Transmisión por Roku
-                                    </span>
                                 </div>
                             </div>
                             <!-- Contenido del evento -->
@@ -839,6 +838,7 @@
         <div class="container">
             <h2 class="section-title text-center mb-5" id="titulo-equipo">Nuestro Equipo</h2>
             <div class="row g-4 justify-content-center">
+<<<<<<< HEAD
                 <!-- Miembro 1 -->
                 <div class="col-6 col-md-3">
                     <article class="team-card text-center">
@@ -891,6 +891,76 @@
                     <p class="team-role text-info">Miembro</p>
                     </article>
                 </div>
+=======
+            <!-- Miembro 1 -->
+            <div class="col-6 col-md-3">
+                <article class="team-card text-center">
+                <picture class="avatar-wrapper">
+                    <source srcset="img/equipo/anonymous.webp" type="image/webp">
+                    <img src="img/equipo/anonymous.png"
+                        alt="Foto de Ing. Alberto Segovia"
+                        width="225" height="225" loading="lazy" decoding="async" class="avatar">
+                </picture>
+                <h5 class="team-name">Ing. Alberto Segovia</h5>
+                <p class="team-role text-info">Presidente</p>
+                </article>
+            </div>
+            <!-- Miembro 2 -->
+            <div class="col-6 col-md-3">
+                <article class="team-card text-center">
+                <picture class="avatar-wrapper">
+                    <source srcset="img/equipo/anonymous.webp" type="image/webp">
+                    <img src="img/equipo/anonymous.png"
+                        alt="Foto de Ing. Manuel Rodriguez Huerta"
+                        width="225" height="225" loading="lazy" decoding="async" class="avatar">
+                </picture>
+                <h5 class="team-name">Ing. Manuel Rodriguez Huerta</h5>
+                <p class="team-role text-info">Expresidente</p>
+                </article>
+            </div>
+            <!-- Miembro 3 -->
+            <div class="col-6 col-md-3">
+                <article class="team-card text-center">
+                <picture class="avatar-wrapper">
+                    <source srcset="img/equipo/anonymous.webp" type="image/webp">
+                    <img src="img/equipo/anonymous.png"
+                        alt="Foto de Julien Potier"
+                        width="225" height="225" loading="lazy" decoding="async" class="avatar">
+                </picture>
+                <h5 class="team-name">Julien Potier</h5>
+                <p class="team-role text-info">Vocal</p>
+                </article>
+            </div>
+            <!-- Miembro 4 -->
+            <div class="col-6 col-md-3">
+                <article class="team-card text-center">
+                <picture class="avatar-wrapper">
+                    <source srcset="img/equipo/anonymous.webp" type="image/webp">
+                    <img src="img/equipo/anonymous.png"
+                        alt="Foto de Hernan Aguirre Campos"
+                        width="225" height="225" loading="lazy" decoding="async" class="avatar">
+                </picture>
+                <h5 class="team-name">Hernan Aguirre Campos</h5>
+                <p class="team-role text-info">Miembro</p>
+                </article>
+            </div>
+      <p class="team-role">Vocal</p>
+                </article>
+            </div>
+            <!-- Miembro 4 -->
+            <div class="col-6 col-md-3">
+                <article class="team-card text-center">
+                <picture class="avatar-wrapper">
+                    <source srcset="img/equipo/anonymous.webp" type="image/webp">
+                    <img src="img/equipo/anonymous.png"
+                        alt="Foto de Hernan Aguirre Campos"
+                        width="225" height="225" loading="lazy" decoding="async" class="avatar">
+                </picture>
+                <h5 class="team-name">Hernan Aguirre Campos</h5>
+                <p class="team-role">Miembro</p>
+                </article>
+            </div>
+>>>>>>> 96a6819 (Mobile Milky Way background with retina image-set; fix tablet overrides; hide hero picture on mobile)
             </div>
         </div>
     </section>

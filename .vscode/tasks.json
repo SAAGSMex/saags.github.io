@@ -1,0 +1,38 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Build CSS",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"run",
+				"build:css"
+			],
+			"problemMatcher": [
+				"$eslint-stylish"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Build CSS",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"run",
+				"build:css"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Build CSS",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"run",
+				"build:css"
+			],
+			"group": "build"
+		}
+	]
+}
