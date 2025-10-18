@@ -1,0 +1,59 @@
+name: Update Visual Baselines
+
+on:
+  workflow_dispatch:
+    inputs:
+      browsers:
+        description: "Browsers to run (chromium,firefox,webkit)"
+        required: false
+        default: "chromium,firefox,webkit"
+      quick:
+        description: "Use QUICK mode (faster, stable)"
+        required: false
+        default: "true"
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install deps
+        run: npm install
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps chromium firefox webkit
+
+      - name: Enable QUICK mode (optional)
+        if: ${{ inputs.quick == 'true' }}
+        run: echo "QUICK=1" >> $GITHUB_ENV
+
+      - name: Regenerate baselines
+        env:
+          UPDATE_BASELINE: '1'
+          BROWSERS: ${{ inputs.browsers }}
+          DISABLE_DEVICE_SCALE: '1'
+          FORCE_VIEWPORT: '1'
+          QUICK_WAIT_MS: '300'
+        run: npm run test:visual
+
+      - name: Commit updated baselines
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tests/visual/baselines/*.png
+          if git diff --cached --quiet; then
+            echo "No baseline changes to commit"
+            exit 0
+          fi
+          git commit -m "chore(visual): update baselines"
+          git push
