@@ -66,14 +66,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 2. LÓGICA PARA CERRAR NAVBAR (SIN INTERFERIR EN NAVEGACIÓN)
     // Seleccionamos TODOS los enlaces dentro del menú desplegable
+    // Definir en ámbito superior para uso global
+    const navbarCollapse = document.getElementById('navbarNav');
+    const bsCollapse = (navbarCollapse && window.bootstrap && typeof window.bootstrap.Collapse === 'function')
+        ? new window.bootstrap.Collapse(navbarCollapse, { toggle: false })
+        : null;
+
     safeSection('navbar-collapse', () => {
         const navLinksInMenu = document.querySelectorAll('#navbarNav .nav-link');
-        const navbarCollapse = document.getElementById('navbarNav');
-        // Evitar ReferenceError si bootstrap no está cargado aún
-        const bsCollapse = (navbarCollapse && window.bootstrap && typeof window.bootstrap.Collapse === 'function')
-            ? new window.bootstrap.Collapse(navbarCollapse, { toggle: false })
-            : null;
-
         navLinksInMenu.forEach(link => {
             link.addEventListener('click', () => {
                 // NO hay e.preventDefault(). Dejamos que el enlace funcione 100% nativo.
