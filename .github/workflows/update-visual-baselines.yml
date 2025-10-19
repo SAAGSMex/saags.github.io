@@ -54,6 +54,7 @@ jobs:
             tests/visual/output/report.html
             tests/visual/output/summary.json
             tests/visual/output/summary-ci.json
+            tests/visual/baselines/*.png
 
       - name: Commit updated baselines (force)
         run: |
