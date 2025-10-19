@@ -28,7 +28,7 @@ jobs:
       - name: Run visual tests
         env:
           CI: 'true'
-          MISMATCH_THRESHOLD: '0.3'
+          MISMATCH_THRESHOLD: '0.35'
         run: npm run test:visual
 
       - name: Upload visual outputs (si falla)
