@@ -30,8 +30,9 @@
                 - Si se crean nuevas clases dinámicas via JS → añadir a safelist PurgeCSS.
                 - Mantener orden semántico de headings (h1 solo en hero, subsecciones h2/h3).
         -->
-    <!-- Fuentes Google Fonts optimizadas: solo pesos usados -->            
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Fuentes Google Fonts: limitar a pesos usados para reducir tamaño -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Inter:400,700&display=swap" rel="stylesheet">
     <!-- Bootstrap CSS -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <!-- Font Awesome para iconos -->
@@ -56,7 +57,7 @@
     <link rel="preload" href="dist/styles.min.css?v=8" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="stylesheet" href="dist/styles.min.css?v=8" media="print" onload="this.media='all'">
     <noscript>
-        <link rel="stylesheet" href="dist/styles.min.css?v=7">
+        <link rel="stylesheet" href="dist/styles.min.css?v=8">
     </noscript>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js" defer></script>
     <!-- GLightbox diferido para mejorar rendimiento inicial -->
@@ -73,7 +74,7 @@
         aria-label="Menú principal de la Sociedad Astronómica de Aguascalientes">
         <div class="container d-flex justify-content-between align-items-center">
             <a class="navbar-brand" href="#inicio" aria-label="Ir al inicio">
-                <img src="img/head-navbar-hero/moon-icon-png-4.jpg" loading="lazy"
+                <img src="img/head-navbar-hero/moon-icon-png-4.jpg" loading="lazy" decoding="async"
                     alt="Logo de la Sociedad Astronómica de Aguascalientes"
                     style="height: 48px; width: 48px; object-fit: cover; border-radius: 50%;" aria-hidden="true">
                 <span class="fw-bold">SAAGS</span>
@@ -335,7 +336,7 @@
                     <div class="card bg-gradient-astro shadow-lg h-100">
                         <picture>
                             <source srcset="img/actividades/logo_ags_ei.webp" type="image/webp">
-                            <img src="img/actividades/logo_ags_ei.png" width="414" height="300" class="card-img-top img-ajustable" alt="Difusión">
+                            <img src="img/actividades/logo_ags_ei.png" width="414" height="300" class="card-img-top img-ajustable" alt="Difusión" loading="lazy" decoding="async">
                         </picture>
                         <div class="card-body">
                             <h5 class="card-actividad-title text-center">
@@ -364,7 +365,7 @@
                                     aria-label="Ver imagen ampliada del evento El Hombre en la Luna">
                                     <picture>
                                         <source srcset="img/actividades/proximos_eventos/Astronaut.webp" type="image/webp">
-                                        <img src="img/actividades/proximos_eventos/Astronaut.jpg"
+                                        <img src="img/actividades/proximos_eventos/Astronaut.jpg" loading="lazy" decoding="async"
                                             width="526" height="681"
                                             class="img-fluid h-100 w-100 d-block mx-auto"
                                             alt="Cartel del evento El Hombre en la Luna"
@@ -407,7 +408,7 @@
                                 <picture>
                                     <source srcset="img/actividades/proximos_eventos/cafeesp1.avif" type="image/avif">
                                     <source srcset="img/actividades/proximos_eventos/cafeesp1.webp" type="image/webp">
-                                    <img src="img/actividades/proximos_eventos/cafeesp1.jpg"
+                                    <img src="img/actividades/proximos_eventos/cafeesp1.jpg" loading="lazy" decoding="async"
                                         width="626" height="470"
                                         class="img-fluid h-100 w-100 d-block mx-auto"
                                         alt="Cartel del evento Café Espacial Series"
