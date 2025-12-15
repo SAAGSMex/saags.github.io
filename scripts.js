@@ -34,23 +34,6 @@ document.addEventListener('DOMContentLoaded', function() {
     function safeSection(name, fn) {
         try { fn(); } catch (err) { console.warn(`[init:${name}]`, err); }
     }
-    // 0. Ajuste de viewport alto dinámico en móviles (usa --vh en CSS)
-    safeSection('vh', () => {
-        (function fixMobileVH(){
-            function setVh() {
-                const vh = window.innerHeight * 0.01; // 1vh real
-                document.documentElement.style.setProperty('--vh', `${vh}px`);
-            }
-            // Actualiza inmediatamente y también tras un pequeño delay para asegurar el valor correcto
-            function updateVhImmediateAndDelayed() {
-                setVh();
-                setTimeout(setVh, 120); // Reaplica tras posibles animaciones de barra
-            }
-            window.addEventListener('resize', updateVhImmediateAndDelayed, { passive: true });
-            window.addEventListener('orientationchange', updateVhImmediateAndDelayed, { passive: true });
-            updateVhImmediateAndDelayed();
-        })();
-    });
     // 1. Animación del botón "Nuestras actividades"
     safeSection('cta-anim', () => {
         const btnActividades = document.getElementById('btn-actividades');

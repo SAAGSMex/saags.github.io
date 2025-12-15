@@ -104,9 +104,45 @@ body {
   margin: 0;
   background: var(--color-bg);
   color: var(--color-text);
-  min-height: 100dvh;
+  min-height: 100vh;
   /* Reserva espacio fijo para el navbar flotante */
   padding-top: var(--navbar-height);
+}
+
+/* Refuerzo para altura completa en hero-section */
+.hero-section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* CAMBIAR ESTA LÍNEA:  */
+  min-height: calc(100dvh - var(--navbar-height));
+  padding: clamp(2. 2rem, 6vh, 5rem) 0 clamp(2.5rem, 7vh, 5.5rem);
+  background:  #0d245a;
+  overflow: visible;
+}
+
+/* REEMPLAZAR TODO ESTE BLOQUE (líneas ~370-374): */
+@supports (height: 100dvh) {
+  .hero-section {
+    min-height: calc(100dvh - var(--navbar-height));
+  }
+}
+
+@media (max-width: 991.98px) {
+  body, .hero-section {
+    min-height: 100dvh;
+  }
+}
+@media (max-width: 767.98px) {
+  body, .hero-section {
+    min-height: 100dvh;
+  }
+}
+@media (max-width: 575.98px) {
+  body, .hero-section {
+    min-height: 100dvh;
+  }
 }
 
 /* === Utilidades globales añadidas === */
@@ -347,19 +383,46 @@ body {
 @media (max-height: 520px) and (orientation: landscape) {
   .navbar { min-height: 60px; }
   :root { --navbar-height: 60px; }
-  .hero-section { min-height: calc(100dvh - 10px); }
+  
+  /* MODIFICADO: Uso directo de dvh */
+  .hero-section { min-height: calc(100dvh - var(--navbar-height)); }
+  
   .hero-section h1 { font-size: clamp(1.6rem, 5.2vw, 2.4rem); }
   .hero-section .lead { font-size: clamp(.9rem, 2.2vw, 1.1rem); margin-bottom: 1.2rem; }
   .hero-section .btn { padding: .6rem 1.2rem; font-size: .95rem; }
 }
 
+/* Este bloque es correcto y se mantiene como la regla base moderna */
+@supports (height: 100dvh) {
+  .hero-section {
+    min-height: calc(100dvh - var(--navbar-height));
+  }
+}
+
 /* Evitar que badges largos provoquen overflow en tarjetas del calendario */
 .evento__texto { word-break: break-word; }
 
-/* Ajuste de smoother scroll en iOS: mejorar inercia (solo Safari/WebKit) */
+/* iOS Safari fixes (2025) */
 @supports (-webkit-touch-callout: none) {
-  body { -webkit-overflow-scrolling: touch; }
+
+  /* Evita saltos al mostrar/ocultar la barra */
+  html, body {
+    height: 100%;
+  }
+
+  .hero-section {
+    /* MODIFICADO: Limpieza de cálculo redundante. 
+       100dvh ya gestiona la barra de direcciones dinámica. */
+    min-height: calc(
+      100dvh 
+      - var(--navbar-height)
+      - env(safe-area-inset-top)
+    );
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
 }
+
 
 /* 3. Utilidades: alineación y títulos de sección */
 .text-justify {
@@ -623,7 +686,7 @@ body::before {
   }
 }
 
-/* Hero: centrar y apilar contenido en TODOS los dispositivos */
+/* Hero: centrar y apilar contenido en MÓVILES (por defecto) */
 .hero-body, .hero-section > .container {
   display: flex;
   flex-direction: column;
@@ -633,7 +696,13 @@ body::before {
 }
 .hero-body h1, .hero-body .lead,
 .hero-section > .container h1,
-.hero-section > .container .lead { text-align: inherit; margin-left: 0; margin-right: 0; }
+.hero-section > .container .lead { 
+  text-align: inherit; 
+  margin-left: 0; 
+  margin-right: 0; 
+}
+
+/* Botones:  columna vertical en móviles */
 .hero-body .hero-actions,
 .hero-section > .container .d-flex {
   display: flex;
@@ -648,6 +717,37 @@ body::before {
   width: 100%;
   max-width: 360px;
   margin-inline: auto;
+}
+
+/* Desktop ≥768px: botones horizontales */
+@media (min-width: 768px) {
+  .hero-body .hero-actions,
+  .hero-section > .container .d-flex {
+    flex-direction: row;
+    align-items: center;
+    width: auto;
+    gap: 0; /* sin gap, controlado por margin negativo más abajo */
+  }
+  .hero-body .hero-actions .btn,
+  .hero-section > .container .d-flex .btn {
+    width: auto;
+    max-width: none;
+    margin-inline: 0;
+  }
+}
+
+/* Desktop ≥1024px: gap y solapamiento de botones (tu efecto especial) */
+@media (min-width: 1024px) {
+  .hero-section .d-flex { 
+    gap: 0; 
+  }
+  .hero-section .d-flex .btn { 
+    margin:  0; 
+  }
+  /* Solapar bordes con margen negativo */
+  .hero-section .d-flex .btn + .btn { 
+    margin-left: -20rem ! important; 
+  }
 }
 
 /* 7. Nosotros: presentación de la asociación */
@@ -1719,7 +1819,7 @@ time {
 /* Optimización específica para móviles pequeños y estándar: uso de --vh y ajuste de columnas/botones */
 @media (max-width: 430px) {
   .hero-section {
-    min-height: calc(var(--vh, 1vh) * 100);
+    min-height: 100dvh; /* Usar unidad dinámica para evitar recortes en móviles */
     display: flex;
     flex-direction: column;
     justify-content: center;
