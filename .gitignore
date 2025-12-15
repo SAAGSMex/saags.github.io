@@ -2,3 +2,5 @@ node_modules/
 playwright-report/
 trace.zip
 /tests/visual/output/
+/lighthouse-report.json
+lighthouse-report.json
